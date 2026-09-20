@@ -7,7 +7,10 @@ docs/teste-manual/
 ├── CTM-03-cadastrar-animal/
 │   ├── caso-teste-testlink.pdf
 │   └── evidencias/
+├── CTM-04-alterar-informacoes-animal/
+│   └── relatorio-teste-manual.pdf
 └── CTM-05-registrar-visita/
+    ├── relatorio-teste-manual.pdf
     └── evidencias/
 ```
 
@@ -21,5 +24,9 @@ docs/teste-manual/
 
 - `relatorio-teste-manual.pdf`: relatório e evidências da execução manual exportados para entrega.
 - `evidencias/erro-500-descricao-256-caracteres.png`: erro interno reproduzido ao informar uma descrição com 256 caracteres. A mensagem mostra que a coluna `DESCRIPTION` aceita no máximo 255 caracteres.
+
+## CTM-04 — Alterar informações do animal
+
+- `relatorio-teste-manual.pdf`: relatório da execução manual realizada por Pedro, exportado do TestLink.
 
 Novos casos devem seguir o padrão `CTM-NN-nome-do-caso/`, mantendo documentos do caso na raiz e capturas em `evidencias/`.
