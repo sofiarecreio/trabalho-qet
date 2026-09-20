@@ -6,6 +6,8 @@ As evidências são organizadas por caso de teste para manter a rastreabilidade 
 docs/teste-manual/
 ├── CTM-01-buscar-proprietario/
 │   └── relatorio-teste-manual.pdf
+├── CTM-02-cadastrar-proprietario/
+│   └── relatorio-teste-manual.pdf
 ├── CTM-03-cadastrar-animal/
 │   ├── caso-teste-testlink.pdf
 │   └── evidencias/
@@ -19,6 +21,10 @@ docs/teste-manual/
 ## CTM-01 — Buscar proprietário
 
 - `relatorio-teste-manual.pdf`: relatório da execução manual realizada por Lucas, exportado do TestLink.
+
+## CTM-02 — Cadastrar proprietário
+
+- `relatorio-teste-manual.pdf`: relatório da execução manual realizada por Sofia, exportado do TestLink.
 
 ## CTM-03 — Cadastrar novo animal
 
