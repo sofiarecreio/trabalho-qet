@@ -103,6 +103,26 @@ O resultado da IA foi validado por leitura do arquivo original `MoveListTest.jav
 - [Teste desenvolvido](../../chesslib/src/test/java/com/github/bhlangonijr/chesslib/move/MoveListQetTest.java)
 - [Repositório original do Chesslib](https://github.com/bhlangonijr/chesslib)
 
+## Registro 003 — Definição do escopo dos sistemas
+
+| Informação | Registro |
+| --- | --- |
+| Data | 20/09/2026 |
+| Responsável | Sofia Recreio |
+| Entrega | Entrega 1 |
+| Atividade | Definição do escopo do Chesslib e do Spring PetClinic |
+| Ferramenta | ChatGPT |
+| Prompt/instrução | “Descrição do escopo do(s) sistema(s). Definir quais módulos/componentes serão testados. Descrever o escopo no Plano de Teste. Faça isso para o Chesslib e o Spring PetClinic do jeito que você julgar mais completo, considerando o que foi pedido pela professora.” |
+| Resultado | A resposta descreveu o escopo de testes dos dois sistemas escolhidos. No Chesslib, propôs foco em classes com lógica mais complexa, voltadas para testes unitários, estruturais, cobertura e mutação. No Spring PetClinic, propôs foco nas funcionalidades da aplicação web, como cadastro de proprietários, animais e visitas, priorizando testes funcionais, de integração e futura automação com Selenium. |
+| Decisão | O grupo aceitou a separação entre testes unitários de classes não CRUD do Chesslib e testes funcionais manuais das principais funcionalidades do Spring PetClinic. Para a Entrega 1, foram mantidos o projeto, a implementação e a execução inicial dos testes unitários e manuais. Cobertura estrutural completa, testes de mutação, inspeção com SonarQube e automação de interface com Selenium foram adiados para a Entrega 2, conforme o enunciado e a capacidade do grupo. |
+| Validação | A resposta foi lida por Sofia e discutida com os demais integrantes. O conteúdo foi comparado com o enunciado da disciplina, com a divisão das classes e funcionalidades e com o Plano de Teste. Foram retiradas ou adiadas as atividades que não pertenciam à Entrega 1. |
+
+### Evidências relacionadas
+
+- Plano de Teste do grupo.
+- Distribuição das classes do Chesslib e dos casos manuais do Spring PetClinic.
+- Casos implementados e relatórios armazenados neste repositório.
+
 ## Modelo para novos registros
 
 ### Registro NNN — Título da interação
