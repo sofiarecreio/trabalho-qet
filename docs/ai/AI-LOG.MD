@@ -91,8 +91,6 @@ O resultado da IA foi validado das seguintes formas:
 
 - [Teste desenvolvido](../../chesslib/src/test/java/com/github/bhlangonijr/chesslib/move/MoveListQetTest.java)
 - [Repositório original do Chesslib](https://github.com/bhlangonijr/chesslib)
-- [Evidências de execução dos testes unitários](../evidencias/testes-unitarios/)
-- [Evidências da execução pelo Maven](../evidencias/maven/)
 
 ### Conclusão
 
