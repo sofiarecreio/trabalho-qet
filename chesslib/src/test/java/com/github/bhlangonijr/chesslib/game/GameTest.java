@@ -1,6 +1,7 @@
 package com.github.bhlangonijr.chesslib.game;
 
 import com.github.bhlangonijr.chesslib.Board;
+import com.github.bhlangonijr.chesslib.move.MoveConversionException;
 import com.github.bhlangonijr.chesslib.move.MoveList;
 
 import org.junit.Before;
@@ -86,14 +87,11 @@ public class GameTest {
         StringBuilder moveText =
                 new StringBuilder("1. e4 INVALID_MOVE");
 
-        // Act
-        try {
-            game.loadMoveText(moveText);
-            fail("Expected an exception for invalid PGN move text");
-        } catch (Exception e) {
-            // Assert
-            assertNotNull(e);
-        }
+        // Act and Assert
+        assertThrows(
+                MoveConversionException.class,
+                () -> game.loadMoveText(moveText)
+        );
     }
 
     @Test
@@ -145,8 +143,20 @@ public class GameTest {
 
         // Assert
         assertNotNull(game.getVariations());
-        assertFalse(game.getVariations().isEmpty());
-        assertEquals(2, game.getHalfMoves().size());
+        assertEquals(1, game.getVariations().size());
+        assertTrue(game.getVariations().containsKey(1));
+        assertEquals(1, game.getVariations().get(1).size());
+
+        MoveList variation = game.getVariations().get(1).get(0);
+
+        assertArrayEquals(
+                new String[]{"d4", "d5"},
+                variation.toSanArray()
+        );
+        assertArrayEquals(
+                new String[]{"e4", "e5"},
+                game.getHalfMoves().toSanArray()
+        );
     }
 
     @Test
@@ -171,7 +181,7 @@ public class GameTest {
         assertSame(moves, game.getCurrentMoveList());
 
         assertEquals(
-                "rnbqkbnr/pppp1ppp/8/4p3/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 2",
+                "rnbqkbnr/pppp1ppp/8/4p3/4P3/8/PPPP1PPP/RNBQKBNR w KQkq e6 0 2",
                 board.getFen()
         );
     }
@@ -219,6 +229,46 @@ public class GameTest {
     }
 
     @Test
+    public void shouldNavigateToLastMoveOfProvidedMoveList()
+            throws Exception {
+
+        // Arrange
+        game.loadMoveText(
+                new StringBuilder("1. e4 e5 2. Nf3 Nc6")
+        );
+        game.setBoard(new Board());
+
+        MoveList alternativeMoves = new MoveList();
+        alternativeMoves.loadFromSan("d4 d5");
+
+        // Act
+        game.gotoLast(alternativeMoves);
+
+        // Assert
+        assertSame(alternativeMoves, game.getCurrentMoveList());
+        assertEquals(alternativeMoves.size() - 1, game.getPosition());
+        assertTrue(game.isEndOfMoveList());
+    }
+
+    @Test
+    public void shouldReportStartOfMoveListWhenPositionIsFirstMove()
+            throws Exception {
+
+        // Arrange
+        game.loadMoveText(
+                new StringBuilder("1. e4 e5")
+        );
+        game.setBoard(new Board());
+
+        // Act
+        game.gotoFirst();
+
+        // Assert
+        assertEquals(0, game.getPosition());
+        assertTrue(game.isStartOfMoveList());
+    }
+
+    @Test
     public void shouldNavigateForwardAndBackwardWhenNextAndPriorAreCalled()
             throws Exception {
 
@@ -254,16 +304,23 @@ public class GameTest {
                 new StringBuilder("1. e4 e5 2. Nf3 Nc6")
         );
 
-        game.setBoard(new Board());
+        Board board = new Board();
+        game.setBoard(board);
         game.gotoMove(game.getHalfMoves(), 1);
 
         assertEquals(1, game.getPosition());
+
+        int previousPosition = game.getPosition();
+        String previousFen = board.getFen();
+        MoveList previousMoveList = game.getCurrentMoveList();
 
         // Act
         game.gotoMove(game.getHalfMoves(), -1);
 
         // Assert
-        assertEquals(1, game.getPosition());
+        assertEquals(previousPosition, game.getPosition());
+        assertEquals(previousFen, board.getFen());
+        assertSame(previousMoveList, game.getCurrentMoveList());
     }
 
     @Test
@@ -275,10 +332,13 @@ public class GameTest {
                 new StringBuilder("1. e4 e5 2. Nf3 Nc6")
         );
 
-        game.setBoard(new Board());
+        Board board = new Board();
+        game.setBoard(board);
         game.gotoMove(game.getHalfMoves(), 1);
 
         int previousPosition = game.getPosition();
+        String previousFen = board.getFen();
+        MoveList previousMoveList = game.getCurrentMoveList();
         int invalidIndex = game.getHalfMoves().size();
 
         // Act
@@ -286,6 +346,8 @@ public class GameTest {
 
         // Assert
         assertEquals(previousPosition, game.getPosition());
+        assertEquals(previousFen, board.getFen());
+        assertSame(previousMoveList, game.getCurrentMoveList());
     }
 
     @Test
@@ -312,19 +374,20 @@ public class GameTest {
         String pgn = game.toPgn(true, true);
 
         // Assert
-        assertNotNull(pgn);
+        String expectedPgn =
+                "[Event \"Test Event\"]\n" +
+                "[Site \"Test Site\"]\n" +
+                "[Date \"2026.09.20\"]\n" +
+                "[Round \"1\"]\n" +
+                "[White \"White Player\"]\n" +
+                "[Black \"Black Player\"]\n" +
+                "[Result \"*\"]\n" +
+                "[PlyCount \"2\"]\n" +
+                "[TimeControl \"-\"]\n" +
+                "\n" +
+                "1. e4 e5 *";
 
-        assertTrue(pgn.contains("[Event \"Test Event\"]"));
-        assertTrue(pgn.contains("[Site \"Test Site\"]"));
-        assertTrue(pgn.contains("[Date \"2026.09.20\"]"));
-        assertTrue(pgn.contains("[Round \"1\"]"));
-
-        assertTrue(pgn.contains("[White \"White Player\"]"));
-        assertTrue(pgn.contains("[Black \"Black Player\"]"));
-
-        assertTrue(pgn.contains("[PlyCount \"2\"]"));
-        assertTrue(pgn.contains("1. e4 e5"));
-        assertTrue(pgn.contains(GameResult.ONGOING.getDescription()));
+        assertEquals(expectedPgn, pgn);
     }
 
     @Test
