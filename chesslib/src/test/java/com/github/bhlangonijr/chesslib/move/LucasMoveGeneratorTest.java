@@ -13,9 +13,9 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 /**
- * Testes do Pedro para a classe MoveGenerator.
+ * Testes do Lucas para a classe MoveGenerator.
  */
-public class PedroMoveGeneratorTest {
+public class LucasMoveGeneratorTest {
 
     @Test
     public void deveGerarOsDoisMovimentosIniciaisDeCadaPeao() {

@@ -22,7 +22,7 @@ Verificar se a classe `MoveGenerator` gera movimentos de xadrez de acordo com a 
 
 Os casos estão implementados em:
 
-`chesslib/src/test/java/com/github/bhlangonijr/chesslib/move/MoveGeneratorTest.java`
+`chesslib/src/test/java/com/github/bhlangonijr/chesslib/move/LucasMoveGeneratorTest.java`
 
 Para executar os testes:
 
