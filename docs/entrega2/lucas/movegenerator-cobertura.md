@@ -6,7 +6,7 @@ Ampliar os testes unitários da classe `MoveGenerator` e configurar a medição 
 
 ## Alterações realizadas
 
-- Criação de `chesslib/src/test/java/com/github/bhlangonijr/chesslib/move/LucasMoveGeneratorTest.java` com 13 testes do Lucas.
+- Criação de `chesslib/src/test/java/com/github/bhlangonijr/chesslib/move/LucasMoveGeneratorTest.java` com 16 testes do Lucas.
 - Inclusão de cenários para:
   - movimentos iniciais de peões brancos e pretos;
   - bloqueio de peão;
@@ -28,7 +28,7 @@ Comando usado no módulo `chesslib`:
 mvn -Dtest=MoveGeneratorTest,LucasMoveGeneratorTest -Dmaven.javadoc.skip=true clean verify
 ```
 
-O filtro executa os 13 testes do Lucas e os 4 testes já existentes da classe `MoveGeneratorTest`, totalizando 17 testes.
+O filtro executa os 16 testes do Lucas e os 4 testes já existentes da classe `MoveGeneratorTest`, totalizando 20 testes.
 
 ## Resultado
 
@@ -38,6 +38,6 @@ O filtro executa os 13 testes do Lucas e os 4 testes já existentes da classe `M
 | Linhas | 169 de 181 — **93,37%** |
 | Instruções | 713 de 778 — **91,65%** |
 
-Resultado da execução: **BUILD SUCCESS** e todos os 17 testes passaram.
+Resultado da execução: **BUILD SUCCESS** e todos os 20 testes passaram.
 
 O relatório HTML detalhado é gerado automaticamente em `chesslib/target/site/jacoco/index.html` após a execução do comando. A pasta `target` é um artefato gerado pelo Maven e não precisa ser versionada.

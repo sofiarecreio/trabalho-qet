@@ -150,6 +150,17 @@ public class LucasMoveGeneratorTest {
     }
 
     @Test
+    public void deveIncluirCapturaDoReiNosMovimentosPseudoLegaisDeCaptura() {
+        Board board = new Board();
+        board.loadFromFen("4k3/8/8/8/3pK3/8/8/8 w - - 0 1");
+
+        List<Move> moves = MoveGenerator.generatePseudoLegalCaptures(board);
+
+        assertEquals(1, moves.size());
+        assertTrue(moves.contains(new Move("e4d4", Side.WHITE)));
+    }
+
+    @Test
     public void deveGerarRoquePequenoEGrandeQuandoOCaminhoEstaLivre() {
         Board board = new Board();
         board.loadFromFen("r3k2r/8/8/8/8/8/8/R3K2R w KQkq - 0 1");
@@ -172,6 +183,29 @@ public class LucasMoveGeneratorTest {
 
         assertEquals(1, moves.size());
         assertTrue(moves.contains(new Move("e1g1", Side.WHITE)));
+    }
+
+    @Test
+    public void deveGerarSomenteRoqueGrandeQuandoApenasEsseDireitoExiste() {
+        Board board = new Board();
+        board.loadFromFen("r3k2r/8/8/8/8/8/8/R3K2R w Q - 0 1");
+        List<Move> moves = new ArrayList<>();
+
+        MoveGenerator.generateCastleMoves(board, moves);
+
+        assertEquals(1, moves.size());
+        assertTrue(moves.contains(new Move("e1c1", Side.WHITE)));
+    }
+
+    @Test
+    public void naoDeveGerarRoqueGrandeQuandoUmaCasaDoCaminhoEstaAtacada() {
+        Board board = new Board();
+        board.loadFromFen("k2r4/8/8/8/8/8/8/R3K2R w Q - 0 1");
+        List<Move> moves = new ArrayList<>();
+
+        MoveGenerator.generateCastleMoves(board, moves);
+
+        assertTrue(moves.isEmpty());
     }
 
     @Test
