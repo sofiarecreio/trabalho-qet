@@ -144,3 +144,125 @@ O resultado da IA foi validado por leitura do arquivo original `MoveListTest.jav
 - Solução inicial gerada pela IA: caminho ou link.
 - Solução final revisada: caminho ou link.
 - Alterações realizadas após a revisão: descrição resumida.
+
+
+## Registro 004 — Redução da complexidade dos métodos `encode` e `decodeSan`
+
+| **Informação** | **Registro** |
+| --- | --- |
+| Data | 20/11/2026 |
+| Responsável | Lucio |
+| Entrega | Entrega 2 |
+| Atividade | Inspeção e correção da classe `MoveList` com base nos problemas identificados pelo Sonar |
+| Ferramenta | ChatGPT |
+| Artefato relacionado | `MoveList.java` |
+| Problemas analisados | Complexidade cognitiva dos métodos `encode` e `decodeSan` |
+
+### Prompt/instrução utilizada
+
+> Analise os problemas de complexidade cognitiva apontados pelo Sonar na classe `MoveList.java` do Chesslib. O método `encode` possui complexidade cognitiva acima do limite permitido e o método `decodeSan` possui complexidade cognitiva 88, enquanto o limite configurado é 15. Ajude a refatorar os métodos de forma incremental, extraindo responsabilidades para métodos auxiliares, sem alterar o comportamento da biblioteca.
+
+### Resultado apresentado pela IA
+
+A IA recomendou que a refatoração fosse realizada de forma incremental, evitando substituir toda a implementação de uma vez. A estratégia utilizada foi identificar responsabilidades internas independentes e movê-las para métodos auxiliares menores.
+
+No método `encode`, foram identificadas três responsabilidades principais:
+
+1. codificação de movimentos de roque;
+2. resolução de movimentos ambíguos;
+3. montagem da notação SAN ou FAN do movimento.
+
+A lógica de roque foi extraída para o método:
+
+```java
+encodeCastleMove(...)
+```
+
+A lógica de identificação e desambiguação da origem do movimento foi extraída para:
+
+```java
+appendAmbiguityResolution(...)
+```
+
+Com essas extrações, o método `encode` passou a apenas coordenar a construção da notação, a execução do movimento, o tratamento de capturas, a promoção e a indicação de xeque ou xeque-mate.
+
+No método `decodeSan`, a maior parte da complexidade estava concentrada na identificação da casa de origem do movimento. A IA sugeriu separar essa lógica nos seguintes métodos:
+
+```java
+findPawnSourceSquare(...)
+findNonPawnSourceSquare(...)
+determineSourcePieceType(...)
+extractSourceLocation(...)
+findAmbiguousSourceSquare(...)
+filterCandidatesByLocation(...)
+```
+
+Também foram realizadas as seguintes simplificações:
+
+- separação do tratamento de roque pequeno e roque grande em retornos antecipados;
+- remoção da atribuição inicial desnecessária `Square from = Square.NONE`;
+- manutenção das validações de posição, promoção e movimento inválido;
+- preservação das exceções `MoveConversionException`;
+- uso de retornos antecipados para reduzir níveis de aninhamento.
+
+### Evolução observada no Sonar
+
+| **Método** | **Complexidade inicial** | **Valores intermediários** | **Resultado final** |
+| --- | --- | --- | --- |
+| `encode` | 33 | 26 após a extração do roque | Aviso de complexidade eliminado |
+| `decodeSan` | 88 | 81 após a extração do movimento de peão e 17 após a extração da busca da origem | Aviso de complexidade eliminado |
+
+Após as refatorações, o Sonar deixou de apresentar problemas de complexidade cognitiva nos métodos `encode` e `decodeSan`. A análise final ainda apresentou um aviso independente relacionado ao uso de `ThreadLocal` por `boardHolder`, que não fazia parte desta interação específica.
+
+### Decisão
+
+As sugestões de extração de métodos foram aceitas porque reduziram a complexidade sem alterar as regras de conversão de movimentos.
+
+Foram mantidos os seguintes comportamentos:
+
+- conversão para SAN e FAN;
+- identificação de roque pequeno e grande;
+- identificação de capturas;
+- resolução de movimentos ambíguos;
+- promoção de peões;
+- identificação da casa de origem;
+- tratamento de movimentos ilegais;
+- indicação de xeque e xeque-mate.
+
+As alterações foram aplicadas uma por vez. Depois de cada etapa, os testes foram executados antes de continuar a refatoração. Essa decisão reduziu o risco de introduzir uma regressão difícil de localizar.
+
+### Alterações realizadas após a revisão
+
+- extração da lógica de roque de `encode`;
+- extração da lógica de desambiguação de movimentos de `encode`;
+- extração da busca da origem de movimentos de peão;
+- separação da busca da origem dos demais movimentos;
+- criação de métodos específicos para tipo da peça, localização, filtragem de candidatos e movimento ambíguo;
+- substituição de estruturas aninhadas por retornos antecipados;
+- remoção de atribuição local desnecessária;
+- reorganização do código para que cada método possua uma responsabilidade mais específica.
+
+### Validação
+
+A resposta da IA foi validada de forma incremental. Inicialmente, foi realizada uma leitura manual do código sugerido, comparando cada método auxiliar com o trecho correspondente da implementação original. Essa comparação foi utilizada para verificar se nenhuma condição, exceção ou atualização do estado do tabuleiro havia sido removida.
+
+Depois de cada alteração, o projeto foi compilado e as suítes MoveListTest e MoveListQetTest foram executadas. A refatoração somente foi mantida quando todos os testes continuaram passando. Dessa forma, caso uma alteração provocasse uma regressão, seria possível identificar exatamente em qual etapa ela havia sido introduzida.
+
+Também foi executada novamente a análise do Sonar após cada conjunto de alterações. Os valores intermediários demonstraram que algumas sugestões eram úteis, mas ainda insuficientes:
+- encode: complexidade reduzida de 33 para 26, seguida de novas extrações até a eliminação do aviso;
+- decodeSan: complexidade reduzida de 88 para 81 e posteriormente para 17, exigindo outra revisão até ficar dentro do limite permitido.
+A validação final foi composta pelas seguintes evidências:
+- execução bem-sucedida dos 12 testes de MoveListTest;
+- execução bem-sucedida dos 8 testes de MoveListQetTest;
+- total de 20 testes executados, sem falhas, erros ou testes ignorados;
+- resultado BUILD SUCCESS no Maven;
+- desaparecimento dos avisos de complexidade de encode e decodeSan;
+- revisão manual dos comportamentos de roque, captura, promoção, ambiguidade, movimentos ilegais, xeque e xeque-mate;
+- comparação entre os resultados inicial e final do Sonar.
+Com base nesses resultados, as refatorações foram consideradas válidas porque produziram uma redução mensurável da complexidade, preservaram o comportamento verificado pelos testes e não introduziram falhas conhecidas. O resultado da IA foi, portanto, utilizado como ponto de partida, mas foi revisado, aplicado gradualmente e aceito somente após validação técnica.
+
+### Evidências relacionadas
+
+- Classe revisada: `chesslib/src/main/java/com/github/bhlangonijr/chesslib/move/MoveList.java`
+- Evidência inicial do Sonar: `docs/inspecao/movelist/sonar_antes.png`
+- Evidência após as correções de complexidade: `docs/inspecao/movelist/sonar_depois.png`
