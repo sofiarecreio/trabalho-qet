@@ -239,15 +239,16 @@ Atualização: 22/11/2026. A contribuição de Weslley está integrada à `main`
 | Inspeção Game | **16 → 0 apontamentos**, mesmo perfil de 608 regras | [Relatório e PNGs](docs/inspecao/game/relatorio.md) |
 | Selenium de visitas | **9 casos aprovados**; seleção conjunta de 18 testes aprovada | [Cenários e capturas](docs/selenium/visitas/README.md) |
 
-Os 307 testes do Chesslib incluem os testes originais e dos demais integrantes. Os 18 do PetClinic correspondem à seleção indicada no comando, e não à suíte inteira da aplicação. A medição de branches é C1/JaCoCo; a aceitação dessa operacionalização para todas-arestas continua a esclarecer no critério acadêmico.
+Os 307 testes do Chesslib incluem os testes originais e dos demais integrantes. Os 18 do PetClinic correspondem à seleção indicada no comando, e não à suíte inteira da aplicação. O critério todas-arestas é medido pelo contador de branches do JaCoCo, como apresentado na aula de cobertura com EclEmma/JaCoCo.
 
 - [x] Ampliar e executar os testes de Game e a integração do Chesslib.
 - [x] Executar PIT de Game acima de 80%, mantendo todos os mutantes no denominador.
 - [x] Corrigir os apontamentos Sonar de Game e preservar capturas antes/depois.
 - [x] Executar Selenium de visitas e versionar cenários, comandos e capturas.
 - [x] Integrar o código e as evidências de Weslley à main.
-- [ ] Fechar a comprovação acadêmica do critério todas-arestas.
-- [ ] Realizar a revisão individual e preparar a explicação da própria contribuição.
+- [x] Comprovar o critério todas-arestas em Game: 166/179 branches (92,74%), acima da meta de 80%.
+- [x] Realizar a revisão individual dos testes, métricas e decisões.
+- [ ] Preparar a explicação da própria contribuição para a apresentação.
 
 ### Pendências de consolidação do grupo
 

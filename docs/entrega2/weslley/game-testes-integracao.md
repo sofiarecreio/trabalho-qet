@@ -78,9 +78,9 @@ Os mutantes restantes permanecem no denominador. Eles envolvem inicialização r
 
 ### Relação com todas-arestas
 
-O valor de 92,74% é cobertura de branches C1/JaCoCo, que observa saídas de decisões no bytecode, incluindo caminhos de curto-circuito. Ele sustenta a análise das arestas de decisão. Não foi calculado um percentual independente sobre um grafo-fonte com todas as arestas sequenciais e excepcionais.
+O valor de 92,74% é cobertura de branches C1/JaCoCo, que observa saídas de decisões no bytecode, incluindo caminhos de curto-circuito. O grafo não foi desenhado manualmente: a ferramenta faz a contagem das arestas a partir do bytecode.
 
-**Pendência acadêmica de Weslley:** confirmar a aceitação dessa operacionalização pela disciplina ou complementar a medição do grafo exigido. A meta configurada de branches está atendida; o critério formal todas-arestas não é marcado como concluído automaticamente. A cobertura de linhas é apenas complementar.
+**Conclusão:** na disciplina, o critério todas-arestas é medido pelo contador de branches do EclEmma/JaCoCo, como apresentado na aula de cobertura com essa ferramenta. Com 166 de 179 branches cobertos (92,74%), o critério está atendido acima da meta de 80%. A cobertura de linhas é apenas complementar.
 
 ## Execução reproduzível
 
@@ -100,7 +100,7 @@ O primeiro comando seleciona os 89 casos de Game. O segundo executa a regressão
 | --- | --- | --- |
 | Inspeção de Game | 16 apontamentos antes e zero depois; mesmo perfil comprehensive de 608 regras | Escopo somente Game.java; não informa o resultado das demais classes |
 | Testes de Game e integração Chesslib | 89 casos nas cinco suítes; 12 de integração; regressão completa com 307 aprovados | Verifica os cenários codificados, sem provar todas as regras, encodings ou combinações de eventos |
-| Cobertura e mutação | Branches 92,74%; PIT 95,31% | Não são notas ISO prontas nem percentuais de todas-arestas sobre outro grafo |
+| Cobertura e mutação | Branches 92,74%; PIT 95,31% | Não são notas ISO prontas; servem de evidência para a consolidação da equipe |
 | Selenium de visitas | 9 casos e 9 capturas; seleção conjunta de 18 testes aprovada | Uma funcionalidade; não comprova as cinco funcionalidades do grupo |
 
 Referências: [inspeção e PNGs](../../inspecao/game/relatorio.md), [Selenium de visitas](../../selenium/visitas/README.md) e [relatório compartilhado de inspeção](https://docs.google.com/document/d/1LBd-p5gI73bchdHi-wWXTSUu7rfhmelV1IxTPfpdvk8/edit).
