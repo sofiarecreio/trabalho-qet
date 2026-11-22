@@ -20,6 +20,7 @@ import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.function.Function;
+import java.util.regex.Pattern;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -50,6 +51,8 @@ public class MoveList extends LinkedList<Move> implements List<Move> {
     private static final long serialVersionUID = -6204280556340150806L;
     private static final ThreadLocal<Board> boardHolder = ThreadLocal.withInitial(Board::new);
     private static final Move nullMove = new Move(Square.NONE, Square.NONE);
+    private static final Pattern SAN_DECORATION_PATTERN =
+            Pattern.compile("[+#!?]");
 
     private final String startFEN;
     private boolean dirty = true;
@@ -84,6 +87,17 @@ public class MoveList extends LinkedList<Move> implements List<Move> {
      */
     public MoveList(MoveList halfMoves) {
         this(halfMoves.getStartFen());
+
+        this.dirty = halfMoves.dirty;
+        this.sanArray = halfMoves.sanArray == null
+                ? null
+                : halfMoves.sanArray.clone();
+        this.fanArray = halfMoves.fanArray == null
+                ? null
+                : halfMoves.fanArray.clone();
+        this.parent = halfMoves.parent;
+        this.index = halfMoves.index;
+
         super.addAll(halfMoves);
     }
 
@@ -132,70 +146,137 @@ public class MoveList extends LinkedList<Move> implements List<Move> {
      * @throws MoveConversionException if the move conversion fails
      */
     // encode the move to SAN/FAN move and update thread local board
-    private static String encode(final Board board, Move move, Function<Piece, String> notation)
+    private static String encode(final Board board, Move move,
+            Function<Piece, String> notation)
             throws MoveConversionException {
-        StringBuilder san = new StringBuilder();
+
         Piece piece = board.getPiece(move.getFrom());
-        if (piece.getPieceType().equals(PieceType.KING)) {
-            if (board.getContext().isCastleMove(move)) { // Chess960-compatible castle detection
-                if (!board.doMove(move, true)) {
-                    throw new MoveConversionException("Invalid move [" +
-                            move + "] for current setup: " + board.getFen());
-                }
-                san.append(board.getContext().isKingSideCastle(move) ? "O-O" : "O-O-O");
-                addCheckFlag(board, san);
-                return san.toString();
-            }
+
+        if (piece.getPieceType().equals(PieceType.KING)
+                && board.getContext().isCastleMove(move)) {
+            return encodeCastleMove(board, move);
         }
-        boolean pawnMove = piece.getPieceType().equals(PieceType.PAWN) &&
-                move.getFrom().getFile().equals(move.getTo().getFile());
-        boolean ambResolved = false;
+
+        StringBuilder san = new StringBuilder();
+
         san.append(notation.apply(piece));
-        if (!pawnMove) {
-            //resolving ambiguous move
-            long amb = board.squareAttackedByPieceType(move.getTo(),
-                    board.getSideToMove(), piece.getPieceType());
-            amb &= ~move.getFrom().getBitboard();
-            if (amb != 0L) {
-                List<Square> fromList = Bitboard.bbToSquareList(amb);
-                for (Square from : fromList) {
-                    if (!board.isMoveLegal(new Move(from, move.getTo()), false)) {
-                        amb ^= from.getBitboard();
-                    }
-                }
-            }
-            if (amb != 0L) {
-                if ((Bitboard.getFilebb(move.getFrom()) & amb) == 0L) {
-                    san.append(move.getFrom().getFile().getNotation().toLowerCase());
-                } else if ((Bitboard.getRankbb(move.getFrom()) & amb) == 0L) {
-                    san.append(move.getFrom().getRank().getNotation().toLowerCase());
-                } else {
-                    san.append(move.getFrom().toString().toLowerCase());
-                }
-                ambResolved = true;
-            }
-        }
+
+        boolean ambResolved =
+                appendAmbiguityResolution(board, move, piece, san);
 
         if (!board.doMove(move, true)) {
-            throw new MoveConversionException("Invalid move [" +
-                    move + "] for current setup: " + board.getFen());
+            throw new MoveConversionException(
+                    "Invalid move [" + move +
+                    "] for current setup: " + board.getFen());
         }
 
+        Piece captured = board.getBackup()
+                .getLast()
+                .getCapturedPiece();
 
-        Piece captured = board.getBackup().getLast().getCapturedPiece();
         boolean isCapture = !captured.equals(Piece.NONE);
+
         if (isCapture) {
-            if (!ambResolved &&
-                    piece.getPieceType().equals(PieceType.PAWN)) {
-                san.append(move.getFrom().getFile().getNotation().toLowerCase());
+            if (!ambResolved
+                    && piece.getPieceType().equals(PieceType.PAWN)) {
+                san.append(move.getFrom()
+                        .getFile()
+                        .getNotation()
+                        .toLowerCase());
             }
+
             san.append("x");
         }
+
         san.append(move.getTo().toString().toLowerCase());
+
         if (!move.getPromotion().equals(Piece.NONE)) {
             san.append("=");
             san.append(notation.apply(move.getPromotion()));
         }
+
+        addCheckFlag(board, san);
+        return san.toString();
+    }
+    
+    private static boolean appendAmbiguityResolution(
+            Board board,
+            Move move,
+            Piece piece,
+            StringBuilder san) {
+
+        boolean pawnMove =
+                piece.getPieceType().equals(PieceType.PAWN)
+                && move.getFrom().getFile().equals(move.getTo().getFile());
+
+        if (pawnMove) {
+            return false;
+        }
+
+        long ambiguousSquares = board.squareAttackedByPieceType(
+                move.getTo(),
+                board.getSideToMove(),
+                piece.getPieceType());
+
+        ambiguousSquares &= ~move.getFrom().getBitboard();
+
+        if (ambiguousSquares != 0L) {
+            List<Square> possibleSources =
+                    Bitboard.bbToSquareList(ambiguousSquares);
+
+            for (Square source : possibleSources) {
+                Move possibleMove = new Move(source, move.getTo());
+
+                if (!board.isMoveLegal(possibleMove, false)) {
+                    ambiguousSquares ^= source.getBitboard();
+                }
+            }
+        }
+
+        if (ambiguousSquares == 0L) {
+            return false;
+        }
+
+        if ((Bitboard.getFilebb(move.getFrom())
+                & ambiguousSquares) == 0L) {
+
+            san.append(move.getFrom()
+                    .getFile()
+                    .getNotation()
+                    .toLowerCase());
+
+        } else if ((Bitboard.getRankbb(move.getFrom())
+                & ambiguousSquares) == 0L) {
+
+            san.append(move.getFrom()
+                    .getRank()
+                    .getNotation()
+                    .toLowerCase());
+
+        } else {
+            san.append(move.getFrom()
+                    .toString()
+                    .toLowerCase());
+        }
+
+        return true;
+    }
+
+    private static String encodeCastleMove(Board board, Move move)
+            throws MoveConversionException {
+
+        if (!board.doMove(move, true)) {
+            throw new MoveConversionException(
+                    "Invalid move [" + move +
+                    "] for current setup: " + board.getFen());
+        }
+
+        StringBuilder san = new StringBuilder();
+
+        san.append(board.getContext().isKingSideCastle(move)
+                ? "O-O"
+                : "O-O-O");
+
         addCheckFlag(board, san);
         return san.toString();
     }
@@ -562,19 +643,17 @@ public class MoveList extends LinkedList<Move> implements List<Move> {
             text = StringUtil.normalize(text);
             String[] m = text.split(StringUtils.SPACE);
             for (String strMove : m) {
-                if (strMove.startsWith("$")) {
+                if (strMove.startsWith("$") || strMove.contains("...")) {
                     continue;
                 }
-                if (strMove.contains("...")) {
-                    continue;
-                }
+
                 if (strMove.contains(".")) {
                     strMove = StringUtil.afterSequence(strMove, ".");
                 }
-                if (StringUtils.isBlank(strMove)) {
-                    continue;
+
+                if (!StringUtils.isBlank(strMove)) {
+                    addSanMove(strMove);
                 }
-                addSanMove(strMove);
             }
         } catch (MoveConversionException e1) {
             throw e1;
@@ -611,12 +690,12 @@ public class MoveList extends LinkedList<Move> implements List<Move> {
             strPromotion = String.valueOf(lastChar);
         }
 
-        if (san.equals("O-O") || san.equals("O-O-O")) { // is castle
-            if (san.equals("O-O")) {
-                return board.getContext().getoo(side);
-            } else {
-                return board.getContext().getooo(side);
-            }
+        if (san.equals("O-O")) {
+            return board.getContext().getoo(side);
+        }
+
+        if (san.equals("O-O-O")) {
+            return board.getContext().getooo(side);
         }
 
         if (san.length() == 3 &&
@@ -625,7 +704,7 @@ public class MoveList extends LinkedList<Move> implements List<Move> {
             san = san.substring(0, 2);
         }
 
-        Square from = Square.NONE;
+        Square from;
         Square to;
         try {
             to = Square.valueOf(StringUtil.lastSequence(san.toUpperCase(), 2));
@@ -633,89 +712,194 @@ public class MoveList extends LinkedList<Move> implements List<Move> {
             throw new MoveConversionException("Couldn't parse destination square[" + san + "]: " +
                     san.toUpperCase());
         }
-        Piece promotion = StringUtils.isEmpty(strPromotion) ? Piece.NONE :
-                Piece.fromFenSymbol(side.equals(Side.WHITE) ? strPromotion.toUpperCase() : strPromotion.toLowerCase());
+        Piece promotion = Piece.NONE;
 
-        if (san.length() == 2) { //is pawn move
-            long mask = Bitboard.getBbtable(to) - 1L;
-            long xfrom = (side.equals(Side.WHITE) ? mask : ~mask) & Bitboard.getFilebb(to) &
-                    board.getBitboard(Piece.make(side, PieceType.PAWN));
-            int f = side.equals(Side.BLACK) ? Bitboard.bitScanForward(xfrom) :
-                    Bitboard.bitScanReverse(xfrom);
-            if (f >= 0 && f <= 63) {
-                from = Square.squareAt(f);
-            }
+        if (!StringUtils.isEmpty(strPromotion)) {
+            String promotionSymbol = side.equals(Side.WHITE)
+                    ? strPromotion.toUpperCase()
+                    : strPromotion.toLowerCase();
+
+            promotion = Piece.fromFenSymbol(promotionSymbol);
+        }
+
+        if (san.length() == 2) { // is pawn move
+            from = findPawnSourceSquare(board, to, side);
         } else {
-
-            String strFrom = (san.contains("x") ?
-                    StringUtil.beforeSequence(san, "x") :
-                    san.substring(0, san.length() - 2));
-
-            if (strFrom == null ||
-                    strFrom.length() == 0 || strFrom.length() > 3) {
-                throw new MoveConversionException("Couldn't parse 'from' square " + san + ": Too many/few characters.");
-            }
-
-            PieceType fromPiece = PieceType.PAWN;
-
-            if (Character.isUpperCase(strFrom.charAt(0))) {
-                fromPiece = PieceType.fromSanSymbol(String.valueOf(strFrom.charAt(0)));
-            }
-
-            if (strFrom.length() == 3) {
-                from = Square.valueOf(strFrom.substring(1, 3).toUpperCase());
-            } else {
-                String location = StringUtils.EMPTY;
-                if (strFrom.length() == 2) {
-                    if (Character.isUpperCase(strFrom.charAt(0))) {
-                        location = strFrom.substring(1, 2);
-                    } else {
-                        location = strFrom.substring(0, 2);
-                        from = Square.valueOf(location.toUpperCase());
-                    }
-                } else {
-                    if (Character.isLowerCase(strFrom.charAt(0))) {
-                        location = strFrom;
-                    }
-                }
-                if (location.length() < 2) {
-                    //resolving ambiguous from
-                    long xfrom = board.squareAttackedByPieceType(to,
-                            board.getSideToMove(), fromPiece);
-                    if (location.length() > 0) {
-                        if (Character.isDigit(location.charAt(0))) {
-                            int irank = Integer.parseInt(location);
-                            if (!(irank >= 1 && irank <= 8)) {
-                                throw new MoveConversionException("Couldn't parse rank: " + location);
-                            }
-                            Rank rank = Rank.allRanks[irank - 1];
-                            xfrom &= Bitboard.getRankbb(rank);
-                        } else {
-                            try {
-                                File file = File.valueOf("FILE_" + location.toUpperCase());
-                                xfrom &= Bitboard.getFilebb(file);
-                            } catch (Exception e) {
-                                throw new MoveConversionException("Couldn't parse file: " + location);
-                            }
-                        }
-                    }
-                    if (xfrom != 0L) {
-                        if (!Bitboard.hasOnly1Bit(xfrom)) {
-                            xfrom = findLegalSquares(board, to, promotion, xfrom);
-                        }
-                        int f = Bitboard.bitScanForward(xfrom);
-                        if (f >= 0 && f <= 63) {
-                            from = Square.squareAt(f);
-                        }
-                    }
-                }
-            }
-
+            from = findNonPawnSourceSquare(
+                    board, san, to, promotion);
         }
         if (from.equals(Square.NONE)) {
             throw new MoveConversionException("Couldn't parse 'from' square " + san + " to setup: " + board.getFen());
         }
         return new Move(from, to, promotion);
+    }
+    
+    private static Square findPawnSourceSquare(
+            Board board,
+            Square destination,
+            Side side) {
+
+        long mask = Bitboard.getBbtable(destination) - 1L;
+
+        long sourceCandidates =
+                (side.equals(Side.WHITE) ? mask : ~mask)
+                & Bitboard.getFilebb(destination)
+                & board.getBitboard(Piece.make(side, PieceType.PAWN));
+
+        int sourceIndex = side.equals(Side.BLACK)
+                ? Bitboard.bitScanForward(sourceCandidates)
+                : Bitboard.bitScanReverse(sourceCandidates);
+
+        if (sourceIndex >= 0 && sourceIndex <= 63) {
+            return Square.squareAt(sourceIndex);
+        }
+
+        return Square.NONE;
+    }
+    
+    private static Square findNonPawnSourceSquare(
+            Board board,
+            String san,
+            Square destination,
+            Piece promotion)
+            throws MoveConversionException {
+
+        String sourceNotation;
+
+        if (san.contains("x")) {
+            sourceNotation = StringUtil.beforeSequence(san, "x");
+        } else {
+            sourceNotation = san.substring(0, san.length() - 2);
+        }
+
+        if (sourceNotation == null
+                || sourceNotation.isEmpty()
+                || sourceNotation.length() > 3) {
+            throw new MoveConversionException(
+                    "Couldn't parse 'from' square " + san
+                            + ": Too many/few characters.");
+        }
+
+        PieceType sourcePieceType =
+                determineSourcePieceType(sourceNotation);
+
+        if (sourceNotation.length() == 3) {
+            return Square.valueOf(
+                    sourceNotation.substring(1, 3).toUpperCase());
+        }
+
+        String location = extractSourceLocation(sourceNotation);
+
+        if (location.length() == 2) {
+            return Square.valueOf(location.toUpperCase());
+        }
+
+        return findAmbiguousSourceSquare(
+                board,
+                destination,
+                promotion,
+                sourcePieceType,
+                location);
+    }
+
+    private static PieceType determineSourcePieceType(
+            String sourceNotation) {
+
+        if (Character.isUpperCase(sourceNotation.charAt(0))) {
+            return PieceType.fromSanSymbol(
+                    String.valueOf(sourceNotation.charAt(0)));
+        }
+
+        return PieceType.PAWN;
+    }
+
+    private static String extractSourceLocation(
+            String sourceNotation) {
+
+        if (sourceNotation.length() == 2) {
+            if (Character.isUpperCase(sourceNotation.charAt(0))) {
+                return sourceNotation.substring(1, 2);
+            }
+
+            return sourceNotation;
+        }
+
+        if (Character.isLowerCase(sourceNotation.charAt(0))) {
+            return sourceNotation;
+        }
+
+        return StringUtils.EMPTY;
+    }
+
+    private static Square findAmbiguousSourceSquare(
+            Board board,
+            Square destination,
+            Piece promotion,
+            PieceType sourcePieceType,
+            String location)
+            throws MoveConversionException {
+
+        long sourceCandidates = board.squareAttackedByPieceType(
+                destination,
+                board.getSideToMove(),
+                sourcePieceType);
+
+        sourceCandidates = filterCandidatesByLocation(
+                sourceCandidates, location);
+
+        if (sourceCandidates == 0L) {
+            return Square.NONE;
+        }
+
+        if (!Bitboard.hasOnly1Bit(sourceCandidates)) {
+            sourceCandidates = findLegalSquares(
+                    board,
+                    destination,
+                    promotion,
+                    sourceCandidates);
+        }
+
+        int sourceIndex =
+                Bitboard.bitScanForward(sourceCandidates);
+
+        if (sourceIndex >= 0 && sourceIndex <= 63) {
+            return Square.squareAt(sourceIndex);
+        }
+
+        return Square.NONE;
+    }
+
+    private static long filterCandidatesByLocation(
+            long sourceCandidates,
+            String location)
+            throws MoveConversionException {
+
+        if (location.isEmpty()) {
+            return sourceCandidates;
+        }
+
+        if (Character.isDigit(location.charAt(0))) {
+            int rankNumber = Integer.parseInt(location);
+
+            if (rankNumber < 1 || rankNumber > 8) {
+                throw new MoveConversionException(
+                        "Couldn't parse rank: " + location);
+            }
+
+            Rank rank = Rank.allRanks[rankNumber - 1];
+            return sourceCandidates & Bitboard.getRankbb(rank);
+        }
+
+        try {
+            File file = File.valueOf(
+                    "FILE_" + location.toUpperCase());
+
+            return sourceCandidates & Bitboard.getFilebb(file);
+
+        } catch (Exception exception) {
+            throw new MoveConversionException(
+                    "Couldn't parse file: " + location);
+        }
     }
 
     /**
@@ -844,12 +1028,10 @@ public class MoveList extends LinkedList<Move> implements List<Move> {
         return false;
     }
 
-    private String normalizeSan(String san) { //TODO regex?
-        return san.replace("+", StringUtils.EMPTY)
-                .replace("#", StringUtils.EMPTY)
-                .replace("!", StringUtils.EMPTY)
-                .replace("?", StringUtils.EMPTY)
+    private String normalizeSan(String san) {
+        return SAN_DECORATION_PATTERN.matcher(san)
+                .replaceAll(StringUtils.EMPTY)
                 .replace("ep", StringUtils.EMPTY)
-                .replace("\n", StringUtils.SPACE);
+                .replace("\\n", StringUtils.SPACE);
     }
 }
