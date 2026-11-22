@@ -379,14 +379,19 @@ Depois de cada alteração, o projeto foi compilado e as suítes MoveListTest e 
 Também foi executada novamente a análise do Sonar após cada conjunto de alterações. Os valores intermediários demonstraram que algumas sugestões eram úteis, mas ainda insuficientes:
 - encode: complexidade reduzida de 33 para 26, seguida de novas extrações até a eliminação do aviso;
 - decodeSan: complexidade reduzida de 88 para 81 e posteriormente para 17, exigindo outra revisão até ficar dentro do limite permitido.
-A validação final foi composta pelas seguintes evidências:
-- execução bem-sucedida dos 12 testes de MoveListTest;
-- execução bem-sucedida dos 8 testes de MoveListQetTest;
+
+Na etapa em que a refatoração foi validada, estavam disponíveis 12 testes de `MoveListTest` e 8 testes de `MoveListQetTest`. Assim, a validação daquela etapa foi composta pelas seguintes evidências:
+
+- execução bem-sucedida dos 12 testes de `MoveListTest`;
+- execução bem-sucedida dos 8 testes de `MoveListQetTest` disponíveis naquele estágio;
 - total de 20 testes executados, sem falhas, erros ou testes ignorados;
 - resultado BUILD SUCCESS no Maven;
 - desaparecimento dos avisos de complexidade de encode e decodeSan;
 - revisão manual dos comportamentos de roque, captura, promoção, ambiguidade, movimentos ilegais, xeque e xeque-mate;
 - comparação entre os resultados inicial e final do Sonar.
+
+Posteriormente, a suíte `MoveListQetTest` foi ampliada para 16 casos, totalizando 28 testes diretamente associados à `MoveList` quando considerada junto aos 12 casos de `MoveListTest`. Após a integração na `main`, a regressão completa do Chesslib executou 315 testes sem falhas, erros ou testes ignorados.
+
 Com base nesses resultados, as refatorações foram consideradas válidas porque produziram uma redução mensurável da complexidade, preservaram o comportamento verificado pelos testes e não introduziram falhas conhecidas. O resultado da IA foi, portanto, utilizado como ponto de partida, mas foi revisado, aplicado gradualmente e aceito somente após validação técnica.
 
 ### Evidências relacionadas
@@ -455,7 +460,7 @@ A resposta da IA foi validada inicialmente pela revisão da configuração adici
 
 Após a configuração do perfil, foi realizada uma primeira execução do JaCoCo utilizando apenas as suítes `MoveListTest` e `MoveListQetTest`. Essa execução apresentou 73% de cobertura de branches, valor inferior ao mínimo de 80%. Como outros testes do Chesslib também exercitam métodos da `MoveList`, foi executada posteriormente a regressão completa do projeto.
 
-Na execução completa, 248 testes foram aprovados, sem falhas, erros ou testes ignorados. O relatório do JaCoCo registrou:
+Na medição individual utilizada para gerar os relatórios da `MoveList`, 248 testes foram aprovados, sem falhas, erros ou testes ignorados. O relatório do JaCoCo registrou:
 
 - 159 de 196 branches cobertos, correspondendo a 81%;
 - 343 de 388 linhas cobertas, correspondendo a 88%;
@@ -469,6 +474,8 @@ Em seguida, o PIT foi executado utilizando `MoveListTest` e `MoveListQetTest` co
 - força dos testes de 168/185, correspondendo a 91%;
 - 26 mutantes sem cobertura e 17 sobreviventes;
 - resultado `BUILD SUCCESS`.
+
+Após a integração da contribuição na `main`, a regressão completa foi executada novamente e apresentou 315 testes aprovados, sem falhas, erros ou testes ignorados. Os perfis `movelist-quality` e `game-quality` foram executados separadamente e terminaram com `BUILD SUCCESS`, confirmando que as duas configurações permaneceram funcionais após a resolução do conflito no `pom.xml`.
 
 A validação final foi composta pelas seguintes evidências:
 

@@ -12,7 +12,9 @@ Este relatório consolida os testes, as medições de cobertura estrutural e os 
 | [MoveListQetTest](../../../chesslib/src/test/java/com/github/bhlangonijr/chesslib/move/MoveListQetTest.java) | 16 | Cenários adicionais para regras especiais, cópia, operações da lista, limites e caminhos excepcionais |
 | **Total das duas suítes** | **28** | Casos diretamente associados à `MoveList` |
 
-A regressão completa do Chesslib executou **248 testes**, sem falhas, erros ou testes ignorados. A execução completa também é necessária para a medição de cobertura, pois outras suítes do projeto exercitam caminhos da `MoveList`.
+Na medição individual da `MoveList`, a regressão completa do Chesslib executou **248 testes**, sem falhas, erros ou testes ignorados. Essa execução completa foi utilizada para a medição de cobertura, pois outras suítes do projeto também exercitam caminhos da `MoveList`.
+
+Após a integração da contribuição à versão atual da `main`, a regressão completa foi executada novamente e apresentou **315 testes aprovados**, sem falhas, erros ou testes ignorados. Os perfis `movelist-quality` e `game-quality` também foram executados separadamente e terminaram com `BUILD SUCCESS`.
 
 ## Técnicas e casos funcionais
 
@@ -97,4 +99,4 @@ A inspeção estática da `MoveList`, as correções realizadas e as evidências
 - [Build após as correções](../../inspecao/movelist/build_sucess.png)
 - [Registro de uso de IA](../../ai/AI-LOG.md)
 
-Os percentuais deste documento correspondem às execuções finais realizadas com o perfil `movelist-quality` na branch `lucio/entrega2`.
+Os percentuais de cobertura e mutação apresentados neste documento correspondem à medição individual realizada com o perfil `movelist-quality` na branch `lucio/entrega2`. Após a integração na `main`, a regressão com 315 testes e as verificações dos perfis `movelist-quality` e `game-quality` foram aprovadas, confirmando que a integração não introduziu regressões conhecidas.
