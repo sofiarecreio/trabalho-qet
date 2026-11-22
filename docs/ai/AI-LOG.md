@@ -165,6 +165,26 @@ O resultado da IA foi validado por leitura do arquivo original `MoveListTest.jav
 - [Testes executáveis](../../chesslib/src/test/java/com/github/bhlangonijr/chesslib/game/GameProcessingTest.java).
 - [Código de produção](../../chesslib/src/main/java/com/github/bhlangonijr/chesslib/game/Game.java).
 
+## Registro E2-WES-GAME-03 — Integração do Chesslib com arquivos PGN
+
+| Informação | Registro |
+| --- | --- |
+| Data | 22/11/2026 |
+| Responsável | Weslley Ribeiro |
+| Entrega | Entrega 2 |
+| Atividade | Leitura de arquivos PGN, criação de partidas e processamento/navegação com componentes reais |
+| Ferramenta | Codex/ChatGPT |
+| Prompt/instrução | [Prompt de melhoria da integração](prompts/game-integracao-entrega-2.md) |
+| Resultado | [Resposta com 12 testes de integração](responses/game-integracao-entrega-2.md). A versão inicial de dois casos aprovados está no commit `8cd5951`. A suíte revisada atravessa arquivos temporários, LargeFile, PgnIterator, GameLoader, Game, MoveList e Board sem dublês. Os 12 casos passaram; as quatro suítes ligadas a Game tiveram 74 testes aprovados e a regressão completa do Chesslib teve 281 |
+| Decisão | Aceitos arquivos criados por cada teste, FENs explícitos, verificação de metadados e anotações, navegação da variação e retorno à linha principal, erros com contexto e exportação com releitura. Mantidas as classes de produção e as dependências existentes. Nenhuma expectativa da resposta precisou ser rejeitada nesta etapa; não foi necessário um commit corretivo adicional |
+| Validação | A distinção em relação aos testes anteriores foi verificada no caminho real de execução: PgnHolder lê bytes do arquivo e usa PgnIterator/GameLoader para criar Game; MoveList interpreta SAN e Board executa movimentos legais. FENs completos foram definidos pelas posições esperadas após cada sequência, evitando validar só o índice ou comparar dois resultados da mesma implementação. A variação com dois meios-lances e linha principal com quatro detecta o uso do tamanho da lista errada. Os erros verificam evento/rodada e causas específicas; o teste de exportação exige conteúdo gravado, relê outro objeto e confere metadados, SAN, comentários, NAG, variação e FEN conhecido. Arquivos vazios, ausentes, LF/CRLF e duas partidas de eventos distintos completam as partições escolhidas. JUnit TemporaryFolder separa os dados de cada teste. Comandos: mvn -B -f chesslib/pom.xml -Dtest=GameTest,GameIsolatedTest,GameProcessingTest,GameIntegrationTest test (74 aprovados) e mvn -B -f chesslib/pom.xml test (281 aprovados). Isso valida os fluxos cobertos, sem provar todas as regras de xadrez, todos os encodings, agrupamento de partidas no mesmo evento, fechamento de recursos em todo erro ou metas de cobertura/mutação. |
+
+### Evidências relacionadas
+
+- [Entrada: prompt utilizado](prompts/game-integracao-entrega-2.md).
+- [Saída: suíte revisada](responses/game-integracao-entrega-2.md).
+- [Testes executáveis](../../chesslib/src/test/java/com/github/bhlangonijr/chesslib/game/GameIntegrationTest.java).
+
 ## Modelo para novos registros
 
 ### Registro NNN — Título da interação
