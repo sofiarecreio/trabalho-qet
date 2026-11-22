@@ -34,9 +34,9 @@ O filtro executa os 16 testes do Lucas e os 4 testes já existentes da classe `M
 
 | Métrica do `MoveGenerator` | Resultado |
 |---|---:|
-| Branches | 56 de 66 — **84,85%** |
-| Linhas | 169 de 181 — **93,37%** |
-| Instruções | 713 de 778 — **91,65%** |
+| Branches | 65 de 68 — **95,59%** |
+| Linhas | 175 de 180 — **97,22%** |
+| Instruções | 741 de 766 — **96,74%** |
 
 Resultado da execução: **BUILD SUCCESS** e todos os 20 testes passaram.
 

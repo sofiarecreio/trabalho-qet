@@ -347,42 +347,42 @@ public class MoveGenerator {
         if (board.isKingAttacked()) {
             return;
         }
-        boolean isChess960 = board.getContext().getVariationType() == VariationType.CHESS960;
-        if (board.getCastleRight(side).equals(CastleRight.KING_AND_QUEEN_SIDE) ||
-                (board.getCastleRight(side).equals(CastleRight.KING_SIDE))) {
-            long occ = board.getBitboard();
-            if (isChess960) {
-                // Exclude king and rook from occupancy for the "must be empty" check
-                Move kingMove = board.getContext().getoo(side);
-                Move rookMove = board.getContext().getRookoo(side);
-                occ &= ~kingMove.getFrom().getBitboard();
-                if (rookMove != null) {
-                    occ &= ~rookMove.getFrom().getBitboard();
-                }
-            }
-            if ((occ & board.getContext().getooAllSquaresBb(side)) == 0L) {
-                if (!board.isSquareAttackedBy(board.getContext().getooSquares(side), side.flip())) {
-                    moves.add(board.getContext().getoo(side));
-                }
+        addCastleMove(board, moves, side, true);
+        addCastleMove(board, moves, side, false);
+    }
+
+    private static void addCastleMove(Board board, List<Move> moves, Side side, boolean kingSide) {
+        CastleRight castleRight = board.getCastleRight(side);
+        if (!hasCastleRight(castleRight, kingSide)) {
+            return;
+        }
+        Move castleMove = kingSide ? board.getContext().getoo(side) : board.getContext().getooo(side);
+        Move rookMove = kingSide ? board.getContext().getRookoo(side) : board.getContext().getRookooo(side);
+        long occupancy = getCastleOccupancy(board, castleMove, rookMove);
+        long emptySquares = kingSide ? board.getContext().getooAllSquaresBb(side)
+                : board.getContext().getoooAllSquaresBb(side);
+        List<Square> transitSquares = kingSide ? board.getContext().getooSquares(side)
+                : board.getContext().getoooSquares(side);
+        if ((occupancy & emptySquares) == 0L && !board.isSquareAttackedBy(transitSquares, side.flip())) {
+            moves.add(castleMove);
+        }
+    }
+
+    private static boolean hasCastleRight(CastleRight castleRight, boolean kingSide) {
+        return castleRight.equals(CastleRight.KING_AND_QUEEN_SIDE)
+                || (kingSide && castleRight.equals(CastleRight.KING_SIDE))
+                || (!kingSide && castleRight.equals(CastleRight.QUEEN_SIDE));
+    }
+
+    private static long getCastleOccupancy(Board board, Move castleMove, Move rookMove) {
+        long occupancy = board.getBitboard();
+        if (board.getContext().getVariationType() == VariationType.CHESS960) {
+            occupancy &= ~castleMove.getFrom().getBitboard();
+            if (rookMove != null) {
+                occupancy &= ~rookMove.getFrom().getBitboard();
             }
         }
-        if (board.getCastleRight(side).equals(CastleRight.KING_AND_QUEEN_SIDE) ||
-                (board.getCastleRight(side).equals(CastleRight.QUEEN_SIDE))) {
-            long occ = board.getBitboard();
-            if (isChess960) {
-                Move kingMove = board.getContext().getooo(side);
-                Move rookMove = board.getContext().getRookooo(side);
-                occ &= ~kingMove.getFrom().getBitboard();
-                if (rookMove != null) {
-                    occ &= ~rookMove.getFrom().getBitboard();
-                }
-            }
-            if ((occ & board.getContext().getoooAllSquaresBb(side)) == 0L) {
-                if (!board.isSquareAttackedBy(board.getContext().getoooSquares(side), side.flip())) {
-                    moves.add(board.getContext().getooo(side));
-                }
-            }
-        }
+        return occupancy;
     }
 
     /**
