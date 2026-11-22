@@ -1,6 +1,7 @@
 package com.github.bhlangonijr.chesslib.game;
 
 import com.github.bhlangonijr.chesslib.Board;
+import com.github.bhlangonijr.chesslib.move.Move;
 import com.github.bhlangonijr.chesslib.move.MoveConversionException;
 import com.github.bhlangonijr.chesslib.move.MoveList;
 
@@ -293,6 +294,49 @@ public class GameTest {
 
         // Assert
         assertEquals(0, game.getPosition());
+    }
+
+    @Test
+    public void shouldNavigateToLastMoveWhenProvidedListIsLongerThanMainLine()
+            throws Exception {
+        game.loadMoveText(new StringBuilder("1. e4 e5"));
+        game.setBoard(new Board());
+        MoveList alternativeMoves = new MoveList();
+        alternativeMoves.loadFromSan("d4 d5 Nf3 Nf6");
+
+        game.gotoLast(alternativeMoves);
+
+        assertSame(alternativeMoves, game.getCurrentMoveList());
+        assertEquals(3, game.getPosition());
+        assertTrue(game.isEndOfMoveList());
+        Board expectedBoard = new Board();
+        for (Move move : alternativeMoves) {
+            assertTrue(expectedBoard.doMove(move, true));
+        }
+        assertEquals(expectedBoard.getFen(), game.getBoard().getFen());
+    }
+
+    @Test
+    public void shouldReportStartWhenCurrentMoveListIsNull() {
+        assertNull(game.getCurrentMoveList());
+        assertTrue(game.isStartOfMoveList());
+    }
+
+    @Test
+    public void shouldReportStartWhenCurrentMoveListIsEmptyRegardlessOfPosition() {
+        game.setCurrentMoveList(new MoveList());
+        game.setPosition(2);
+
+        assertTrue(game.isStartOfMoveList());
+    }
+
+    @Test
+    public void shouldNotReportStartAfterFirstMove() throws Exception {
+        game.loadMoveText(new StringBuilder("1. e4 e5"));
+        game.setBoard(new Board());
+        game.gotoMove(game.getHalfMoves(), 1);
+
+        assertFalse(game.isStartOfMoveList());
     }
 
     @Test

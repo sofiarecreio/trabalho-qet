@@ -967,7 +967,7 @@ public class Game {
      * @see Game#gotoMove(MoveList, int)
      */
     public void gotoLast(final MoveList moves) throws MoveException {
-        gotoMove(moves, getHalfMoves().size() - 1);
+        gotoMove(moves, moves.size() - 1);
     }
 
     /**
@@ -1066,7 +1066,7 @@ public class Game {
      * @return {@code true} if the current move is the first one in the active list of moves, or the latter is empty
      */
     public boolean isStartOfMoveList() {
-        return getCurrentMoveList() == null && getPosition() == 0;
+        return getCurrentMoveList() == null || getCurrentMoveList().isEmpty() || getPosition() == 0;
     }
 
     /**
