@@ -17,8 +17,6 @@
   <properties>
     <!-- Generic properties -->
     <java.version>17</java.version>
-    <selenium.version>4.53.0</selenium.version>
-    
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     <!-- Important for reproducible builds. Update using e.g. ./mvnw versions:set -DnewVersion=... -->
@@ -181,19 +179,11 @@
       <scope>test</scope>
     </dependency>
     <dependency>
-        <groupId>org.testcontainers</groupId>
-        <artifactId>testcontainers-mysql</artifactId>
-        <scope>test</scope>
+      <groupId>org.seleniumhq.selenium</groupId>
+      <artifactId>selenium-java</artifactId>
+      <version>4.43.0</version>
+      <scope>test</scope>
     </dependency>
-
-    <!-- Selenium para os testes automatizados de sistema -->
-    <dependency>
-        <groupId>org.seleniumhq.selenium</groupId>
-        <artifactId>selenium-java</artifactId>
-        <version>${selenium.version}</version>
-        <scope>test</scope>
-    </dependency>
-    
   </dependencies>
 
   <build>
