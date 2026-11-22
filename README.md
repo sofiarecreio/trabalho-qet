@@ -54,6 +54,11 @@ O [Spring PetClinic](https://github.com/spring-projects/spring-petclinic) é uma
 - **Plano de Teste editável:** [documento compartilhado](https://docs.google.com/document/d/1JDJVJR6WbpOXpzfRQsbcVWZm8XzQYc8xMSGoEAKj0xo/edit?tab=t.0); atualização final da Entrega 2 a consolidar pela equipe.
 - **Escopo dos sistemas:** descrito no Plano de Teste e resumido neste README.
 - **Registro de uso de IA:** [`docs/ai/AI-LOG.md`](docs/ai/AI-LOG.md).
+- **Entrega 2 — Pedro:** [índice dos artefatos e situação de integração](docs/entrega2/pedro/README.md).
+- **TimeControl — Pedro:** [testes, cobertura, mutação e comandos](docs/entrega2/pedro/timecontrol-testes.md), com evidências XML da medição local.
+- **Consolidação das cinco classes:** [tabela, estados do PIT, comandos e pendências](docs/entrega2/consolidacao/README.md).
+- **Inspeção PgnHolder — Pedro:** [correções e capturas antes/depois](docs/inspecao/pgnholder/README.md).
+- **Selenium de alteração de animal — Pedro:** [nove cenários e capturas](docs/selenium/alterar-animal/README.md).
 - **Organização dos testes manuais:** [`docs/teste-manual/README.md`](docs/teste-manual/README.md).
 - **Inspeção compartilhada:** [relatório Sonar](https://docs.google.com/document/d/1LBd-p5gI73bchdHi-wWXTSUu7rfhmelV1IxTPfpdvk8/edit?tab=t.0).
 - **Testes e integração de Game:** [relatório técnico de Weslley](docs/entrega2/weslley/game-testes-integracao.md).
@@ -250,11 +255,25 @@ Os 307 testes do Chesslib incluem os testes originais e dos demais integrantes. 
 - [x] Realizar a revisão individual dos testes, métricas e decisões.
 - [ ] Preparar a explicação da própria contribuição para a apresentação.
 
+### Resultados de Pedro
+
+Os resultados abaixo correspondem à validação da contribuição de Pedro; a integração na main deve ser confirmada pelo responsável pelo merge:
+
+| Item | Resultado | Evidência |
+| --- | --- | --- |
+| TimeControl | 23 testes; 40/42 branches (95,24%); 60/69 mutantes mortos (86,96%) | [Relatório](docs/entrega2/pedro/timecontrol-testes.md) |
+| PgnHolder | 10 para 0 apontamentos no mesmo perfil Sonar; oito testes de regressão adicionais | [Inspeção](docs/inspecao/pgnholder/README.md) |
+| Regressão Chesslib | 341 aprovados | [Escopo e validação](docs/inspecao/pgnholder/README.md#compatibilidade-e-validação) |
+| Edição de animal | Nove cenários Selenium aprovados; seleção conjunta de 42 testes aprovada | [Selenium](docs/selenium/alterar-animal/README.md) |
+| Consolidação | Cinco classes medidas; pendências de mutação de GameLoader e MoveList identificadas | [Tabela e dados originais](docs/entrega2/consolidacao/README.md) |
+
+A seleção do PetClinic não corresponde à suíte inteira. A seção de PgnHolder no relatório Sonar compartilhado está atualizada. Os dados para o Plano de Teste/ISO estão [disponíveis nesta contribuição](docs/entrega2/pedro/dados-documentacao.md); o plano está somente para leitura na conta da UFF de Pedro. As correções de PgnHolder estão registradas nas Issues [#21](https://github.com/sofiarecreio/trabalho-qet/issues/21) e [#22](https://github.com/sofiarecreio/trabalho-qet/issues/22).
+
 ### Pendências de consolidação do grupo
 
 | Responsável | Próxima consolidação | Situação documentada |
 | --- | --- | --- |
-| Pedro | Tabela final de complexidade, cobertura e mutação das cinco classes | Aguardando consolidação dos resultados individuais |
+| Pedro | Consolidar métricas e publicar sua contribuição | [Tabela preparada](docs/entrega2/consolidacao/README.md); resultados e limites documentados; integração pelo responsável do grupo |
 | Lucio | Relatório final de inspeção com os resultados das cinco classes | MoveList já descrita no documento compartilhado; Game preenchida; demais resultados finais a confirmar |
 | Lucas | Consolidação das funcionalidades Selenium e confirmação dos resultados finais de sua classe | Artefatos de MoveGenerator, integração e busca de proprietário já disponíveis nos links acima |
 | Sofia | ISO/IEC 25010, Plano de Teste, índice de evidências e slides | Consolidação e links finais pendentes |
