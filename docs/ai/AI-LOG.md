@@ -248,7 +248,7 @@ O resultado da IA foi validado por leitura do arquivo original `MoveListTest.jav
 
 - Correções iniciais: commit `27a5d86`, somente código de Game.
 - [Entrada](prompts/game-inspecao-sonar-entrega-2.md) e [saída](responses/game-inspecao-sonar-entrega-2.md) da revisão.
-- [Relatório e capturas antes/depois](../entrega2/weslley/sonar-game/relatorio.md).
+- [Relatório e capturas antes/depois](../inspecao/game/relatorio.md).
 - [Classe corrigida](../../chesslib/src/main/java/com/github/bhlangonijr/chesslib/game/Game.java) e [casos de robustez](../../chesslib/src/test/java/com/github/bhlangonijr/chesslib/game/GameQualityTest.java).
 
 ## Modelo para novos registros

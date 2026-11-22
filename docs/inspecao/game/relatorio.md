@@ -32,13 +32,13 @@ A extração de métodos e os tratamentos explícitos de estado acrescentaram m�
 
 ### Evidência inicial — 16 apontamentos em Game
 
-![Sonar antes: 16 apontamentos e as três complexidades altas de Game](01-antes-apontamentos.png)
+![Sonar antes: 16 apontamentos e as três complexidades altas de Game](sonar-antes.png)
 
 Fonte inicial: commit `90c64bd15f267872afd66b4843a6fd43b79597ac`. [Painel inicial local](http://localhost:9000/project/issues?issueStatuses=OPEN%2CCONFIRMED&id=qet-weslley-game).
 
 ### Evidência final — zero apontamentos no mesmo escopo
 
-![Sonar depois: zero apontamentos no projeto que analisa somente Game.java](02-depois-apontamentos.png)
+![Sonar depois: zero apontamentos no projeto que analisa somente Game.java](sonar-depois.png)
 
 Fonte final: commit `fda91583c42a43b000f1b546f3388f680affa6b5`, registrado também na análise Sonar; Game.java analisado com SHA-256 `EFCD3829B4B656532466561F780814C28C5A0D7E61A4EC16597D46692AAAB154`. A captura foi atualizada em seguida para identificar o painel como Game - Depois, sem mudar o código analisado. [Painel final local](http://localhost:9000/project/issues?issueStatuses=OPEN%2CCONFIRMED&id=qet-weslley-game-depois).
 
@@ -106,4 +106,4 @@ O projeto deve estar associado ao perfil comprehensive antes de estabelecer os r
 
 Aceitar as correções e a refatoração porque o mesmo perfil eliminou os 16 apontamentos, os oráculos completos de PGN passaram e as metas de cobertura e mutação foram mantidas na produção final. A revisão não depende apenas do resultado verde dos testes: os casos verificam conteúdo e estrutura de saída e o PIT verifica sensibilidade a alterações na lógica.
 
-Não há apontamento Sonar remanescente de Game a justificar em issue nesta execução. Continuam pendentes a inserção desta seção no relatório compartilhado da equipe, sua conferência pelo responsável e a integração da branch individual à main. A relação entre branches JaCoCo e o critério acadêmico todas-arestas continua sujeita aos limites já documentados na análise de cobertura; o Sonar não resolve essa distinção.
+Não há apontamento Sonar remanescente de Game a justificar em issue nesta execução. A seção 5 do [relatório compartilhado](https://docs.google.com/document/d/1LBd-p5gI73bchdHi-wWXTSUu7rfhmelV1IxTPfpdvk8/edit) foi atualizada com correções, validação e capturas, e as tabelas de consolidação receberam os dados de Game. O documento foi padronizado, preservando o conteúdo dos colegas. Permanecem a conferência dos responsáveis e a integração da branch individual à main. A relação entre branches JaCoCo e o critério acadêmico todas-arestas continua sujeita aos limites já documentados na análise de cobertura; o Sonar não resolve essa distinção.
