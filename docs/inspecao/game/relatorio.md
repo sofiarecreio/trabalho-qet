@@ -34,13 +34,13 @@ A extração de métodos e os tratamentos explícitos de estado acrescentaram m�
 
 ![Sonar antes: 16 apontamentos e as três complexidades altas de Game](sonar-antes.png)
 
-Fonte inicial: commit `90c64bd15f267872afd66b4843a6fd43b79597ac`. [Painel inicial local](http://localhost:9000/project/issues?issueStatuses=OPEN%2CCONFIRMED&id=qet-weslley-game).
+Fonte inicial registrada na execução Sonar: commit `90c64bd15f267872afd66b4843a6fd43b79597ac`. A versão equivalente de código no histórico atual é `f42c79a394b1afad19a9a69cd6a778226cd59410`, após a reorganização dos registros de documentação. [Painel inicial local](http://localhost:9000/project/issues?issueStatuses=OPEN%2CCONFIRMED&id=qet-weslley-game).
 
 ### Evidência final — zero apontamentos no mesmo escopo
 
 ![Sonar depois: zero apontamentos no projeto que analisa somente Game.java](sonar-depois.png)
 
-Fonte final: commit `fda91583c42a43b000f1b546f3388f680affa6b5`, registrado também na análise Sonar; Game.java analisado com SHA-256 `EFCD3829B4B656532466561F780814C28C5A0D7E61A4EC16597D46692AAAB154`. A captura foi atualizada em seguida para identificar o painel como Game - Depois, sem mudar o código analisado. [Painel final local](http://localhost:9000/project/issues?issueStatuses=OPEN%2CCONFIRMED&id=qet-weslley-game-depois).
+Fonte final registrada na execução Sonar: commit `fda91583c42a43b000f1b546f3388f680affa6b5`; a versão equivalente de código no histórico atual é `d4d98e681b41c246d4e5a1603fea2915672411de`. Game.java analisado com SHA-256 `EFCD3829B4B656532466561F780814C28C5A0D7E61A4EC16597D46692AAAB154`. A captura foi atualizada em seguida para identificar o painel como Game - Depois, sem mudar o código analisado. O código e as evidências foram integrados à main pelo [PR #16](https://github.com/sofiarecreio/trabalho-qet/pull/16), merge `f2f875e0394e28801fe832c6c5ffbda3644cffdc`. [Painel final local](http://localhost:9000/project/issues?issueStatuses=OPEN%2CCONFIRMED&id=qet-weslley-game-depois).
 
 Os endereços localhost dependem do servidor desta máquina; as capturas versionadas permitem consultar a evidência sem esse acesso. O zero é restrito ao arquivo analisado e às regras ativas, não significa ausência de defeitos em todo Chesslib.
 
@@ -106,4 +106,4 @@ O projeto deve estar associado ao perfil comprehensive antes de estabelecer os r
 
 Aceitar as correções e a refatoração porque o mesmo perfil eliminou os 16 apontamentos, os oráculos completos de PGN passaram e as metas de cobertura e mutação foram mantidas na produção final. A revisão não depende apenas do resultado verde dos testes: os casos verificam conteúdo e estrutura de saída e o PIT verifica sensibilidade a alterações na lógica.
 
-Não há apontamento Sonar remanescente de Game a justificar em issue nesta execução. A seção 5 do [relatório compartilhado](https://docs.google.com/document/d/1LBd-p5gI73bchdHi-wWXTSUu7rfhmelV1IxTPfpdvk8/edit) foi atualizada com correções, validação e capturas, e as tabelas de consolidação receberam os dados de Game. O documento foi padronizado, preservando o conteúdo dos colegas. Permanecem a conferência dos responsáveis e a integração da branch individual à main. A relação entre branches JaCoCo e o critério acadêmico todas-arestas continua sujeita aos limites já documentados na análise de cobertura; o Sonar não resolve essa distinção.
+Não há apontamento Sonar remanescente de Game a justificar em issue nesta execução. A seção 5 do [relatório compartilhado](https://docs.google.com/document/d/1LBd-p5gI73bchdHi-wWXTSUu7rfhmelV1IxTPfpdvk8/edit) foi atualizada com correções, validação e capturas, e as tabelas de consolidação receberam os dados de Game. O documento foi padronizado, preservando o conteúdo dos colegas. Código e evidências de Weslley estão na main pelo PR #16. Permanecem a conferência individual e a consolidação das demais classes pelos respectivos responsáveis. A relação entre branches JaCoCo e o critério acadêmico todas-arestas está explicitada no [relatório técnico de Game](../../entrega2/weslley/game-testes-integracao.md#relação-com-todas-arestas) e continua a esclarecer no critério acadêmico; o Sonar não resolve essa distinção.
