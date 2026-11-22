@@ -40,7 +40,7 @@ Fonte inicial: commit `90c64bd15f267872afd66b4843a6fd43b79597ac`. [Painel inicia
 
 ![Sonar depois: zero apontamentos no projeto que analisa somente Game.java](02-depois-apontamentos.png)
 
-Fonte final: Game.java da versão que adiciona este relatório, SHA-256 `EFCD3829B4B656532466561F780814C28C5A0D7E61A4EC16597D46692AAAB154`. [Painel final local](http://localhost:9000/project/issues?issueStatuses=OPEN%2CCONFIRMED&id=qet-weslley-game-depois).
+Fonte final: commit `fda91583c42a43b000f1b546f3388f680affa6b5`, registrado também na análise Sonar; Game.java analisado com SHA-256 `EFCD3829B4B656532466561F780814C28C5A0D7E61A4EC16597D46692AAAB154`. A captura foi atualizada em seguida para identificar o painel como Game - Depois, sem mudar o código analisado. [Painel final local](http://localhost:9000/project/issues?issueStatuses=OPEN%2CCONFIRMED&id=qet-weslley-game-depois).
 
 Os endereços localhost dependem do servidor desta máquina; as capturas versionadas permitem consultar a evidência sem esse acesso. O zero é restrito ao arquivo analisado e às regras ativas, não significa ausência de defeitos em todo Chesslib.
 
