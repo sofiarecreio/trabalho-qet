@@ -430,7 +430,7 @@ public class Game {
         int variantIndex = 0;
         int lastSize = sb.length();
 
-        if (getHalfMoves().size() == 0) {
+        if (getHalfMoves().isEmpty()) {
             sb.append(getMoveText().toString());
         } else {
             sb.append(moveCounter);
@@ -453,9 +453,9 @@ public class Game {
                     lastSize = sb.length();
                 }
                 if (getNag() != null) {
-                    String nag = getNag().get(variantIndex);
-                    if (nag != null) {
-                        sb.append(nag);
+                    String annotationGlyph = getNag().get(variantIndex);
+                    if (annotationGlyph != null) {
+                        sb.append(annotationGlyph);
                         sb.append(' ');
                     }
                 }
@@ -471,8 +471,8 @@ public class Game {
                 if (getVariations() != null) {
                     List<MoveList> vars = getVariations().get(variantIndex);
                     if (vars != null) {
-                        for (MoveList var : vars) {
-                            variantIndex = translateVariation(sb, var, -1,
+                        for (MoveList alternative : vars) {
+                            variantIndex = translateVariation(sb, alternative,
                                     variantIndex, index, moveCounter, lastSize);
                         }
                         if (index % 2 != 0) {
@@ -496,7 +496,7 @@ public class Game {
 
     }
 
-    private int translateVariation(StringBuilder sb, MoveList variation, int parent,
+    private int translateVariation(StringBuilder sb, MoveList variation,
                                    int variantIndex, int index, int moveCounter, int lastSize) throws MoveConversionException {
         final int variantIndexOld = variantIndex;
         if (variation != null) {
@@ -529,7 +529,7 @@ public class Game {
                             terminated = true;
                             sb.append(") ");
                         }
-                        variantIndex = translateVariation(sb, child, variantIndexOld,
+                        variantIndex = translateVariation(sb, child,
                                 variantIndex, idx, mc, lastSize);
                     }
                 }
@@ -856,7 +856,7 @@ public class Game {
                             new StringBuilder(getMovesAt(moves.toString(), halfMove));
                     try {
 
-                        onVariationBlock = variation.size() > 0;
+                        onVariationBlock = !variation.isEmpty();
 
                         for (RTextEntry entry : variation) {
                             currentLine.append(getMovesAt(entry.text.toString(), entry.size));
@@ -864,18 +864,18 @@ public class Game {
 
                         MoveList tmp = new MoveList();
                         tmp.loadFromSan(getMovesAt(currentLine.toString(), last.index));
-                        MoveList var = MoveList.createMoveListFrom(tmp, tmp.size());
-                        var.loadFromSan(last.text.toString());
+                        MoveList alternative = MoveList.createMoveListFrom(tmp, tmp.size());
+                        alternative.loadFromSan(last.text.toString());
                         final RTextEntry parent = variation.peekLast();
                         if (onVariationBlock && parent != null) {
-                            var.setParent(parent.index);
+                            alternative.setParent(parent.index);
                         } else {
-                            var.setParent(-1);
+                            alternative.setParent(-1);
                         }
                         if (getVariations() == null) {
                             setVariations(new HashMap<Integer, List<MoveList>>());
                         }
-                        getVariations().computeIfAbsent(last.index, k -> new ArrayList<>()).add(var);
+                        getVariations().computeIfAbsent(last.index, k -> new ArrayList<>()).add(alternative);
                         if (!onVariationBlock) {
                             lastClosedIndex = last.index;
                         }
