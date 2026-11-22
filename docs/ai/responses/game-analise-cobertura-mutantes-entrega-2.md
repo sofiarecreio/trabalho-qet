@@ -4,9 +4,9 @@ Data: 22/11/2026. Classe de produção: `com.github.bhlangonijr.chesslib.game.Ga
 
 ## Resultado e decisão
 
-A revisão ampliou `GameQualityTest` de cinco para 13 casos. A versão inicial está no commit `9fa379f`; a versão revisada está no commit que acrescenta este documento. A produção e o POM permaneceram intactos nesta etapa. A contribuição e os filtros padrão de Lucas foram preservados.
+A revisão ampliou `GameQualityTest` de cinco para 13 casos. A versão inicial está no commit `0d5dbf9`; a versão revisada está no commit que acrescenta este documento. A produção e o POM permaneceram intactos nesta etapa. A contribuição e os filtros padrão de Lucas foram preservados.
 
-| Medida | Antes (`37a9b47`) | Depois (versão revisada) |
+| Medida | Antes (`7376d34`) | Depois (versão revisada) |
 | --- | --- | --- |
 | Testes da regressão Chesslib | 292 | 305 |
 | Casos nas suítes `Game*Test` | 74, quatro suítes | 87, cinco suítes |

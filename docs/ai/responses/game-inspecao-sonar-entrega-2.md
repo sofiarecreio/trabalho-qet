@@ -1,6 +1,6 @@
 # Saída da revisão Sonar de Game
 
-A versão inicial (`27a5d86`) aplicou correções de nomes, listas vazias e parâmetro privado sem uso. A revisão separou geração de cabeçalhos, anotações e variações e decompôs o parser em normalização, comentários, delimitadores e fechamento de variações. Os objetos internos novos contêm somente dados; os métodos continuam em Game, no alvo da cobertura e mutação.
+A versão inicial (`71df887`) aplicou correções de nomes, listas vazias e parâmetro privado sem uso. A revisão separou geração de cabeçalhos, anotações e variações e decompôs o parser em normalização, comentários, delimitadores e fechamento de variações. Os objetos internos novos contêm somente dados; os métodos continuam em Game, no alvo da cobertura e mutação.
 
 Resultado: **16 → 0 apontamentos**, com SonarQube Community Build 26.11.0.134175, analisador Java 8.46.0.59609 e o mesmo perfil oficial Sonar way comprehensive de 608 regras. Complexidade cognitiva agregada **218 → 109**, sem método acima do limite 15 na análise final.
 
