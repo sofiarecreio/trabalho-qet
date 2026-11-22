@@ -208,6 +208,28 @@ O resultado da IA foi validado por leitura do arquivo original `MoveListTest.jav
 - Relatório PIT gerado localmente: `chesslib/target/pit-reports-game/index.html`.
 - Os relatórios completos são gerados pelos comandos preservados na resposta; scripts e logs não foram adicionados ao repositório nesta etapa.
 
+## E2-WES-GAME-05 — Análise de cobertura e mutantes de Game
+
+| Informação | Registro |
+| --- | --- |
+| Data | 22/11/2026 |
+| Responsável | Weslley Ribeiro |
+| Entrega | Entrega 2 |
+| Atividade | Analisar as lacunas JaCoCo/PIT de Game e melhorar os testes dirigidos pelos relatórios |
+| Ferramenta | Codex/ChatGPT |
+| Prompt/instrução | [Instrução de revisão](prompts/game-analise-cobertura-mutantes-entrega-2.md) |
+| Resultado | [Saída, casos e análise individual](responses/game-analise-cobertura-mutantes-entrega-2.md). GameQualityTest passou de cinco para 13 casos; regressão completa de 305 testes. Branches: 195/218 = 89,45%. PIT: 201/208 = 96,63%, sete sobreviventes e nenhum sem cobertura ou erro na execução final. Analisados os 28 mutantes inicialmente não mortos e as 29 saídas de decisão inicialmente ausentes |
+| Decisão | Aceitos os oráculos exatos de variações, limites de navegação, metadados não padrão e falha controlada de conversão. Preservados produção, POM e contribuição de Lucas. Nenhum sobrevivente excluído do denominador. Não aceita a conclusão de equivalência universal dos sobreviventes nem a identidade automática entre percentual C1 e um grafo completo de arestas. A saída documenta a operacionalização e os limites do critério acadêmico |
+| Validação | A comparação dos XMLs por método, descritor, operador e índice identifica 21 mutantes antes não mortos agora KILLED, sem regressão dos 180 antes mortos. Os oráculos de PGN verificam ordem, numeração, retomada e fechamento completo das variantes; não apenas presença de palavras. Limites de navegação distinguem falso antes do fim e verdadeiro no último índice/acima. Valores não vazios e posição inicial não zero detectam apagamento de estado. O stub de MoveList permite exercitar o tratamento explícito da falha de conversão sem modificar Game. A regressão completa e a regra de cobertura passaram. Duas execuções restritas do PIT falharam com MINION_DIED; a execução final fora da restrição concluiu, e somente seu XML foi usado no escore. As sete limitações restantes foram analisadas e mantidas explícitas. |
+
+### Evidências relacionadas
+
+- Versão inicial: commit `9fa379f`, somente código com cinco casos.
+- [Entrada da revisão](prompts/game-analise-cobertura-mutantes-entrega-2.md).
+- [Saída da revisão e decisões](responses/game-analise-cobertura-mutantes-entrega-2.md).
+- [Suíte final executável](../../chesslib/src/test/java/com/github/bhlangonijr/chesslib/game/GameQualityTest.java).
+- Relatórios completos gerados localmente em `chesslib/target/site/jacoco-game/` e `chesslib/target/pit-reports-game/`; sem scripts ou logs brutos novos no repositório.
+
 ## Modelo para novos registros
 
 ### Registro NNN — Título da interação

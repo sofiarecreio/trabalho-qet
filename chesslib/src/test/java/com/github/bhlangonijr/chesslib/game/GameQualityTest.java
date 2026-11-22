@@ -1,6 +1,7 @@
 package com.github.bhlangonijr.chesslib.game;
 
 import com.github.bhlangonijr.chesslib.move.MoveList;
+import com.github.bhlangonijr.chesslib.move.MoveConversionException;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -30,6 +31,8 @@ public class GameQualityTest {
         game.setPosition(1);
         assertFalse(game.isEndOfMoveList());
         game.setPosition(2);
+        assertTrue(game.isEndOfMoveList());
+        game.setPosition(3);
         assertTrue(game.isEndOfMoveList());
     }
 
@@ -62,6 +65,73 @@ public class GameQualityTest {
     public void shouldSerializeAllMovesOfLongVariation() throws Exception {
         game.loadMoveText(new StringBuilder("1. e4 (1. d4 d5 2. c4 e6 3. Nc3 Nf6) e5"));
         assertEquals("1. e4 (1. d4 d5 2. c4 e6 3. Nc3 Nf6 ) 1... e5 *", moveSection());
+    }
+
+    @Test
+    public void shouldNumberBlackVariationAndResumeNextWhiteMove() throws Exception {
+        game.loadMoveText(new StringBuilder("1. e4 e5 (1... c5 2. Nf3 d6) 2. Nf3"));
+        assertEquals("1. e4 e5 (1... c5 2. Nf3 d6 ) 2. Nf3 *", moveSection());
+    }
+
+    @Test
+    public void shouldCloseSiblingVariationBeforeOpeningNext() throws Exception {
+        game.loadMoveText(new StringBuilder("1. e4 (1. d4 d5) (1. c4 e5) e5"));
+        assertEquals("1. e4 (1. d4 d5 ) (1. c4 e5 ) 1... e5 *", moveSection());
+    }
+
+    @Test
+    public void shouldKeepNestedVariationInsideParent() throws Exception {
+        game.loadMoveText(new StringBuilder("1. e4 (1. d4 d5 (1... Nf6 2. c4 e6) 2. c4) e5"));
+        assertEquals("1. e4 (1. d4 d5 (1... Nf6 2. c4 e6 ) 2. c4 ) 1... e5 *", moveSection());
+    }
+
+    @Test
+    public void shouldUseAssignedInitialPositionInMoveNumber() throws Exception {
+        game.setInitialPosition(2);
+        game.loadMoveText(new StringBuilder("1. e4"));
+        assertEquals("3. e4 *", moveSection());
+    }
+
+    @Test
+    public void shouldRenderGameAsPgnString() throws Exception {
+        game.loadMoveText(new StringBuilder("1. e4 e5"));
+        assertEquals(game.toPgn(true, true), game.toString());
+    }
+
+    @Test
+    public void shouldReturnNullWhenStringConversionFails() {
+        game.setHalfMoves(new MoveList() {
+            @Override
+            public int size() {
+                return 1;
+            }
+
+            @Override
+            public String[] toSanArray() throws MoveConversionException {
+                throw new MoveConversionException("Controlled conversion failure");
+            }
+        });
+        assertNull(game.toString());
+    }
+
+    @Test
+    public void shouldReuseCommentMapAcrossLineCommentsAndReloads() throws Exception {
+        game.loadMoveText(new StringBuilder("1. e4 ; first\n e5 ; second"));
+        assertEquals("first ", game.getComments().get(1));
+        assertEquals("second ", game.getComments().get(2));
+        game.loadMoveText(new StringBuilder("1. d4 ; replaced\n d5"));
+        assertEquals(1, game.getComments().size());
+        assertEquals("replaced ", game.getComments().get(1));
+        assertArrayEquals(new String[]{"d4", "d5"}, game.getHalfMoves().toSanArray());
+    }
+
+    @Test
+    public void shouldIgnoreMoveMarkersInsideBlockComment() throws Exception {
+        game.loadMoveText(new StringBuilder("1. e4 { 1... $2 ( literal ) } e5"));
+        assertEquals("1... $2 ( literal ) ", game.getComments().get(1));
+        assertArrayEquals(new String[]{"e4", "e5"}, game.getHalfMoves().toSanArray());
+        assertNull(game.getVariations());
+        assertNull(game.getNag());
     }
 
     private String moveSection() throws Exception {
