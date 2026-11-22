@@ -383,7 +383,20 @@ public class Game {
      */
     public String toPgn(boolean includeVariations, boolean includeComments) throws MoveConversionException {
         StringBuilder sb = new StringBuilder();
+        appendPgnHeaders(sb);
+        sb.append('\n');
+        if (getHalfMoves().isEmpty()) {
+            if (getMoveText() != null) {
+                sb.append(getMoveText());
+            }
+        } else {
+            appendMainLine(sb);
+        }
+        sb.append(getResult().getDescription());
+        return sb.toString();
+    }
 
+    private void appendPgnHeaders(StringBuilder sb) {
         sb.append(makeProp("Event", getRound().getEvent().getName()));
         sb.append(makeProp("Site", getRound().getEvent().getSite()));
         sb.append(makeProp("Date", getRound().getEvent().getStartDate()));
@@ -393,162 +406,151 @@ public class Game {
         sb.append(makeProp("Result", getResult().getDescription()));
         sb.append(makeProp("PlyCount", getPlyCount()));
         if (getTermination() != null) {
-            sb.append(makeProp("Termination", getTermination().toString().toLowerCase()));
+            sb.append(makeProp("Termination", getTermination().toString().toLowerCase(java.util.Locale.ROOT)));
         }
-        if (getRound().getEvent().getTimeControl() != null) {
-            sb.append(makeProp("TimeControl", getRound().getEvent().getTimeControl().toPGNString()));
-        } else {
-            sb.append(makeProp("TimeControl", "-"));
+        TimeControl timeControl = getRound().getEvent().getTimeControl();
+        sb.append(makeProp("TimeControl", timeControl == null ? "-" : timeControl.toPGNString()));
+        appendOptionalPgnHeaders(sb);
+        if (getProperty() != null) {
+            for (Entry<String, String> entry : getProperty().entrySet()) {
+                sb.append(makeProp(entry.getKey(), entry.getValue()));
+            }
         }
-        if (StringUtils.isNotEmpty(getAnnotator())) {
-            sb.append(makeProp("Annotator", getAnnotator()));
-        }
-        if (StringUtils.isNotEmpty(getFen())) {
-            sb.append(makeProp("FEN", getFen()));
-        }
-        if (StringUtils.isNotEmpty(getEco())) {
-            sb.append(makeProp("ECO", getEco()));
-        }
-        if (StringUtils.isNotEmpty(getOpening())) {
-            sb.append(makeProp("Opening", getOpening()));
-        }
+    }
+
+    private void appendOptionalPgnHeaders(StringBuilder sb) {
+        appendOptionalProperty(sb, "Annotator", getAnnotator());
+        appendOptionalProperty(sb, "FEN", getFen());
+        appendOptionalProperty(sb, "ECO", getEco());
+        appendOptionalProperty(sb, "Opening", getOpening());
         if (getWhitePlayer().getElo() > 0) {
             sb.append(makeProp("WhiteElo", String.valueOf(getWhitePlayer().getElo())));
         }
         if (getBlackPlayer().getElo() > 0) {
             sb.append(makeProp("BlackElo", String.valueOf(getBlackPlayer().getElo())));
         }
-        if (getProperty() != null) {
-            for (Entry<String, String> entry : getProperty().entrySet()) {
-                sb.append(makeProp(entry.getKey(), entry.getValue()));
-            }
-        }
+    }
 
-        sb.append('\n');
+    private static void appendOptionalProperty(StringBuilder sb, String name, String value) {
+        if (StringUtils.isNotEmpty(value)) {
+            sb.append(makeProp(name, value));
+        }
+    }
+
+    private void appendMainLine(StringBuilder sb) {
         int index = 0;
         int moveCounter = getInitialPosition() + 1;
         int variantIndex = 0;
         int lastSize = sb.length();
-
-        if (getHalfMoves().isEmpty()) {
-            sb.append(getMoveText().toString());
-        } else {
-            sb.append(moveCounter);
-            if (moveCounter % 2 == 0) {
-                sb.append(".. ");
-            } else {
+        sb.append(moveCounter);
+        sb.append(moveCounter % 2 == 0 ? ".. " : ". ");
+        String[] sanArray = getHalfMoves().toSanArray();
+        for (int i = 0; i < sanArray.length; i++) {
+            index++;
+            variantIndex++;
+            sb.append(sanArray[i]);
+            sb.append(' ');
+            if (sb.length() - lastSize > 80) {
+                sb.append('\n');
+                lastSize = sb.length();
+            }
+            appendMoveAnnotations(sb, variantIndex);
+            variantIndex = appendMainLineVariations(sb, variantIndex, index, moveCounter);
+            if (i < sanArray.length - 1 && index % 2 == 0 && index >= 2) {
+                moveCounter++;
+                sb.append(moveCounter);
                 sb.append(". ");
             }
-            final String[] sanArray = getHalfMoves().toSanArray();
-            for (int i = 0; i < sanArray.length; i++) {
-                String san = sanArray[i];
-                index++;
-                variantIndex++;
-
-                sb.append(san);
-                sb.append(' ');
-
-                if (sb.length() - lastSize > 80) {
-                    sb.append("\n");
-                    lastSize = sb.length();
-                }
-                if (getNag() != null) {
-                    String annotationGlyph = getNag().get(variantIndex);
-                    if (annotationGlyph != null) {
-                        sb.append(annotationGlyph);
-                        sb.append(' ');
-                    }
-                }
-
-                if (getComments() != null) {
-                    String comment = getComments().get(variantIndex);
-                    if (comment != null) {
-                        sb.append("{");
-                        sb.append(comment);
-                        sb.append("}");
-                    }
-                }
-                if (getVariations() != null) {
-                    List<MoveList> vars = getVariations().get(variantIndex);
-                    if (vars != null) {
-                        for (MoveList alternative : vars) {
-                            variantIndex = translateVariation(sb, alternative,
-                                    variantIndex, index, moveCounter, lastSize);
-                        }
-                        if (index % 2 != 0) {
-                            sb.append(moveCounter);
-                            sb.append("... ");
-                        }
-                    }
-                }
-                if (i < sanArray.length - 1 &&
-                        index % 2 == 0 && index >= 2) {
-                    moveCounter++;
-
-                    sb.append(moveCounter);
-                    sb.append(". ");
-                }
-            }
         }
-        sb.append(getResult().getDescription());
-        return sb.toString();
-
-
     }
 
-    private int translateVariation(StringBuilder sb, MoveList variation,
-                                   int variantIndex, int index, int moveCounter, int lastSize) throws MoveConversionException {
-        final int variantIndexOld = variantIndex;
-        if (variation != null) {
-            boolean terminated = false;
-            sb.append("(");
-            int i = 0;
-            int mc = moveCounter;
-            int idx = index;
-            String[] sanArray = variation.toSanArray();
-            for (i = 0; i < sanArray.length; i++) {
-                String sanMove = sanArray[i];
-                if (i == 0) {
-                    sb.append(mc);
-                    if (idx % 2 == 0) {
-                        sb.append("... ");
-                    } else {
-                        sb.append(". ");
-                    }
-                }
-
-                variantIndex++;
-
-                sb.append(sanMove);
+    private void appendMoveAnnotations(StringBuilder sb, int variantIndex) {
+        if (getNag() != null) {
+            String annotationGlyph = getNag().get(variantIndex);
+            if (annotationGlyph != null) {
+                sb.append(annotationGlyph);
                 sb.append(' ');
-                final List<MoveList> children = getVariations().get(variantIndex);
-                if (children != null) {
-                    for (MoveList child : children) {
-                        if (i == sanArray.length - 1 &&
-                                variantIndexOld != child.getParent()) {
-                            terminated = true;
-                            sb.append(") ");
-                        }
-                        variantIndex = translateVariation(sb, child,
-                                variantIndex, idx, mc, lastSize);
-                    }
-                }
-                if (idx % 2 == 0 && idx >= 2
-                        && i < sanArray.length - 1) {
-                    mc++;
-
-                    sb.append(mc);
-                    sb.append(". ");
-                }
-                idx++;
-
             }
-            if (!terminated) {
-                sb.append(") ");
+        }
+        if (getComments() != null) {
+            String comment = getComments().get(variantIndex);
+            if (comment != null) {
+                sb.append('{');
+                sb.append(comment);
+                sb.append('}');
             }
+        }
+    }
 
+    private int appendMainLineVariations(StringBuilder sb, int variantIndex, int index, int moveCounter) {
+        if (getVariations() == null || getVariations().get(variantIndex) == null) {
+            return variantIndex;
+        }
+        for (MoveList alternative : getVariations().get(variantIndex)) {
+            variantIndex = translateVariation(sb, alternative, variantIndex, index, moveCounter);
+        }
+        if (index % 2 != 0) {
+            sb.append(moveCounter);
+            sb.append("... ");
         }
         return variantIndex;
+    }
+
+    private int translateVariation(StringBuilder sb, MoveList alternative,
+                                   int variantIndex, int index, int moveCounter) {
+        if (alternative == null) {
+            return variantIndex;
+        }
+        int variantIndexOld = variantIndex;
+        VariationRenderState state = new VariationRenderState(variantIndex);
+        sb.append('(');
+        int counter = moveCounter;
+        int currentIndex = index;
+        String[] sanArray = alternative.toSanArray();
+        for (int i = 0; i < sanArray.length; i++) {
+            if (i == 0) {
+                sb.append(counter);
+                sb.append(currentIndex % 2 == 0 ? "... " : ". ");
+            }
+            state.index++;
+            sb.append(sanArray[i]);
+            sb.append(' ');
+            appendVariationChildren(sb, state, variantIndexOld, i, sanArray.length - 1, currentIndex, counter);
+            if (currentIndex % 2 == 0 && currentIndex >= 2 && i < sanArray.length - 1) {
+                counter++;
+                sb.append(counter);
+                sb.append(". ");
+            }
+            currentIndex++;
+        }
+        if (!state.terminated) {
+            sb.append(") ");
+        }
+        return state.index;
+    }
+
+    private void appendVariationChildren(StringBuilder sb, VariationRenderState state, int parentIndex,
+                                         int moveIndex, int lastMoveIndex, int index, int moveCounter) {
+        List<MoveList> children = getVariations().get(state.index);
+        if (children == null) {
+            return;
+        }
+        for (MoveList child : children) {
+            if (moveIndex == lastMoveIndex && parentIndex != child.getParent()) {
+                state.terminated = true;
+                sb.append(") ");
+            }
+            state.index = translateVariation(sb, child, state.index, index, moveCounter);
+        }
+    }
+
+    private static class VariationRenderState {
+        private int index;
+        private boolean terminated;
+
+        private VariationRenderState(int index) {
+            this.index = index;
+        }
     }
 
     /**
@@ -556,15 +558,19 @@ public class Game {
      * <p>
      * The result of {@link Game#toPgn(boolean, boolean)} is used to represent this game.
      *
-     * @return a string representation of this game
+     * @return the PGN, or an empty string if required metadata is missing or move conversion fails
      * @see Game#toPgn(boolean, boolean)
      */
     @Override
     public String toString() {
+        if (getRound() == null || getRound().getEvent() == null
+                || getWhitePlayer() == null || getBlackPlayer() == null || getResult() == null) {
+            return "";
+        }
         try {
-            return toPgn(true, true); //TODO this throws NPE in debugger sometimes
+            return toPgn(true, true);
         } catch (MoveConversionException e) {
-            return null;
+            return "";
         }
     }
 
@@ -719,11 +725,12 @@ public class Game {
      * It is possible to load a list of moves in their PGN textual representation without setting them in advance in the
      * game invoking {@link Game#loadMoveText(StringBuilder)}.
      *
-     * @throws Exception if it is not possible to load the moves
+     * @throws MoveConversionException if a move cannot be converted
+     * @throws PgnException if a variation cannot be loaded
      * @see Game#setMoveText(StringBuilder)
      * @see Game#loadMoveText(StringBuilder)
      */
-    public void loadMoveText() throws Exception {
+    public void loadMoveText() throws MoveConversionException, PgnException {
         if (getMoveText() != null) {
             loadMoveText(getMoveText());
         }
@@ -734,10 +741,25 @@ public class Game {
      * is updated to reflect the loaded moves.
      *
      * @param moveText the moves to load
-     * @throws Exception if it is not possible to load the moves
+     * @throws MoveConversionException if a move cannot be converted
+     * @throws PgnException if a variation cannot be loaded
      */
-    public void loadMoveText(StringBuilder moveText) throws Exception {
+    public void loadMoveText(StringBuilder moveText) throws MoveConversionException, PgnException {
+        clearMoveAnnotations();
+        normalizeMoveText(moveText);
+        setHalfMoves(StringUtils.isNotBlank(getFen()) ? new MoveList(getFen()) : new MoveList());
+        MoveTextState state = new MoveTextState();
+        for (String token : moveText.toString().split(StringUtils.SPACE)) {
+            processMoveToken(state, token);
+        }
+        if (state.onLineCommentBlock) {
+            storeComment(state);
+        }
+        StringUtil.replaceAll(state.moves, "\n", " ");
+        getHalfMoves().loadFromSan(state.moves.toString());
+    }
 
+    private void clearMoveAnnotations() {
         if (getVariations() != null) {
             getVariations().clear();
         }
@@ -747,7 +769,9 @@ public class Game {
         if (getNag() != null) {
             getNag().clear();
         }
+    }
 
+    private static void normalizeMoveText(StringBuilder moveText) {
         StringUtil.replaceAll(moveText, "\r\n", "\n");
         StringUtil.replaceAll(moveText, "\r", "\n");
         StringUtil.replaceAll(moveText, "\n", " \n ");
@@ -755,175 +779,168 @@ public class Game {
         StringUtil.replaceAll(moveText, "}", " } ");
         StringUtil.replaceAll(moveText, "(", " ( ");
         StringUtil.replaceAll(moveText, ")", " ) ");
+    }
 
-        String text = moveText.toString();
+    private void processMoveToken(MoveTextState state, String token) {
+        if (state.onLineCommentBlock) {
+            processLineComment(state, token);
+        } else if (!StringUtils.isBlank(token)) {
+            processNonBlankToken(state, token);
+        }
+    }
 
-        if (StringUtils.isNotBlank(getFen())) {
-            setHalfMoves(new MoveList(getFen()));
+    private void processLineComment(MoveTextState state, String token) {
+        if (token.equals("\n")) {
+            storeComment(state);
+            state.onLineCommentBlock = false;
+            state.comment = null;
+        } else if (!StringUtils.isBlank(token)) {
+            state.comment.append(token);
+            state.comment.append(StringUtils.SPACE);
+        }
+    }
+
+    private void processNonBlankToken(MoveTextState state, String token) {
+        if (state.onCommentBlock) {
+            processBlockComment(state, token);
+            return;
+        }
+        String moveToken = stripMoveNumber(token);
+        if (!moveToken.isEmpty() && !processAnnotationToken(state, moveToken)) {
+            appendParsedMove(state, moveToken);
+        }
+    }
+
+    private static String stripMoveNumber(String token) {
+        String moveToken = token;
+        if (moveToken.contains("...")) {
+            moveToken = StringUtil.afterSequence(moveToken, "...");
+            if (StringUtils.trim(moveToken).isEmpty()) {
+                return "";
+            }
+        }
+        if (moveToken.contains(".")) {
+            moveToken = StringUtil.afterSequence(moveToken, ".");
+            if (StringUtils.trim(moveToken).isEmpty()) {
+                return "";
+            }
+        }
+        return moveToken;
+    }
+
+    private void processBlockComment(MoveTextState state, String token) {
+        if (token.equals("}")) {
+            state.onCommentBlock = false;
+            storeComment(state);
+            state.comment = null;
         } else {
-            setHalfMoves(new MoveList());
+            state.comment.append(token);
+            state.comment.append(StringUtils.SPACE);
         }
+    }
 
-        StringBuilder moves = new StringBuilder();
-        StringBuilder comment = null;
-        LinkedList<RTextEntry> variation =
-                new LinkedList<RTextEntry>();
-
-        int halfMove = 0;
-        int variantIndex = 0;
-
-        int lastClosedIndex = -1;
-        boolean onCommentBlock = false;
-        boolean onVariationBlock = false;
-        boolean onLineCommentBlock = false;
-        for (String token : text.split(StringUtils.SPACE)) {
-            if (token.equals("\n") && onLineCommentBlock) {
-                if (getComments() == null) {
-                    setComments(new HashMap<>());
-                }
-                getComments().put(variantIndex, comment.toString());
-                onLineCommentBlock = false;
-                comment = null;
-                continue;
+    private boolean processAnnotationToken(MoveTextState state, String token) {
+        if (token.startsWith("$")) {
+            if (getNag() == null) {
+                setNag(new HashMap<>());
             }
-            if (StringUtils.isBlank(token)) {
-                continue;
-            }
-            if (onLineCommentBlock) {
-                comment.append(token);
-                comment.append(StringUtils.SPACE);
-                continue;
-            }
-            if (!(onLineCommentBlock || onCommentBlock) &&
-                    token.contains("...")) {
-                token = StringUtil.afterSequence(token, "...");
-                if (token.trim().length() == 0) {
-                    continue;
-                }
-            }
-            if (!(onLineCommentBlock || onCommentBlock) &&
-                    token.contains(".")) {
-                token = StringUtil.afterSequence(token, ".");
-                if (token.trim().length() == 0) {
-                    continue;
-                }
-            }
-            if (!(onLineCommentBlock || onCommentBlock) &&
-                    token.startsWith("$")) {
-                if (getNag() == null) {
-                    setNag(new HashMap<Integer, String>());
-                }
-                getNag().put(variantIndex, token);
-                continue;
-            }
-            if (token.equals("{") &&
-                    !(onLineCommentBlock || onCommentBlock)) {
-                onCommentBlock = true;
-                comment = new StringBuilder();
-                continue;
-            } else if (token.equals("}") && !onLineCommentBlock) {
-                onCommentBlock = false;
-                if (comment != null) {
-                    if (getComments() == null) {
-                        setComments(new HashMap<>());
-                    }
-                    getComments().put(variantIndex, comment.toString());
-                }
-                comment = null;
-                continue;
-            } else if (token.startsWith(";") && !onCommentBlock) {
-                onLineCommentBlock = true;
-                comment = new StringBuilder();
-                if (token.length() > 1) {
-                    comment.append(token.substring(1));
-                    comment.append(StringUtils.SPACE);
-                }
-                continue;
-            } else if (token.equals("(") &&
-                    !(onCommentBlock || onLineCommentBlock)) {
-                int branchIndex = (lastClosedIndex >= 0 && variation.isEmpty())
-                        ? lastClosedIndex : variantIndex;
-                lastClosedIndex = -1;
-                onVariationBlock = true;
-                variation.add(new RTextEntry(branchIndex));
-                continue;
-            } else if (token.equals(")") && onVariationBlock &&
-                    !(onCommentBlock || onLineCommentBlock)) {
-                onVariationBlock = false;
-                if (variation != null) {
-                    final RTextEntry last = variation.pollLast();
-                    StringBuilder currentLine =
-                            new StringBuilder(getMovesAt(moves.toString(), halfMove));
-                    try {
-
-                        onVariationBlock = !variation.isEmpty();
-
-                        for (RTextEntry entry : variation) {
-                            currentLine.append(getMovesAt(entry.text.toString(), entry.size));
-                        }
-
-                        MoveList tmp = new MoveList();
-                        tmp.loadFromSan(getMovesAt(currentLine.toString(), last.index));
-                        MoveList alternative = MoveList.createMoveListFrom(tmp, tmp.size());
-                        alternative.loadFromSan(last.text.toString());
-                        final RTextEntry parent = variation.peekLast();
-                        if (onVariationBlock && parent != null) {
-                            alternative.setParent(parent.index);
-                        } else {
-                            alternative.setParent(-1);
-                        }
-                        if (getVariations() == null) {
-                            setVariations(new HashMap<Integer, List<MoveList>>());
-                        }
-                        getVariations().computeIfAbsent(last.index, k -> new ArrayList<>()).add(alternative);
-                        if (!onVariationBlock) {
-                            lastClosedIndex = last.index;
-                        }
-                    } catch (Exception e) {
-                        if (last != null) {
-                            throw new PgnException("Error while reading variation: " +
-                                    getMovesAt(currentLine.toString(), last.index) + " - " +
-                                    last.text.toString(), e);
-                        } else {
-                            throw new PgnException("Error while reading variation: ", e);
-                        }
-                    }
-                }
-                continue;
-            }
-
-            if (onCommentBlock || onLineCommentBlock) {
-                if (comment != null) {
-                    comment.append(token);
-                    comment.append(StringUtils.SPACE);
-                }
-                continue;
-            }
-
-            if (onVariationBlock) {
-                if (variation != null) {
-                    variation.getLast().text.append(token);
-                    variation.getLast().text.append(StringUtils.SPACE);
-                    variation.getLast().size++;
-                    variantIndex++;
-                }
-                continue;
-            }
-            lastClosedIndex = -1;
-            variantIndex++;
-            halfMove++;
-            moves.append(token);
-            moves.append(StringUtils.SPACE);
+            getNag().put(state.variantIndex, token);
+            return true;
         }
-
-        if (onLineCommentBlock) {
-            if (getComments() == null) {
-                setComments(new HashMap<>());
+        if (token.startsWith(";")) {
+            state.onLineCommentBlock = true;
+            state.comment = new StringBuilder();
+            if (token.length() > 1) {
+                state.comment.append(token.substring(1));
+                state.comment.append(StringUtils.SPACE);
             }
-            getComments().put(variantIndex, comment.toString());
+            return true;
         }
-        StringUtil.replaceAll(moves, "\n", " ");
-        getHalfMoves().loadFromSan(moves.toString());
+        return processDelimiterToken(state, token);
+    }
+
+    private boolean processDelimiterToken(MoveTextState state, String token) {
+        switch (token) {
+            case "{":
+                state.onCommentBlock = true;
+                state.comment = new StringBuilder();
+                return true;
+            case "}":
+                return true;
+            case "(":
+                int branchIndex = state.lastClosedIndex >= 0 && state.variationStack.isEmpty()
+                        ? state.lastClosedIndex : state.variantIndex;
+                state.lastClosedIndex = -1;
+                state.variationStack.add(new RTextEntry(branchIndex));
+                return true;
+            case ")":
+                if (!state.variationStack.isEmpty()) {
+                    closeVariation(state);
+                    return true;
+                }
+                return false;
+            default:
+                return false;
+        }
+    }
+
+    private void appendParsedMove(MoveTextState state, String token) {
+        if (!state.variationStack.isEmpty()) {
+            RTextEntry entry = state.variationStack.getLast();
+            entry.text.append(token);
+            entry.text.append(StringUtils.SPACE);
+            entry.size++;
+        } else {
+            state.lastClosedIndex = -1;
+            state.halfMove++;
+            state.moves.append(token);
+            state.moves.append(StringUtils.SPACE);
+        }
+        state.variantIndex++;
+    }
+
+    private void storeComment(MoveTextState state) {
+        if (getComments() == null) {
+            setComments(new HashMap<>());
+        }
+        getComments().put(state.variantIndex, state.comment.toString());
+    }
+
+    private void closeVariation(MoveTextState state) {
+        RTextEntry last = state.variationStack.removeLast();
+        StringBuilder currentLine = new StringBuilder(getMovesAt(state.moves.toString(), state.halfMove));
+        try {
+            for (RTextEntry entry : state.variationStack) {
+                currentLine.append(getMovesAt(entry.text.toString(), entry.size));
+            }
+            MoveList preceding = new MoveList();
+            preceding.loadFromSan(getMovesAt(currentLine.toString(), last.index));
+            MoveList alternative = MoveList.createMoveListFrom(preceding, preceding.size());
+            alternative.loadFromSan(last.text.toString());
+            RTextEntry parent = state.variationStack.peekLast();
+            alternative.setParent(parent == null ? -1 : parent.index);
+            if (getVariations() == null) {
+                setVariations(new HashMap<>());
+            }
+            getVariations().computeIfAbsent(last.index, k -> new ArrayList<>()).add(alternative);
+            if (state.variationStack.isEmpty()) {
+                state.lastClosedIndex = last.index;
+            }
+        } catch (RuntimeException e) {
+            throw new PgnException("Error while reading variation: "
+                    + getMovesAt(currentLine.toString(), last.index) + " - " + last.text, e);
+        }
+    }
+
+    private static class MoveTextState {
+        private final StringBuilder moves = new StringBuilder();
+        private final LinkedList<RTextEntry> variationStack = new LinkedList<>();
+        private StringBuilder comment;
+        private int halfMove;
+        private int variantIndex;
+        private int lastClosedIndex = -1;
+        private boolean onCommentBlock;
+        private boolean onLineCommentBlock;
     }
 
     /**

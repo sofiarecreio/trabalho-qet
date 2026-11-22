@@ -230,6 +230,27 @@ O resultado da IA foi validado por leitura do arquivo original `MoveListTest.jav
 - [Suíte final executável](../../chesslib/src/test/java/com/github/bhlangonijr/chesslib/game/GameQualityTest.java).
 - Relatórios completos gerados localmente em `chesslib/target/site/jacoco-game/` e `chesslib/target/pit-reports-game/`; sem scripts ou logs brutos novos no repositório.
 
+## E2-WES-GAME-06 — Inspeção Sonar e refatoração de Game
+
+| Informação | Registro |
+| --- | --- |
+| Data | 22/11/2026 |
+| Responsável | Weslley Ribeiro |
+| Entrega | Entrega 2 |
+| Atividade | Inspeção inicial/final e correção dos apontamentos Sonar de Game |
+| Ferramenta | Codex/ChatGPT; SonarQube Community Build 26.11.0.134175 |
+| Prompt/instrução | [Revisão das correções](prompts/game-inspecao-sonar-entrega-2.md) |
+| Resultado | [Saída da revisão](responses/game-inspecao-sonar-entrega-2.md). Perfil comprehensive com 608 regras: 16 → 0 apontamentos. Regressão: 307 testes; branches: 166/179 = 92,74%; PIT: 203/213 = 95,31%, sete sobreviventes e três sem cobertura, sem erro de execução |
+| Decisão | Aceitas extrações por responsabilidade, nomes claros, exceções específicas e retorno não nulo de toString. A mudança de contrato e os dois casos novos de robustez estão explícitos no relatório. Rejeitada a substituição indiscriminada de trim por isBlank por diferença semântica. Produção dos colegas e POM preservados. Não usar zero do Sonar como prova de ausência de defeitos, nem esconder mutantes restantes |
+| Validação | Capturas reais e APIs conferem o mesmo perfil e escopo em dois projetos que preservam as versões inicial/final; nenhuma regra foi desativada. As saídas completas de PGN continuam a verificar numeração, parentesco e retomada das variantes; comentários, navegação e integração com arquivos reais passaram na regressão. A falha controlada de conversão e as entradas vazia/incompleta verificam os motivos concretos da correção de toString. Os auxiliares de lógica permanecem em Game e foram incluídos nas medições; os tipos internos novos guardam dados. O XML PIT confirma todos os estados e o denominador completo de 213; a regra JaCoCo mínima de 80% foi aprovada. Complexidade cognitiva diminuiu de 218 para 109, mas a ciclomática agregada Sonar cresceu de 174 para 177, portanto não se afirma redução desta última. |
+
+### Evidências relacionadas
+
+- Correções iniciais: commit `27a5d86`, somente código de Game.
+- [Entrada](prompts/game-inspecao-sonar-entrega-2.md) e [saída](responses/game-inspecao-sonar-entrega-2.md) da revisão.
+- [Relatório e capturas antes/depois](../entrega2/weslley/sonar-game/relatorio.md).
+- [Classe corrigida](../../chesslib/src/main/java/com/github/bhlangonijr/chesslib/game/Game.java) e [casos de robustez](../../chesslib/src/test/java/com/github/bhlangonijr/chesslib/game/GameQualityTest.java).
+
 ## Modelo para novos registros
 
 ### Registro NNN — Título da interação

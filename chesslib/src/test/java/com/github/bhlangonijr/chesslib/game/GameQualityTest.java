@@ -99,7 +99,7 @@ public class GameQualityTest {
     }
 
     @Test
-    public void shouldReturnNullWhenStringConversionFails() {
+    public void shouldReturnEmptyStringWhenStringConversionFails() {
         game.setHalfMoves(new MoveList() {
             @Override
             public int size() {
@@ -111,7 +111,20 @@ public class GameQualityTest {
                 throw new MoveConversionException("Controlled conversion failure");
             }
         });
-        assertNull(game.toString());
+        assertEquals("", game.toString());
+    }
+
+    @Test
+    public void shouldRenderEmptyGameWithoutRawMoveText() {
+        assertNull(game.getMoveText());
+        assertTrue(game.toPgn(true, true).endsWith("\n\n*"));
+        assertEquals(game.toPgn(true, true), game.toString());
+    }
+
+    @Test
+    public void shouldReturnEmptyStringForIncompleteGame() {
+        assertEquals("", new Game("incomplete", null).toString());
+        assertEquals("", new Game("missing-players", new Round(new Event())).toString());
     }
 
     @Test
