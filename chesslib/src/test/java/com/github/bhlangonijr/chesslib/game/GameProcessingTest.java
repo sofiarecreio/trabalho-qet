@@ -280,6 +280,9 @@ public class GameProcessingTest {
 
         assertTrue(moveText.contains("\n"));
         assertTrue(moveText.replace('\n', ' ').contains("10. Ng1 Ng8 *"));
-        assertEquals(40, game.getHalfMoves().size());
+        assertEquals(20, game.getHalfMoves().size());
+        assertArrayEquals(new String[]{"Nf3", "Nf6", "Ng1", "Ng8", "Nf3", "Nf6", "Ng1", "Ng8",
+                "Nf3", "Nf6", "Ng1", "Ng8", "Nf3", "Nf6", "Ng1", "Ng8", "Nf3", "Nf6", "Ng1", "Ng8"},
+                game.getHalfMoves().toSanArray());
     }
 }
