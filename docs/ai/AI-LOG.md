@@ -185,6 +185,29 @@ O resultado da IA foi validado por leitura do arquivo original `MoveListTest.jav
 - [Saída: suíte revisada](responses/game-integracao-entrega-2.md).
 - [Testes executáveis](../../chesslib/src/test/java/com/github/bhlangonijr/chesslib/game/GameIntegrationTest.java).
 
+## Registro E2-WES-GAME-04 — Reaproveitamento de JaCoCo e PIT para Game
+
+| Informação | Registro |
+| --- | --- |
+| Data | 22/11/2026 |
+| Responsável | Weslley Ribeiro |
+| Entrega | Entrega 2 |
+| Atividade | Adaptar para Game as ferramentas da contribuição de Lucas, integrada à main pelo PR #14 |
+| Ferramenta | Codex/ChatGPT |
+| Prompt/instrução | [Prompt de adaptação](prompts/game-configuracao-qualidade-entrega-2.md) |
+| Resultado | [Perfil Maven game-quality e comandos](responses/game-configuracao-qualidade-entrega-2.md). JaCoCo: 189/218 branches de Game, 86,70%; complexidade ciclomática agregada 176, incluindo loadMoveText com 57, toPgn com 26 e translateVariation com 13. PIT: 180/208 mutações mortas, 86,54% (87% exibido), 23 sobreviventes e 5 sem cobertura, sem erro de execução. Regressão completa integrada: 292 testes aprovados |
+| Decisão | Reutilizadas as versões e metas de Lucas: JaCoCo 0.8.12, PIT 1.17.4 e mínimos de 80%. Aceito um perfil optativo para Game, mantendo os filtros padrão de MoveGenerator. Usados filtros diferentes para o agente (nome da classe) e relatório (arquivo Game.class), com substituição explícita das listas herdadas. Relatórios separados para evitar misturar métricas. Não foram alterados testes, produção ou limites para elevar os resultados |
+| Validação | O relatório XML foi inspecionado para confirmar que a análise contém exatamente Game e que a cobertura não está vazia. A regra de branches de Game foi aprovada no verify com os 292 testes do Chesslib; o PIT selecionou Game e suas quatro suítes pelo filtro Game*Test. O XML de mutações confirmou os estados KILLED=180, SURVIVED=23 e NO_COVERAGE=5, sem excluir sobreviventes do denominador. A execução padrão de Lucas também foi revalidada com seus 20 testes e a regra JaCoCo aprovada, mostrando que o perfil não substituiu o padrão. A agregação de complexidade e as contagens são da versão analisada e deverão ser reavaliadas após refatorações. Cobertura de branches ainda precisa ser relacionada ao critério todas-arestas no relatório acadêmico; as mutações sobreviventes e sem cobertura precisam de análise individual. |
+
+### Evidências relacionadas
+
+- [Entrada: prompt utilizado](prompts/game-configuracao-qualidade-entrega-2.md).
+- [Saída: perfil e comandos](responses/game-configuracao-qualidade-entrega-2.md).
+- [Configuração executável](../../chesslib/pom.xml).
+- Relatório JaCoCo gerado localmente: `chesslib/target/site/jacoco-game/index.html`.
+- Relatório PIT gerado localmente: `chesslib/target/pit-reports-game/index.html`.
+- Os relatórios completos são gerados pelos comandos preservados na resposta; scripts e logs não foram adicionados ao repositório nesta etapa.
+
 ## Modelo para novos registros
 
 ### Registro NNN — Título da interação
