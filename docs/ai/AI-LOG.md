@@ -123,6 +123,27 @@ O resultado da IA foi validado por leitura do arquivo original `MoveListTest.jav
 - Distribuição das classes do Chesslib e dos casos manuais do Spring PetClinic.
 - Casos implementados e relatórios armazenados neste repositório.
 
+## Registro E2-WES-GAME-01 — Testes isolados de navegação de Game
+
+| Informação | Registro |
+| --- | --- |
+| Data | 22/11/2026 |
+| Responsável | Weslley Ribeiro |
+| Entrega | Entrega 2 |
+| Atividade | Revisão e melhoria dos testes unitários de navegação de `Game`, com isolamento do processamento de `Board` |
+| Versão inicial | Elaborada por Weslley sem auxílio de IA, com quatro testes, no commit `f1f091a`. A IA foi utilizada apenas para melhorar essa versão |
+| Ferramenta | Codex/ChatGPT |
+| Prompt/instrução | [Prompt de melhoria dos testes](prompts/game-isolados-entrega-2.md) |
+| Resultado | Resposta com a suíte revisada de 18 testes isolados de navegação de `Game`, usando stub de `Board` para controlar respostas e registrar interações. [Saída produzida](responses/game-isolados-entrega-2.md) |
+| Decisão | Aceitas as verificações de FEN, ordem de chamadas, validação completa, rejeição de jogadas e limites. Mantido o stub sem novas dependências. Não foi exigida a preservação da lista anterior em chamadas inválidas porque o contrato prevê ativar a lista fornecida. Weslley informou ter validado a melhoria |
+| Validação | Os casos foram confrontados com o contrato de navegação e com as fronteiras -1, 0, n-1, n e n+1. O stub separa a coordenação de Game das regras reais de xadrez e permite conferir FEN, ordem, fullValidation e interrupção sem calcular o esperado pelo Board real. A revisão detectou lacunas na versão anterior e a suíte ampliada detectou três alterações defeituosas controladas: tamanho da lista errado, validação desativada e limite inclusivo incorreto. Os 40 testes de Game e os 247 da regressão passaram. Esses resultados sustentam as asserções escolhidas, mas não substituem cobertura estrutural, PIT ou integração com componentes reais. |
+
+### Evidências relacionadas
+
+- [Entrada: prompt utilizado](prompts/game-isolados-entrega-2.md).
+- [Saída: código da resposta](responses/game-isolados-entrega-2.md).
+- [Suíte executável](../../chesslib/src/test/java/com/github/bhlangonijr/chesslib/game/GameIsolatedTest.java).
+
 ## Modelo para novos registros
 
 ### Registro NNN — Título da interação
