@@ -144,6 +144,27 @@ O resultado da IA foi validado por leitura do arquivo original `MoveListTest.jav
 - [Saída: código da resposta](responses/game-isolados-entrega-2.md).
 - [Suíte executável](../../chesslib/src/test/java/com/github/bhlangonijr/chesslib/game/GameIsolatedTest.java).
 
+## Registro E2-WES-GAME-02 — Processamento de movimentos, comentários e PGN
+
+| Informação | Registro |
+| --- | --- |
+| Data | 22/11/2026 |
+| Responsável | Weslley Ribeiro |
+| Entrega | Entrega 2 |
+| Atividade | Ampliação dos testes funcionais de processamento de `Game` e correção de comentários de linha |
+| Ferramenta | Codex/ChatGPT |
+| Prompt/instrução | [Prompt de melhoria](prompts/game-processamento-entrega-2.md) |
+| Resultado | [Resposta com correção e 22 testes propostos](responses/game-processamento-entrega-2.md). A versão inicial de quatro testes está no commit `9b5f9c8`: três passaram e um reproduziu a perda de movimento após comentário de linha. A execução da proposta ampliada com as outras duas suítes de Game teve 62 testes, com uma falha no oráculo do caso de PGN longo |
+| Decisão | Aceita a correção de encerrar comentários antes de descartar a quebra de linha e de impedir que marcadores de notação no comentário sejam interpretados. Aceitos os cenários de recarregamento, FEN, variações e metadados. Rejeitada a expectativa de 40 movimentos no teste de PGN longo: a entrada literal possui 10 pares, portanto 20 meios-lances. A resposta é preservada sem reescrever esse erro; a correção do teste deve ocorrer em commit separado. Não foram alterados os parâmetros documentados como ignorados de toPgn |
+| Validação | O teste inicial forneceu uma sequência concreta esperada e falhou na ausência de e5, identificando um erro real em vez de ajustar o esperado à implementação. A correção foi confrontada com três causas no código: descarte antecipado de newline, interpretação do conteúdo como variação e ausência de armazenamento no fim do texto. Os novos casos verificam o texto do comentário, a sequência SAN, índices de associação e a ausência de NAGs/variações indevidas; casos separados mantêm comentários entre chaves e aceitam LF/CRLF. Para FEN e recarregamento, os resultados são definidos por posições e sequências explícitas. A expectativa 40 foi rejeitada por contagem independente da entrada, não porque o programa retornou 20. A proposta usa componentes reais e não substitui teste de arquivos PGN, cobertura estrutural, PIT ou Sonar. |
+
+### Evidências relacionadas
+
+- [Entrada: prompt utilizado](prompts/game-processamento-entrega-2.md).
+- [Saída original da revisão, incluindo a expectativa rejeitada](responses/game-processamento-entrega-2.md).
+- [Testes executáveis](../../chesslib/src/test/java/com/github/bhlangonijr/chesslib/game/GameProcessingTest.java).
+- [Código de produção](../../chesslib/src/main/java/com/github/bhlangonijr/chesslib/game/Game.java).
+
 ## Modelo para novos registros
 
 ### Registro NNN — Título da interação

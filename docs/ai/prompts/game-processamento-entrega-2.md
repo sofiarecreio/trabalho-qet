@@ -1,0 +1,11 @@
+# Prompt — Melhoria dos testes de processamento de Game
+
+Revise a primeira versão de `GameProcessingTest` e a implementação de `Game.loadMoveText`/`toPgn`. A suíte inicial tem quatro casos: retomada após comentário de linha, limpeza de anotações ao recarregar a partida, movimentos a partir de FEN e geração de PGN a partir do texto bruto. Três passaram; o comentário de linha perdeu o movimento após a quebra de linha.
+
+Melhore os casos sem alterar expectativas corretas apenas para fazê-los passar. Use JUnit 4 e preserve os testes já existentes. Cubra as partições relevantes: comentários de linha vazios, com conteúdo ou sem quebra de linha final; marcadores de anotação dentro de comentários; quebras LF e CRLF; sobrecarga de carregamento com e sem texto definido; lista de movimentos nula com FEN definido ou ausente; recarregamento com limpeza de anotações; variações sucessivas, aninhadas e inválidas; metadados opcionais e ausência deles no PGN; texto bruto vazio e quebra de linha na saída de partidas longas.
+
+Nos novos casos, verifique a sequência exata dos movimentos, comentários e variações e os valores dos metadados. Indique a entrada e o resultado esperado no propósito de cada caso. Use componentes reais no processamento, distinguindo estes testes dos testes isolados de navegação; não afirme que eles já cobrem a integração completa de arquivos PGN.
+
+Investigue a falha do comentário de linha. Se confirmada no código, faça uma correção pequena: a quebra de linha deve encerrar o comentário antes de ser descartada como espaço em branco; o conteúdo do comentário não pode ser interpretado como jogada, NAG ou variação; comentários sem newline final também devem ser preservados. Mantenha comentários entre chaves e as demais regras funcionando. Não faça a refatoração geral do Sonar nem mude o contrato documentado de `toPgn`, cujos parâmetros de inclusão estão explicitamente ignorados.
+
+Entregue os testes revisados e a correção pertinente, explicando na validação por que os oráculos e as partições são adequados e quais limitações permanecem. Registre decisões aceitas ou rejeitadas com motivos técnicos. A saída registrada deve conter o código produzido, sem adicionar scripts ou logs à documentação. Não invente autoria humana, ferramenta utilizada, métricas de cobertura ou revisão humana não informada.

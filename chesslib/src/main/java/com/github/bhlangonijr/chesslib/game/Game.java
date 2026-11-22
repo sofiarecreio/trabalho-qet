@@ -748,6 +748,8 @@ public class Game {
             getNag().clear();
         }
 
+        StringUtil.replaceAll(moveText, "\r\n", "\n");
+        StringUtil.replaceAll(moveText, "\r", "\n");
         StringUtil.replaceAll(moveText, "\n", " \n ");
         StringUtil.replaceAll(moveText, "{", " { ");
         StringUtil.replaceAll(moveText, "}", " } ");
@@ -775,7 +777,21 @@ public class Game {
         boolean onVariationBlock = false;
         boolean onLineCommentBlock = false;
         for (String token : text.split(StringUtils.SPACE)) {
+            if (token.equals("\n") && onLineCommentBlock) {
+                if (getComments() == null) {
+                    setComments(new HashMap<>());
+                }
+                getComments().put(variantIndex, comment.toString());
+                onLineCommentBlock = false;
+                comment = null;
+                continue;
+            }
             if (StringUtils.isBlank(token)) {
+                continue;
+            }
+            if (onLineCommentBlock) {
+                comment.append(token);
+                comment.append(StringUtils.SPACE);
                 continue;
             }
             if (!(onLineCommentBlock || onCommentBlock) &&
@@ -815,19 +831,16 @@ public class Game {
                 }
                 comment = null;
                 continue;
-            } else if (token.equals(";") && !onCommentBlock) {
+            } else if (token.startsWith(";") && !onCommentBlock) {
                 onLineCommentBlock = true;
                 comment = new StringBuilder();
-                continue;
-            } else if (token.equals("\n") && onLineCommentBlock) {
-                onLineCommentBlock = false;
-                if (comment != null) {
-                    getComments().put(variantIndex, comment.toString());
+                if (token.length() > 1) {
+                    comment.append(token.substring(1));
+                    comment.append(StringUtils.SPACE);
                 }
-                comment = null;
                 continue;
             } else if (token.equals("(") &&
-                    !(onCommentBlock) || onLineCommentBlock) {
+                    !(onCommentBlock || onLineCommentBlock)) {
                 int branchIndex = (lastClosedIndex >= 0 && variation.isEmpty())
                         ? lastClosedIndex : variantIndex;
                 lastClosedIndex = -1;
@@ -835,7 +848,7 @@ public class Game {
                 variation.add(new RTextEntry(branchIndex));
                 continue;
             } else if (token.equals(")") && onVariationBlock &&
-                    !(onCommentBlock) || onLineCommentBlock) {
+                    !(onCommentBlock || onLineCommentBlock)) {
                 onVariationBlock = false;
                 if (variation != null) {
                     final RTextEntry last = variation.pollLast();
@@ -903,6 +916,12 @@ public class Game {
             moves.append(StringUtils.SPACE);
         }
 
+        if (onLineCommentBlock) {
+            if (getComments() == null) {
+                setComments(new HashMap<>());
+            }
+            getComments().put(variantIndex, comment.toString());
+        }
         StringUtil.replaceAll(moves, "\n", " ");
         getHalfMoves().loadFromSan(moves.toString());
     }
