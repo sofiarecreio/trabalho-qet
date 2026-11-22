@@ -267,74 +267,97 @@ Com base nesses resultados, as refatorações foram consideradas válidas porque
 - Evidência inicial do Sonar: `docs/inspecao/movelist/sonar_antes.png`
 - Evidência após as correções de complexidade: `docs/inspecao/movelist/sonar_depois.png`
 
-Registro 005 — Configuração e validação de cobertura e mutação da MoveList
-Informação	Registro
-Data	22/11/2026
-Responsável	Lucio
-Entrega	Entrega 2
-Atividade	Configuração e validação da cobertura estrutural com JaCoCo e do teste de mutação com PIT
-Ferramenta	ChatGPT
-Artefatos relacionados	chesslib/pom.xml, MoveListTest.java e MoveListQetTest.java
-Classe analisada	com.github.bhlangonijr.chesslib.move.MoveList
+## Registro 005 — Configuração e validação de cobertura e mutação da `MoveList`
 
+| **Informação** | **Registro** |
+| --- | --- |
+| Data | 22/11/2026 |
+| Responsável | Lucio |
+| Entrega | Entrega 2 |
+| Atividade | Configuração e validação da cobertura estrutural com JaCoCo e do teste de mutação com PIT |
+| Ferramenta | ChatGPT |
+| Artefatos relacionados | `chesslib/pom.xml`, `MoveListTest.java` e `MoveListQetTest.java` |
+| Classe analisada | `com.github.bhlangonijr.chesslib.move.MoveList` |
 
-Prompt/instrução utilizada
-Ajude a configurar o JaCoCo e o PIT no pom.xml do Chesslib para analisar somente a classe MoveList. A configuração deve exigir pelo menos 80% de cobertura de branches e 80% de mutação, utilizar MoveListTest e MoveListQetTest e não substituir a configuração já existente para MoveGenerator. Também indique os comandos necessários para executar e validar os relatórios.
+### Prompt/instrução utilizada
 
-Resultado apresentado pela IA
-A IA recomendou criar um perfil Maven separado chamado movelist-quality, preservando a configuração padrão já existente no projeto.
+> Ajude a configurar o JaCoCo e o PIT no `pom.xml` do Chesslib para analisar somente a classe `MoveList`. A configuração deve exigir pelo menos 80% de cobertura de branches e 80% de mutação, utilizar `MoveListTest` e `MoveListQetTest` e não substituir a configuração já existente para `MoveGenerator`. Também indique os comandos necessários para executar e validar os relatórios.
+
+### Resultado apresentado pela IA
+
+A IA recomendou criar um perfil Maven separado chamado `movelist-quality`, preservando a configuração padrão já existente no projeto.
 
 Para o JaCoCo, foram sugeridas as seguintes configurações:
-- instrumentação somente da classe MoveList;
-- relatório separado em target/site/jacoco-movelist;
-- arquivo de execução separado em target/jacoco-movelist.exec;
+
+- instrumentação somente da classe `MoveList`;
+- relatório separado em `target/site/jacoco-movelist`;
+- arquivo de execução separado em `target/jacoco-movelist.exec`;
 - verificação mínima de 80% de cobertura de branches;
-- uso de combine.self="override" para substituir os filtros herdados no perfil.
+- uso de `combine.self="override"` para substituir os filtros herdados no perfil.
+
 Para o PIT, foram sugeridas:
-- seleção de MoveList como classe-alvo;
-- seleção de MoveListTest e MoveListQetTest como testes-alvo;
-- relatório separado em target/pit-reports-movelist;
+
+- seleção de `MoveList` como classe-alvo;
+- seleção de `MoveListTest` e `MoveListQetTest` como testes-alvo;
+- relatório separado em `target/pit-reports-movelist`;
 - manutenção do limite mínimo de 80% de mutação já configurado no projeto.
-A primeira execução do JaCoCo utilizando somente as duas suítes diretamente relacionadas à MoveList apresentou 73% de branches. A IA explicou que outras suítes do Chesslib também exercitam caminhos da classe e recomendou executar a regressão completa para reproduzir a medição final.
+
+A primeira execução do JaCoCo utilizando somente as duas suítes diretamente relacionadas à `MoveList` apresentou 73% de branches. A IA explicou que outras suítes do Chesslib também exercitam caminhos da classe e recomendou executar a regressão completa para reproduzir a medição final.
 
 Também foram analisadas duas dificuldades do ambiente:
-- falha na geração do Javadoc devido à configuração local do JAVA_HOME, contornada com -Dmaven.javadoc.skip=true;
-- falhas de testes dependentes da codificação do Windows, corrigidas na sessão com JAVA_TOOL_OPTIONS=-Dfile.encoding=UTF-8.
-Decisão
-A sugestão do perfil separado foi aceita porque permite executar as verificações específicas da MoveList sem alterar o comportamento padrão configurado para MoveGenerator e sem substituir os relatórios dos outros integrantes.
+
+- falha na geração do Javadoc devido à configuração local do `JAVA_HOME`, contornada com `-Dmaven.javadoc.skip=true`;
+- falhas de testes dependentes da codificação do Windows, corrigidas na sessão com `JAVA_TOOL_OPTIONS=-Dfile.encoding=UTF-8`.
+
+### Decisão
+
+A sugestão do perfil separado foi aceita porque permite executar as verificações específicas da `MoveList` sem alterar o comportamento padrão configurado para `MoveGenerator` e sem substituir os relatórios dos outros integrantes.
 
 Foram utilizados os seguintes comandos:
+
+```text
 set "JAVA_TOOL_OPTIONS=-Dfile.encoding=UTF-8"
 mvn -f chesslib\pom.xml -Pmovelist-quality clean verify -Dmaven.javadoc.skip=true
 mvn -f chesslib\pom.xml -Pmovelist-quality org.pitest:pitest-maven:mutationCoverage
-Validação
-A resposta da IA foi validada inicialmente pela revisão da configuração adicionada ao pom.xml. O perfil movelist-quality foi comparado com a configuração já existente para verificar se o JaCoCo e o PIT estavam direcionados somente à classe MoveList e se a análise de MoveGenerator permanecia preservada.
+```
 
-Após a configuração do perfil, foi realizada uma primeira execução do JaCoCo utilizando apenas as suítes MoveListTest e MoveListQetTest. Essa execução apresentou 73% de cobertura de branches, valor inferior ao mínimo de 80%. Como outros testes do Chesslib também exercitam métodos da MoveList, foi executada posteriormente a regressão completa do projeto.
+### Validação
+
+A resposta da IA foi validada inicialmente pela revisão da configuração adicionada ao `pom.xml`. O perfil `movelist-quality` foi comparado com a configuração já existente para verificar se o JaCoCo e o PIT estavam direcionados somente à classe `MoveList` e se a análise de `MoveGenerator` permanecia preservada.
+
+Após a configuração do perfil, foi realizada uma primeira execução do JaCoCo utilizando apenas as suítes `MoveListTest` e `MoveListQetTest`. Essa execução apresentou 73% de cobertura de branches, valor inferior ao mínimo de 80%. Como outros testes do Chesslib também exercitam métodos da `MoveList`, foi executada posteriormente a regressão completa do projeto.
 
 Na execução completa, 248 testes foram aprovados, sem falhas, erros ou testes ignorados. O relatório do JaCoCo registrou:
+
 - 159 de 196 branches cobertos, correspondendo a 81%;
 - 343 de 388 linhas cobertas, correspondendo a 88%;
 - limite mínimo de 80% de branches atendido;
-- resultado BUILD SUCCESS.
-Em seguida, o PIT foi executado utilizando MoveListTest e MoveListQetTest como suítes-alvo. O relatório de mutação registrou:
+- resultado `BUILD SUCCESS`.
+
+Em seguida, o PIT foi executado utilizando `MoveListTest` e `MoveListQetTest` como suítes-alvo. O relatório de mutação registrou:
+
 - 168 de 211 mutantes mortos, correspondendo a 80%;
 - cobertura de linhas de 316/388, correspondendo a 81%;
 - força dos testes de 168/185, correspondendo a 91%;
 - 26 mutantes sem cobertura e 17 sobreviventes;
-- resultado BUILD SUCCESS.
+- resultado `BUILD SUCCESS`.
+
 A validação final foi composta pelas seguintes evidências:
+
 - execução bem-sucedida dos 248 testes da regressão do Chesslib;
 - cobertura de branches superior ao mínimo exigido;
 - escore de mutação igual ao mínimo exigido;
-- relatórios HTML gerados separadamente para a MoveList;
+- relatórios HTML gerados separadamente para a `MoveList`;
 - correspondência entre os valores apresentados no terminal e nos relatórios;
-- preservação da configuração existente para MoveGenerator.
-Com base nesses resultados, a configuração sugerida foi considerada válida porque permitiu reproduzir as análises de cobertura e mutação, atingiu os limites definidos, preservou o funcionamento dos testes existentes e manteve os resultados da MoveList separados das análises dos outros integrantes.
-Evidências relacionadas
-- Configuração Maven: chesslib/pom.xml
-- Testes desenvolvidos: chesslib/src/test/java/com/github/bhlangonijr/chesslib/move/MoveListQetTest.java
-- Testes originais utilizados: chesslib/src/test/java/com/github/bhlangonijr/chesslib/move/MoveListTest.java
-- Relatório consolidado: docs/entrega2/lucio/movelist-testes-integracao.md
-- Relatório JaCoCo gerado localmente: chesslib/target/site/jacoco-movelist/index.html
-- Relatório PIT gerado localmente: chesslib/target/pit-reports-movelist/index.html
+- preservação da configuração existente para `MoveGenerator`.
+
+Com base nesses resultados, a configuração sugerida foi considerada válida porque permitiu reproduzir as análises de cobertura e mutação, atingiu os limites definidos, preservou o funcionamento dos testes existentes e manteve os resultados da `MoveList` separados das análises dos outros integrantes.
+
+### Evidências relacionadas
+
+- Configuração Maven: `chesslib/pom.xml`
+- Testes desenvolvidos: `chesslib/src/test/java/com/github/bhlangonijr/chesslib/move/MoveListQetTest.java`
+- Testes originais utilizados: `chesslib/src/test/java/com/github/bhlangonijr/chesslib/move/MoveListTest.java`
+- Relatório consolidado: `docs/entrega2/lucio/movelist-testes-integracao.md`
+- Relatório JaCoCo gerado localmente: `chesslib/target/site/jacoco-movelist/index.html`
+- Relatório PIT gerado localmente: `chesslib/target/pit-reports-movelist/index.html`
