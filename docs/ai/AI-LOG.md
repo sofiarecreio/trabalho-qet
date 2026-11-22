@@ -154,7 +154,7 @@ O resultado da IA foi validado por leitura do arquivo original `MoveListTest.jav
 | Atividade | Ampliação dos testes funcionais de processamento de `Game` e correção de comentários de linha |
 | Ferramenta | Codex/ChatGPT |
 | Prompt/instrução | [Prompt de melhoria](prompts/game-processamento-entrega-2.md) |
-| Resultado | [Resposta com correção e 22 testes propostos](responses/game-processamento-entrega-2.md). A versão inicial de quatro testes está no commit `9b5f9c8`: três passaram e um reproduziu a perda de movimento após comentário de linha. A proposta ampliada foi preservada no commit `3d42b42`, com uma falha de oráculo entre os 62 testes de Game executados. Depois da correção separada desse oráculo, os 62 testes de Game e os 269 da regressão completa passaram |
+| Resultado | [Resposta com correção e 22 testes propostos](responses/game-processamento-entrega-2.md). A versão inicial de quatro testes está no commit `c9aaa88`: três passaram e um reproduziu a perda de movimento após comentário de linha. A proposta ampliada foi preservada no commit `a9d9ac2`, com uma falha de oráculo entre os 62 testes de Game executados. Depois da correção separada desse oráculo, os 62 testes de Game e os 269 da regressão completa passaram |
 | Decisão | Aceita a correção de encerrar comentários antes de descartar a quebra de linha e de impedir que marcadores de notação no comentário sejam interpretados. Aceitos os cenários de recarregamento, FEN, variações e metadados. Rejeitada a expectativa de 40 movimentos no teste de PGN longo: a entrada literal possui 10 pares, portanto 20 meios-lances. A resposta é preservada sem reescrever esse erro. Em commit posterior à proposta, a expectativa foi corrigida para 20 e complementada pela sequência SAN completa esperada; esse ajuste também foi realizado com auxílio de IA. Não foram alterados os parâmetros documentados como ignorados de toPgn |
 | Validação | O teste inicial forneceu uma sequência concreta esperada e falhou na ausência de e5, identificando um erro real em vez de ajustar o esperado à implementação. A correção foi confrontada com três causas no código: descarte antecipado de newline, interpretação do conteúdo como variação e ausência de armazenamento no fim do texto. Os novos casos verificam o texto do comentário, a sequência SAN, índices de associação e a ausência de NAGs/variações indevidas; casos separados mantêm comentários entre chaves e aceitam LF/CRLF. Para FEN e recarregamento, os resultados são definidos por posições e sequências explícitas. A expectativa 40 foi rejeitada por contagem independente da entrada, não porque o programa retornou 20; a asserção final também confere todos os 20 meios-lances, evitando esconder perda ou reordenação de movimentos. Comandos executados: mvn -B -f chesslib/pom.xml -Dtest=GameTest,GameIsolatedTest,GameProcessingTest test (62 aprovados) e mvn -B -f chesslib/pom.xml test (269 aprovados). A proposta usa componentes reais e não substitui teste de arquivos PGN, cobertura estrutural, PIT ou Sonar. |
 
@@ -175,7 +175,7 @@ O resultado da IA foi validado por leitura do arquivo original `MoveListTest.jav
 | Atividade | Leitura de arquivos PGN, criação de partidas e processamento/navegação com componentes reais |
 | Ferramenta | Codex/ChatGPT |
 | Prompt/instrução | [Prompt de melhoria da integração](prompts/game-integracao-entrega-2.md) |
-| Resultado | [Resposta com 12 testes de integração](responses/game-integracao-entrega-2.md). A versão inicial de dois casos aprovados está no commit `8cd5951`. A suíte revisada atravessa arquivos temporários, LargeFile, PgnIterator, GameLoader, Game, MoveList e Board sem dublês. Os 12 casos passaram; as quatro suítes ligadas a Game tiveram 74 testes aprovados e a regressão completa do Chesslib teve 281 |
+| Resultado | [Resposta com 12 testes de integração](responses/game-integracao-entrega-2.md). A versão inicial de dois casos aprovados está no commit `0990830`. A suíte revisada atravessa arquivos temporários, LargeFile, PgnIterator, GameLoader, Game, MoveList e Board sem dublês. Os 12 casos passaram; as quatro suítes ligadas a Game tiveram 74 testes aprovados e a regressão completa do Chesslib teve 281 |
 | Decisão | Aceitos arquivos criados por cada teste, FENs explícitos, verificação de metadados e anotações, navegação da variação e retorno à linha principal, erros com contexto e exportação com releitura. Mantidas as classes de produção e as dependências existentes. Nenhuma expectativa da resposta precisou ser rejeitada nesta etapa; não foi necessário um commit corretivo adicional |
 | Validação | A distinção em relação aos testes anteriores foi verificada no caminho real de execução: PgnHolder lê bytes do arquivo e usa PgnIterator/GameLoader para criar Game; MoveList interpreta SAN e Board executa movimentos legais. FENs completos foram definidos pelas posições esperadas após cada sequência, evitando validar só o índice ou comparar dois resultados da mesma implementação. A variação com dois meios-lances e linha principal com quatro detecta o uso do tamanho da lista errada. Os erros verificam evento/rodada e causas específicas; o teste de exportação exige conteúdo gravado, relê outro objeto e confere metadados, SAN, comentários, NAG, variação e FEN conhecido. Arquivos vazios, ausentes, LF/CRLF e duas partidas de eventos distintos completam as partições escolhidas. JUnit TemporaryFolder separa os dados de cada teste. Comandos: mvn -B -f chesslib/pom.xml -Dtest=GameTest,GameIsolatedTest,GameProcessingTest,GameIntegrationTest test (74 aprovados) e mvn -B -f chesslib/pom.xml test (281 aprovados). Isso valida os fluxos cobertos, sem provar todas as regras de xadrez, todos os encodings, agrupamento de partidas no mesmo evento, fechamento de recursos em todo erro ou metas de cobertura/mutação. |
 
@@ -224,7 +224,7 @@ O resultado da IA foi validado por leitura do arquivo original `MoveListTest.jav
 
 ### Evidências relacionadas
 
-- Versão inicial: commit `9fa379f`, somente código com cinco casos.
+- Versão inicial: commit `0d5dbf9`, somente código com cinco casos.
 - [Entrada da revisão](prompts/game-analise-cobertura-mutantes-entrega-2.md).
 - [Saída da revisão e decisões](responses/game-analise-cobertura-mutantes-entrega-2.md).
 - [Suíte final executável](../../chesslib/src/test/java/com/github/bhlangonijr/chesslib/game/GameQualityTest.java).
@@ -246,7 +246,7 @@ O resultado da IA foi validado por leitura do arquivo original `MoveListTest.jav
 
 ### Evidências relacionadas
 
-- Correções iniciais: commit `27a5d86`, somente código de Game.
+- Correções iniciais: commit `71df887`, somente código de Game.
 - [Entrada](prompts/game-inspecao-sonar-entrega-2.md) e [saída](responses/game-inspecao-sonar-entrega-2.md) da revisão.
 - [Relatório e capturas antes/depois](../inspecao/game/relatorio.md).
 - [Classe corrigida](../../chesslib/src/main/java/com/github/bhlangonijr/chesslib/game/Game.java) e [casos de robustez](../../chesslib/src/test/java/com/github/bhlangonijr/chesslib/game/GameQualityTest.java).
