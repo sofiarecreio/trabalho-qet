@@ -267,7 +267,7 @@ Os resultados abaixo correspondem à validação da contribuição de Pedro; a i
 | Edição de animal | Nove cenários Selenium aprovados; seleção conjunta de 42 testes aprovada | [Selenium](docs/selenium/alterar-animal/README.md) |
 | Consolidação | Cinco classes medidas; pendências de mutação de GameLoader e MoveList identificadas | [Tabela e dados originais](docs/entrega2/consolidacao/README.md) |
 
-A seleção do PetClinic não corresponde à suíte inteira. A seção de PgnHolder no relatório Sonar compartilhado está atualizada. Os dados para o Plano de Teste/ISO estão [disponíveis nesta contribuição](docs/entrega2/pedro/dados-documentacao.md); o plano está somente para leitura na conta da UFF de Pedro. As correções de PgnHolder estão registradas nas Issues [#21](https://github.com/sofiarecreio/trabalho-qet/issues/21) e [#22](https://github.com/sofiarecreio/trabalho-qet/issues/22).
+A seleção do PetClinic não corresponde à suíte inteira. A seção de PgnHolder no relatório Sonar compartilhado está atualizada. A seção 6 do [Plano de Teste](https://docs.google.com/document/d/1JDJVJR6WbpOXpzfRQsbcVWZm8XzQYc8xMSGoEAKj0xo/edit?tab=t.0) registra o escopo, a estratégia, os critérios e os resultados da contribuição de Pedro na Entrega 2. Os dados para a avaliação ISO estão [disponíveis nesta contribuição](docs/entrega2/pedro/dados-documentacao.md). As correções de PgnHolder estão registradas nas Issues [#21](https://github.com/sofiarecreio/trabalho-qet/issues/21) e [#22](https://github.com/sofiarecreio/trabalho-qet/issues/22).
 
 ### Pendências de consolidação do grupo
 

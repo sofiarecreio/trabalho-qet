@@ -1,6 +1,6 @@
 # Dados para documentação e apresentação — Pedro
 
-Este material reúne os dados medidos e o escopo da contribuição. É uma base local para atualizar as seções pertinentes do Plano de Teste e da avaliação coordenada pela equipe; não substitui o histórico de participação nos Google Docs.
+Este material reúne os dados medidos e o escopo da contribuição. A seção individual da Entrega 2 já foi incorporada à seção 6 do Plano de Teste compartilhado. Os indicadores abaixo também servem de base para a avaliação coordenada pela equipe; este arquivo não substitui o histórico de participação nos Google Docs.
 
 ## Escopo para o Plano de Teste
 
