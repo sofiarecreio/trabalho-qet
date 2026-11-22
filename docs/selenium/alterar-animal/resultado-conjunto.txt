@@ -1,0 +1,15 @@
+Resumo extraído da saída real do Maven; os tempos referem-se à execução local.
+
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 8.685 s -- in org.springframework.samples.petclinic.owner.LucasOwnerSeleniumTests
+[INFO] Tests run: 8, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.226 s -- in org.springframework.samples.petclinic.owner.PetControllerTests$ProcessUpdateFormHasErrors
+[INFO] Tests run: 6, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.148 s -- in org.springframework.samples.petclinic.owner.PetControllerTests$ProcessCreationFormHasErrors
+[INFO] Tests run: 0, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.221 s -- in org.springframework.samples.petclinic.owner.PetControllerTests
+[INFO] Tests run: 9, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 13.20 s -- in org.springframework.samples.petclinic.owner.WeslleyVisitSeleniumTests
+[INFO] Tests run: 9, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 12.67 s -- in org.springframework.samples.petclinic.owner.PedroPetEditSeleniumTests
+[INFO] Tests run: 6, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.124 s -- in org.springframework.samples.petclinic.owner.VisitControllerTests
+[INFO] Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.043 s -- in org.springframework.samples.petclinic.owner.LucasOwnerIntegrationTests
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 35.63 s -- in org.springframework.samples.petclinic.system.CadastrarAnimalSeleniumTest
+[INFO] Tests run: 42, Failures: 0, Errors: 0, Skipped: 0
+[INFO] BUILD SUCCESS
+[INFO] Total time:  01:16 min
+[INFO] Finished at: 2026-11-22T19:08:18-03:00
