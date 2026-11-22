@@ -19,6 +19,7 @@ package com.github.bhlangonijr.chesslib.pgn;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.io.UncheckedIOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -26,6 +27,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Stream;
 
 import com.github.bhlangonijr.chesslib.game.Event;
 import com.github.bhlangonijr.chesslib.game.Game;
@@ -128,9 +130,9 @@ public class PgnHolder {
      * @return the games
      * @deprecated use {@link PgnHolder#getGames()} instead
      */
-    @Deprecated
+    @Deprecated(forRemoval = false)
     public List<Game> getGame() {
-        return games;
+        return getGames();
     }
 
     /**
@@ -152,29 +154,26 @@ public class PgnHolder {
      * @throws IOException in case of error reading the PGN file
      */
     public long countGamesInPgnFile() throws IOException {
-        return Files.lines(Paths.get(this.fileName))
-                .filter(s -> s.startsWith("[Event "))
-                .count();
+        try (Stream<String> lines = Files.lines(Paths.get(this.fileName))) {
+            return lines.filter(s -> s.startsWith("[Event ")).count();
+        }
     }
 
     /**
      * Loads into memory the chess data stored in the given PGN file.
      *
      * @param file the PGN file to load
-     * @throws Exception in case of error loading the contents of the file
+     * @throws PgnException in case of invalid PGN contents
      */
-    public void loadPgn(LargeFile file) throws Exception {
+    public void loadPgn(LargeFile file) {
 
         size = 0;
 
-        PgnIterator games = new PgnIterator(file);
-
-        try {
-            for (Game game : games) {
+        try (LargeFile input = file) {
+            PgnIterator parsedGames = new PgnIterator(input);
+            for (Game game : parsedGames) {
                 addGame(game);
             }
-        } finally {
-            file.close();
         }
     }
 
@@ -186,22 +185,23 @@ public class PgnHolder {
     public void loadPgn(String pgn) {
 
         Iterable<String> iterable = Arrays.asList(pgn.split("\n"));
-        PgnIterator games = new PgnIterator(iterable.iterator());
-        for (Game game : games) {
+        PgnIterator parsedGames = new PgnIterator(iterable.iterator());
+        for (Game game : parsedGames) {
             addGame(game);
         }
     }
 
     /**
      * Saves to the PGN file the current data stored in the holder.
+     *
+     * @throws UncheckedIOException if the destination cannot be opened or written
      */
     public void savePgn() {
 
-        try {
-            FileWriter outFile = new FileWriter(getFileName());
-            PrintWriter out = new PrintWriter(outFile);
-            for (Event event : getEvent().values()) {
-                for (Round round : event.getRound().values()) {
+        try (FileWriter outFile = new FileWriter(getFileName());
+             PrintWriter out = new PrintWriter(outFile)) {
+            for (Event chessEvent : getEvent().values()) {
+                for (Round round : chessEvent.getRound().values()) {
                     for (Game game : round.getGame()) {
                         if (game != null) {
                             out.println();
@@ -211,9 +211,11 @@ public class PgnHolder {
                     }
                 }
             }
-            out.close();
+            if (out.checkError()) {
+                throw new IOException("Error writing PGN data");
+            }
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new UncheckedIOException("Unable to save PGN file: " + getFileName(), e);
         }
 
     }
@@ -267,8 +269,8 @@ public class PgnHolder {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        for (Event event : getEvent().values()) {
-            for (Round round : event.getRound().values()) {
+        for (Event chessEvent : getEvent().values()) {
+            for (Round round : chessEvent.getRound().values()) {
                 for (Game game : round.getGame()) {
                     if (game != null) {
                         sb.append('\n');
@@ -283,8 +285,8 @@ public class PgnHolder {
 
     private void addGame(Game game) {
 
-        Event event = getEvent().get(game.getRound().getEvent().getName());
-        if (event == null) {
+        Event existingEvent = getEvent().get(game.getRound().getEvent().getName());
+        if (existingEvent == null) {
             getEvent().put(game.getRound().getEvent().getName(), game.getRound().getEvent());
         }
         Player whitePlayer = getPlayer().get(game.getWhitePlayer().getId());
