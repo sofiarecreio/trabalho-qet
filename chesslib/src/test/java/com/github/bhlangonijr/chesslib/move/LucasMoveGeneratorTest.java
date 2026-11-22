@@ -32,6 +32,32 @@ public class LucasMoveGeneratorTest {
     }
 
     @Test
+    public void deveGerarOsMovimentosIniciaisDosPeoesPretos() {
+        Board board = new Board();
+        board.loadFromFen("4k3/pppppppp/8/8/8/8/8/4K3 b - - 0 1");
+        List<Move> moves = new ArrayList<>();
+
+        MoveGenerator.generatePawnMoves(board, moves);
+
+        assertEquals(16, moves.size());
+        assertTrue(moves.contains(new Move("e7e6", Side.BLACK)));
+        assertTrue(moves.contains(new Move("e7e5", Side.BLACK)));
+        assertTrue(moves.contains(new Move("a7a6", Side.BLACK)));
+        assertTrue(moves.contains(new Move("a7a5", Side.BLACK)));
+    }
+
+    @Test
+    public void naoDeveMoverPeaoQuandoAProximaCasaEstaOcupada() {
+        Board board = new Board();
+        board.loadFromFen("4k3/8/8/8/8/4p3/4P3/4K3 w - - 0 1");
+        List<Move> moves = new ArrayList<>();
+
+        MoveGenerator.generatePawnMoves(board, moves);
+
+        assertTrue(moves.isEmpty());
+    }
+
+    @Test
     public void deveGerarCapturaDePeaoSomenteParaCasaOcupadaPorAdversario() {
         Board board = new Board();
         board.loadFromFen("4k3/8/2p5/3P4/8/8/8/4K3 w - - 0 1");
@@ -59,6 +85,21 @@ public class LucasMoveGeneratorTest {
     }
 
     @Test
+    public void deveGerarAsQuatroOpcoesDePromocaoDoPeaoPreto() {
+        Board board = new Board();
+        board.loadFromFen("4k3/8/8/8/8/8/p7/4K3 b - - 0 1");
+        List<Move> moves = new ArrayList<>();
+
+        MoveGenerator.generatePawnMoves(board, moves);
+
+        assertEquals(4, moves.size());
+        assertTrue(moves.contains(new Move(Square.A2, Square.A1, Piece.BLACK_QUEEN)));
+        assertTrue(moves.contains(new Move(Square.A2, Square.A1, Piece.BLACK_ROOK)));
+        assertTrue(moves.contains(new Move(Square.A2, Square.A1, Piece.BLACK_BISHOP)));
+        assertTrue(moves.contains(new Move(Square.A2, Square.A1, Piece.BLACK_KNIGHT)));
+    }
+
+    @Test
     public void deveRespeitarMascaraAoGerarMovimentosDoCavalo() {
         Board board = new Board();
         board.loadFromFen("4k3/8/8/8/3N4/8/8/4K3 w - - 0 1");
@@ -68,6 +109,55 @@ public class LucasMoveGeneratorTest {
 
         assertEquals(1, moves.size());
         assertTrue(moves.contains(new Move("d4c6", Side.WHITE)));
+    }
+
+    @Test
+    public void deveGerarMovimentosDeBispoTorreERainhaRespeitandoMascara() {
+        Board board = new Board();
+        board.loadFromFen("4k3/8/8/8/3B3R/8/8/4K3 w - - 0 1");
+
+        List<Move> bishopMoves = new ArrayList<>();
+        MoveGenerator.generateBishopMoves(board, bishopMoves, Square.H8.getBitboard());
+        assertTrue(bishopMoves.contains(new Move("d4h8", Side.WHITE)));
+
+        List<Move> rookMoves = new ArrayList<>();
+        MoveGenerator.generateRookMoves(board, rookMoves, Square.D4.getBitboard());
+        assertTrue(rookMoves.contains(new Move("h4d4", Side.WHITE)));
+
+        List<Move> queenMoves = new ArrayList<>();
+        board.loadFromFen("4k3/8/8/8/3Q4/8/8/4K3 w - - 0 1");
+        MoveGenerator.generateQueenMoves(board, queenMoves, Square.H8.getBitboard());
+        assertTrue(queenMoves.contains(new Move("d4h8", Side.WHITE)));
+    }
+
+    @Test
+    public void deveGerarMovimentoDoReiRespeitandoMascara() {
+        Board board = new Board();
+        board.loadFromFen("4k3/8/8/8/4K3/8/8/8 w - - 0 1");
+        List<Move> moves = new ArrayList<>();
+
+        MoveGenerator.generateKingMoves(board, moves, Square.D4.getBitboard());
+
+        assertEquals(1, moves.size());
+        assertTrue(moves.contains(new Move("e4d4", Side.WHITE)));
+    }
+
+    @Test
+    public void deveGerarTodosOsMovimentosPseudoLegaisDaPosicaoInicial() {
+        List<Move> moves = MoveGenerator.generatePseudoLegalMoves(new Board());
+
+        assertEquals(20, moves.size());
+    }
+
+    @Test
+    public void deveIncluirCapturaDoReiNosMovimentosPseudoLegaisDeCaptura() {
+        Board board = new Board();
+        board.loadFromFen("4k3/8/8/8/3pK3/8/8/8 w - - 0 1");
+
+        List<Move> moves = MoveGenerator.generatePseudoLegalCaptures(board);
+
+        assertEquals(1, moves.size());
+        assertTrue(moves.contains(new Move("e4d4", Side.WHITE)));
     }
 
     @Test
@@ -81,5 +171,51 @@ public class LucasMoveGeneratorTest {
         assertEquals(2, moves.size());
         assertTrue(moves.contains(new Move("e1g1", Side.WHITE)));
         assertTrue(moves.contains(new Move("e1c1", Side.WHITE)));
+    }
+
+    @Test
+    public void deveGerarSomenteRoquePequenoQuandoApenasEsseDireitoExiste() {
+        Board board = new Board();
+        board.loadFromFen("r3k2r/8/8/8/8/8/8/R3K2R w K - 0 1");
+        List<Move> moves = new ArrayList<>();
+
+        MoveGenerator.generateCastleMoves(board, moves);
+
+        assertEquals(1, moves.size());
+        assertTrue(moves.contains(new Move("e1g1", Side.WHITE)));
+    }
+
+    @Test
+    public void deveGerarSomenteRoqueGrandeQuandoApenasEsseDireitoExiste() {
+        Board board = new Board();
+        board.loadFromFen("r3k2r/8/8/8/8/8/8/R3K2R w Q - 0 1");
+        List<Move> moves = new ArrayList<>();
+
+        MoveGenerator.generateCastleMoves(board, moves);
+
+        assertEquals(1, moves.size());
+        assertTrue(moves.contains(new Move("e1c1", Side.WHITE)));
+    }
+
+    @Test
+    public void naoDeveGerarRoqueGrandeQuandoUmaCasaDoCaminhoEstaAtacada() {
+        Board board = new Board();
+        board.loadFromFen("k2r4/8/8/8/8/8/8/R3K2R w Q - 0 1");
+        List<Move> moves = new ArrayList<>();
+
+        MoveGenerator.generateCastleMoves(board, moves);
+
+        assertTrue(moves.isEmpty());
+    }
+
+    @Test
+    public void naoDeveGerarRoqueQuandoOReiEstaEmXeque() {
+        Board board = new Board();
+        board.loadFromFen("k3r3/8/8/8/8/8/8/R3K2R w KQ - 0 1");
+        List<Move> moves = new ArrayList<>();
+
+        MoveGenerator.generateCastleMoves(board, moves);
+
+        assertTrue(moves.isEmpty());
     }
 }
