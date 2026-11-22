@@ -123,6 +123,134 @@ O resultado da IA foi validado por leitura do arquivo original `MoveListTest.jav
 - Distribuição das classes do Chesslib e dos casos manuais do Spring PetClinic.
 - Casos implementados e relatórios armazenados neste repositório.
 
+## Registro E2-WES-GAME-01 — Testes isolados de navegação de Game
+
+| Informação | Registro |
+| --- | --- |
+| Data | 22/11/2026 |
+| Responsável | Weslley Ribeiro |
+| Entrega | Entrega 2 |
+| Atividade | Revisão e melhoria dos testes unitários de navegação de `Game`, com isolamento do processamento de `Board` |
+| Versão inicial | Elaborada por Weslley sem auxílio de IA, com quatro testes, no commit `f1f091a`. A IA foi utilizada apenas para melhorar essa versão |
+| Ferramenta | Codex/ChatGPT |
+| Prompt/instrução | [Prompt de melhoria dos testes](prompts/game-isolados-entrega-2.md) |
+| Resultado | Resposta com a suíte revisada de 18 testes isolados de navegação de `Game`, usando stub de `Board` para controlar respostas e registrar interações. [Saída produzida](responses/game-isolados-entrega-2.md) |
+| Decisão | Aceitas as verificações de FEN, ordem de chamadas, validação completa, rejeição de jogadas e limites. Mantido o stub sem novas dependências. Não foi exigida a preservação da lista anterior em chamadas inválidas porque o contrato prevê ativar a lista fornecida. Weslley informou ter validado a melhoria |
+| Validação | Os casos foram confrontados com o contrato de navegação e com as fronteiras -1, 0, n-1, n e n+1. O stub separa a coordenação de Game das regras reais de xadrez e permite conferir FEN, ordem, fullValidation e interrupção sem calcular o esperado pelo Board real. A revisão detectou lacunas na versão anterior e a suíte ampliada detectou três alterações defeituosas controladas: tamanho da lista errado, validação desativada e limite inclusivo incorreto. Os 40 testes de Game e os 247 da regressão passaram. Esses resultados sustentam as asserções escolhidas, mas não substituem cobertura estrutural, PIT ou integração com componentes reais. |
+
+### Evidências relacionadas
+
+- [Entrada: prompt utilizado](prompts/game-isolados-entrega-2.md).
+- [Saída: código da resposta](responses/game-isolados-entrega-2.md).
+- [Suíte executável](../../chesslib/src/test/java/com/github/bhlangonijr/chesslib/game/GameIsolatedTest.java).
+
+## Registro E2-WES-GAME-02 — Processamento de movimentos, comentários e PGN
+
+| Informação | Registro |
+| --- | --- |
+| Data | 22/11/2026 |
+| Responsável | Weslley Ribeiro |
+| Entrega | Entrega 2 |
+| Atividade | Ampliação dos testes funcionais de processamento de `Game` e correção de comentários de linha |
+| Ferramenta | Codex/ChatGPT |
+| Prompt/instrução | [Prompt de melhoria](prompts/game-processamento-entrega-2.md) |
+| Resultado | [Resposta com correção e 22 testes propostos](responses/game-processamento-entrega-2.md). A versão inicial de quatro testes está no commit `9b5f9c8`: três passaram e um reproduziu a perda de movimento após comentário de linha. A proposta ampliada foi preservada no commit `3d42b42`, com uma falha de oráculo entre os 62 testes de Game executados. Depois da correção separada desse oráculo, os 62 testes de Game e os 269 da regressão completa passaram |
+| Decisão | Aceita a correção de encerrar comentários antes de descartar a quebra de linha e de impedir que marcadores de notação no comentário sejam interpretados. Aceitos os cenários de recarregamento, FEN, variações e metadados. Rejeitada a expectativa de 40 movimentos no teste de PGN longo: a entrada literal possui 10 pares, portanto 20 meios-lances. A resposta é preservada sem reescrever esse erro. Em commit posterior à proposta, a expectativa foi corrigida para 20 e complementada pela sequência SAN completa esperada; esse ajuste também foi realizado com auxílio de IA. Não foram alterados os parâmetros documentados como ignorados de toPgn |
+| Validação | O teste inicial forneceu uma sequência concreta esperada e falhou na ausência de e5, identificando um erro real em vez de ajustar o esperado à implementação. A correção foi confrontada com três causas no código: descarte antecipado de newline, interpretação do conteúdo como variação e ausência de armazenamento no fim do texto. Os novos casos verificam o texto do comentário, a sequência SAN, índices de associação e a ausência de NAGs/variações indevidas; casos separados mantêm comentários entre chaves e aceitam LF/CRLF. Para FEN e recarregamento, os resultados são definidos por posições e sequências explícitas. A expectativa 40 foi rejeitada por contagem independente da entrada, não porque o programa retornou 20; a asserção final também confere todos os 20 meios-lances, evitando esconder perda ou reordenação de movimentos. Comandos executados: mvn -B -f chesslib/pom.xml -Dtest=GameTest,GameIsolatedTest,GameProcessingTest test (62 aprovados) e mvn -B -f chesslib/pom.xml test (269 aprovados). A proposta usa componentes reais e não substitui teste de arquivos PGN, cobertura estrutural, PIT ou Sonar. |
+
+### Evidências relacionadas
+
+- [Entrada: prompt utilizado](prompts/game-processamento-entrega-2.md).
+- [Saída original da revisão, incluindo a expectativa rejeitada](responses/game-processamento-entrega-2.md).
+- [Testes executáveis](../../chesslib/src/test/java/com/github/bhlangonijr/chesslib/game/GameProcessingTest.java).
+- [Código de produção](../../chesslib/src/main/java/com/github/bhlangonijr/chesslib/game/Game.java).
+
+## Registro E2-WES-GAME-03 — Integração do Chesslib com arquivos PGN
+
+| Informação | Registro |
+| --- | --- |
+| Data | 22/11/2026 |
+| Responsável | Weslley Ribeiro |
+| Entrega | Entrega 2 |
+| Atividade | Leitura de arquivos PGN, criação de partidas e processamento/navegação com componentes reais |
+| Ferramenta | Codex/ChatGPT |
+| Prompt/instrução | [Prompt de melhoria da integração](prompts/game-integracao-entrega-2.md) |
+| Resultado | [Resposta com 12 testes de integração](responses/game-integracao-entrega-2.md). A versão inicial de dois casos aprovados está no commit `8cd5951`. A suíte revisada atravessa arquivos temporários, LargeFile, PgnIterator, GameLoader, Game, MoveList e Board sem dublês. Os 12 casos passaram; as quatro suítes ligadas a Game tiveram 74 testes aprovados e a regressão completa do Chesslib teve 281 |
+| Decisão | Aceitos arquivos criados por cada teste, FENs explícitos, verificação de metadados e anotações, navegação da variação e retorno à linha principal, erros com contexto e exportação com releitura. Mantidas as classes de produção e as dependências existentes. Nenhuma expectativa da resposta precisou ser rejeitada nesta etapa; não foi necessário um commit corretivo adicional |
+| Validação | A distinção em relação aos testes anteriores foi verificada no caminho real de execução: PgnHolder lê bytes do arquivo e usa PgnIterator/GameLoader para criar Game; MoveList interpreta SAN e Board executa movimentos legais. FENs completos foram definidos pelas posições esperadas após cada sequência, evitando validar só o índice ou comparar dois resultados da mesma implementação. A variação com dois meios-lances e linha principal com quatro detecta o uso do tamanho da lista errada. Os erros verificam evento/rodada e causas específicas; o teste de exportação exige conteúdo gravado, relê outro objeto e confere metadados, SAN, comentários, NAG, variação e FEN conhecido. Arquivos vazios, ausentes, LF/CRLF e duas partidas de eventos distintos completam as partições escolhidas. JUnit TemporaryFolder separa os dados de cada teste. Comandos: mvn -B -f chesslib/pom.xml -Dtest=GameTest,GameIsolatedTest,GameProcessingTest,GameIntegrationTest test (74 aprovados) e mvn -B -f chesslib/pom.xml test (281 aprovados). Isso valida os fluxos cobertos, sem provar todas as regras de xadrez, todos os encodings, agrupamento de partidas no mesmo evento, fechamento de recursos em todo erro ou metas de cobertura/mutação. |
+
+### Evidências relacionadas
+
+- [Entrada: prompt utilizado](prompts/game-integracao-entrega-2.md).
+- [Saída: suíte revisada](responses/game-integracao-entrega-2.md).
+- [Testes executáveis](../../chesslib/src/test/java/com/github/bhlangonijr/chesslib/game/GameIntegrationTest.java).
+
+## Registro E2-WES-GAME-04 — Reaproveitamento de JaCoCo e PIT para Game
+
+| Informação | Registro |
+| --- | --- |
+| Data | 22/11/2026 |
+| Responsável | Weslley Ribeiro |
+| Entrega | Entrega 2 |
+| Atividade | Adaptar para Game as ferramentas da contribuição de Lucas, integrada à main pelo PR #14 |
+| Ferramenta | Codex/ChatGPT |
+| Prompt/instrução | [Prompt de adaptação](prompts/game-configuracao-qualidade-entrega-2.md) |
+| Resultado | [Perfil Maven game-quality e comandos](responses/game-configuracao-qualidade-entrega-2.md). JaCoCo: 189/218 branches de Game, 86,70%; complexidade ciclomática agregada 176, incluindo loadMoveText com 57, toPgn com 26 e translateVariation com 13. PIT: 180/208 mutações mortas, 86,54% (87% exibido), 23 sobreviventes e 5 sem cobertura, sem erro de execução. Regressão completa integrada: 292 testes aprovados |
+| Decisão | Reutilizadas as versões e metas de Lucas: JaCoCo 0.8.12, PIT 1.17.4 e mínimos de 80%. Aceito um perfil optativo para Game, mantendo os filtros padrão de MoveGenerator. Usados filtros diferentes para o agente (nome da classe) e relatório (arquivo Game.class), com substituição explícita das listas herdadas. Relatórios separados para evitar misturar métricas. Não foram alterados testes, produção ou limites para elevar os resultados |
+| Validação | O relatório XML foi inspecionado para confirmar que a análise contém exatamente Game e que a cobertura não está vazia. A regra de branches de Game foi aprovada no verify com os 292 testes do Chesslib; o PIT selecionou Game e suas quatro suítes pelo filtro Game*Test. O XML de mutações confirmou os estados KILLED=180, SURVIVED=23 e NO_COVERAGE=5, sem excluir sobreviventes do denominador. A execução padrão de Lucas também foi revalidada com seus 20 testes e a regra JaCoCo aprovada, mostrando que o perfil não substituiu o padrão. A agregação de complexidade e as contagens são da versão analisada e deverão ser reavaliadas após refatorações. Cobertura de branches ainda precisa ser relacionada ao critério todas-arestas no relatório acadêmico; as mutações sobreviventes e sem cobertura precisam de análise individual. |
+
+### Evidências relacionadas
+
+- [Entrada: prompt utilizado](prompts/game-configuracao-qualidade-entrega-2.md).
+- [Saída: perfil e comandos](responses/game-configuracao-qualidade-entrega-2.md).
+- [Configuração executável](../../chesslib/pom.xml).
+- Relatório JaCoCo gerado localmente: `chesslib/target/site/jacoco-game/index.html`.
+- Relatório PIT gerado localmente: `chesslib/target/pit-reports-game/index.html`.
+- Os relatórios completos são gerados pelos comandos preservados na resposta; scripts e logs não foram adicionados ao repositório nesta etapa.
+
+## E2-WES-GAME-05 — Análise de cobertura e mutantes de Game
+
+| Informação | Registro |
+| --- | --- |
+| Data | 22/11/2026 |
+| Responsável | Weslley Ribeiro |
+| Entrega | Entrega 2 |
+| Atividade | Analisar as lacunas JaCoCo/PIT de Game e melhorar os testes dirigidos pelos relatórios |
+| Ferramenta | Codex/ChatGPT |
+| Prompt/instrução | [Instrução de revisão](prompts/game-analise-cobertura-mutantes-entrega-2.md) |
+| Resultado | [Saída, casos e análise individual](responses/game-analise-cobertura-mutantes-entrega-2.md). GameQualityTest passou de cinco para 13 casos; regressão completa de 305 testes. Branches: 195/218 = 89,45%. PIT: 201/208 = 96,63%, sete sobreviventes e nenhum sem cobertura ou erro na execução final. Analisados os 28 mutantes inicialmente não mortos e as 29 saídas de decisão inicialmente ausentes |
+| Decisão | Aceitos os oráculos exatos de variações, limites de navegação, metadados não padrão e falha controlada de conversão. Preservados produção, POM e contribuição de Lucas. Nenhum sobrevivente excluído do denominador. Não aceita a conclusão de equivalência universal dos sobreviventes nem a identidade automática entre percentual C1 e um grafo completo de arestas. A saída documenta a operacionalização e os limites do critério acadêmico |
+| Validação | A comparação dos XMLs por método, descritor, operador e índice identifica 21 mutantes antes não mortos agora KILLED, sem regressão dos 180 antes mortos. Os oráculos de PGN verificam ordem, numeração, retomada e fechamento completo das variantes; não apenas presença de palavras. Limites de navegação distinguem falso antes do fim e verdadeiro no último índice/acima. Valores não vazios e posição inicial não zero detectam apagamento de estado. O stub de MoveList permite exercitar o tratamento explícito da falha de conversão sem modificar Game. A regressão completa e a regra de cobertura passaram. Duas execuções restritas do PIT falharam com MINION_DIED; a execução final fora da restrição concluiu, e somente seu XML foi usado no escore. As sete limitações restantes foram analisadas e mantidas explícitas. |
+
+### Evidências relacionadas
+
+- Versão inicial: commit `9fa379f`, somente código com cinco casos.
+- [Entrada da revisão](prompts/game-analise-cobertura-mutantes-entrega-2.md).
+- [Saída da revisão e decisões](responses/game-analise-cobertura-mutantes-entrega-2.md).
+- [Suíte final executável](../../chesslib/src/test/java/com/github/bhlangonijr/chesslib/game/GameQualityTest.java).
+- Relatórios completos gerados localmente em `chesslib/target/site/jacoco-game/` e `chesslib/target/pit-reports-game/`; sem scripts ou logs brutos novos no repositório.
+
+## E2-WES-GAME-06 — Inspeção Sonar e refatoração de Game
+
+| Informação | Registro |
+| --- | --- |
+| Data | 22/11/2026 |
+| Responsável | Weslley Ribeiro |
+| Entrega | Entrega 2 |
+| Atividade | Inspeção inicial/final e correção dos apontamentos Sonar de Game |
+| Ferramenta | Codex/ChatGPT; SonarQube Community Build 26.11.0.134175 |
+| Prompt/instrução | [Revisão das correções](prompts/game-inspecao-sonar-entrega-2.md) |
+| Resultado | [Saída da revisão](responses/game-inspecao-sonar-entrega-2.md). Perfil comprehensive com 608 regras: 16 → 0 apontamentos. Regressão: 307 testes; branches: 166/179 = 92,74%; PIT: 203/213 = 95,31%, sete sobreviventes e três sem cobertura, sem erro de execução |
+| Decisão | Aceitas extrações por responsabilidade, nomes claros, exceções específicas e retorno não nulo de toString. A mudança de contrato e os dois casos novos de robustez estão explícitos no relatório. Rejeitada a substituição indiscriminada de trim por isBlank por diferença semântica. Produção dos colegas e POM preservados. Não usar zero do Sonar como prova de ausência de defeitos, nem esconder mutantes restantes |
+| Validação | Capturas reais e APIs conferem o mesmo perfil e escopo em dois projetos que preservam as versões inicial/final; nenhuma regra foi desativada. As saídas completas de PGN continuam a verificar numeração, parentesco e retomada das variantes; comentários, navegação e integração com arquivos reais passaram na regressão. A falha controlada de conversão e as entradas vazia/incompleta verificam os motivos concretos da correção de toString. Os auxiliares de lógica permanecem em Game e foram incluídos nas medições; os tipos internos novos guardam dados. O XML PIT confirma todos os estados e o denominador completo de 213; a regra JaCoCo mínima de 80% foi aprovada. Complexidade cognitiva diminuiu de 218 para 109, mas a ciclomática agregada Sonar cresceu de 174 para 177, portanto não se afirma redução desta última. |
+
+### Evidências relacionadas
+
+- Correções iniciais: commit `27a5d86`, somente código de Game.
+- [Entrada](prompts/game-inspecao-sonar-entrega-2.md) e [saída](responses/game-inspecao-sonar-entrega-2.md) da revisão.
+- [Relatório e capturas antes/depois](../inspecao/game/relatorio.md).
+- [Classe corrigida](../../chesslib/src/main/java/com/github/bhlangonijr/chesslib/game/Game.java) e [casos de robustez](../../chesslib/src/test/java/com/github/bhlangonijr/chesslib/game/GameQualityTest.java).
+
 ## Modelo para novos registros
 
 ### Registro NNN — Título da interação
