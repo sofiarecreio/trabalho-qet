@@ -1,0 +1,82 @@
+{
+  "base_commit": "4750daac2045f5d16e841a5c7ea1011afdda9b5d",
+  "source_sha256": "e7b215745485babbad010e607dae34aff0cb3aaf2518d03cd336ba6216cf04f8",
+  "server_version": "26.11.0.134175",
+  "profile": {
+    "key": "e1ead7cb-857c-4916-a0e4-dbb85a19750c",
+    "name": "Sonar way comprehensive",
+    "language": "java",
+    "languageName": "Java",
+    "isInherited": false,
+    "isDefault": false,
+    "activeRuleCount": 608,
+    "activeDeprecatedRuleCount": 0,
+    "projectCount": 1,
+    "rulesUpdatedAt": "2026-11-22T21:26:36+0000",
+    "lastUsed": "2026-11-22T21:29:10+0000",
+    "isBuiltIn": true,
+    "actions": {
+      "edit": false,
+      "setAsDefault": true,
+      "copy": true,
+      "associateProjects": true,
+      "delete": false
+    }
+  },
+  "issues": {
+    "total": 0,
+    "p": 1,
+    "ps": 500,
+    "paging": {
+      "pageIndex": 1,
+      "pageSize": 500,
+      "total": 0
+    },
+    "effortTotal": 0,
+    "issues": [],
+    "components": [],
+    "facets": []
+  },
+  "measures": {
+    "component": {
+      "key": "qet-pedro-pgnholder-depois",
+      "name": "Chesslib - Pedro - PgnHolder - Depois",
+      "qualifier": "TRK",
+      "measures": [
+        {
+          "metric": "bugs",
+          "value": "0",
+          "bestValue": true
+        },
+        {
+          "metric": "complexity",
+          "value": "36"
+        },
+        {
+          "metric": "code_smells",
+          "value": "0",
+          "bestValue": true
+        },
+        {
+          "metric": "cognitive_complexity",
+          "value": "27",
+          "bestValue": false
+        },
+        {
+          "metric": "ncloc",
+          "value": "150"
+        },
+        {
+          "metric": "violations",
+          "value": "0",
+          "bestValue": true
+        },
+        {
+          "metric": "vulnerabilities",
+          "value": "0",
+          "bestValue": true
+        }
+      ]
+    }
+  }
+}

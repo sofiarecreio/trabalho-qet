@@ -1,0 +1,591 @@
+{
+  "base_commit": "4750daac2045f5d16e841a5c7ea1011afdda9b5d",
+  "source_sha256": "d84be678858d3f474f6df15d089c4328f0ef6be3757786aaf72038e90c88a762",
+  "server_version": "26.11.0.134175",
+  "profile": {
+    "key": "e1ead7cb-857c-4916-a0e4-dbb85a19750c",
+    "name": "Sonar way comprehensive",
+    "language": "java",
+    "languageName": "Java",
+    "isInherited": false,
+    "isDefault": false,
+    "activeRuleCount": 608,
+    "activeDeprecatedRuleCount": 0,
+    "projectCount": 0,
+    "rulesUpdatedAt": "2026-11-22T21:26:36+0000",
+    "isBuiltIn": true,
+    "actions": {
+      "edit": false,
+      "setAsDefault": true,
+      "copy": true,
+      "associateProjects": true,
+      "delete": false
+    }
+  },
+  "issues": {
+    "total": 10,
+    "p": 1,
+    "ps": 500,
+    "paging": {
+      "pageIndex": 1,
+      "pageSize": 500,
+      "total": 10
+    },
+    "effortTotal": 81,
+    "issues": [
+      {
+        "key": "5cd88774-f1c8-4ce7-8663-1042a927a1ea",
+        "rule": "java:S6355",
+        "severity": "MAJOR",
+        "component": "qet-pedro-pgnholder-antes:src/main/java/com/github/bhlangonijr/chesslib/pgn/PgnHolder.java",
+        "project": "qet-pedro-pgnholder-antes",
+        "line": 131,
+        "hash": "b1eaf8cb50dcb99ab0f059111ebf4efa",
+        "textRange": {
+          "startLine": 131,
+          "endLine": 131,
+          "startOffset": 4,
+          "endOffset": 15
+        },
+        "flows": [],
+        "status": "OPEN",
+        "message": "Add 'since' and/or 'forRemoval' arguments to the @Deprecated annotation.",
+        "effort": "5min",
+        "debt": "5min",
+        "author": "sofia.recreio2@gmail.com",
+        "tags": [
+          "java9"
+        ],
+        "creationDate": "2026-09-19T19:47:11+0000",
+        "updateDate": "2026-11-22T21:29:10+0000",
+        "type": "CODE_SMELL",
+        "scope": "MAIN",
+        "quickFixAvailable": false,
+        "messageFormattings": [],
+        "codeVariants": [],
+        "cleanCodeAttribute": "CONVENTIONAL",
+        "cleanCodeAttributeCategory": "CONSISTENT",
+        "impacts": [
+          {
+            "softwareQuality": "MAINTAINABILITY",
+            "severity": "MEDIUM"
+          }
+        ],
+        "issueStatus": "OPEN",
+        "prioritizedRule": false,
+        "fromSonarQubeUpdate": false,
+        "internalTags": [],
+        "linkedTicketStatus": "NOT_LINKED"
+      },
+      {
+        "key": "304196bb-d3cb-48dd-9ac9-6b9fdca8897f",
+        "rule": "java:S4144",
+        "severity": "MAJOR",
+        "component": "qet-pedro-pgnholder-antes:src/main/java/com/github/bhlangonijr/chesslib/pgn/PgnHolder.java",
+        "project": "qet-pedro-pgnholder-antes",
+        "line": 132,
+        "hash": "c3e10cb860b4847bf55f8bbd0d30011a",
+        "textRange": {
+          "startLine": 132,
+          "endLine": 132,
+          "startOffset": 22,
+          "endOffset": 29
+        },
+        "flows": [
+          {
+            "locations": [
+              {
+                "component": "qet-pedro-pgnholder-antes:src/main/java/com/github/bhlangonijr/chesslib/pgn/PgnHolder.java",
+                "textRange": {
+                  "startLine": 121,
+                  "endLine": 121,
+                  "startOffset": 22,
+                  "endOffset": 30
+                },
+                "msg": "original implementation",
+                "msgFormattings": []
+              }
+            ]
+          }
+        ],
+        "status": "OPEN",
+        "message": "Update this method so that its implementation is not identical to \"getGames\" on line 121.",
+        "effort": "15min",
+        "debt": "15min",
+        "author": "sofia.recreio2@gmail.com",
+        "tags": [
+          "confusing",
+          "duplicate",
+          "suspicious"
+        ],
+        "creationDate": "2026-09-19T19:47:11+0000",
+        "updateDate": "2026-11-22T21:29:10+0000",
+        "type": "CODE_SMELL",
+        "scope": "MAIN",
+        "quickFixAvailable": false,
+        "messageFormattings": [],
+        "codeVariants": [],
+        "cleanCodeAttribute": "DISTINCT",
+        "cleanCodeAttributeCategory": "ADAPTABLE",
+        "impacts": [
+          {
+            "softwareQuality": "MAINTAINABILITY",
+            "severity": "MEDIUM"
+          }
+        ],
+        "issueStatus": "OPEN",
+        "prioritizedRule": false,
+        "fromSonarQubeUpdate": false,
+        "internalTags": [],
+        "linkedTicketStatus": "NOT_LINKED"
+      },
+      {
+        "key": "c207d178-9c5a-4b0a-875d-b57bbda04b5c",
+        "rule": "java:S112",
+        "severity": "MAJOR",
+        "component": "qet-pedro-pgnholder-antes:src/main/java/com/github/bhlangonijr/chesslib/pgn/PgnHolder.java",
+        "project": "qet-pedro-pgnholder-antes",
+        "line": 166,
+        "hash": "72d78b3f18491dda919a896e139959e4",
+        "textRange": {
+          "startLine": 166,
+          "endLine": 166,
+          "startOffset": 47,
+          "endOffset": 56
+        },
+        "flows": [],
+        "status": "OPEN",
+        "message": "Replace generic exceptions with specific library exceptions or a custom exception.",
+        "effort": "20min",
+        "debt": "20min",
+        "author": "sofia.recreio2@gmail.com",
+        "tags": [
+          "cwe",
+          "error-handling",
+          "cert"
+        ],
+        "creationDate": "2026-09-19T19:47:11+0000",
+        "updateDate": "2026-11-22T21:29:10+0000",
+        "type": "CODE_SMELL",
+        "scope": "MAIN",
+        "quickFixAvailable": false,
+        "messageFormattings": [],
+        "codeVariants": [],
+        "cleanCodeAttribute": "COMPLETE",
+        "cleanCodeAttributeCategory": "INTENTIONAL",
+        "impacts": [
+          {
+            "softwareQuality": "MAINTAINABILITY",
+            "severity": "MEDIUM"
+          }
+        ],
+        "issueStatus": "OPEN",
+        "prioritizedRule": false,
+        "fromSonarQubeUpdate": false,
+        "internalTags": [],
+        "linkedTicketStatus": "NOT_LINKED"
+      },
+      {
+        "key": "e4779090-52ce-4399-8f40-8c3e59c331b4",
+        "rule": "java:S1117",
+        "severity": "MAJOR",
+        "component": "qet-pedro-pgnholder-antes:src/main/java/com/github/bhlangonijr/chesslib/pgn/PgnHolder.java",
+        "project": "qet-pedro-pgnholder-antes",
+        "line": 170,
+        "hash": "349c81e9a2c1caf08844afaac771f0a2",
+        "textRange": {
+          "startLine": 170,
+          "endLine": 170,
+          "startOffset": 20,
+          "endOffset": 25
+        },
+        "flows": [],
+        "status": "OPEN",
+        "message": "Rename \"games\" which hides the field declared at line 45.",
+        "effort": "5min",
+        "debt": "5min",
+        "author": "sofia.recreio2@gmail.com",
+        "tags": [
+          "cert",
+          "suspicious",
+          "pitfall"
+        ],
+        "creationDate": "2026-09-19T19:47:11+0000",
+        "updateDate": "2026-11-22T21:29:10+0000",
+        "type": "CODE_SMELL",
+        "scope": "MAIN",
+        "quickFixAvailable": false,
+        "messageFormattings": [],
+        "codeVariants": [],
+        "cleanCodeAttribute": "CLEAR",
+        "cleanCodeAttributeCategory": "INTENTIONAL",
+        "impacts": [
+          {
+            "softwareQuality": "MAINTAINABILITY",
+            "severity": "MEDIUM"
+          }
+        ],
+        "issueStatus": "OPEN",
+        "prioritizedRule": false,
+        "fromSonarQubeUpdate": false,
+        "internalTags": [],
+        "linkedTicketStatus": "NOT_LINKED"
+      },
+      {
+        "key": "2755ba90-93c9-4806-bb06-7bf3623834b2",
+        "rule": "java:S2093",
+        "severity": "CRITICAL",
+        "component": "qet-pedro-pgnholder-antes:src/main/java/com/github/bhlangonijr/chesslib/pgn/PgnHolder.java",
+        "project": "qet-pedro-pgnholder-antes",
+        "line": 172,
+        "hash": "80d5b17efc16ace990c07580fc3e85eb",
+        "textRange": {
+          "startLine": 172,
+          "endLine": 172,
+          "startOffset": 8,
+          "endOffset": 11
+        },
+        "flows": [
+          {
+            "locations": [
+              {
+                "component": "qet-pedro-pgnholder-antes:src/main/java/com/github/bhlangonijr/chesslib/pgn/PgnHolder.java",
+                "textRange": {
+                  "startLine": 170,
+                  "endLine": 170,
+                  "startOffset": 28,
+                  "endOffset": 49
+                },
+                "msg": "AutoCloseable resource",
+                "msgFormattings": []
+              }
+            ]
+          }
+        ],
+        "status": "OPEN",
+        "message": "Change this \"try\" to a try-with-resources.",
+        "effort": "15min",
+        "debt": "15min",
+        "author": "sofia.recreio2@gmail.com",
+        "tags": [
+          "java8",
+          "cert",
+          "pitfall"
+        ],
+        "creationDate": "2026-09-19T19:47:11+0000",
+        "updateDate": "2026-11-22T21:29:10+0000",
+        "type": "CODE_SMELL",
+        "scope": "MAIN",
+        "quickFixAvailable": false,
+        "messageFormattings": [],
+        "codeVariants": [],
+        "cleanCodeAttribute": "CONVENTIONAL",
+        "cleanCodeAttributeCategory": "CONSISTENT",
+        "impacts": [
+          {
+            "softwareQuality": "MAINTAINABILITY",
+            "severity": "HIGH"
+          }
+        ],
+        "issueStatus": "OPEN",
+        "prioritizedRule": false,
+        "fromSonarQubeUpdate": false,
+        "internalTags": [],
+        "linkedTicketStatus": "NOT_LINKED"
+      },
+      {
+        "key": "2d424682-9d36-475f-a37e-735cc13d2cc2",
+        "rule": "java:S1117",
+        "severity": "MAJOR",
+        "component": "qet-pedro-pgnholder-antes:src/main/java/com/github/bhlangonijr/chesslib/pgn/PgnHolder.java",
+        "project": "qet-pedro-pgnholder-antes",
+        "line": 189,
+        "hash": "ac7ea95147e4904f0dece9726d8472d9",
+        "textRange": {
+          "startLine": 189,
+          "endLine": 189,
+          "startOffset": 20,
+          "endOffset": 25
+        },
+        "flows": [],
+        "status": "OPEN",
+        "message": "Rename \"games\" which hides the field declared at line 45.",
+        "effort": "5min",
+        "debt": "5min",
+        "author": "sofia.recreio2@gmail.com",
+        "tags": [
+          "cert",
+          "suspicious",
+          "pitfall"
+        ],
+        "creationDate": "2026-09-19T19:47:11+0000",
+        "updateDate": "2026-11-22T21:29:10+0000",
+        "type": "CODE_SMELL",
+        "scope": "MAIN",
+        "quickFixAvailable": false,
+        "messageFormattings": [],
+        "codeVariants": [],
+        "cleanCodeAttribute": "CLEAR",
+        "cleanCodeAttributeCategory": "INTENTIONAL",
+        "impacts": [
+          {
+            "softwareQuality": "MAINTAINABILITY",
+            "severity": "MEDIUM"
+          }
+        ],
+        "issueStatus": "OPEN",
+        "prioritizedRule": false,
+        "fromSonarQubeUpdate": false,
+        "internalTags": [],
+        "linkedTicketStatus": "NOT_LINKED"
+      },
+      {
+        "key": "55855888-d932-4d58-b225-7b5df1227ff9",
+        "rule": "java:S1117",
+        "severity": "MAJOR",
+        "component": "qet-pedro-pgnholder-antes:src/main/java/com/github/bhlangonijr/chesslib/pgn/PgnHolder.java",
+        "project": "qet-pedro-pgnholder-antes",
+        "line": 203,
+        "hash": "30da360374ca62fb204910da91bdf56f",
+        "textRange": {
+          "startLine": 203,
+          "endLine": 203,
+          "startOffset": 23,
+          "endOffset": 28
+        },
+        "flows": [],
+        "status": "OPEN",
+        "message": "Rename \"event\" which hides the field declared at line 43.",
+        "effort": "5min",
+        "debt": "5min",
+        "author": "sofia.recreio2@gmail.com",
+        "tags": [
+          "cert",
+          "suspicious",
+          "pitfall"
+        ],
+        "creationDate": "2026-09-19T19:47:11+0000",
+        "updateDate": "2026-11-22T21:29:10+0000",
+        "type": "CODE_SMELL",
+        "scope": "MAIN",
+        "quickFixAvailable": false,
+        "messageFormattings": [],
+        "codeVariants": [],
+        "cleanCodeAttribute": "CLEAR",
+        "cleanCodeAttributeCategory": "INTENTIONAL",
+        "impacts": [
+          {
+            "softwareQuality": "MAINTAINABILITY",
+            "severity": "MEDIUM"
+          }
+        ],
+        "issueStatus": "OPEN",
+        "prioritizedRule": false,
+        "fromSonarQubeUpdate": false,
+        "internalTags": [],
+        "linkedTicketStatus": "NOT_LINKED"
+      },
+      {
+        "key": "5e46622f-4309-4194-be6f-e18a458d8d32",
+        "rule": "java:S4507",
+        "severity": "MINOR",
+        "component": "qet-pedro-pgnholder-antes:src/main/java/com/github/bhlangonijr/chesslib/pgn/PgnHolder.java",
+        "project": "qet-pedro-pgnholder-antes",
+        "line": 216,
+        "hash": "2dc1665d31b37f9aa7408939a0365027",
+        "textRange": {
+          "startLine": 216,
+          "endLine": 216,
+          "startOffset": 14,
+          "endOffset": 29
+        },
+        "flows": [],
+        "status": "OPEN",
+        "message": "Make sure this debug feature is deactivated before delivering the code in production.",
+        "effort": "1min",
+        "debt": "1min",
+        "author": "sofia.recreio2@gmail.com",
+        "tags": [
+          "cwe",
+          "error-handling",
+          "spring",
+          "debug",
+          "user-experience",
+          "former-hotspot"
+        ],
+        "creationDate": "2026-09-19T19:47:11+0000",
+        "updateDate": "2026-11-22T21:29:10+0000",
+        "type": "VULNERABILITY",
+        "scope": "MAIN",
+        "quickFixAvailable": false,
+        "messageFormattings": [],
+        "codeVariants": [],
+        "cleanCodeAttribute": "CONVENTIONAL",
+        "cleanCodeAttributeCategory": "CONSISTENT",
+        "impacts": [
+          {
+            "softwareQuality": "SECURITY",
+            "severity": "LOW"
+          }
+        ],
+        "issueStatus": "OPEN",
+        "prioritizedRule": false,
+        "fromSonarQubeUpdate": false,
+        "internalTags": [],
+        "linkedTicketStatus": "NOT_LINKED"
+      },
+      {
+        "key": "b1c76533-f55d-4a69-9d68-78218f7891b2",
+        "rule": "java:S1117",
+        "severity": "MAJOR",
+        "component": "qet-pedro-pgnholder-antes:src/main/java/com/github/bhlangonijr/chesslib/pgn/PgnHolder.java",
+        "project": "qet-pedro-pgnholder-antes",
+        "line": 270,
+        "hash": "30da360374ca62fb204910da91bdf56f",
+        "textRange": {
+          "startLine": 270,
+          "endLine": 270,
+          "startOffset": 19,
+          "endOffset": 24
+        },
+        "flows": [],
+        "status": "OPEN",
+        "message": "Rename \"event\" which hides the field declared at line 43.",
+        "effort": "5min",
+        "debt": "5min",
+        "author": "sofia.recreio2@gmail.com",
+        "tags": [
+          "cert",
+          "suspicious",
+          "pitfall"
+        ],
+        "creationDate": "2026-09-19T19:47:11+0000",
+        "updateDate": "2026-11-22T21:29:10+0000",
+        "type": "CODE_SMELL",
+        "scope": "MAIN",
+        "quickFixAvailable": false,
+        "messageFormattings": [],
+        "codeVariants": [],
+        "cleanCodeAttribute": "CLEAR",
+        "cleanCodeAttributeCategory": "INTENTIONAL",
+        "impacts": [
+          {
+            "softwareQuality": "MAINTAINABILITY",
+            "severity": "MEDIUM"
+          }
+        ],
+        "issueStatus": "OPEN",
+        "prioritizedRule": false,
+        "fromSonarQubeUpdate": false,
+        "internalTags": [],
+        "linkedTicketStatus": "NOT_LINKED"
+      },
+      {
+        "key": "58e042cd-59f6-4dc7-b871-39a4da02553a",
+        "rule": "java:S1117",
+        "severity": "MAJOR",
+        "component": "qet-pedro-pgnholder-antes:src/main/java/com/github/bhlangonijr/chesslib/pgn/PgnHolder.java",
+        "project": "qet-pedro-pgnholder-antes",
+        "line": 286,
+        "hash": "38aec09c07e9abdf800199d958b5449b",
+        "textRange": {
+          "startLine": 286,
+          "endLine": 286,
+          "startOffset": 14,
+          "endOffset": 19
+        },
+        "flows": [],
+        "status": "OPEN",
+        "message": "Rename \"event\" which hides the field declared at line 43.",
+        "effort": "5min",
+        "debt": "5min",
+        "author": "sofia.recreio2@gmail.com",
+        "tags": [
+          "cert",
+          "suspicious",
+          "pitfall"
+        ],
+        "creationDate": "2026-09-19T19:47:11+0000",
+        "updateDate": "2026-11-22T21:29:10+0000",
+        "type": "CODE_SMELL",
+        "scope": "MAIN",
+        "quickFixAvailable": false,
+        "messageFormattings": [],
+        "codeVariants": [],
+        "cleanCodeAttribute": "CLEAR",
+        "cleanCodeAttributeCategory": "INTENTIONAL",
+        "impacts": [
+          {
+            "softwareQuality": "MAINTAINABILITY",
+            "severity": "MEDIUM"
+          }
+        ],
+        "issueStatus": "OPEN",
+        "prioritizedRule": false,
+        "fromSonarQubeUpdate": false,
+        "internalTags": [],
+        "linkedTicketStatus": "NOT_LINKED"
+      }
+    ],
+    "components": [
+      {
+        "key": "qet-pedro-pgnholder-antes:src/main/java/com/github/bhlangonijr/chesslib/pgn/PgnHolder.java",
+        "enabled": true,
+        "qualifier": "FIL",
+        "name": "PgnHolder.java",
+        "longName": "src/main/java/com/github/bhlangonijr/chesslib/pgn/PgnHolder.java",
+        "path": "src/main/java/com/github/bhlangonijr/chesslib/pgn/PgnHolder.java"
+      },
+      {
+        "key": "qet-pedro-pgnholder-antes",
+        "enabled": true,
+        "qualifier": "TRK",
+        "name": "Chesslib - Pedro - PgnHolder - Antes",
+        "longName": "Chesslib - Pedro - PgnHolder - Antes"
+      }
+    ],
+    "facets": []
+  },
+  "measures": {
+    "component": {
+      "key": "qet-pedro-pgnholder-antes",
+      "name": "Chesslib - Pedro - PgnHolder - Antes",
+      "qualifier": "TRK",
+      "measures": [
+        {
+          "metric": "bugs",
+          "value": "0",
+          "bestValue": true
+        },
+        {
+          "metric": "complexity",
+          "value": "35"
+        },
+        {
+          "metric": "code_smells",
+          "value": "9",
+          "bestValue": false
+        },
+        {
+          "metric": "cognitive_complexity",
+          "value": "26",
+          "bestValue": false
+        },
+        {
+          "metric": "ncloc",
+          "value": "149"
+        },
+        {
+          "metric": "violations",
+          "value": "10",
+          "bestValue": false
+        },
+        {
+          "metric": "vulnerabilities",
+          "value": "1",
+          "bestValue": false
+        }
+      ]
+    }
+  }
+}
