@@ -1,0 +1,11 @@
+# Prompt — Melhoria da integração do Chesslib
+
+Revise a versão inicial de `GameIntegrationTest`. Ela escreve arquivos PGN temporários, carrega com `PgnHolder` e verifica metadados/movimentos e a navegação até a última posição com um `Board` real. Os dois casos iniciais passaram. O fluxo atravessa `LargeFile`, `PgnIterator`, `GameLoader`, `Game`, `MoveList` e `Board`; mantenha esses componentes reais, sem mocks ou stubs.
+
+Melhore a suíte com casos pequenos e independentes: navegar para frente e para trás conferindo FENs esperados definidos antes da execução; múltiplas partidas com dados distintos no mesmo arquivo sem mistura de estado; partida iniciada com tag FEN; navegação de variação com tamanho diferente da linha principal; comentários de linha, bloco e NAG vindos do arquivo; movimentos inválidos na linha principal e na variação; arquivo vazio ou inexistente; quebras CRLF; salvar um PGN e relê-lo preservando metadados, movimentos, anotações e posição final.
+
+Use JUnit 4 e `TemporaryFolder`, com dados criados pelo próprio teste e fechamento dos recursos via APIs existentes. Evite depender de arquivos pessoais, rede, ordem dos testes ou partidas aleatórias. Ao verificar arquivos inválidos, confira o contexto da exceção e a causa pertinente, sem aceitar qualquer exceção como sucesso. No teste de exportação, confira a existência de conteúdo antes de reler para não aceitar silenciosamente falhas de gravação.
+
+Os oráculos devem incluir valores explícitos e sequências de movimentos, e não apenas comparar dois resultados produzidos pela mesma implementação. Diferencie testes de unidade com dependências isoladas, testes de processamento com componentes reais e integração completa de leitura/gravação de arquivos. Não amplie o escopo para refatorações gerais de GameLoader/PgnHolder ou inspeção Sonar; se surgir defeito fora do escopo, descreva-o e preserve a evidência antes de decidir a correção.
+
+Entregue a suíte revisada e registre entrada, saída, decisões e validação crítica no AI-LOG. Se uma expectativa proposta estiver incorreta, preserve a saída original, explique a rejeição e faça o ajuste em commit separado. Não acrescente scripts ou logs à documentação e não invente resultados, autoria manual ou revisão humana.
