@@ -50,8 +50,12 @@ Validação conjunta com os testes existentes:
 mvn -B -f spring-petclinic/pom.xml -Dtest=PedroPetEditSeleniumTests,WeslleyVisitSeleniumTests,LucasOwnerSeleniumTests,CadastrarAnimalSeleniumTest,LucasOwnerIntegrationTests,PetControllerTests,VisitControllerTests test
 ```
 
-Resultado conjunto: **42 aprovados, zero falhas, erros ou ignorados** — [resumo real da execução](resultado-conjunto.txt). Inclui os nove casos de Pedro, nove de visitas, busca de proprietário, cadastro de animal, dois testes de integração de Lucas e as validações dos controladores. A seleção não representa a suíte inteira do PetClinic nem cinco funcionalidades Selenium: cadastrar proprietário ainda depende da contribuição correspondente.
+Resultado conjunto: **42 aprovados, zero falhas, erros ou ignorados** — [resumo real da execução](resultado-conjunto.txt). Inclui os nove casos de Pedro, nove de visitas, busca de proprietário, cadastro de animal, dois testes de integração de Lucas e as validações dos controladores. A seleção não representa a suíte inteira do PetClinic nem cinco funcionalidades Selenium. Posteriormente, a contribuição de cadastro de proprietário foi incorporada à main; os 42 casos aqui descritos permanecem como registro histórico dessa seleção. Uma reexecução da seleção apresentou erro transitório no teste de visitas de Weslley, que passou isoladamente; não se declara estabilidade absoluta a partir da rodada inicial.
 
 As capturas são geradas em `spring-petclinic/target/selenium-evidence/alterar-animal/`; esta pasta contém cópias reais da execução conjunta aprovada. Os relatórios JUnit ficam em `spring-petclinic/target/surefire-reports/`.
 
 Não houve alteração no código de produção do PetClinic nem nas suítes dos colegas. O Maven também executou as verificações de formatação e Checkstyle. O aviso de ausência de módulo CDP específico do Chrome não impediu esses testes WebDriver; nenhum caso usa a API DevTools.
+
+## Revalidação individual
+
+Em 23/11/2026, sobre a main `3934419`, PedroPetEditSeleniumTests foi executada novamente: nove testes aprovados, zero falhas, erros ou ignorados, com verificações de formatação e Checkstyle aprovadas. A revalidação foi restrita à suíte de edição de animal. O resumo está em [revalidacao-individual.txt](revalidacao-individual.txt).

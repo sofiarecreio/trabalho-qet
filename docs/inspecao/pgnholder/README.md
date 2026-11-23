@@ -47,7 +47,7 @@ As complexidades agregadas aumentaram devido ao tratamento explícito de falha d
 
 ![PgnHolder depois: zero apontamentos](sonar-depois.png)
 
-[Dados finais originais](sonar-depois.json). A fonte corrigida está identificada por SHA-256 nesse arquivo. Enquanto não houver commit das alterações, esse hash identifica o conteúdo efetivamente analisado.
+[Dados finais originais](sonar-depois.json). A fonte corrigida está identificada por SHA-256 nesse arquivo. Esse hash identifica o conteúdo efetivamente analisado e permite compará-lo com a fonte integrada à main.
 
 ## Correções e decisões
 
@@ -86,4 +86,4 @@ mvn -B -f chesslib/pom.xml org.sonarsource.scanner.maven:sonar-maven-plugin:5.3.
 
 ## Limitações e integração
 
-O conector não tinha permissão para o relatório compartilhado, e esta comparação foi produzida em ambiente local identificado. Posteriormente, a seção 6.1 e as linhas de PgnHolder nas tabelas foram atualizadas pela conta Google de Pedro, no navegador, com as duas capturas. O zero é restrito ao arquivo e às regras analisadas; não comprova ausência de defeitos em todo o sistema. O código e as evidências pertencem à branch `pedro/entrega2`. A integração na main deve ser realizada pelo responsável pelo merge após a revisão. As correções se relacionam às Issues [#21](https://github.com/sofiarecreio/trabalho-qet/issues/21) e [#22](https://github.com/sofiarecreio/trabalho-qet/issues/22), ainda abertas até essa integração.
+O conector não tinha permissão para o relatório compartilhado, e esta comparação foi produzida em ambiente local identificado. Posteriormente, a seção 6.1 e as linhas de PgnHolder nas tabelas foram atualizadas pela conta Google de Pedro, no navegador, com as duas capturas. O zero é restrito ao arquivo e às regras analisadas; não comprova ausência de defeitos em todo o sistema. O código e as evidências foram integrados à main pelo [PR #23](https://github.com/sofiarecreio/trabalho-qet/pull/23). As correções se relacionam às Issues [#21](https://github.com/sofiarecreio/trabalho-qet/issues/21) e [#22](https://github.com/sofiarecreio/trabalho-qet/issues/22), fechadas como concluídas após essa integração.
