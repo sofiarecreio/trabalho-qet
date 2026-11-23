@@ -1,0 +1,145 @@
+[
+  {
+    "class": "gameloader",
+    "stage": "coverage",
+    "exit_code": 0,
+    "command": [
+      "mvn",
+      "-B",
+      "-f",
+      "chesslib/pom.xml",
+      "-Pgameloader-quality",
+      "-Dmaven.javadoc.skip=true",
+      "verify"
+    ]
+  },
+  {
+    "class": "gameloader",
+    "stage": "mutation",
+    "exit_code": 1,
+    "command": [
+      "mvn",
+      "-B",
+      "-f",
+      "chesslib/pom.xml",
+      "-Pgameloader-quality",
+      "-Djacoco.skip=true",
+      "test-compile",
+      "org.pitest:pitest-maven:1.17.4:mutationCoverage"
+    ]
+  },
+  {
+    "class": "game",
+    "stage": "coverage",
+    "exit_code": 0,
+    "command": [
+      "mvn",
+      "-B",
+      "-f",
+      "chesslib/pom.xml",
+      "-Pgame-quality",
+      "-Dmaven.javadoc.skip=true",
+      "verify"
+    ]
+  },
+  {
+    "class": "game",
+    "stage": "mutation",
+    "exit_code": 0,
+    "command": [
+      "mvn",
+      "-B",
+      "-f",
+      "chesslib/pom.xml",
+      "-Pgame-quality",
+      "-Djacoco.skip=true",
+      "test-compile",
+      "org.pitest:pitest-maven:1.17.4:mutationCoverage"
+    ]
+  },
+  {
+    "class": "movelist",
+    "stage": "coverage",
+    "exit_code": 0,
+    "command": [
+      "mvn",
+      "-B",
+      "-f",
+      "chesslib/pom.xml",
+      "-Pmovelist-quality",
+      "-Dmaven.javadoc.skip=true",
+      "verify"
+    ]
+  },
+  {
+    "class": "movelist",
+    "stage": "mutation",
+    "exit_code": 0,
+    "command": [
+      "mvn",
+      "-B",
+      "-f",
+      "chesslib/pom.xml",
+      "-Pmovelist-quality",
+      "-Djacoco.skip=true",
+      "test-compile",
+      "org.pitest:pitest-maven:1.17.4:mutationCoverage"
+    ]
+  },
+  {
+    "class": "timecontrol",
+    "stage": "coverage",
+    "exit_code": 0,
+    "command": [
+      "mvn",
+      "-B",
+      "-f",
+      "chesslib/pom.xml",
+      "-Ptimecontrol-quality",
+      "-Dmaven.javadoc.skip=true",
+      "verify"
+    ]
+  },
+  {
+    "class": "timecontrol",
+    "stage": "mutation",
+    "exit_code": 0,
+    "command": [
+      "mvn",
+      "-B",
+      "-f",
+      "chesslib/pom.xml",
+      "-Ptimecontrol-quality",
+      "-Djacoco.skip=true",
+      "test-compile",
+      "org.pitest:pitest-maven:1.17.4:mutationCoverage"
+    ]
+  },
+  {
+    "class": "movegenerator",
+    "stage": "coverage",
+    "exit_code": 0,
+    "command": [
+      "mvn",
+      "-B",
+      "-f",
+      "chesslib/pom.xml",
+      "-Dmaven.javadoc.skip=true",
+      "verify"
+    ]
+  },
+  {
+    "class": "movegenerator",
+    "stage": "mutation",
+    "exit_code": 0,
+    "command": [
+      "mvn",
+      "-B",
+      "-f",
+      "chesslib/pom.xml",
+      "-Djacoco.skip=true",
+      "test-compile",
+      "org.pitest:pitest-maven:1.17.4:mutationCoverage"
+    ]
+  }
+]

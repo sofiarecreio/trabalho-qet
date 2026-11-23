@@ -1,0 +1,32 @@
+Resumo extraído da saída real do Maven; os tempos referem-se à execução local.
+
+[INFO] Tests run: 37, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.073 s -- in com.github.bhlangonijr.chesslib.BoardTest
+[INFO] Tests run: 16, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.001 s -- in com.github.bhlangonijr.chesslib.move.MoveListQetTest
+[INFO] Tests run: 16, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.001 s -- in com.github.bhlangonijr.chesslib.move.LucasMoveGeneratorTest
+[INFO] Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.001 s -- in com.github.bhlangonijr.chesslib.move.MoveGeneratorTest
+[INFO] Tests run: 12, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.003 s -- in com.github.bhlangonijr.chesslib.move.MoveListTest
+[INFO] Tests run: 11, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.001 s -- in com.github.bhlangonijr.chesslib.PolyglotKeyTest
+[INFO] Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.001 s -- in com.github.bhlangonijr.chesslib.Chess960KxcCaptureTest
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0 s -- in com.github.bhlangonijr.chesslib.unicode.UnicodePrinterTest
+[INFO] Tests run: 6, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0 s -- in com.github.bhlangonijr.chesslib.Chess960FenComparisonTest
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0 s -- in com.github.bhlangonijr.chesslib.Chess960RookMoveTest
+[INFO] Tests run: 23, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.021 s -- in com.github.bhlangonijr.chesslib.game.PedroTimeControlTest
+[INFO] Tests run: 22, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.008 s -- in com.github.bhlangonijr.chesslib.game.GameTest
+[INFO] Tests run: 15, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.004 s -- in com.github.bhlangonijr.chesslib.game.GameQualityTest
+[INFO] Tests run: 12, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.040 s -- in com.github.bhlangonijr.chesslib.game.GameIntegrationTest
+[INFO] Tests run: 18, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.001 s -- in com.github.bhlangonijr.chesslib.game.GameIsolatedTest
+[INFO] Tests run: 22, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.005 s -- in com.github.bhlangonijr.chesslib.game.GameProcessingTest
+[INFO] Tests run: 20, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0 s -- in com.github.bhlangonijr.chesslib.Chess960DoMoveBugTest
+[INFO] Tests run: 6, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0 s -- in com.github.bhlangonijr.chesslib.PieceTest
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0 s -- in com.github.bhlangonijr.chesslib.PieceTypeTest
+[INFO] Tests run: 7, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0 s -- in com.github.bhlangonijr.chesslib.GameLoaderTest
+[INFO] Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0 s -- in com.github.bhlangonijr.chesslib.bitboard.BitboardTest
+[INFO] Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.010 s -- in com.github.bhlangonijr.chesslib.PgnIteratorTest
+[INFO] Tests run: 29, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 2.520 s -- in com.github.bhlangonijr.chesslib.PgnHolderTest
+[INFO] Tests run: 8, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.004 s -- in com.github.bhlangonijr.chesslib.PedroPgnHolderQualityTest
+[INFO] Tests run: 27, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.002 s -- in com.github.bhlangonijr.chesslib.Chess960Test
+[INFO] Tests run: 17, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 5.585 s -- in com.github.bhlangonijr.chesslib.PerftTest
+[INFO] Tests run: 341, Failures: 0, Errors: 0, Skipped: 0
+[INFO] BUILD SUCCESS
+[INFO] Total time:  10.984 s
+[INFO] Finished at: 2026-11-22T19:07:15-03:00
