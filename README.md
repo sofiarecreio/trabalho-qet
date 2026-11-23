@@ -59,7 +59,6 @@ O [Spring PetClinic](https://github.com/spring-projects/spring-petclinic) é uma
 - **Consolidação das cinco classes:** [tabela, estados do PIT, comandos e pendências](docs/entrega2/consolidacao/README.md).
 - **Inspeção PgnHolder — Pedro:** [correções e capturas antes/depois](docs/inspecao/pgnholder/README.md).
 - **Selenium de alteração de animal — Pedro:** [nove cenários e capturas](docs/selenium/alterar-animal/README.md).
-- **Selenium de cadastro de proprietário — Sofia:** [oito cenários, execução e capturas](docs/selenium/cadastrar-proprietario/README.md).
 - **Organização dos testes manuais:** [`docs/teste-manual/README.md`](docs/teste-manual/README.md).
 - **Inspeção compartilhada:** [relatório Sonar](https://docs.google.com/document/d/1LBd-p5gI73bchdHi-wWXTSUu7rfhmelV1IxTPfpdvk8/edit?tab=t.0).
 - **Testes e integração de Game:** [relatório técnico de Weslley](docs/entrega2/weslley/game-testes-integracao.md).
@@ -266,15 +265,11 @@ Os resultados abaixo correspondem à validação da contribuição de Pedro; a i
 | PgnHolder | 10 para 0 apontamentos no mesmo perfil Sonar; oito testes de regressão adicionais | [Inspeção](docs/inspecao/pgnholder/README.md) |
 | Regressão Chesslib | 341 aprovados | [Escopo e validação](docs/inspecao/pgnholder/README.md#compatibilidade-e-validação) |
 | Edição de animal | Nove cenários Selenium aprovados; seleção conjunta de 42 testes aprovada | [Selenium](docs/selenium/alterar-animal/README.md) |
-| Consolidação | Cinco classes medidas; MoveList revalidada em 80,09% após o PR #24; GameLoader revalidada localmente em 93,65% na contribuição de Sofia abaixo | [Tabela e dados originais](docs/entrega2/consolidacao/README.md) |
+| Consolidação | Cinco classes medidas; MoveList revalidada em 80,09% após o PR #24; GameLoader permanece abaixo da meta de mutação | [Tabela e dados originais](docs/entrega2/consolidacao/README.md) |
 
 A seleção do PetClinic não corresponde à suíte inteira. A seção de PgnHolder no relatório Sonar compartilhado está atualizada. A seção 6 do [Plano de Teste](https://docs.google.com/document/d/1JDJVJR6WbpOXpzfRQsbcVWZm8XzQYc8xMSGoEAKj0xo/edit?tab=t.0) registra o escopo, a estratégia, os critérios e os resultados da contribuição de Pedro na Entrega 2. Os dados para a avaliação ISO estão [disponíveis nesta contribuição](docs/entrega2/pedro/dados-documentacao.md). As correções de PgnHolder estão registradas nas Issues [#21](https://github.com/sofiarecreio/trabalho-qet/issues/21) e [#22](https://github.com/sofiarecreio/trabalho-qet/issues/22).
 
 ### Pendências de consolidação do grupo
-
-Resultado local de Sofia em 22/11/2026: `GameLoaderTest` ampliado de 7 para 14 casos; PIT de 36/63 (57,14%) para **59/63 (93,65%)**; cobertura de **58/66 branches (87,88%)** na regressão completa, com **349 testes aprovados**. [Relatório, comandos, XMLs antes/depois e texto para a issue](docs/entrega2/sofia/gameloader/README.md). A publicação e a integração desta contribuição na main ainda devem ser confirmadas; este resultado não conclui as demais tarefas de Sofia.
-
-Selenium de cadastro de proprietário de Sofia, execução local em 23/11/2026: **8 casos aprovados** (cadastro válido com busca posterior, nome no limite de 30 caracteres, quatro telefones inválidos, formulário vazio e campos só com espaços); seleção conjunta com os demais Selenium do grupo e `OwnerControllerTests` com **43 testes aprovados**. [Cenários, comandos e capturas](docs/selenium/cadastrar-proprietario/README.md). A integração na main ainda deve ser confirmada.
 
 | Responsável | Próxima consolidação | Situação documentada |
 | --- | --- | --- |
