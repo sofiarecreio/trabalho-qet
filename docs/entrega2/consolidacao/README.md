@@ -70,6 +70,8 @@ python3 scripts/consolidar-metricas.py --java-version 21.0.11 --check-thresholds
 
 ## Evidências e limites
 
+Nos logs publicados, os caminhos absolutos locais foram normalizados: `<REPOSITORIO>` representa a raiz do projeto e `<HOME>` representa o diretório pessoal. Essa substituição preserva as demais mensagens, resultados e horários das execuções.
+
 [Estados dos comandos desta medição](execucoes.json). As saídas XML completas foram copiadas para `evidencias/<classe>/jacoco.xml` e `evidencias/<classe>/mutations.xml` e permitem verificar números e localizações sem depender de arquivos temporários em target. A execução individual de TimeControl está descrita no [relatório de Pedro](../pedro/timecontrol-testes.md).
 
 As tabelas correspondem ao código local identificado pelos hashes. Após novas contribuições ou alterações nas classes, repetir as medições antes de apresentar os números como resultados finais da main. O relatório não declara concluídas as metas que os dados ainda não comprovam.
