@@ -1,6 +1,6 @@
 # Consolidação de complexidade, cobertura e mutação
 
-Responsável pela consolidação: Pedro Piaes. Medição local em 22/11/2026, sobre a base `4982c6e` com as alterações locais de Pedro; a atualização desde `4750daa` é apenas documental. Cada fonte está identificada por SHA-256 em [metricas.json](metricas.json).
+Responsável pela consolidação: Pedro Piaes. Medição local em 22/11/2026, sobre a base `4982c6e` com as alterações locais de Pedro; a atualização desde `4750daa` é apenas documental. Cada fonte está identificada por SHA-256 em [metricas.json](metricas.json). A linha de MoveList foi revalidada após o [PR #24](https://github.com/sofiarecreio/trabalho-qet/pull/24), sobre a main `da4a3f0`: 342 testes aprovados e PIT 169/211 (80,09%). As demais linhas preservam a medição inicial; não representam uma nova execução nesta revisão.
 
 ## Resultados das cinco classes
 
@@ -8,7 +8,7 @@ Responsável pela consolidação: Pedro Piaes. Medição local em 22/11/2026, so
 | --- | --- | ---: | ---: | ---: | --- |
 | Sofia | GameLoader | 50 | 57/66 = 86,36% | 36/63 = 57,14% | Mutação abaixo de 80% |
 | Weslley | Game | 177 | 166/179 = 92,74% | 203/213 = 95,31% | Atende |
-| Lucio | MoveList | 153 | 159/196 = 81,12% | 168/211 = 79,62% | Mutação abaixo de 80% |
+| Lucio | MoveList | 153 | 159/196 = 81,12% | 169/211 = 80,09% | Atende |
 | Pedro | TimeControl | 41 | 40/42 = 95,24% | 60/69 = 86,96% | Atende |
 | Lucas | MoveGenerator | 55 | 67/68 = 98,53% | 64/78 = 82,05% | Atende numericamente; ocorrências na execução |
 
@@ -18,16 +18,16 @@ Responsável pela consolidação: Pedro Piaes. Medição local em 22/11/2026, so
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
 | GameLoader | 36 | 13 | 14 | 0 | 0 | 63 |
 | Game | 203 | 7 | 3 | 0 | 0 | 213 |
-| MoveList | 168 | 17 | 26 | 0 | 0 | 211 |
+| MoveList | 169 | 16 | 26 | 0 | 0 | 211 |
 | TimeControl | 60 | 7 | 2 | 0 | 0 | 69 |
 | MoveGenerator | 64 | 3 | 5 | 4 | 2 | 78 |
 
 ## Critérios e decisões
 
-- Cobertura: contador BRANCH do JaCoCo, obtido pela regressão completa de 341 testes. Não é cobertura de linhas. A associação acadêmica com todas-arestas segue a convenção do grupo e não inclui todas as arestas excepcionais de um grafo de fluxo.
+- Cobertura: contador BRANCH do JaCoCo, obtido pela regressão completa de 341 testes na medição inicial e de 342 testes na revalidação de MoveList. Não é cobertura de linhas. A associação acadêmica com todas-arestas segue a convenção do grupo e não inclui todas as arestas excepcionais de um grafo de fluxo.
 - Mutação estrita da tabela: somente KILLED dividido por todos os mutantes gerados. Sobreviventes, ausência de cobertura e erros de execução ficam no denominador.
 - O PIT de MoveGenerator informa 90% porque considera quatro MEMORY_ERROR e dois TIMED_OUT como detecções. O XML distingue 64 KILLED e essas seis ocorrências de execução: a fração estrita é 64/78 = 82,05%, ainda acima de 80%. Esses estados são apresentados separadamente e não como mortes por asserção. Na medição anterior, as mesmas seis ocorrências foram classificadas como MEMORY_ERROR; a variação entre erro de memória e timeout mostra por que o total KILLED é apresentado separadamente.
-- MoveList tem 168/211 = 79,62%. O PIT aceita o limiar inteiro configurado e imprime 80%, mas o valor exato permanece abaixo de 80%. Com o mesmo total, 169 mortos corresponderiam a 80,09%.
+- MoveList passou de 168/211 = 79,62% para 169/211 = 80,09% após o novo cenário `testConversaoFanSemNumeracao` de Lucio, integrado no PR #24. A meta exata de 80% está atendida, com 16 sobreviventes e 26 mutantes sem cobertura. O arredondamento da medição anterior não é usado como aprovação.
 - GameLoader tem 36/63 = 57,14%. O comando PIT reprovou corretamente o limiar de 80%. A consolidação preserva esse resultado e não altera os testes individuais.
 - A complexidade é a soma dos contadores COMPLEXITY da classe no JaCoCo, incluindo contribuição dos métodos. Não é complexidade cognitiva do Sonar nem complexidade de um único método. O maior método, pela mesma ferramenta, está no JSON para evitar confundir as medidas.
 
@@ -72,6 +72,6 @@ python3 scripts/consolidar-metricas.py --java-version 21.0.11 --check-thresholds
 
 Nos logs publicados, os caminhos absolutos locais foram normalizados: `<REPOSITORIO>` representa a raiz do projeto e `<HOME>` representa o diretório pessoal. Essa substituição preserva as demais mensagens, resultados e horários das execuções.
 
-[Estados dos comandos desta medição](execucoes.json). As saídas XML completas foram copiadas para `evidencias/<classe>/jacoco.xml` e `evidencias/<classe>/mutations.xml` e permitem verificar números e localizações sem depender de arquivos temporários em target. A execução individual de TimeControl está descrita no [relatório de Pedro](../pedro/timecontrol-testes.md).
+[Estados dos comandos e base da revalidação de MoveList](execucoes.json). Os dois logs e XMLs de MoveList foram substituídos pelos resultados dessa revalidação; as evidências das demais classes permanecem da medição inicial. As saídas XML completas foram copiadas para `evidencias/<classe>/jacoco.xml` e `evidencias/<classe>/mutations.xml` e permitem verificar números e localizações sem depender de arquivos temporários em target. A execução individual de TimeControl está descrita no [relatório de Pedro](../pedro/timecontrol-testes.md).
 
 As tabelas correspondem ao código local identificado pelos hashes. Após novas contribuições ou alterações nas classes, repetir as medições antes de apresentar os números como resultados finais da main. O relatório não declara concluídas as metas que os dados ainda não comprovam.

@@ -16,3 +16,7 @@ O código e as evidências foram validados localmente. A publicação na branch 
 A seção 6.1 de PgnHolder e as linhas correspondentes das tabelas do [relatório Sonar compartilhado](https://docs.google.com/document/d/1LBd-p5gI73bchdHi-wWXTSUu7rfhmelV1IxTPfpdvk8/edit) foram atualizadas pela conta Google de Pedro, com as duas capturas. A seção 6 do [Plano de Teste](https://docs.google.com/document/d/1JDJVJR6WbpOXpzfRQsbcVWZm8XzQYc8xMSGoEAKj0xo/edit?tab=t.0) foi atualizada com o escopo individual da Entrega 2, a estratégia, os critérios de aceitação, os resultados e os links das evidências. Os dados para a avaliação ISO estão disponíveis no [material de documentação](dados-documentacao.md).
 
 A consolidação contém as medições das cinco classes e seus limites. As alterações de código desta contribuição se restringem a TimeControl (testes), PgnHolder (inspeção e regressão), Selenium de edição de animal e à configuração das ferramentas. A integração será feita pelo responsável do grupo.
+
+## Revalidação de MoveList após o PR #24
+
+A consolidação foi atualizada após a correção de Lucio incorporada à main `da4a3f0`: MoveList atingiu 169/211 mutantes eliminados (80,09%), com 16 sobreviventes e 26 sem cobertura. A cobertura de branches permaneceu em 159/196 (81,12%), e a regressão completa executou 342 testes aprovados. Os XMLs, logs normalizados e metadados dessa classe estão no [relatório consolidado](../consolidacao/README.md). As medições das demais classes foram preservadas.

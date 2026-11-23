@@ -1,26 +1,26 @@
 [INFO] Scanning for projects...
-[INFO] 
+[INFO]
 [INFO] --------------< com.github.bhlangonijr.chesslib:chesslib >--------------
 [INFO] Building chesslib 1.3.7
 [INFO]   from pom.xml
 [INFO] --------------------------------[ jar ]---------------------------------
-[INFO] 
+[INFO]
 [INFO] --- jacoco:0.8.12:prepare-agent (prepare-agent) @ chesslib ---
 [INFO] Skipping JaCoCo execution because property jacoco.skip is set.
 [INFO] argLine set to empty
-[INFO] 
+[INFO]
 [INFO] --- resources:3.4.0:resources (default-resources) @ chesslib ---
 [INFO] Copying 1 resource from src/main/resources to target/classes
-[INFO] 
+[INFO]
 [INFO] --- compiler:3.8.1:compile (default-compile) @ chesslib ---
 [INFO] Nothing to compile - all classes are up to date
-[INFO] 
+[INFO]
 [INFO] --- resources:3.4.0:testResources (default-testResources) @ chesslib ---
 [INFO] Copying 27 resources from src/test/resources to target/test-classes
-[INFO] 
+[INFO]
 [INFO] --- compiler:3.8.1:testCompile (default-testCompile) @ chesslib ---
 [INFO] Nothing to compile - all classes are up to date
-[INFO] 
+[INFO]
 [INFO] --- pitest:1.17.4:mutationCoverage (default-cli) @ chesslib ---
 [INFO] Root dir is : <REPOSITORIO>/chesslib
 [INFO] Found plugin : Default csv report plugin
@@ -68,76 +68,76 @@
 [INFO] Available mutators : EXPERIMENTAL_ARGUMENT_PROPAGATION,FALSE_RETURNS,TRUE_RETURNS,CONDITIONALS_BOUNDARY,CONSTRUCTOR_CALLS,EMPTY_RETURNS,INCREMENTS,INLINE_CONSTS,INVERT_NEGS,MATH,NEGATE_CONDITIONALS,NON_VOID_METHOD_CALLS,NULL_RETURNS,PRIMITIVE_RETURNS,REMOVE_CONDITIONALS_EQUAL_IF,REMOVE_CONDITIONALS_EQUAL_ELSE,REMOVE_CONDITIONALS_ORDER_IF,REMOVE_CONDITIONALS_ORDER_ELSE,VOID_METHOD_CALLS,EXPERIMENTAL_BIG_DECIMAL,EXPERIMENTAL_BIG_INTEGER,EXPERIMENTAL_MEMBER_VARIABLE,EXPERIMENTAL_NAKED_RECEIVER,REMOVE_INCREMENTS,EXPERIMENTAL_SWITCH
 [INFO] Adding org.pitest:pitest to SUT classpath
 [INFO] Mutating from <REPOSITORIO>/chesslib/target/classes
-[INFO] Replacing properties in argLine 
-19:08:42 PIT >> INFO : Verbose logging is disabled. If you encounter a problem, please enable it before reporting an issue.
-19:08:42 PIT >> INFO : Created 1 mutation test units in pre scan
-19:08:42 PIT >> INFO : Sending 2 test classes to minion
-19:08:42 PIT >> INFO : Sent tests to minion
-/-\|/-\|/-\|/-\|/-\|/-\|/-\|19:08:42 PIT >> INFO : Calculated coverage in 0 seconds.
-19:08:42 PIT >> INFO : Created 1 mutation test units
-/19:08:45 PIT >> INFO : Completed in 3 seconds
+[INFO] Replacing properties in argLine
+22:41:03 PIT >> INFO : Verbose logging is disabled. If you encounter a problem, please enable it before reporting an issue.
+22:41:03 PIT >> INFO : Created 1 mutation test units in pre scan
+22:41:04 PIT >> INFO : Sending 2 test classes to minion
+22:41:04 PIT >> INFO : Sent tests to minion
+/-\|/-\|/-\|/-\|/-\|/-\|/-\|/22:41:04 PIT >> INFO : Calculated coverage in 0 seconds.
+22:41:04 PIT >> INFO : Created 1 mutation test units
+/22:41:05 PIT >> INFO : Completed in 2 seconds
 ================================================================================
 - Mutators
 ================================================================================
 > org.pitest.mutationtest.engine.gregor.mutators.ConditionalsBoundaryMutator
 >> Generated 11 Killed 6 (55%)
-> KILLED 6 SURVIVED 4 TIMED_OUT 0 NON_VIABLE 0 
-> MEMORY_ERROR 0 NOT_STARTED 0 STARTED 0 RUN_ERROR 0 
-> NO_COVERAGE 1 
+> KILLED 6 SURVIVED 4 TIMED_OUT 0 NON_VIABLE 0
+> MEMORY_ERROR 0 NOT_STARTED 0 STARTED 0 RUN_ERROR 0
+> NO_COVERAGE 1
 --------------------------------------------------------------------------------
 > org.pitest.mutationtest.engine.gregor.mutators.IncrementsMutator
 >> Generated 5 Killed 5 (100%)
-> KILLED 5 SURVIVED 0 TIMED_OUT 0 NON_VIABLE 0 
-> MEMORY_ERROR 0 NOT_STARTED 0 STARTED 0 RUN_ERROR 0 
-> NO_COVERAGE 0 
+> KILLED 5 SURVIVED 0 TIMED_OUT 0 NON_VIABLE 0
+> MEMORY_ERROR 0 NOT_STARTED 0 STARTED 0 RUN_ERROR 0
+> NO_COVERAGE 0
 --------------------------------------------------------------------------------
 > org.pitest.mutationtest.engine.gregor.mutators.returns.PrimitiveReturnsMutator
 >> Generated 7 Killed 4 (57%)
-> KILLED 4 SURVIVED 0 TIMED_OUT 0 NON_VIABLE 0 
-> MEMORY_ERROR 0 NOT_STARTED 0 STARTED 0 RUN_ERROR 0 
-> NO_COVERAGE 3 
+> KILLED 4 SURVIVED 0 TIMED_OUT 0 NON_VIABLE 0
+> MEMORY_ERROR 0 NOT_STARTED 0 STARTED 0 RUN_ERROR 0
+> NO_COVERAGE 3
 --------------------------------------------------------------------------------
 > org.pitest.mutationtest.engine.gregor.mutators.VoidMethodCallMutator
 >> Generated 20 Killed 17 (85%)
-> KILLED 17 SURVIVED 3 TIMED_OUT 0 NON_VIABLE 0 
-> MEMORY_ERROR 0 NOT_STARTED 0 STARTED 0 RUN_ERROR 0 
-> NO_COVERAGE 0 
+> KILLED 17 SURVIVED 3 TIMED_OUT 0 NON_VIABLE 0
+> MEMORY_ERROR 0 NOT_STARTED 0 STARTED 0 RUN_ERROR 0
+> NO_COVERAGE 0
 --------------------------------------------------------------------------------
 > org.pitest.mutationtest.engine.gregor.mutators.returns.BooleanTrueReturnValsMutator
 >> Generated 9 Killed 4 (44%)
-> KILLED 4 SURVIVED 2 TIMED_OUT 0 NON_VIABLE 0 
-> MEMORY_ERROR 0 NOT_STARTED 0 STARTED 0 RUN_ERROR 0 
-> NO_COVERAGE 3 
+> KILLED 4 SURVIVED 2 TIMED_OUT 0 NON_VIABLE 0
+> MEMORY_ERROR 0 NOT_STARTED 0 STARTED 0 RUN_ERROR 0
+> NO_COVERAGE 3
 --------------------------------------------------------------------------------
 > org.pitest.mutationtest.engine.gregor.mutators.returns.NullReturnValsMutator
 >> Generated 23 Killed 18 (78%)
-> KILLED 18 SURVIVED 0 TIMED_OUT 0 NON_VIABLE 0 
-> MEMORY_ERROR 0 NOT_STARTED 0 STARTED 0 RUN_ERROR 0 
-> NO_COVERAGE 5 
+> KILLED 18 SURVIVED 0 TIMED_OUT 0 NON_VIABLE 0
+> MEMORY_ERROR 0 NOT_STARTED 0 STARTED 0 RUN_ERROR 0
+> NO_COVERAGE 5
 --------------------------------------------------------------------------------
 > org.pitest.mutationtest.engine.gregor.mutators.MathMutator
 >> Generated 22 Killed 18 (82%)
-> KILLED 18 SURVIVED 1 TIMED_OUT 0 NON_VIABLE 0 
-> MEMORY_ERROR 0 NOT_STARTED 0 STARTED 0 RUN_ERROR 0 
-> NO_COVERAGE 3 
+> KILLED 18 SURVIVED 1 TIMED_OUT 0 NON_VIABLE 0
+> MEMORY_ERROR 0 NOT_STARTED 0 STARTED 0 RUN_ERROR 0
+> NO_COVERAGE 3
 --------------------------------------------------------------------------------
 > org.pitest.mutationtest.engine.gregor.mutators.returns.BooleanFalseReturnValsMutator
 >> Generated 6 Killed 4 (67%)
-> KILLED 4 SURVIVED 1 TIMED_OUT 0 NON_VIABLE 0 
-> MEMORY_ERROR 0 NOT_STARTED 0 STARTED 0 RUN_ERROR 0 
-> NO_COVERAGE 1 
+> KILLED 4 SURVIVED 1 TIMED_OUT 0 NON_VIABLE 0
+> MEMORY_ERROR 0 NOT_STARTED 0 STARTED 0 RUN_ERROR 0
+> NO_COVERAGE 1
 --------------------------------------------------------------------------------
 > org.pitest.mutationtest.engine.gregor.mutators.returns.EmptyObjectReturnValsMutator
->> Generated 21 Killed 17 (81%)
-> KILLED 17 SURVIVED 1 TIMED_OUT 0 NON_VIABLE 0 
-> MEMORY_ERROR 0 NOT_STARTED 0 STARTED 0 RUN_ERROR 0 
-> NO_COVERAGE 3 
+>> Generated 21 Killed 18 (86%)
+> KILLED 18 SURVIVED 0 TIMED_OUT 0 NON_VIABLE 0
+> MEMORY_ERROR 0 NOT_STARTED 0 STARTED 0 RUN_ERROR 0
+> NO_COVERAGE 3
 --------------------------------------------------------------------------------
 > org.pitest.mutationtest.engine.gregor.mutators.NegateConditionalsMutator
 >> Generated 87 Killed 75 (86%)
-> KILLED 75 SURVIVED 5 TIMED_OUT 0 NON_VIABLE 0 
-> MEMORY_ERROR 0 NOT_STARTED 0 STARTED 0 RUN_ERROR 0 
-> NO_COVERAGE 7 
+> KILLED 75 SURVIVED 5 TIMED_OUT 0 NON_VIABLE 0
+> MEMORY_ERROR 0 NOT_STARTED 0 STARTED 0 RUN_ERROR 0
+> NO_COVERAGE 7
 --------------------------------------------------------------------------------
 ================================================================================
 - Timings
@@ -146,22 +146,22 @@
 > scan classpath : < 1 second
 > coverage and dependency analysis : < 1 second
 > build mutation tests : < 1 second
-> run mutation analysis : 2 seconds
+> run mutation analysis : 1 seconds
 --------------------------------------------------------------------------------
-> Total  : 3 seconds
+> Total  : 2 seconds
 --------------------------------------------------------------------------------
 ================================================================================
 - Statistics
 ================================================================================
 >> Line Coverage (for mutated classes only): 316/388 (81%)
 >> 2 tests examined
->> Generated 211 mutations Killed 168 (80%)
+>> Generated 211 mutations Killed 169 (80%)
 >> Mutations with no coverage 26. Test strength 91%
->> Ran 356 tests (1.69 tests per mutation)
+>> Ran 365 tests (1.73 tests per mutation)
 Enhanced functionality available at https://www.arcmutate.com/
 [INFO] ------------------------------------------------------------------------
 [INFO] BUILD SUCCESS
 [INFO] ------------------------------------------------------------------------
-[INFO] Total time:  4.617 s
-[INFO] Finished at: 2026-11-22T19:08:45-03:00
+[INFO] Total time:  2.912 s
+[INFO] Finished at: 2026-11-22T22:41:05-03:00
 [INFO] ------------------------------------------------------------------------

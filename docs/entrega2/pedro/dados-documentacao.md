@@ -33,6 +33,6 @@ As medidas não constituem uma avaliação completa de cada característica da n
 4. O que resta: dois caminhos do parser não cobertos, sete mutantes sobreviventes e dois sem cobertura; não foram eliminados do denominador.
 5. Como o Selenium verifica persistência: formulário real, consulta do registro exato, recarga da tela e verificação do segundo animal intacto.
 6. Qual mudança de contrato foi feita em PgnHolder: falhas de gravação agora geram UncheckedIOException com causa; recursos fecham mesmo em falhas de inicialização do iterador.
-7. Por que um BUILD SUCCESS pode não bastar na consolidação: arredondamento de 79,62% para 80% no PIT e tratamento de erros de memória como detecção pela ferramenta.
+7. Por que um BUILD SUCCESS pode não bastar na consolidação: arredondamento de 79,62% para 80% no PIT na medição anterior de MoveList (corrigida depois para 169/211 = 80,09% no PR #24) e tratamento de erros de memória como detecção pela ferramenta.
 
 Antes da apresentação, executar os comandos e revisar os cenários e asserções para conseguir explicá-los e modificá-los quando solicitado.
