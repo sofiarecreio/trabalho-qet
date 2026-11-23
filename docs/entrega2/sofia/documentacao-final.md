@@ -53,7 +53,7 @@ Ambos os sistemas | Combinações SO/JDK aprovadas / planejadas, na mesma revis�
 
 ## Pendências identificadas
 
-1. Inspeção de GameLoader com prints antes/depois e comprovação de isolamento individual não foram localizadas no escopo consultado. A melhoria de mutação não substitui essas entregas.
+1. Comprovação de isolamento individual de GameLoader não foi localizada no escopo consultado. A inspeção Sonar de GameLoader (7 → 0) está em docs/inspecao/gameloader. A melhoria de mutação não substitui essas entregas.
 2. Portabilidade controlada, avaliação ampla de segurança e estudo de usabilidade não têm medição suficiente. A matriz registra os recortes disponíveis e NE para o restante.
 3. Consolidar o resultado final das cinco inspeções com Lucio. MoveList preserva a pendência ThreadLocal (issue #12); não apresentar todas as classes como “zero problemas”.
 4. Integrar a branch de trabalho na main e conferir os links públicos. A consolidação não realiza merge nem confirma entrega no Classroom.
