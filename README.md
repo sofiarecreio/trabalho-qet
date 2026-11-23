@@ -51,14 +51,15 @@ O [Spring PetClinic](https://github.com/spring-projects/spring-petclinic) é uma
 
 ### Documentação geral
 
-- **Plano de Teste editável:** [documento compartilhado](https://docs.google.com/document/d/1JDJVJR6WbpOXpzfRQsbcVWZm8XzQYc8xMSGoEAKj0xo/edit?tab=t.0); atualização final da Entrega 2 a consolidar pela equipe.
-- **Escopo dos sistemas:** descrito no Plano de Teste e resumido neste README.
+- **Plano de Teste editável:** [documento compartilhado](https://docs.google.com/document/d/1JDJVJR6WbpOXpzfRQsbcVWZm8XzQYc8xMSGoEAKj0xo/edit?tab=t.0); versão 2.0 com o escopo, a metodologia e os critérios da Entrega 2, a contribuição de Sofia (seção 7) e a consolidação do grupo (seção 8).
+- **Escopo dos sistemas e avaliação ISO/IEC 25010:** [documento Trabalho QeT](https://docs.google.com/document/d/16PhvQ19VGINYlqDE0NsTWH6VHgzwLYcO_FdjD46PtVU/edit) (escopo dos dois sistemas, matriz ISO/IEC 25010:2011 com escalas, resultados, justificativas e fontes).
 - **Registro de uso de IA:** [`docs/ai/AI-LOG.md`](docs/ai/AI-LOG.md).
 - **Entrega 2 — Pedro:** [índice dos artefatos e situação de integração](docs/entrega2/pedro/README.md).
 - **TimeControl — Pedro:** [testes, cobertura, mutação e comandos](docs/entrega2/pedro/timecontrol-testes.md), com evidências XML da medição local.
 - **Consolidação das cinco classes:** [tabela, estados do PIT, comandos e pendências](docs/entrega2/consolidacao/README.md).
 - **Inspeção PgnHolder — Pedro:** [correções e capturas antes/depois](docs/inspecao/pgnholder/README.md).
 - **Inspeção GameLoader — Sofia:** [7 → 0 apontamentos, correções e capturas antes/depois](docs/inspecao/gameloader/README.md).
+- **GameLoader — Sofia:** [melhoria de mutação](docs/entrega2/sofia/gameloader/README.md) e [testes unitários isolados com stubs](docs/entrega2/sofia/gameloader/isolamento.md).
 - **Selenium de alteração de animal — Pedro:** [nove cenários e capturas](docs/selenium/alterar-animal/README.md).
 - **Selenium de cadastro de proprietário — Sofia:** [oito cenários, execução e capturas](docs/selenium/cadastrar-proprietario/README.md).
 - **Organização dos testes manuais:** [`docs/teste-manual/README.md`](docs/teste-manual/README.md).
@@ -67,8 +68,8 @@ O [Spring PetClinic](https://github.com/spring-projects/spring-petclinic) é uma
 - **Inspeção de Game:** [relatório, achados e resultados](docs/inspecao/game/relatorio.md), [PNG antes](docs/inspecao/game/sonar-antes.png) e [PNG depois](docs/inspecao/game/sonar-depois.png).
 - **Selenium de visitas:** [nove cenários, execução e capturas](docs/selenium/visitas/README.md).
 - **Artefatos de Lucas já disponíveis:** [cobertura](docs/entrega2/lucas/movegenerator-cobertura.md), [mutação](docs/entrega2/lucas/mutacao-movegenerator.md), [correções de MoveGenerator](docs/entrega2/lucas/qualidade-movegenerator.md), [integração PetClinic](docs/entrega2/lucas/integracao-petclinic.md) e [Selenium de busca](docs/entrega2/lucas/selenium-petclinic.md).
-- **Avaliação ISO/IEC 25010:** consolidação pendente pela equipe; os dados medidos de Weslley estão no relatório técnico acima.
-- **Slides da apresentação:** link pendente de inclusão pela coordenação da documentação.
+- **Avaliação ISO/IEC 25010:** [matriz no documento Trabalho QeT](https://docs.google.com/document/d/16PhvQ19VGINYlqDE0NsTWH6VHgzwLYcO_FdjD46PtVU/edit), coordenada por Sofia com os dados medidos de todos os integrantes.
+- **Slides da apresentação:** [pasta indicada pela professora](https://drive.google.com/drive/folders/1LVjwh2mAI-q-r4dDPsyD1pxVFcnPD1Ff); slides ainda a publicar.
 
 
 ---
@@ -273,19 +274,19 @@ A seleção do PetClinic não corresponde à suíte inteira. A seção de PgnHol
 
 ### Pendências de consolidação do grupo
 
-Resultado local de Sofia em 22/11/2026: `GameLoaderTest` ampliado de 7 para 14 casos; PIT de 36/63 (57,14%) para **59/63 (93,65%)**; cobertura de **58/66 branches (87,88%)** na regressão completa, com **349 testes aprovados**. [Relatório, comandos, XMLs antes/depois e texto para a issue](docs/entrega2/sofia/gameloader/README.md). A publicação e a integração desta contribuição na main ainda devem ser confirmadas; este resultado não conclui as demais tarefas de Sofia.
+Resultado local de Sofia em 22/11/2026: `GameLoaderTest` ampliado de 7 para 14 casos; PIT de 36/63 (57,14%) para **59/63 (93,65%)**; cobertura de **58/66 branches (87,88%)** na regressão completa, com **349 testes aprovados**. [Relatório, comandos, XMLs antes/depois e texto para a issue](docs/entrega2/sofia/gameloader/README.md). Integrado à main pelo PR #28. Depois da inspeção e dos testes isolados (23/11/2026), os números de GameLoader passaram a **63/68 branches (92,65%)** e **76/77 mutantes mortos (98,70%)**, com **361 testes** na regressão: [testes isolados](docs/entrega2/sofia/gameloader/isolamento.md) e [inspeção Sonar 7 → 0](docs/inspecao/gameloader/README.md).
 
-Selenium de cadastro de proprietário de Sofia, execução local em 23/11/2026: **8 casos aprovados** (cadastro válido com busca posterior, nome no limite de 30 caracteres, quatro telefones inválidos, formulário vazio e campos só com espaços); seleção conjunta com os demais Selenium do grupo e `OwnerControllerTests` com **43 testes aprovados**. [Cenários, comandos e capturas](docs/selenium/cadastrar-proprietario/README.md). A integração na main ainda deve ser confirmada.
+Selenium de cadastro de proprietário de Sofia, execução local em 23/11/2026: **8 casos aprovados** (cadastro válido com busca posterior, nome no limite de 30 caracteres, quatro telefones inválidos, formulário vazio e campos só com espaços); seleção conjunta com os demais Selenium do grupo e `OwnerControllerTests` com **43 testes aprovados**. [Cenários, comandos e capturas](docs/selenium/cadastrar-proprietario/README.md). Integrado à main pelo PR #28.
 
 | Responsável | Próxima consolidação | Situação documentada |
 | --- | --- | --- |
 | Pedro | Consolidar métricas e publicar sua contribuição | [Tabela preparada](docs/entrega2/consolidacao/README.md); resultados e limites documentados; integração pelo responsável do grupo |
 | Lucio | Relatório final de inspeção com os resultados das cinco classes | MoveList já descrita no documento compartilhado; Game preenchida; demais resultados finais a confirmar |
 | Lucas | Consolidação das funcionalidades Selenium e confirmação dos resultados finais de sua classe | Artefatos de MoveGenerator, integração e busca de proprietário já disponíveis nos links acima |
-| Sofia | ISO/IEC 25010, Plano de Teste, índice de evidências e slides | Consolidação e links finais pendentes |
+| Sofia | ISO/IEC 25010, Plano de Teste, índice de evidências e slides | ISO no [documento Trabalho QeT](https://docs.google.com/document/d/16PhvQ19VGINYlqDE0NsTWH6VHgzwLYcO_FdjD46PtVU/edit); Plano de Teste 2.0; índice neste README; slides pendentes |
 | Todos | Entregar seus próprios resultados, evidências e revisão individual | Esta atualização não declara concluídas as partes ainda sem confirmação |
 
-Os dados medidos que Weslley pode fornecer à consolidação estão reunidos no [relatório técnico](docs/entrega2/weslley/game-testes-integracao.md). A avaliação ISO 25010 ainda precisa de atributos, medidas, escala, resultados e justificativas consolidados pela equipe.
+Os dados medidos que Weslley pode fornecer à consolidação estão reunidos no [relatório técnico](docs/entrega2/weslley/game-testes-integracao.md). A avaliação ISO 25010, com atributos, medidas, escala, resultados e justificativas, está no [documento Trabalho QeT](https://docs.google.com/document/d/16PhvQ19VGINYlqDE0NsTWH6VHgzwLYcO_FdjD46PtVU/edit).
 
 ---
 

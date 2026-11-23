@@ -86,3 +86,7 @@ mvn -B -f chesslib/pom.xml org.sonarsource.scanner.maven:sonar-maven-plugin:5.3.
 ## Limites
 
 O zero vale apenas para este arquivo e para as 608 regras do perfil usado; não comprova ausência de defeitos no sistema. Os painéis locais dependem do servidor Docker desta máquina; os JSONs e as capturas permitem conferir o resultado sem ele. Os dois `catch (Exception)` de `parseTermination` e `setTimeControl` foram mantidos como estavam, porque não foram apontados pelo perfil e estreitá-los poderia mudar o comportamento com tags inválidas.
+
+## Atualização após o isolamento (23/11/2026)
+
+Depois desta inspeção, GameLoader recebeu um ponto de injeção da partida para os [testes isolados](../../entrega2/sofia/gameloader/isolamento.md). A fonte resultante (SHA-256 `ffcc5f68867f26058239c80e7e36771c892351e972bcabcb7b928280050ecbdb`) foi reanalisada com o mesmo servidor e perfil no projeto `qet-sofia-gameloader-isolamento`: **0 apontamentos**, complexidade cognitiva 32, ciclomática 64, 248 ncloc ([JSON](../../entrega2/sofia/gameloader/evidencias/sonar-isolamento.json)). Com os testes isolados, a regressão passou a 361 testes, os branches a 63/68 (92,65%) e a mutação a 76/77 (98,70%).
