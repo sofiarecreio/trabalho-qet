@@ -36,6 +36,9 @@ spring-petclinic/target/selenium-evidence/01-busca-davis-resultados.png
 
 A pasta `target` é gerada pelo Maven e não deve ser versionada.
 
+Após a execução validada, a captura foi copiada para a documentação versionada em
+[`docs/selenium/busca-proprietario/`](../../selenium/busca-proprietario/).
+
 ## Execução
 
 No diretório `spring-petclinic`:

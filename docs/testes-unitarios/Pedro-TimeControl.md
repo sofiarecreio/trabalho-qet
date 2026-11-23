@@ -1,7 +1,7 @@
 # Casos de teste unitários - classe TimeControl
 
-Responsável: Pedro Piaz  
-Projeto: Chesslib  
+Responsável: Pedro Piaz
+Projeto: Chesslib
 Arquivo sob teste: `chesslib/src/main/java/com/github/bhlangonijr/chesslib/game/TimeControl.java`
 
 ## Objetivo
@@ -13,7 +13,7 @@ Verificar a interpretação e a conversão dos principais formatos de controle d
 | ID | Cenário | Resultado esperado |
 |---|---|---|
 | CTU-TC-01 | Interpretar `3000+3` | Identificar controle com bônus, armazenar 3.000.000 ms e incremento de 3.000 ms. |
-| CTU-TC-02 | Interpretar `3000|3` | Aceitar a barra vertical e converter a representação para `3000+3`. |
+| CTU-TC-02 | Interpretar `3000\|3` | Aceitar a barra vertical e converter a representação para `3000+3`. |
 | CTU-TC-03 | Interpretar `40/9000` | Identificar controle por movimentos, com 40 movimentos e 9.000.000 ms. |
 | CTU-TC-04 | Interpretar múltiplos estágios | Armazenar o primeiro estágio e uma etapa adicional em `getMovePerTime()`. |
 | CTU-TC-05 | Interpretar controle desconhecido `-` | Retornar tipo desconhecido, representação PGN `?` e texto `Custom...`. |
