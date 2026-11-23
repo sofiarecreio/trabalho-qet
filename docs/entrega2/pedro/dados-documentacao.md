@@ -8,22 +8,22 @@ Na Entrega 2, a atividade de Pedro compreende a ampliação de testes de TimeCon
 
 O ambiente usa JDK 21 e Maven. Os testes de TimeControl utilizam JUnit 4, JaCoCo e PIT; a interface do PetClinic é exercitada por Selenium com Chrome e H2 reais. Os perfis individuais de qualidade preservam os filtros dos colegas. As metas são pelo menos 80% de branches e 80% de mutantes mortos, mantendo todos os mutantes no denominador da consolidação estrita.
 
-O critério local de conclusão de Pedro é a execução aprovada dos testes, os relatórios reproduzíveis, a comparação Sonar com mesmo perfil, a documentação dos limites e a disponibilidade dos artefatos. A conclusão da entrega exige adicionalmente publicação e integração na main, atualização dos documentos compartilhados e revisão individual.
+O critério local de conclusão de Pedro é a execução aprovada dos testes, os relatórios reproduzíveis, a comparação Sonar com mesmo perfil, a documentação dos limites e a disponibilidade dos artefatos. A contribuição já foi integrada à main; o Plano de Teste e o relatório compartilhado de inspeção receberam a seção de Pedro. A entrega acadêmica ainda exige a revisão individual, a apresentação e a submissão dos links pelo grupo.
 
 ## Indicadores para avaliação ISO/IEC 25010
 
 | Característica relacionada | Indicador observado | Resultado | Limite da conclusão |
 | --- | --- | --- | --- |
 | Adequação funcional | Cenários selecionados de edição de animal | 9/9 aprovados | Cobertura funcional restrita aos cenários descritos; não comprova toda a aplicação |
-| Confiabilidade | Regressão Chesslib após correções | 341/341 aprovados | Resultado em ambiente local; não é taxa de falha em produção |
-| Confiabilidade | Seleção conjunta PetClinic | 42/42 aprovados | Inclui testes dos colegas; seleção não corresponde à suíte inteira |
+| Confiabilidade | Regressão Chesslib na revisão final da main `3934419` | 361/361 aprovados | Resultado em ambiente local; não é taxa de falha em produção |
+| Confiabilidade | Seleção conjunta PetClinic da rodada original | 42/42 aprovados | Registro histórico; uma repetição teve erro transitório no Selenium de visitas. A revisão individual de Pedro aprovou os 9 cenários; não é a suíte inteira |
 | Manutenibilidade — testabilidade | Branches de TimeControl | 40/42 = 95,24% | Branches não incluem todas as arestas excepcionais |
 | Manutenibilidade — testabilidade | Mutantes mortos de TimeControl | 60/69 = 86,96% | Sete sobreviventes e dois sem cobertura continuam contabilizados |
 | Manutenibilidade | Apontamentos de PgnHolder | 10 para 0 | Mesmo perfil comprehensive de 608 regras; escopo de um arquivo |
 | Segurança | Apontamento de impressão de stack trace | S4507 resolvido | Inspeção estática; não equivale a teste de penetração |
 | Portabilidade/adaptabilidade | Execução em macOS ARM64 com JDK 21 | Execução local aprovada | Não é evidência de execução em todos os sistemas operacionais |
 
-As medidas não constituem uma avaliação completa de cada característica da norma. A equipe ainda deve adotar a edição da ISO e a escala solicitadas pela disciplina, definir os indicadores faltantes e justificar os resultados. Pedro não mediu desempenho de sua funcionalidade, satisfação de uso, concorrência ou interoperabilidade; não atribuir notas máximas sem evidência.
+As medidas não constituem uma avaliação completa de cada característica da norma. A avaliação final coordenada por Sofia adota a edição ISO/IEC 25010:2011 e escalas próprias do grupo; os indicadores de Pedro estão incorporados ao [documento Trabalho QeT](https://docs.google.com/document/d/16PhvQ19VGINYlqDE0NsTWH6VHgzwLYcO_FdjD46PtVU/edit). A escala do grupo não é apresentada como prescrição da ISO; indicadores sem evidência permanecem não avaliados. Pedro não mediu desempenho de sua funcionalidade, satisfação de uso, concorrência ou interoperabilidade; não atribuir notas máximas sem evidência.
 
 ## Pontos para explicar na apresentação
 

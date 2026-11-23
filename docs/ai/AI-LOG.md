@@ -502,7 +502,7 @@ Com base nesses resultados, o novo teste foi considerado válido porque verifica
 - Relatório JaCoCo gerado localmente: `chesslib/target/site/jacoco-movelist/index.html`
 - Relatório PIT gerado localmente: `chesslib/target/pit-reports-movelist/index.html`
 
-## Registro 006 — Testes unitários e cobertura do `MoveGenerator`
+## Registro 011 — Testes unitários e cobertura do `MoveGenerator`
 
 | Informação | Registro |
 |---|---|
@@ -518,7 +518,7 @@ Com base nesses resultados, o novo teste foi considerado válido porque verifica
 | Validação | Lucas executou os testes com Maven e conferiu os relatórios do JaCoCo. A execução selecionada teve 20 testes aprovados e cobertura de branches acima de 80% |
 | Evidência no GitHub | [Commit `017a24d`](https://github.com/sofiarecreio/trabalho-qet/commit/017a24d), de 19/11/2026 |
 
-## Registro 007 — Integração do PetClinic e teste de mutação
+## Registro 012 — Integração do PetClinic e teste de mutação
 
 | Informação | Registro |
 |---|---|
@@ -534,7 +534,7 @@ Com base nesses resultados, o novo teste foi considerado válido porque verifica
 | Validação | Lucas executou os testes com Maven, conferiu as respostas da aplicação e analisou o relatório do PIT, incluindo mutantes mortos, sobreviventes e sem cobertura |
 | Evidência no GitHub | [Commit `df1b211`](https://github.com/sofiarecreio/trabalho-qet/commit/df1b211), de 19/11/2026 |
 
-## Registro 008 — Teste de sistema com Selenium
+## Registro 013 — Teste de sistema com Selenium
 
 | Informação | Registro |
 |---|---|
@@ -549,3 +549,268 @@ Com base nesses resultados, o novo teste foi considerado válido porque verifica
 | Decisão | A IA foi utilizada somente como apoio técnico na organização do roteiro e na revisão das asserções. A execução do cenário, a conferência do resultado e a seleção da evidência ficaram sob responsabilidade de Lucas |
 | Validação | O teste foi executado com Maven usando Chrome em modo headless. O resultado foi aprovado e a captura da tela foi conferida e copiada para a documentação versionada |
 | Evidência no GitHub | [Commit `77881c1`](https://github.com/sofiarecreio/trabalho-qet/commit/77881c1), de 22/11/2026 |
+
+---
+
+## Registro 006 — Ampliação dos testes unitários e melhoria do escore de mutação de `GameLoader`
+
+| **Informação** | **Registro** |
+| --- | --- |
+| Data | 22/11/2026 |
+| Responsável | Sofia |
+| Entrega | Entrega 2 |
+| Atividade | Ampliação dos testes unitários e validação da cobertura estrutural com JaCoCo e do teste de mutação com PIT |
+| Ferramenta | Codex |
+| Artefatos relacionados | `GameLoaderTest.java`, perfil `gameloader-quality` de `chesslib/pom.xml` e relatórios do PIT e JaCoCo |
+| Classe analisada | `com.github.bhlangonijr.chesslib.pgn.GameLoader` |
+
+### Prompt/instrução utilizada
+
+> Ajude a configurar o JaCoCo e o PIT no `pom.xml` do Chesslib para analisar somente a classe `GameLoader`. A configuração deve exigir pelo menos 80% de cobertura de branches e 80% de mutação, utilizar `GameLoaderTest`. Também indique os comandos necessários para executar e validar os relatórios.
+
+### Resultado apresentado pela IA
+
+A IA explicou que a ferramenta havia executado normalmente e que a falha do build correspondia ao descumprimento do critério de qualidade. O resultado de 36/63 equivale a 57,14%; para atingir pelo menos 80% com o mesmo total, seria necessário eliminar no mínimo 51 dos 63 mutantes.
+
+Após analisar o relatório `mutations.xml` e o código de `GameLoader`, a IA identificou 13 mutantes sobreviventes e 14 sem cobertura. A recomendação foi ampliar os cenários de entrada e fortalecer as asserções dos testes, preservando a implementação de produção e a configuração do PIT.
+
+Para os testes existentes, foram sugeridas verificações adicionais de:
+
+- identificador do evento;
+- vínculo entre a rodada e o mapa de rodadas do evento;
+- identificadores e descrições dos jogadores;
+- texto das jogadas carregadas;
+- contagem de meios-lances calculada após a leitura da partida.
+
+### Decisão
+
+A proposta foi aplicada porque os cenários verificam comportamentos observáveis pela API pública e tratam lacunas identificadas no relatório de mutação. A suíte passou de 7 para 14 testes, mantendo os casos anteriores e acrescentando verificações mais específicas.
+
+Foram preservados o código de produção, os operadores de mutação, a seleção de classes e testes do perfil Maven e todos os 63 mutantes no denominador. Não foram utilizados filtros ou exclusões para elevar artificialmente o escore. Os testes utilizam componentes reais em memória; não foram adicionados dublês nesta etapa.
+
+A suíte anterior e a primeira proposta da IA foram armazenadas como evidências em Markdown. A proposta inicial passou na validação automatizada sem necessidade de uma segunda alteração no código de testes.
+
+Foram utilizados os seguintes comandos, a partir da raiz do repositório:
+
+```text
+mvn -B -f chesslib/pom.xml -Pgameloader-quality "-Dtest=GameLoaderTest" test
+mvn -B -f chesslib/pom.xml -Pgameloader-quality test-compile org.pitest:pitest-maven:mutationCoverage
+mvn -B -f chesslib/pom.xml -Pgameloader-quality "-Dmaven.javadoc.skip=true" verify
+```
+
+### Validação
+
+A resposta da IA foi validada pelo agente por meio da leitura do código de `GameLoader`, da análise dos mutantes no XML e da execução dos testes propostos. A configuração existente foi conferida para confirmar que o PIT selecionava somente `GameLoader` e `GameLoaderTest`, mantendo a mesma base de comparação.
+
+O relatório inicial de mutação registrou:
+
+- 36 de 63 mutantes mortos, correspondendo a 57,14%;
+- 13 mutantes sobreviventes;
+- 14 mutantes sem cobertura;
+- resultado `BUILD FAILURE` pelo limite de 80% não atingido.
+
+Após a ampliação da suíte, a execução individual de `GameLoaderTest` apresentou 14 testes aprovados, sem falhas, erros ou testes ignorados. Nessa execução, o JaCoCo registrou 55 de 66 branches cobertos, correspondendo a 83,33%.
+
+Em seguida, o PIT foi executado novamente utilizando o mesmo perfil. O relatório final registrou:
+
+- 59 de 63 mutantes mortos, correspondendo a 93,65%;
+- dois mutantes sobreviventes;
+- dois mutantes sem cobertura;
+- cobertura de linhas de 113/117, correspondendo a 96,58%;
+- ausência de timeouts e erros de execução de mutantes;
+- resultado `BUILD SUCCESS`.
+
+O percentual exato de aprovação foi calculado por `59 / 63 × 100 = 93,650793…%`. O valor inteiro de 94% exibido pelo PIT não foi utilizado como substituto dessa verificação. A melhoria eliminou 23 mutantes adicionais, mantendo o total de 63.
+
+Após a execução do PIT, a regressão completa do Chesslib foi executada com `verify` e apresentou 349 testes aprovados, sem falhas, erros ou testes ignorados. O relatório do JaCoCo dessa execução registrou:
+
+- 58 de 66 branches cobertos em `GameLoader`, correspondendo a 87,88%;
+- 114 de 117 linhas cobertas, correspondendo a 97,44%;
+- limite mínimo de 80% de branches atendido;
+- resultado `BUILD SUCCESS`.
+
+A diferença entre os resultados de cobertura individual e de regressão completa decorre do conjunto de testes executado. O PIT utilizou somente `GameLoaderTest`; a medição final de 58/66 branches utilizou todas as suítes do Chesslib.
+
+A validação final foi composta pelas seguintes evidências:
+
+- execução bem-sucedida dos 14 testes de `GameLoaderTest`;
+- execução bem-sucedida dos 349 testes da regressão completa;
+- cobertura de branches superior ao mínimo de 80%;
+- escore de mutação de 59/63, superior ao mínimo de 80% sem depender de arredondamento;
+- redução de 13 para dois mutantes sobreviventes e de 14 para dois mutantes sem cobertura;
+- correspondência entre os resultados do terminal e os relatórios XML;
+- preservação do código de produção e da configuração de mutação.
+
+Com base nesses resultados, a ampliação foi considerada tecnicamente validada pelo agente porque detectou alterações antes não identificadas pelos testes, atingiu a meta de mutação e não introduziu falhas na regressão completa. A responsável aceitou a alteração: fez o commit `9adb790`, integrou-o à main pelo PR #28 e fechou a Issue #26. Os quatro mutantes restantes continuam registrados no relatório, sem exclusão ou classificação automática como equivalentes.
+
+### Evidências relacionadas
+
+- Configuração Maven: [chesslib/pom.xml](../../chesslib/pom.xml)
+- Classe analisada: [GameLoader.java](../../chesslib/src/main/java/com/github/bhlangonijr/chesslib/pgn/GameLoader.java)
+- Testes desenvolvidos: [GameLoaderTest.java](../../chesslib/src/test/java/com/github/bhlangonijr/chesslib/GameLoaderTest.java)
+- Suíte anterior à melhoria: [GameLoaderTest-antes.md](../entrega2/sofia/gameloader/evidencias/GameLoaderTest-antes.md)
+- Proposta inicial da IA: [GameLoaderTest-ia-inicial.md](../entrega2/sofia/gameloader/evidencias/GameLoaderTest-ia-inicial.md)
+- Relatório de mutação antes da melhoria: [mutations-antes.xml](../entrega2/sofia/gameloader/evidencias/mutations-antes.xml)
+- Relatório de mutação após a melhoria: [mutations-depois.xml](../entrega2/sofia/gameloader/evidencias/mutations-depois.xml)
+- Relatório de cobertura JaCoCo preservado: [jacoco-depois.xml](../entrega2/sofia/gameloader/evidencias/jacoco-depois.xml)
+- Resumo da regressão completa: [testes-resumo.json](../entrega2/sofia/gameloader/evidencias/testes-resumo.json)
+- Relatório técnico e texto para a issue: [docs/entrega2/sofia/gameloader/README.md](../entrega2/sofia/gameloader/README.md)
+- Relatório JaCoCo gerado localmente: `chesslib/target/site/jacoco-gameloader/index.html`
+- Relatório PIT gerado localmente: `chesslib/target/pit-reports-gameloader/index.html`
+
+## Registro 007 — Testes Selenium do cadastro de proprietário
+
+| **Informação** | **Registro** |
+| --- | --- |
+| Data | 23/11/2026 |
+| Responsável | Sofia |
+| Entrega | Entrega 2 |
+| Atividade | Testes de sistema com Selenium para o CTM-02 — Cadastrar proprietário |
+| Ferramenta | Claude Code (Claude Opus 5.5), no aplicativo desktop |
+| Artefatos relacionados | `SofiaOwnerSeleniumTests.java`, `docs/selenium/cadastrar-proprietario/` |
+
+### Prompt/instrução utilizada
+
+> crie os testes selenium na branch sofia/entrega-2, mas deixe eu commitar
+
+### Resultado apresentado pela IA
+
+A IA leu os testes Selenium dos colegas, o `Owner`, o controlador e o template do formulário, e propôs oito casos por partições de equivalência e valores-limite: cadastro válido com busca posterior, nome com 30 caracteres (limite da coluna), telefone com 9 e 11 dígitos, com letra e com símbolos, formulário vazio e campos só com espaços. Cada caso confere tela, banco H2 e persistência após recarregar; os inválidos conferem a mensagem por campo e que nada foi gravado.
+
+### Decisão
+
+Aceita. A responsável fez o commit `081e5ca` e integrou pelo PR #28. Ficou registrado como limite que nome com 31 ou mais caracteres não foi avaliado e que a mensagem geral de erro do controlador não aparece no formulário.
+
+### Validação
+
+- Execução individual: 8 aprovados.
+- Execução conjunta com os Selenium do grupo e `OwnerControllerTests`: 43 aprovados.
+- Verificação de que as asserções reprovam: a mensagem esperada do telefone foi trocada temporariamente para "11-digit" e os quatro casos de telefone falharam; o texto original foi restaurado.
+- Capturas conferidas visualmente (cadastro válido e formulário vazio).
+
+### Evidências relacionadas
+
+- [Relatório e capturas](../selenium/cadastrar-proprietario/README.md)
+- [SofiaOwnerSeleniumTests.java](../../spring-petclinic/src/test/java/org/springframework/samples/petclinic/owner/SofiaOwnerSeleniumTests.java)
+
+## Registro 008 — Inspeção Sonar e correção de `GameLoader`
+
+| **Informação** | **Registro** |
+| --- | --- |
+| Data | 23/11/2026 |
+| Responsável | Sofia |
+| Entrega | Entrega 2 |
+| Atividade | Relatório de inspeção do código-fonte e correção dos apontamentos |
+| Ferramenta | Claude Code (Claude Opus 5.5); SonarQube Community Build 26.11.0.134175 em Docker |
+| Artefatos relacionados | `GameLoader.java`, `docs/inspecao/gameloader/`, seção 7 do relatório Sonar compartilhado |
+
+### Prompt/instrução utilizada
+
+> faça a inspeção com sonar do gameloader na branch sofiarecreio/sofia/entrega-2 no estilo [relatório Sonar compartilhado] e do repositorio tbm, pode escrever as coisas no docs na minha conta
+
+### Resultado apresentado pela IA
+
+A IA subiu o mesmo servidor usado nas inspeções de Game e PgnHolder, associou o perfil Sonar way comprehensive (608 regras) a projetos separados para antes e depois e encontrou 7 apontamentos: duas complexidades cognitivas acima de 15, construtor público implícito, `throws Exception`, `size() == 0` e dois TODO. Propôs extrair métodos auxiliares, construtor privado, retirar `throws Exception` (nenhuma exceção verificada é lançada) e implementar o que cada TODO pedia, em vez de apagar o comentário.
+
+### Decisão
+
+Aceita. A responsável fez o commit `a369d28`, integrado pelo PR #29. Os dois `catch (Exception)` não apontados foram mantidos para não mudar o comportamento com tags inválidas. A seção 7 do relatório Sonar compartilhado foi escrita no navegador logado na conta da responsável.
+
+### Validação
+
+- Sonar depois: 0 apontamentos, mesmo perfil e escopo.
+- Regressão completa: 349 aprovados; branches 60/68 (88,24%); mutação 71/75 (94,67%); os quatro mutantes restantes eram os mesmos da medição anterior.
+- E-mail de autoria que o Sonar obtém do git removido dos JSONs publicados.
+
+### Evidências relacionadas
+
+- [Relatório da inspeção](../inspecao/gameloader/README.md)
+- [Relatório Sonar compartilhado](https://docs.google.com/document/d/1LBd-p5gI73bchdHi-wWXTSUu7rfhmelV1IxTPfpdvk8/edit)
+
+## Registro 009 — Testes unitários isolados de `GameLoader`
+
+| **Informação** | **Registro** |
+| --- | --- |
+| Data | 23/11/2026 |
+| Responsável | Sofia |
+| Entrega | Entrega 2 |
+| Atividade | Melhorar os testes unitários isolando as dependências |
+| Ferramenta | Claude Code (Claude Opus 5.5) |
+| Artefatos relacionados | `GameLoaderIsolatedTest.java`, ponto de injeção em `GameLoader.java`, perfil `gameloader-quality` |
+
+### Prompt/instrução utilizada
+
+> [lista de pendências] … 5. Isolamento de dependências em GameLoader … faça tudo isso
+
+### Resultado apresentado pela IA
+
+A IA observou que GameLoaderTest só usava componentes reais e que GameLoader criava a partida internamente. Propôs uma sobrecarga visível só no pacote, que recebe a fábrica da partida, e dois stubs escritos à mão, no estilo do stub de Board de Weslley: `GameStub` (registra o texto entregue e devolve uma quantidade fixa de lances, sem Board, MoveList ou SAN) e `RecordingIterator` (conta linhas consumidas e falha numa linha escolhida). Foram propostos 12 casos.
+
+### Decisão
+
+Aplicada na branch, aguardando revisão e commit da responsável. A assinatura pública foi mantida. Na primeira execução, um caso falhou porque a linha de teste terminava em `*` e encerrava a partida antes do esperado; o caso foi reescrito com uma linha que contém os quatro marcadores.
+
+### Validação
+
+- 12 casos isolados aprovados; regressão completa com 361 testes aprovados.
+- Branches 63/68 (92,65%); mutação 76/77 (98,70%). O único sobrevivente (`round < 1` → `<= 1`) é equivalente e ficou no denominador.
+- Reanálise Sonar após o ponto de injeção: 0 apontamentos.
+
+### Evidências relacionadas
+
+- [Relatório do isolamento](../entrega2/sofia/gameloader/isolamento.md)
+- [GameLoaderIsolatedTest.java](../../chesslib/src/test/java/com/github/bhlangonijr/chesslib/pgn/GameLoaderIsolatedTest.java)
+
+## Registro 010 — Avaliação ISO/IEC 25010, Plano de Teste e índice de evidências
+
+| **Informação** | **Registro** |
+| --- | --- |
+| Data | 23/11/2026 |
+| Responsável | Sofia |
+| Entrega | Entrega 2 |
+| Atividade | Consolidação da documentação: avaliação ISO/IEC 25010, atualização do Plano de Teste e índice do README |
+| Ferramenta | Claude Code (Claude Opus 5.5) |
+| Artefatos relacionados | Documento Trabalho QeT, Plano de Teste, `README.md`, `docs/entrega2/sofia/documentacao-final.md` |
+
+### Prompt/instrução utilizada
+
+> nao quero q vc edite o docs, apenas q escreva aqui o que escreve pra eu ler, revisar e colocar la eu
+
+Depois: "me mande o plano de teste atualizado completo", "o que falta agora alem dos slides? cheque tudo …" e "faça tudo isso".
+
+### Resultado apresentado pela IA
+
+A IA reuniu os números dos relatórios de todos os integrantes e redigiu: a matriz ISO/IEC 25010:2011 com escalas próprias do grupo (percentual, tempo, binária e NE para o que não foi medido); o texto completo do Plano de Teste 2.0; e as atualizações do README. Também comparou os requisitos da professora com o repositório, os documentos e a pasta do Drive e listou as pendências.
+
+### Decisão
+
+A responsável revisou e colou a matriz ISO no documento Trabalho QeT. Na rodada final, a IA aplicou os ajustes pendentes (Portabilidade como NE, lista de pendências, GameLoader na inspeção, escopo com TimeControl) e o Plano de Teste completo pelo navegador logado na conta da responsável; o README foi alterado na branch, aguardando commit. A escala foi tratada como convenção do grupo, não como prescrição da ISO, e nenhuma característica sem medição recebeu nota.
+
+### Validação
+
+- Cada número da matriz foi conferido com o relatório ou XML de origem.
+- Os links das fontes foram conferidos na main.
+- A leitura do requisito da professora mostrou que a matriz precisava cobrir as oito características; Portabilidade foi incluída como NE.
+
+### Evidências relacionadas
+
+- [Documento Trabalho QeT](https://docs.google.com/document/d/16PhvQ19VGINYlqDE0NsTWH6VHgzwLYcO_FdjD46PtVU/edit)
+- [Plano de Teste](https://docs.google.com/document/d/1JDJVJR6WbpOXpzfRQsbcVWZm8XzQYc8xMSGoEAKj0xo/edit)
+- [Rascunho da documentação no repositório](../entrega2/sofia/documentacao-final.md)
+
+---
+
+## Registro 014 — Ampliação dos testes de `TimeControl`
+
+| Informação | Registro |
+|---|---|
+| Data | 22/11/2026 |
+| Responsável | Pedro Piaes Rodrigues |
+| Entrega | Entrega 2 |
+| Atividade | Ampliação dos testes unitários de TimeControl e avaliação de cobertura estrutural e mutação |
+| Ferramenta | ChatGPT, Maven, JUnit 4, JaCoCo e PIT |
+| Artefato relacionado | `PedroTimeControlTest.java` e perfil `timecontrol-quality` do `chesslib/pom.xml` |
+| Prompt/instrução | Solicitei apoio para ampliar os testes existentes de TimeControl, contemplando formatos válidos, incrementos, múltiplos estágios, valores-limite e entradas inválidas, além de ajuda na configuração e execução das medições de cobertura e mutação |
+| Resultado | Com apoio da ferramenta na definição e implementação dos cenários, a suíte passou de 5 para 23 testes. Também houve ajuda na configuração e execução do JaCoCo e do PIT, cujos relatórios permitiram verificar os resultados e identificar os caminhos e mutantes restantes |
+| Decisão | Foi preservado o código de produção de TimeControl. Foram utilizadas partições de equivalência e análise de valores-limite, além de um stub de MovePerTime para verificar a delegação com resultados controlados. Os mutantes sobreviventes e sem cobertura foram mantidos no cálculo |
+| Validação | Os 23 testes foram aprovados. O JaCoCo registrou 40/42 branches cobertos (95,24%). O PIT registrou 60/69 mutantes eliminados (86,96%), com 7 sobreviventes e 2 sem cobertura. As contagens foram conferidas nos relatórios XML |

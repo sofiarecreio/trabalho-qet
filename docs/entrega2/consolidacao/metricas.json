@@ -1,5 +1,5 @@
 {
-  "base_commit": "4982c6e8456aebebfc58508e25fc01c63d0fb0ae",
+  "base_commit": "393441949d1ee45ecdbda5849baa855fddd8ecee",
   "jdk_informado_pelo_executor": "21.0.11",
   "jacoco": "0.8.12",
   "pit": "1.17.4",
@@ -8,27 +8,27 @@
       "class": "GameLoader",
       "owner": "Sofia",
       "profile": "gameloader-quality",
-      "source_sha256": "a87d98a370e4f6f2b7df6c2a49f4d4c64aa12cc606e627cfc45e9f248cc01da2",
+      "source_sha256": "6cc447b802a8e62fbcacfed328a12fa2f895206fb7da9d2ad56b55dfcca4f684",
       "counters": {
         "INSTRUCTION": {
-          "covered": 425,
-          "missed": 19
+          "covered": 471,
+          "missed": 3
         },
         "BRANCH": {
-          "covered": 57,
-          "missed": 9
+          "covered": 63,
+          "missed": 5
         },
         "LINE": {
-          "covered": 113,
-          "missed": 4
+          "covered": 128,
+          "missed": 2
         },
         "COMPLEXITY": {
-          "covered": 41,
-          "missed": 9
+          "covered": 55,
+          "missed": 5
         },
         "METHOD": {
-          "covered": 8,
-          "missed": 1
+          "covered": 18,
+          "missed": 0
         },
         "CLASS": {
           "covered": 1,
@@ -37,16 +37,15 @@
       },
       "maximum_method_complexity": {
         "method": "addProperty",
-        "complexity": 24
+        "complexity": 19
       },
       "mutation_statuses": {
-        "KILLED": 36,
-        "SURVIVED": 13,
-        "NO_COVERAGE": 14
+        "KILLED": 76,
+        "SURVIVED": 1
       },
-      "mutation_total": 63,
+      "mutation_total": 77,
       "meets_branch_threshold": true,
-      "meets_strict_mutation_threshold": false
+      "meets_strict_mutation_threshold": true
     },
     {
       "class": "Game",
@@ -134,13 +133,7 @@
       },
       "mutation_total": 211,
       "meets_branch_threshold": true,
-      "meets_strict_mutation_threshold": true,
-      "measurement_commit": "da4a3f005dd2655eef83e40fb66cde9c0e84fbb4",
-      "regression_tests": 342,
-      "test_sources_sha256": {
-        "chesslib/src/test/java/com/github/bhlangonijr/chesslib/move/MoveListTest.java": "fa575ab9aeaf8e247aadd3e379b01b04919b35702b55540857f1ea9ccfd25a56",
-        "chesslib/src/test/java/com/github/bhlangonijr/chesslib/move/MoveListQetTest.java": "086be69f4215cafcb657c37d427db3d3e9776adb723f999b42919743cc7c2a53"
-      }
+      "meets_strict_mutation_threshold": true
     },
     {
       "class": "TimeControl",
@@ -224,8 +217,7 @@
       "mutation_statuses": {
         "KILLED": 64,
         "SURVIVED": 3,
-        "MEMORY_ERROR": 4,
-        "TIMED_OUT": 2,
+        "MEMORY_ERROR": 6,
         "NO_COVERAGE": 5
       },
       "mutation_total": 78,

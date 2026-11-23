@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: org.springframework.samples.petclinic.owner.SofiaOwnerSeleniumTests
+-------------------------------------------------------------------------------
+Tests run: 8, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 69.61 s -- in org.springframework.samples.petclinic.owner.SofiaOwnerSeleniumTests

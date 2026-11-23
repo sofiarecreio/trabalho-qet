@@ -1,0 +1,53 @@
+{
+  "fase": "apos-isolamento",
+  "base_commit": "441aa73ef90db249e5ab3cc736905bddfce99e3c",
+  "source_sha256": "ffcc5f68867f26058239c80e7e36771c892351e972bcabcb7b928280050ecbdb",
+  "server_version": "26.11.0.134175",
+  "docker_image": "sonarqube:community@sha256:7b2296713a92b8ea0dd7a083a25faadc59376c9a1e6daf2744a89711c54ea1ba",
+  "scanner": "sonar-maven-plugin 5.3.0.6276",
+  "profile": {
+    "key": "063b570e-5413-4ae5-b37f-2502b0f753a3",
+    "name": "Sonar way comprehensive",
+    "language": "java",
+    "languageName": "Java",
+    "isInherited": false,
+    "isDefault": false,
+    "activeRuleCount": 608,
+    "activeDeprecatedRuleCount": 0,
+    "projectCount": 3,
+    "rulesUpdatedAt": "2026-11-23T04:16:29+0000",
+    "lastUsed": "2026-11-23T04:50:18+0000",
+    "isBuiltIn": true,
+    "actions": {
+      "edit": false,
+      "setAsDefault": true,
+      "copy": true,
+      "associateProjects": true,
+      "delete": false
+    }
+  },
+  "measures": {
+    "bugs": "0",
+    "complexity": "64",
+    "code_smells": "0",
+    "cognitive_complexity": "32",
+    "ncloc": "248",
+    "violations": "0",
+    "vulnerabilities": "0",
+    "security_hotspots": "0"
+  },
+  "issues": {
+    "total": 0,
+    "p": 1,
+    "ps": 500,
+    "paging": {
+      "pageIndex": 1,
+      "pageSize": 500,
+      "total": 0
+    },
+    "effortTotal": 0,
+    "issues": [],
+    "components": [],
+    "facets": []
+  }
+}

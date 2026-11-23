@@ -1,6 +1,6 @@
 # Defeitos reproduzidos de PgnHolder
 
-Os defeitos foram reproduzidos contra a fonte original do commit `4750daa` e tratados nesta contribuição. Estão registrados nas Issues [#21](https://github.com/sofiarecreio/trabalho-qet/issues/21) e [#22](https://github.com/sofiarecreio/trabalho-qet/issues/22), que permanecem abertas até a integração das correções.
+Os defeitos foram reproduzidos contra a fonte original do commit `4750daa` e tratados nesta contribuição. Estão registrados nas Issues [#21](https://github.com/sofiarecreio/trabalho-qet/issues/21) e [#22](https://github.com/sofiarecreio/trabalho-qet/issues/22), fechadas como concluídas após a integração das correções à main pelo PR #23.
 
 ## Issue #21 — arquivo não fechado quando a criação do iterador falha
 

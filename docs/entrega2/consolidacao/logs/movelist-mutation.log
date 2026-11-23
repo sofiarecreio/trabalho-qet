@@ -69,13 +69,13 @@
 [INFO] Adding org.pitest:pitest to SUT classpath
 [INFO] Mutating from <REPOSITORIO>/chesslib/target/classes
 [INFO] Replacing properties in argLine
-22:41:03 PIT >> INFO : Verbose logging is disabled. If you encounter a problem, please enable it before reporting an issue.
-22:41:03 PIT >> INFO : Created 1 mutation test units in pre scan
-22:41:04 PIT >> INFO : Sending 2 test classes to minion
-22:41:04 PIT >> INFO : Sent tests to minion
-/-\|/-\|/-\|/-\|/-\|/-\|/-\|/22:41:04 PIT >> INFO : Calculated coverage in 0 seconds.
-22:41:04 PIT >> INFO : Created 1 mutation test units
-/22:41:05 PIT >> INFO : Completed in 2 seconds
+11:05:45 PIT >> INFO : Verbose logging is disabled. If you encounter a problem, please enable it before reporting an issue.
+11:05:45 PIT >> INFO : Created 1 mutation test units in pre scan
+11:05:46 PIT >> INFO : Sending 2 test classes to minion
+11:05:46 PIT >> INFO : Sent tests to minion
+/-\|/-\|/-\|/-\|/-\|/-\|/-\|/11:05:46 PIT >> INFO : Calculated coverage in 0 seconds.
+11:05:46 PIT >> INFO : Created 1 mutation test units
+/11:05:48 PIT >> INFO : Completed in 2 seconds
 ================================================================================
 - Mutators
 ================================================================================
@@ -146,7 +146,7 @@
 > scan classpath : < 1 second
 > coverage and dependency analysis : < 1 second
 > build mutation tests : < 1 second
-> run mutation analysis : 1 seconds
+> run mutation analysis : 2 seconds
 --------------------------------------------------------------------------------
 > Total  : 2 seconds
 --------------------------------------------------------------------------------
@@ -157,11 +157,11 @@
 >> 2 tests examined
 >> Generated 211 mutations Killed 169 (80%)
 >> Mutations with no coverage 26. Test strength 91%
->> Ran 365 tests (1.73 tests per mutation)
+>> Ran 367 tests (1.74 tests per mutation)
 Enhanced functionality available at https://www.arcmutate.com/
 [INFO] ------------------------------------------------------------------------
 [INFO] BUILD SUCCESS
 [INFO] ------------------------------------------------------------------------
-[INFO] Total time:  2.912 s
-[INFO] Finished at: 2026-11-22T22:41:05-03:00
+[INFO] Total time:  3.366 s
+[INFO] Finished at: 2026-11-23T11:05:48-03:00
 [INFO] ------------------------------------------------------------------------

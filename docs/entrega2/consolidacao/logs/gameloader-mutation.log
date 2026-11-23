@@ -1,26 +1,26 @@
 [INFO] Scanning for projects...
-[INFO] 
+[INFO]
 [INFO] --------------< com.github.bhlangonijr.chesslib:chesslib >--------------
 [INFO] Building chesslib 1.3.7
 [INFO]   from pom.xml
 [INFO] --------------------------------[ jar ]---------------------------------
-[INFO] 
+[INFO]
 [INFO] --- jacoco:0.8.12:prepare-agent (prepare-agent) @ chesslib ---
 [INFO] Skipping JaCoCo execution because property jacoco.skip is set.
 [INFO] argLine set to empty
-[INFO] 
+[INFO]
 [INFO] --- resources:3.4.0:resources (default-resources) @ chesslib ---
 [INFO] Copying 1 resource from src/main/resources to target/classes
-[INFO] 
+[INFO]
 [INFO] --- compiler:3.8.1:compile (default-compile) @ chesslib ---
 [INFO] Nothing to compile - all classes are up to date
-[INFO] 
+[INFO]
 [INFO] --- resources:3.4.0:testResources (default-testResources) @ chesslib ---
 [INFO] Copying 27 resources from src/test/resources to target/test-classes
-[INFO] 
+[INFO]
 [INFO] --- compiler:3.8.1:testCompile (default-testCompile) @ chesslib ---
 [INFO] Nothing to compile - all classes are up to date
-[INFO] 
+[INFO]
 [INFO] --- pitest:1.17.4:mutationCoverage (default-cli) @ chesslib ---
 [INFO] Root dir is : <REPOSITORIO>/chesslib
 [INFO] Found plugin : Default csv report plugin
@@ -68,46 +68,64 @@
 [INFO] Available mutators : EXPERIMENTAL_ARGUMENT_PROPAGATION,FALSE_RETURNS,TRUE_RETURNS,CONDITIONALS_BOUNDARY,CONSTRUCTOR_CALLS,EMPTY_RETURNS,INCREMENTS,INLINE_CONSTS,INVERT_NEGS,MATH,NEGATE_CONDITIONALS,NON_VOID_METHOD_CALLS,NULL_RETURNS,PRIMITIVE_RETURNS,REMOVE_CONDITIONALS_EQUAL_IF,REMOVE_CONDITIONALS_EQUAL_ELSE,REMOVE_CONDITIONALS_ORDER_IF,REMOVE_CONDITIONALS_ORDER_ELSE,VOID_METHOD_CALLS,EXPERIMENTAL_BIG_DECIMAL,EXPERIMENTAL_BIG_INTEGER,EXPERIMENTAL_MEMBER_VARIABLE,EXPERIMENTAL_NAKED_RECEIVER,REMOVE_INCREMENTS,EXPERIMENTAL_SWITCH
 [INFO] Adding org.pitest:pitest to SUT classpath
 [INFO] Mutating from <REPOSITORIO>/chesslib/target/classes
-[INFO] Replacing properties in argLine 
-19:08:09 PIT >> INFO : Verbose logging is disabled. If you encounter a problem, please enable it before reporting an issue.
-19:08:09 PIT >> INFO : Created 1 mutation test units in pre scan
-19:08:09 PIT >> INFO : Sending 1 test classes to minion
-19:08:09 PIT >> INFO : Sent tests to minion
-/-\|/-\19:08:09 PIT >> INFO : Calculated coverage in 0 seconds.
-19:08:09 PIT >> INFO : Created 1 mutation test units
-/19:08:10 PIT >> INFO : Completed in 1 seconds
+[INFO] Replacing properties in argLine
+11:05:19 PIT >> INFO : Verbose logging is disabled. If you encounter a problem, please enable it before reporting an issue.
+11:05:19 PIT >> INFO : Created 1 mutation test units in pre scan
+11:05:19 PIT >> INFO : Sending 2 test classes to minion
+11:05:19 PIT >> INFO : Sent tests to minion
+/-\|/-\|/-\|/-\|/-\|/-\|/-11:05:19 PIT >> INFO : Calculated coverage in 0 seconds.
+11:05:19 PIT >> INFO : Created 1 mutation test units
+/11:05:20 PIT >> INFO : Completed in 1 seconds
 ================================================================================
 - Mutators
 ================================================================================
 > org.pitest.mutationtest.engine.gregor.mutators.returns.PrimitiveReturnsMutator
 >> Generated 2 Killed 2 (100%)
-> KILLED 2 SURVIVED 0 TIMED_OUT 0 NON_VIABLE 0 
-> MEMORY_ERROR 0 NOT_STARTED 0 STARTED 0 RUN_ERROR 0 
-> NO_COVERAGE 0 
+> KILLED 2 SURVIVED 0 TIMED_OUT 0 NON_VIABLE 0
+> MEMORY_ERROR 0 NOT_STARTED 0 STARTED 0 RUN_ERROR 0
+> NO_COVERAGE 0
 --------------------------------------------------------------------------------
 > org.pitest.mutationtest.engine.gregor.mutators.ConditionalsBoundaryMutator
 >> Generated 2 Killed 1 (50%)
-> KILLED 1 SURVIVED 1 TIMED_OUT 0 NON_VIABLE 0 
-> MEMORY_ERROR 0 NOT_STARTED 0 STARTED 0 RUN_ERROR 0 
-> NO_COVERAGE 0 
+> KILLED 1 SURVIVED 1 TIMED_OUT 0 NON_VIABLE 0
+> MEMORY_ERROR 0 NOT_STARTED 0 STARTED 0 RUN_ERROR 0
+> NO_COVERAGE 0
 --------------------------------------------------------------------------------
 > org.pitest.mutationtest.engine.gregor.mutators.VoidMethodCallMutator
->> Generated 33 Killed 17 (52%)
-> KILLED 17 SURVIVED 6 TIMED_OUT 0 NON_VIABLE 0 
-> MEMORY_ERROR 0 NOT_STARTED 0 STARTED 0 RUN_ERROR 0 
-> NO_COVERAGE 10 
+>> Generated 37 Killed 37 (100%)
+> KILLED 37 SURVIVED 0 TIMED_OUT 0 NON_VIABLE 0
+> MEMORY_ERROR 0 NOT_STARTED 0 STARTED 0 RUN_ERROR 0
+> NO_COVERAGE 0
 --------------------------------------------------------------------------------
 > org.pitest.mutationtest.engine.gregor.mutators.returns.BooleanTrueReturnValsMutator
->> Generated 2 Killed 0 (0%)
-> KILLED 0 SURVIVED 1 TIMED_OUT 0 NON_VIABLE 0 
-> MEMORY_ERROR 0 NOT_STARTED 0 STARTED 0 RUN_ERROR 0 
-> NO_COVERAGE 1 
+>> Generated 5 Killed 5 (100%)
+> KILLED 5 SURVIVED 0 TIMED_OUT 0 NON_VIABLE 0
+> MEMORY_ERROR 0 NOT_STARTED 0 STARTED 0 RUN_ERROR 0
+> NO_COVERAGE 0
+--------------------------------------------------------------------------------
+> org.pitest.mutationtest.engine.gregor.mutators.returns.NullReturnValsMutator
+>> Generated 4 Killed 4 (100%)
+> KILLED 4 SURVIVED 0 TIMED_OUT 0 NON_VIABLE 0
+> MEMORY_ERROR 0 NOT_STARTED 0 STARTED 0 RUN_ERROR 0
+> NO_COVERAGE 0
+--------------------------------------------------------------------------------
+> org.pitest.mutationtest.engine.gregor.mutators.returns.BooleanFalseReturnValsMutator
+>> Generated 1 Killed 1 (100%)
+> KILLED 1 SURVIVED 0 TIMED_OUT 0 NON_VIABLE 0
+> MEMORY_ERROR 0 NOT_STARTED 0 STARTED 0 RUN_ERROR 0
+> NO_COVERAGE 0
+--------------------------------------------------------------------------------
+> org.pitest.mutationtest.engine.gregor.mutators.returns.EmptyObjectReturnValsMutator
+>> Generated 1 Killed 1 (100%)
+> KILLED 1 SURVIVED 0 TIMED_OUT 0 NON_VIABLE 0
+> MEMORY_ERROR 0 NOT_STARTED 0 STARTED 0 RUN_ERROR 0
+> NO_COVERAGE 0
 --------------------------------------------------------------------------------
 > org.pitest.mutationtest.engine.gregor.mutators.NegateConditionalsMutator
->> Generated 24 Killed 16 (67%)
-> KILLED 16 SURVIVED 5 TIMED_OUT 0 NON_VIABLE 0 
-> MEMORY_ERROR 0 NOT_STARTED 0 STARTED 0 RUN_ERROR 0 
-> NO_COVERAGE 3 
+>> Generated 25 Killed 25 (100%)
+> KILLED 25 SURVIVED 0 TIMED_OUT 0 NON_VIABLE 0
+> MEMORY_ERROR 0 NOT_STARTED 0 STARTED 0 RUN_ERROR 0
+> NO_COVERAGE 0
 --------------------------------------------------------------------------------
 ================================================================================
 - Timings
@@ -123,22 +141,15 @@
 ================================================================================
 - Statistics
 ================================================================================
->> Line Coverage (for mutated classes only): 89/117 (76%)
->> 1 tests examined
->> Generated 63 mutations Killed 36 (57%)
->> Mutations with no coverage 14. Test strength 73%
->> Ran 74 tests (1.17 tests per mutation)
+>> Line Coverage (for mutated classes only): 128/132 (97%)
+>> 2 tests examined
+>> Generated 77 mutations Killed 76 (99%)
+>> Mutations with no coverage 0. Test strength 99%
+>> Ran 146 tests (1.9 tests per mutation)
 Enhanced functionality available at https://www.arcmutate.com/
 [INFO] ------------------------------------------------------------------------
-[INFO] BUILD FAILURE
+[INFO] BUILD SUCCESS
 [INFO] ------------------------------------------------------------------------
-[INFO] Total time:  2.592 s
-[INFO] Finished at: 2026-11-22T19:08:10-03:00
+[INFO] Total time:  2.139 s
+[INFO] Finished at: 2026-11-23T11:05:20-03:00
 [INFO] ------------------------------------------------------------------------
-[ERROR] Failed to execute goal org.pitest:pitest-maven:1.17.4:mutationCoverage (default-cli) on project chesslib: Mutation score of 57 is below threshold of 80 -> [Help 1]
-[ERROR] 
-[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
-[ERROR] Re-run Maven using the -X switch to enable full debug logging.
-[ERROR] 
-[ERROR] For more information about the errors and possible solutions, please read the following articles:
-[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException
