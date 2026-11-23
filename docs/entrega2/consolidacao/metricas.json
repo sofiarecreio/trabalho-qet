@@ -128,13 +128,19 @@
         "complexity": 12
       },
       "mutation_statuses": {
-        "KILLED": 168,
-        "SURVIVED": 17,
+        "KILLED": 169,
+        "SURVIVED": 16,
         "NO_COVERAGE": 26
       },
       "mutation_total": 211,
       "meets_branch_threshold": true,
-      "meets_strict_mutation_threshold": false
+      "meets_strict_mutation_threshold": true,
+      "measurement_commit": "da4a3f005dd2655eef83e40fb66cde9c0e84fbb4",
+      "regression_tests": 342,
+      "test_sources_sha256": {
+        "chesslib/src/test/java/com/github/bhlangonijr/chesslib/move/MoveListTest.java": "fa575ab9aeaf8e247aadd3e379b01b04919b35702b55540857f1ea9ccfd25a56",
+        "chesslib/src/test/java/com/github/bhlangonijr/chesslib/move/MoveListQetTest.java": "086be69f4215cafcb657c37d427db3d3e9776adb723f999b42919743cc7c2a53"
+      }
     },
     {
       "class": "TimeControl",

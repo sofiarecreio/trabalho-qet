@@ -64,12 +64,14 @@
     "command": [
       "mvn",
       "-B",
+      "-o",
       "-f",
       "chesslib/pom.xml",
       "-Pmovelist-quality",
       "-Dmaven.javadoc.skip=true",
       "verify"
-    ]
+    ],
+    "measurement_commit": "da4a3f005dd2655eef83e40fb66cde9c0e84fbb4"
   },
   {
     "class": "movelist",
@@ -78,13 +80,15 @@
     "command": [
       "mvn",
       "-B",
+      "-o",
       "-f",
       "chesslib/pom.xml",
       "-Pmovelist-quality",
       "-Djacoco.skip=true",
       "test-compile",
       "org.pitest:pitest-maven:1.17.4:mutationCoverage"
-    ]
+    ],
+    "measurement_commit": "da4a3f005dd2655eef83e40fb66cde9c0e84fbb4"
   },
   {
     "class": "timecontrol",

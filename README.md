@@ -265,7 +265,7 @@ Os resultados abaixo correspondem à validação da contribuição de Pedro; a i
 | PgnHolder | 10 para 0 apontamentos no mesmo perfil Sonar; oito testes de regressão adicionais | [Inspeção](docs/inspecao/pgnholder/README.md) |
 | Regressão Chesslib | 341 aprovados | [Escopo e validação](docs/inspecao/pgnholder/README.md#compatibilidade-e-validação) |
 | Edição de animal | Nove cenários Selenium aprovados; seleção conjunta de 42 testes aprovada | [Selenium](docs/selenium/alterar-animal/README.md) |
-| Consolidação | Cinco classes medidas; pendências de mutação de GameLoader e MoveList identificadas | [Tabela e dados originais](docs/entrega2/consolidacao/README.md) |
+| Consolidação | Cinco classes medidas; MoveList revalidada em 80,09% após o PR #24; GameLoader permanece abaixo da meta de mutação | [Tabela e dados originais](docs/entrega2/consolidacao/README.md) |
 
 A seleção do PetClinic não corresponde à suíte inteira. A seção de PgnHolder no relatório Sonar compartilhado está atualizada. A seção 6 do [Plano de Teste](https://docs.google.com/document/d/1JDJVJR6WbpOXpzfRQsbcVWZm8XzQYc8xMSGoEAKj0xo/edit?tab=t.0) registra o escopo, a estratégia, os critérios e os resultados da contribuição de Pedro na Entrega 2. Os dados para a avaliação ISO estão [disponíveis nesta contribuição](docs/entrega2/pedro/dados-documentacao.md). As correções de PgnHolder estão registradas nas Issues [#21](https://github.com/sofiarecreio/trabalho-qet/issues/21) e [#22](https://github.com/sofiarecreio/trabalho-qet/issues/22).
 

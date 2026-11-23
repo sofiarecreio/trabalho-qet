@@ -14,7 +14,7 @@ Este relatório consolida os testes, as medições de cobertura estrutural e os 
 
 Na medição individual da `MoveList`, a regressão completa do Chesslib executou **248 testes**, sem falhas, erros ou testes ignorados. Essa execução completa foi utilizada para a medição de cobertura, pois outras suítes do projeto também exercitam caminhos da `MoveList`.
 
-Após a integração da contribuição à versão atual da `main`, a regressão completa foi executada novamente e apresentou **342 testes aprovados**, sem falhas, erros ou testes ignorados. Os perfis `movelist-quality` e `game-quality` também foram executados separadamente e terminaram com `BUILD SUCCESS`.
+Após o [PR #24](https://github.com/sofiarecreio/trabalho-qet/pull/24), a revalidação consolidada sobre a main `da4a3f0` executou **342 testes aprovados**, sem falhas, erros ou testes ignorados. O perfil `movelist-quality` passou na verificação JaCoCo e no PIT; os [XMLs e logs da revalidação](../consolidacao/README.md) preservam as contagens exatas.
 
 ## Técnicas e casos funcionais
 
@@ -41,9 +41,9 @@ O perfil `movelist-quality` restringe o relatório e a regra de qualidade à cla
 
 | Indicador | Resultado |
 | --- | ---: |
-| Instruções | 1.340/1.515 = **88%** |
-| Branches | 159/196 = **81%** |
-| Linhas | 343/388 = **88%** |
+| Instruções | 1.344/1.521 = **88,36%** |
+| Branches | 159/196 = **81,12%** |
+| Linhas | 344/388 = **88,66%** |
 | Limite configurado | **80% de branches** |
 | Resultado da verificação | **Aprovado — BUILD SUCCESS** |
 
@@ -55,11 +55,11 @@ O PIT foi configurado para alterar somente a classe `MoveList` e utilizar `MoveL
 
 | Indicador | Resultado |
 | --- | ---: |
-| Cobertura de linhas das classes mutadas | 342/388 = **81%** |
+| Cobertura de linhas das classes mutadas | 316/388 = **81%** |
 | Mutantes mortos | 169/211 = **80,09%** |
-| Força dos testes | 169/185 = **91%** |
+| Força dos testes | 169/185 = **91,35%** |
 | Mutantes sem cobertura | 26 |
-| Mutantes sobreviventes | 17 |
+| Mutantes sobreviventes | 16 |
 | Limite configurado | **80% de mutação** |
 | Resultado da verificação | **Aprovado — BUILD SUCCESS** |
 
@@ -99,4 +99,4 @@ A inspeção estática da `MoveList`, as correções realizadas e as evidências
 - [Build após as correções](../../inspecao/movelist/build_sucess.png)
 - [Registro de uso de IA](../../ai/AI-LOG.md)
 
-Os percentuais de cobertura e mutação apresentados neste documento correspondem à medição individual realizada com o perfil `movelist-quality` na branch `lucio/entrega2`. Após a integração na `main`, a regressão com 342 testes e as verificações dos perfis `movelist-quality` e `game-quality` foram aprovadas, confirmando que a integração não introduziu regressões conhecidas.
+Os percentuais de cobertura e mutação apresentados neste documento correspondem à revalidação do perfil `movelist-quality` sobre a main `da4a3f0`, após o PR #24. A regressão com 342 testes e as verificações JaCoCo/PIT de MoveList foram aprovadas. O cenário adicional verifica a conversão FAN sem numeração e eliminou mais um mutante, mantendo todos os 211 no denominador.
