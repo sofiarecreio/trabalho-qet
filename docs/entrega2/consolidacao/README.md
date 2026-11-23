@@ -1,5 +1,7 @@
 # Consolidação de complexidade, cobertura e mutação
 
+> **Revalidação posterior de GameLoader (22/11/2026):** a contribuição local de Sofia atingiu **59/63 mutantes mortos (93,65%)** e **58/66 branches (87,88%)**, com 349 testes aprovados. Consulte o [relatório e os novos XMLs](../sofia/gameloader/README.md). As tabelas, JSONs e evidências abaixo preservam a medição histórica anterior de GameLoader (36/63); não são os dados desta revalidação. A integração da nova contribuição na main ainda deve ser confirmada.
+
 Responsável pela consolidação: Pedro Piaes. Medição local em 22/11/2026, sobre a base `4982c6e` com as alterações locais de Pedro; a atualização desde `4750daa` é apenas documental. Cada fonte está identificada por SHA-256 em [metricas.json](metricas.json). A linha de MoveList foi revalidada após o [PR #24](https://github.com/sofiarecreio/trabalho-qet/pull/24), sobre a main `da4a3f0`: 342 testes aprovados e PIT 169/211 (80,09%). As demais linhas preservam a medição inicial; não representam uma nova execução nesta revisão.
 
 ## Resultados das cinco classes
