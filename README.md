@@ -58,6 +58,7 @@ O [Spring PetClinic](https://github.com/spring-projects/spring-petclinic) é uma
 - **TimeControl — Pedro:** [testes, cobertura, mutação e comandos](docs/entrega2/pedro/timecontrol-testes.md), com evidências XML da medição local.
 - **Consolidação das cinco classes:** [tabela, estados do PIT, comandos e pendências](docs/entrega2/consolidacao/README.md).
 - **Inspeção PgnHolder — Pedro:** [correções e capturas antes/depois](docs/inspecao/pgnholder/README.md).
+- **Inspeção GameLoader — Sofia:** [7 → 0 apontamentos, correções e capturas antes/depois](docs/inspecao/gameloader/README.md).
 - **Selenium de alteração de animal — Pedro:** [nove cenários e capturas](docs/selenium/alterar-animal/README.md).
 - **Selenium de cadastro de proprietário — Sofia:** [oito cenários, execução e capturas](docs/selenium/cadastrar-proprietario/README.md).
 - **Organização dos testes manuais:** [`docs/teste-manual/README.md`](docs/teste-manual/README.md).

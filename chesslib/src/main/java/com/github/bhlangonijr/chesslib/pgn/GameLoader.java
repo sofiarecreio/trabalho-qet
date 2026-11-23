@@ -43,6 +43,10 @@ import static com.github.bhlangonijr.chesslib.pgn.PgnProperty.parsePgnProperty;
  */
 public class GameLoader {
 
+    private GameLoader() {
+        // utility class: only static methods
+    }
+
     /**
      * Loads the next game of chess from an iterator over the lines of a Portable Game Notation (PGN) file. The
      * iteration ends when the game is fully loaded, hence the iterator is not consumed more than necessary.
@@ -59,131 +63,158 @@ public class GameLoader {
         PgnTempContainer container = new PgnTempContainer();
 
         while (iterator.hasNext()) {
-            String line = iterator.next().trim();
-            if (line.startsWith(UTF8_BOM)) {
-                line = line.substring(1);
-            }
+            String line = removeBom(iterator.next().trim());
             try {
-                if (isProperty(line)) {
-                    addProperty(line, container);
-                } else if (StringUtils.isNotEmpty(line)) {
-                    addMoveText(line, container);
-                    if (isEndGame(line, container)) {
-                        setMoveText(container.game, container.moveText);
-                        return container.initGame ? container.game : null;
-                    }
+                if (processLine(line, container)) {
+                    return container.initGame ? container.game : null;
                 }
-            } catch (Exception e) { //TODO stricter exceptions
-                String name = container.event.getName();
-                int r = container.round.getNumber();
+            } catch (RuntimeException e) {
+                // parsing only raises unchecked exceptions; they are reported with the event context
+                String name = container.event().getName();
+                int r = container.round().getNumber();
                 throw new PgnException(String.format("Error parsing PGN[%d, %s]: ", r, name), e);
             }
         }
         return container.initGame ? container.game : null;
     }
 
-    private static void addProperty(String line, PgnTempContainer container) throws Exception {
+    private static String removeBom(String line) {
+        return line.startsWith(UTF8_BOM) ? line.substring(1) : line;
+    }
+
+    /**
+     * Processes one trimmed PGN line.
+     *
+     * @return {@code true} when the line closes the current game
+     */
+    private static boolean processLine(String line, PgnTempContainer container) {
+        if (isProperty(line)) {
+            addProperty(line, container);
+            return false;
+        }
+        if (StringUtils.isEmpty(line)) {
+            return false;
+        }
+        addMoveText(line, container);
+        if (isEndGame(line, container)) {
+            setMoveText(container.game, container.moveText);
+            return true;
+        }
+        return false;
+    }
+
+    private static void addProperty(String line, PgnTempContainer container) {
         PgnProperty property = parsePgnProperty(line);
         if (property == null) {
             return;
         }
         container.initGame = true;
         String tag = property.name.toLowerCase().trim();
+        Game game = container.game;
         //begin
         switch (tag) {
             case "event":
-                if (container.moveTextParsing && container.game.getHalfMoves().size() == 0) {
-                    setMoveText(container.game, container.moveText);
-                }
-                container.event.setName(property.value);
-                container.event.setId(property.value);
+                setEvent(property.value, container);
                 break;
             case "site":
-                container.event.setSite(property.value);
+                container.event().setSite(property.value);
                 break;
             case "date":
-                container.event.setStartDate(property.value);
+                container.event().setStartDate(property.value);
                 break;
             case "round":
-                int roundNumber = Math.max(
-                        0,
-                        parseIntegerOrDefault(property.value, 1));
-
-                container.round.setNumber(roundNumber);
-
-                if (!container.event.getRound().containsKey(roundNumber)) {
-                    container.event.getRound()
-                            .put(roundNumber, container.round);
-                }
+                setRound(property.value, container);
                 break;
             case "white":
-                setPlayerDetails(
-                        property.value,
-                        container.whitePlayer,
-                        container);
+                setPlayerDetails(property.value, game.getWhitePlayer(), container);
                 break;
             case "black":
-                setPlayerDetails(
-                        property.value,
-                        container.blackPlayer,
-                        container);
+                setPlayerDetails(property.value, game.getBlackPlayer(), container);
                 break;
             case "result":
-                container.game.setResult(GameResult.fromNotation(property.value));
+                game.setResult(GameResult.fromNotation(property.value));
                 break;
             case "plycount":
-                container.game.setPlyCount(property.value);
+                game.setPlyCount(property.value);
                 break;
             case "termination":
-                try {
-                    container.game.setTermination(Termination.fromValue(property.value.toUpperCase()));
-                } catch (Exception e1) {
-                    container.game.setTermination(Termination.UNTERMINATED);
-                }
+                game.setTermination(parseTermination(property.value));
                 break;
             case "timecontrol":
-                if (container.event.getTimeControl() == null) {
-                    try {
-                        container.event.setTimeControl(TimeControl.parseFromString(property.value.toUpperCase()));
-                    } catch (Exception e1) {
-                        //ignore errors in time control tag as it's not required by standards
-                    }
-                }
+                setTimeControl(property.value, container.event());
                 break;
             case "annotator":
-                container.game.setAnnotator(property.value);
+                game.setAnnotator(property.value);
                 break;
             case "fen":
-                container.game.setFen(property.value);
+                game.setFen(property.value);
                 break;
             case "eco":
-                container.game.setEco(property.value);
+                game.setEco(property.value);
                 break;
             case "opening":
-                container.game.setOpening(property.value);
+                game.setOpening(property.value);
                 break;
             case "variation":
-                container.game.setVariation(property.value);
+                game.setVariation(property.value);
                 break;
             case "whiteelo":
-                container.whitePlayer.setElo(
-                        parseIntegerOrDefault(
-                                property.value,
-                                container.whitePlayer.getElo()));
+                setElo(property.value, game.getWhitePlayer());
                 break;
             case "blackelo":
-                container.blackPlayer.setElo(
-                        parseIntegerOrDefault(
-                                property.value,
-                                container.blackPlayer.getElo()));
+                setElo(property.value, game.getBlackPlayer());
                 break;
             default:
-                if (container.game.getProperty() == null) {
-                    container.game.setProperty(new HashMap<>());
-                }
-                container.game.getProperty().put(property.name, property.value);
+                addCustomProperty(property, game);
                 break;
         }
+    }
+
+    private static void setEvent(String value, PgnTempContainer container) {
+        if (container.moveTextParsing && container.game.getHalfMoves().isEmpty()) {
+            setMoveText(container.game, container.moveText);
+        }
+        container.event().setName(value);
+        container.event().setId(value);
+    }
+
+    private static void setRound(String value, PgnTempContainer container) {
+        int roundNumber = Math.max(0, parseIntegerOrDefault(value, 1));
+        Round round = container.round();
+        round.setNumber(roundNumber);
+        if (!container.event().getRound().containsKey(roundNumber)) {
+            container.event().getRound().put(roundNumber, round);
+        }
+    }
+
+    private static Termination parseTermination(String value) {
+        try {
+            return Termination.fromValue(value.toUpperCase());
+        } catch (Exception e1) {
+            return Termination.UNTERMINATED;
+        }
+    }
+
+    private static void setTimeControl(String value, Event event) {
+        if (event.getTimeControl() != null) {
+            return;
+        }
+        try {
+            event.setTimeControl(TimeControl.parseFromString(value.toUpperCase()));
+        } catch (Exception e1) {
+            //ignore errors in time control tag as it's not required by standards
+        }
+    }
+
+    private static void setElo(String value, Player player) {
+        player.setElo(parseIntegerOrDefault(value, player.getElo()));
+    }
+
+    private static void addCustomProperty(PgnProperty property, Game game) {
+        if (game.getProperty() == null) {
+            game.setProperty(new HashMap<>());
+        }
+        game.getProperty().put(property.name, property.value);
     }
 
     private static void addMoveText(String line, PgnTempContainer container) {
@@ -213,36 +244,42 @@ public class GameLoader {
         }
     }
 
+    /**
+     * Parsing state of the game being loaded. Event, round and players are reached through the game itself.
+     */
     private static class PgnTempContainer {
 
-        //TODO many of this stuff can be accessed through game
-
-        final Event event;
-        final Round round;
         final Game game;
-        Player whitePlayer;
-        Player blackPlayer;
         final StringBuilder moveText;
         boolean moveTextParsing;
         boolean initGame;
         boolean commentOpened;
 
         PgnTempContainer() {
-            this.event = new Event();
-            this.round = new Round(event);
+            Round round = new Round(new Event());
             this.game = new Game(UUID.randomUUID().toString(), round);
-            this.round.getGame().add(this.game);
-            this.whitePlayer = new GenericPlayer();
-            this.whitePlayer.setType(PlayerType.HUMAN);
-            this.game.setWhitePlayer(this.whitePlayer);
-            this.blackPlayer = new GenericPlayer();
-            this.blackPlayer.setType(PlayerType.HUMAN);
-            this.game.setBlackPlayer(this.blackPlayer);
+            round.getGame().add(this.game);
+            this.game.setWhitePlayer(newHumanPlayer());
+            this.game.setBlackPlayer(newHumanPlayer());
             this.moveText = new StringBuilder();
+        }
+
+        Round round() {
+            return game.getRound();
+        }
+
+        Event event() {
+            return game.getRound().getEvent();
+        }
+
+        private static Player newHumanPlayer() {
+            Player player = new GenericPlayer();
+            player.setType(PlayerType.HUMAN);
+            return player;
         }
     }
 
-    private static void setMoveText(Game game, StringBuilder moveText) throws Exception {
+    private static void setMoveText(Game game, StringBuilder moveText) {
 
         //clear game result
         StringUtil.replaceAll(moveText, "1-0", StringUtils.EMPTY);
@@ -275,11 +312,11 @@ public class GameLoader {
             Player player,
             PgnTempContainer container) {
 
-        if (container.round.getNumber() < 1) {
-            container.round.setNumber(1);
+        if (container.round().getNumber() < 1) {
+            container.round().setNumber(1);
         }
 
-        container.game.setDate(container.event.getStartDate());
+        container.game.setDate(container.event().getStartDate());
         player.setId(value);
         player.setName(value);
         player.setDescription(value);
