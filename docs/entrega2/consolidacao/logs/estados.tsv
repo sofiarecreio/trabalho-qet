@@ -1,0 +1,10 @@
+gameloader	coverage	0
+gameloader	mutation	1
+game	coverage	0
+game	mutation	0
+movelist	coverage	0
+movelist	mutation	0
+timecontrol	coverage	0
+timecontrol	mutation	0
+movegenerator	coverage	0
+movegenerator	mutation	0

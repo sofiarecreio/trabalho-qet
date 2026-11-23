@@ -289,6 +289,133 @@
                 </plugins>
             </build>
         </profile>
+        <profile>
+            <id>timecontrol-quality</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.jacoco</groupId>
+                        <artifactId>jacoco-maven-plugin</artifactId>
+                        <configuration>
+                            <includes combine.self="override">
+                                <include>com/github/bhlangonijr/chesslib/game/TimeControl.class</include>
+                            </includes>
+                            <destFile>${project.build.directory}/jacoco-timecontrol.exec</destFile>
+                            <dataFile>${project.build.directory}/jacoco-timecontrol.exec</dataFile>
+                            <outputDirectory>${project.build.directory}/site/jacoco-timecontrol</outputDirectory>
+                            <append>false</append>
+                        </configuration>
+                        <executions>
+                            <execution>
+                                <id>prepare-agent</id>
+                                <configuration>
+                                    <includes combine.self="override">
+                                        <include>com/github/bhlangonijr/chesslib/game/TimeControl</include>
+                                    </includes>
+                                </configuration>
+                            </execution>
+                            <execution>
+                                <id>check</id>
+                                <configuration>
+                                    <rules combine.self="override">
+                                        <rule>
+                                            <element>CLASS</element>
+                                            <includes>
+                                                <include>com.github.bhlangonijr.chesslib.game.TimeControl</include>
+                                            </includes>
+                                            <limits>
+                                                <limit>
+                                                    <counter>BRANCH</counter>
+                                                    <value>COVEREDRATIO</value>
+                                                    <minimum>0.80</minimum>
+                                                </limit>
+                                            </limits>
+                                        </rule>
+                                    </rules>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.pitest</groupId>
+                        <artifactId>pitest-maven</artifactId>
+                        <configuration>
+                            <targetClasses combine.self="override">
+                                <param>com.github.bhlangonijr.chesslib.game.TimeControl</param>
+                            </targetClasses>
+                            <targetTests combine.self="override">
+                                <param>com.github.bhlangonijr.chesslib.game.PedroTimeControlTest</param>
+                            </targetTests>
+                            <reportsDirectory>${project.build.directory}/pit-reports-timecontrol</reportsDirectory>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+
+        <profile>
+            <id>gameloader-quality</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.jacoco</groupId>
+                        <artifactId>jacoco-maven-plugin</artifactId>
+                        <configuration>
+                            <includes combine.self="override">
+                                <include>com/github/bhlangonijr/chesslib/pgn/GameLoader.class</include>
+                            </includes>
+                            <destFile>${project.build.directory}/jacoco-gameloader.exec</destFile>
+                            <dataFile>${project.build.directory}/jacoco-gameloader.exec</dataFile>
+                            <outputDirectory>${project.build.directory}/site/jacoco-gameloader</outputDirectory>
+                            <append>false</append>
+                        </configuration>
+                        <executions>
+                            <execution>
+                                <id>prepare-agent</id>
+                                <configuration>
+                                    <includes combine.self="override">
+                                        <include>com/github/bhlangonijr/chesslib/pgn/GameLoader</include>
+                                    </includes>
+                                </configuration>
+                            </execution>
+                            <execution>
+                                <id>check</id>
+                                <configuration>
+                                    <rules combine.self="override">
+                                        <rule>
+                                            <element>CLASS</element>
+                                            <includes>
+                                                <include>com.github.bhlangonijr.chesslib.pgn.GameLoader</include>
+                                            </includes>
+                                            <limits>
+                                                <limit>
+                                                    <counter>BRANCH</counter>
+                                                    <value>COVEREDRATIO</value>
+                                                    <minimum>0.80</minimum>
+                                                </limit>
+                                            </limits>
+                                        </rule>
+                                    </rules>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.pitest</groupId>
+                        <artifactId>pitest-maven</artifactId>
+                        <configuration>
+                            <targetClasses combine.self="override">
+                                <param>com.github.bhlangonijr.chesslib.pgn.GameLoader</param>
+                            </targetClasses>
+                            <targetTests combine.self="override">
+                                <param>com.github.bhlangonijr.chesslib.GameLoaderTest</param>
+                            </targetTests>
+                            <reportsDirectory>${project.build.directory}/pit-reports-gameloader</reportsDirectory>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
     </profiles>
 
 </project>

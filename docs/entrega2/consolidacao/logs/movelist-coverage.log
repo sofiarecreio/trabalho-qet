@@ -1,0 +1,858 @@
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] --------------< com.github.bhlangonijr.chesslib:chesslib >--------------
+[INFO] Building chesslib 1.3.7
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- jacoco:0.8.12:prepare-agent (prepare-agent) @ chesslib ---
+[INFO] argLine set to "-javaagent:<HOME>/.m2/repository/org/jacoco/org.jacoco.agent/0.8.12/org.jacoco.agent-0.8.12-runtime.jar=destfile=<REPOSITORIO>/chesslib/target/jacoco-movelist.exec,append=false,includes=com/github/bhlangonijr/chesslib/move/MoveList,excludes=com/github/bhlangonijr/chesslib/move/MoveGeneratorException"
+[INFO] 
+[INFO] --- resources:3.4.0:resources (default-resources) @ chesslib ---
+[INFO] Copying 1 resource from src/main/resources to target/classes
+[INFO] 
+[INFO] --- compiler:3.8.1:compile (default-compile) @ chesslib ---
+[INFO] Nothing to compile - all classes are up to date
+[INFO] 
+[INFO] --- resources:3.4.0:testResources (default-testResources) @ chesslib ---
+[INFO] Copying 27 resources from src/test/resources to target/test-classes
+[INFO] 
+[INFO] --- compiler:3.8.1:testCompile (default-testCompile) @ chesslib ---
+[INFO] Nothing to compile - all classes are up to date
+[INFO] 
+[INFO] --- surefire:3.5.4:test (default-test) @ chesslib ---
+[INFO] Using auto detected provider org.apache.maven.surefire.junit4.JUnit4Provider
+[INFO] 
+[INFO] -------------------------------------------------------
+[INFO]  T E S T S
+[INFO] -------------------------------------------------------
+[INFO] Running com.github.bhlangonijr.chesslib.BoardTest
+r1bqkb1r/pppp1ppp/2n2n2/1B2p3/4P3/5N2/PPPP1PPP/RNBQ1RK1 b kq - 5 4
+new FEN after: e1g1: rnbqk2r/ppp1b1pp/5p1n/3p4/8/3B1N2/PPPP1PPP/RNBQ1RK1 b kq - 5 1
+hash code is: 841730187
+new FEN after: e8g8: rnbq1rk1/ppp1b1pp/5p1n/3p4/8/3B1N2/PPPP1PPP/RNBQ1RK1 w - - 6 2
+hash code is: 1199523201
+new FEN after: undo: rnbqk2r/ppp1b1pp/5p1n/3p4/8/3B1N2/PPPP1PPP/RNBQ1RK1 b kq - 5 1
+hash code is: 841730187
+new FEN after: e7e5: rnbqkbnr/pppp1ppp/8/4p3/4P3/8/PPPP1PPP/RNBQKBNR w KQkq e6 0 2
+hash code is: -361884155
+new FEN after: undo: rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR b KQkq e3 0 1
+hash code is: -280065720
+new FEN after: d7d5: rnbqkbnr/ppp1pppp/8/3p4/4P3/8/PPPP1PPP/RNBQKBNR w KQkq d6 0 2
+hash code is: -1844806708
+new FEN after: e4e5: rnbqkbnr/ppp1pppp/8/3pP3/8/8/PPPP1PPP/RNBQKBNR b KQkq - 0 2
+hash code is: -251614987
+new FEN after: f7f5: rnbqkbnr/ppp1p1pp/8/3pPp2/8/8/PPPP1PPP/RNBQKBNR w KQkq f6 0 3
+hash code is: 1110417270
+new FEN after: e5f6: rnbqkbnr/ppp1p1pp/5P2/3p4/8/8/PPPP1PPP/RNBQKBNR b KQkq - 0 3
+hash code is: -2003229841
+new FEN after: e7f6: rnbqkbnr/ppp3pp/5p2/3p4/8/8/PPPP1PPP/RNBQKBNR w KQkq - 0 4
+hash code is: 549137569
+r.bqkbnr
+pppppppp
+..n.....
+........
+..B.P...
+........
+PPPP.PPP
+RNBQK.NR
+Side: BLACK
+3494082646737507219
+7756704916819034564
+hash code is: 2141901675
+hash code is: 2141901675
+2151371626546460885	 = g1f3
+ = rnbqkbnr/pppppppp/8/8/8/5N2/PPPPPPPP/RNBQKB1R b KQkq - 1 1
+1444809208435460661	 = g8f6
+ = rnbqkb1r/pppppppp/5n2/8/8/5N2/PPPPPPPP/RNBQKB1R w KQkq - 2 2
+1460141479071705617	 = c2c4
+ = rnbqkb1r/pppppppp/5n2/8/2P5/5N2/PP1PPPPP/RNBQKB1R b KQkq c3 0 2
+540002481590076708	 = c7c5
+ = rnbqkb1r/pp1ppppp/5n2/2p5/2P5/5N2/PP1PPPPP/RNBQKB1R w KQkq c6 0 3
+3078298542808550788	 = b2b3
+ = rnbqkb1r/pp1ppppp/5n2/2p5/2P5/1P3N2/P2PPPPP/RNBQKB1R b KQkq - 0 3
+3740111219830539998	 = d7d6
+ = rnbqkb1r/pp2pppp/3p1n2/2p5/2P5/1P3N2/P2PPPPP/RNBQKB1R w KQkq - 0 4
+-6395112901570578577	 = d2d4
+ = rnbqkb1r/pp2pppp/3p1n2/2p5/2PP4/1P3N2/P3PPPP/RNBQKB1R b KQkq d3 0 4
+1338917373201768279	 = c5d4
+ = rnbqkb1r/pp2pppp/3p1n2/8/2Pp4/1P3N2/P3PPPP/RNBQKB1R w KQkq - 0 5
+951607811048012997	 = f3d4
+ = rnbqkb1r/pp2pppp/3p1n2/8/2PN4/1P6/P3PPPP/RNBQKB1R b KQkq - 0 5
+4016738816921461640	 = e7e5
+ = rnbqkb1r/pp3ppp/3p1n2/4p3/2PN4/1P6/P3PPPP/RNBQKB1R w KQkq e6 0 6
+8369000728852272266	 = d4b5
+ = rnbqkb1r/pp3ppp/3p1n2/1N2p3/2P5/1P6/P3PPPP/RNBQKB1R b KQkq - 1 6
+534184192105272030	 = c8e6
+ = rn1qkb1r/pp3ppp/3pbn2/1N2p3/2P5/1P6/P3PPPP/RNBQKB1R w KQkq - 2 7
+3759099742643025206	 = g2g3
+ = rn1qkb1r/pp3ppp/3pbn2/1N2p3/2P5/1P4P1/P3PP1P/RNBQKB1R b KQkq - 0 7
+3565373134117513172	 = a7a6
+ = rn1qkb1r/1p3ppp/p2pbn2/1N2p3/2P5/1P4P1/P3PP1P/RNBQKB1R w KQkq - 0 8
+5628513321331109649	 = b5c3
+ = rn1qkb1r/1p3ppp/p2pbn2/4p3/2P5/1PN3P1/P3PP1P/RNBQKB1R b KQkq - 1 8
+-3037953077428238711	 = d6d5
+ = rn1qkb1r/1p3ppp/p3bn2/3pp3/2P5/1PN3P1/P3PP1P/RNBQKB1R w KQkq - 0 9
+-5323556572456318558	 = c4d5
+ = rn1qkb1r/1p3ppp/p3bn2/3Pp3/8/1PN3P1/P3PP1P/RNBQKB1R b KQkq - 0 9
+5736349413578185878	 = f6d5
+ = rn1qkb1r/1p3ppp/p3b3/3np3/8/1PN3P1/P3PP1P/RNBQKB1R w KQkq - 0 10
+-416300335409275953	 = f1g2
+ = rn1qkb1r/1p3ppp/p3b3/3np3/8/1PN3P1/P3PPBP/RNBQK2R b KQkq - 1 10
+3920585241221147863	 = f8b4
+ = rn1qk2r/1p3ppp/p3b3/3np3/1b6/1PN3P1/P3PPBP/RNBQK2R w KQkq - 2 11
+-1871930962192893252	 = c1d2
+ = rn1qk2r/1p3ppp/p3b3/3np3/1b6/1PN3P1/P2BPPBP/RN1QK2R b KQkq - 3 11
+276783626348052724	 = b8c6
+ = r2qk2r/1p3ppp/p1n1b3/3np3/1b6/1PN3P1/P2BPPBP/RN1QK2R w KQkq - 4 12
+8752088040041601812	 = e1g1
+ = r2qk2r/1p3ppp/p1n1b3/3np3/1b6/1PN3P1/P2BPPBP/RN1Q1RK1 b kq - 5 12
+3130521826544539166	 = e8g8
+ = r2q1rk1/1p3ppp/p1n1b3/3np3/1b6/1PN3P1/P2BPPBP/RN1Q1RK1 w - - 6 13
+6268438450632675412	 = c3a4
+ = r2q1rk1/1p3ppp/p1n1b3/3np3/Nb6/1P4P1/P2BPPBP/RN1Q1RK1 b - - 7 13
+3886499988873305552	 = a8c8
+ = 2rq1rk1/1p3ppp/p1n1b3/3np3/Nb6/1P4P1/P2BPPBP/RN1Q1RK1 w - - 8 14
+4416040984093121911	 = a2a3
+ = 2rq1rk1/1p3ppp/p1n1b3/3np3/Nb6/PP4P1/3BPPBP/RN1Q1RK1 b - - 0 14
+8086519610933724906	 = b4e7
+ = 2rq1rk1/1p2bppp/p1n1b3/3np3/N7/PP4P1/3BPPBP/RN1Q1RK1 w - - 1 15
+6942017691813444002	 = e2e3
+ = 2rq1rk1/1p2bppp/p1n1b3/3np3/N7/PP2P1P1/3B1PBP/RN1Q1RK1 b - - 0 15
+5511877886134679970	 = b7b5
+ = 2rq1rk1/4bppp/p1n1b3/1p1np3/N7/PP2P1P1/3B1PBP/RN1Q1RK1 w - b6 0 16
+5806669445649149425	 = a4b2
+ = 2rq1rk1/4bppp/p1n1b3/1p1np3/8/PP2P1P1/1N1B1PBP/RN1Q1RK1 b - - 1 16
+-2842280463950178691	 = d8b6
+ = 2r2rk1/4bppp/pqn1b3/1p1np3/8/PP2P1P1/1N1B1PBP/RN1Q1RK1 w - - 2 17
+7330065811767288136	 = b2d3
+ = 2r2rk1/4bppp/pqn1b3/1p1np3/8/PP1NP1P1/3B1PBP/RN1Q1RK1 b - - 3 17
+1005166331808440528	 = f8d8
+ = 2rr2k1/4bppp/pqn1b3/1p1np3/8/PP1NP1P1/3B1PBP/RN1Q1RK1 w - - 4 18
+-6523747474547437923	 = d1e2
+ = 2rr2k1/4bppp/pqn1b3/1p1np3/8/PP1NP1P1/3BQPBP/RN3RK1 b - - 5 18
+2856667383983642112	 = d5f6
+ = 2rr2k1/4bppp/pqn1bn2/1p2p3/8/PP1NP1P1/3BQPBP/RN3RK1 w - - 6 19
+4660223202791915303	 = d3c1
+ = 2rr2k1/4bppp/pqn1bn2/1p2p3/8/PP2P1P1/3BQPBP/RNN2RK1 b - - 7 19
+-8134240597246054996	 = e5e4
+ = 2rr2k1/4bppp/pqn1bn2/1p6/4p3/PP2P1P1/3BQPBP/RNN2RK1 w - - 0 20
+-7732428668101022308	 = d2c3
+ = 2rr2k1/4bppp/pqn1bn2/1p6/4p3/PPB1P1P1/4QPBP/RNN2RK1 b - - 1 20
+1613116590033679617	 = f6d5
+ = 2rr2k1/4bppp/pqn1b3/1p1n4/4p3/PPB1P1P1/4QPBP/RNN2RK1 w - - 2 21
+-728497306698758962	 = g2e4
+ = 2rr2k1/4bppp/pqn1b3/1p1n4/4B3/PPB1P1P1/4QP1P/RNN2RK1 b - - 0 21
+2670445468681426363	 = d5c3
+ = 2rr2k1/4bppp/pqn1b3/1p6/4B3/PPn1P1P1/4QP1P/RNN2RK1 w - - 0 22
+2919380828458586330	 = b1c3
+ = 2rr2k1/4bppp/pqn1b3/1p6/4B3/PPN1P1P1/4QP1P/R1N2RK1 b - - 0 22
+-4297831075801056617	 = c6a5
+ = 2rr2k1/4bppp/pq2b3/np6/4B3/PPN1P1P1/4QP1P/R1N2RK1 w - - 1 23
+-6975279927721078201	 = c1a2
+ = 2rr2k1/4bppp/pq2b3/np6/4B3/PPN1P1P1/N3QP1P/R4RK1 b - - 2 23
+-5651628512996131601	 = a5b3
+ = 2rr2k1/4bppp/pq2b3/1p6/4B3/PnN1P1P1/N3QP1P/R4RK1 w - - 0 24
+1730095226985351168	 = a1d1
+ = 2rr2k1/4bppp/pq2b3/1p6/4B3/PnN1P1P1/N3QP1P/3R1RK1 b - - 1 24
+-4409768867524695916	 = e6c4
+ = 2rr2k1/4bppp/pq6/1p6/2b1B3/PnN1P1P1/N3QP1P/3R1RK1 w - - 2 25
+-7382098617907788710	 = e2f3
+ = 2rr2k1/4bppp/pq6/1p6/2b1B3/PnN1PQP1/N4P1P/3R1RK1 b - - 3 25
+6026371615022628471	 = b6f6
+ = 2rr2k1/4bppp/p4q2/1p6/2b1B3/PnN1PQP1/N4P1P/3R1RK1 w - - 4 26
+4092755812428017025	 = f3g4
+ = 2rr2k1/4bppp/p4q2/1p6/2b1B1Q1/PnN1P1P1/N4P1P/3R1RK1 b - - 5 26
+-2160688373055009515	 = c4e6
+ = 2rr2k1/4bppp/p3bq2/1p6/4B1Q1/PnN1P1P1/N4P1P/3R1RK1 w - - 6 27
+7098909620663018091	 = g4e2
+ = 2rr2k1/4bppp/p3bq2/1p6/4B3/PnN1P1P1/N3QP1P/3R1RK1 b - - 7 27
+6302881892168265148	 = c8c3
+ = 3r2k1/4bppp/p3bq2/1p6/4B3/Pnr1P1P1/N3QP1P/3R1RK1 w - - 0 28
+5075136362660962942	 = a2c3
+ = 3r2k1/4bppp/p3bq2/1p6/4B3/PnN1P1P1/4QP1P/3R1RK1 b - - 0 28
+-6645369062157476746	 = f6c3
+ = 3r2k1/4bppp/p3b3/1p6/4B3/Pnq1P1P1/4QP1P/3R1RK1 w - - 0 29
+7478381370136492571	 = d1d8
+ = 3R2k1/4bppp/p3b3/1p6/4B3/Pnq1P1P1/4QP1P/5RK1 b - - 0 29
+-6792808012596415977	 = e7d8
+ = 3b2k1/5ppp/p3b3/1p6/4B3/Pnq1P1P1/4QP1P/5RK1 w - - 0 30
+-5029418339112038089	 = f1d1
+ = 3b2k1/5ppp/p3b3/1p6/4B3/Pnq1P1P1/4QP1P/3R2K1 b - - 1 30
+3749249205101071119	 = d8e7
+ = 6k1/4bppp/p3b3/1p6/4B3/Pnq1P1P1/4QP1P/3R2K1 w - - 2 31
+-2296826685534500076	 = e4b7
+ = 6k1/1B2bppp/p3b3/1p6/8/Pnq1P1P1/4QP1P/3R2K1 b - - 3 31
+-6870856741574813197	 = b3c5
+ = 6k1/1B2bppp/p3b3/1pn5/8/P1q1P1P1/4QP1P/3R2K1 w - - 4 32
+-295813926539709123	 = e2f3
+ = 6k1/1B2bppp/p3b3/1pn5/8/P1q1PQP1/5P1P/3R2K1 b - - 5 32
+-7368128314504445245	 = g7g6
+ = 6k1/1B2bp1p/p3b1p1/1pn5/8/P1q1PQP1/5P1P/3R2K1 w - - 0 33
+5592357846719996767	 = b7d5
+ = 6k1/4bp1p/p3b1p1/1pnB4/8/P1q1PQP1/5P1P/3R2K1 b - - 1 33
+2221177512435900383	 = e6d5
+ = 6k1/4bp1p/p5p1/1pnb4/8/P1q1PQP1/5P1P/3R2K1 w - - 0 34
+-7536605285318163424	 = f3d5
+ = 6k1/4bp1p/p5p1/1pnQ4/8/P1q1P1P1/5P1P/3R2K1 b - - 0 34
+-3041743981934055372	 = c3a3
+ = 6k1/4bp1p/p5p1/1pnQ4/8/q3P1P1/5P1P/3R2K1 w - - 0 35
+-8870049534836622971	 = d5e5
+ = 6k1/4bp1p/p5p1/1pn1Q3/8/q3P1P1/5P1P/3R2K1 b - - 1 35
+8563155578445040879	 = c5e6
+ = 6k1/4bp1p/p3n1p1/1p2Q3/8/q3P1P1/5P1P/3R2K1 w - - 2 36
+-2358310467644557312	 = d1a1
+ = 6k1/4bp1p/p3n1p1/1p2Q3/8/q3P1P1/5P1P/R5K1 b - - 3 36
+856372623161709311	 = a3d6
+ = 6k1/4bp1p/p2qn1p1/1p2Q3/8/4P1P1/5P1P/R5K1 w - - 4 37
+499901993022411484	 = e5d6
+ = 6k1/4bp1p/p2Qn1p1/1p6/8/4P1P1/5P1P/R5K1 b - - 0 37
+-7466446384472616607	 = e7d6
+ = 6k1/5p1p/p2bn1p1/1p6/8/4P1P1/5P1P/R5K1 w - - 0 38
+7813788642131910453	 = a1a6
+ = 6k1/5p1p/R2bn1p1/1p6/8/4P1P1/5P1P/6K1 b - - 0 38
+548062567547406487	 = d6c5
+ = 6k1/5p1p/R3n1p1/1pb5/8/4P1P1/5P1P/6K1 w - - 1 39
+4271070029531307434	 = g1f1
+ = 6k1/5p1p/R3n1p1/1pb5/8/4P1P1/5P1P/5K2 b - - 2 39
+1830704449941774578	 = g8f8
+ = 5k2/5p1p/R3n1p1/1pb5/8/4P1P1/5P1P/5K2 w - - 3 40
+-7769123138040853889	 = f1e2
+ = 5k2/5p1p/R3n1p1/1pb5/8/4P1P1/4KP1P/8 b - - 4 40
+3003121537766592324	 = f8e7
+ = 8/4kp1p/R3n1p1/1pb5/8/4P1P1/4KP1P/8 w - - 5 41
+74876065116144225	 = e2d3
+ = 8/4kp1p/R3n1p1/1pb5/8/3KP1P1/5P1P/8 b - - 6 41
+1922320226768812097	 = e7d7
+ = 8/3k1p1p/R3n1p1/1pb5/8/3KP1P1/5P1P/8 w - - 7 42
+-4673990452105557436	 = g3g4
+ = 8/3k1p1p/R3n1p1/1pb5/6P1/3KP3/5P1P/8 b - - 0 42
+-4361258606045450069	 = d7c7
+ = 8/2k2p1p/R3n1p1/1pb5/6P1/3KP3/5P1P/8 w - - 1 43
+-5171480277330667722	 = a6a8
+ = R7/2k2p1p/4n1p1/1pb5/6P1/3KP3/5P1P/8 b - - 2 43
+9096085512508223002	 = c7c6
+ = R7/5p1p/2k1n1p1/1pb5/6P1/3KP3/5P1P/8 w - - 3 44
+2323147197240163422	 = f2f4
+ = R7/5p1p/2k1n1p1/1pb5/5PP1/3KP3/7P/8 b - f3 0 44
+-3850309042805480294	 = c5e7
+ = R7/4bp1p/2k1n1p1/1p6/5PP1/3KP3/7P/8 w - - 1 45
+7225196519749324090	 = a8c8
+ = 2R5/4bp1p/2k1n1p1/1p6/5PP1/3KP3/7P/8 b - - 2 45
+-7594230645046063733	 = c6d5
+ = 2R5/4bp1p/4n1p1/1p1k4/5PP1/3KP3/7P/8 w - - 3 46
+-3356510829408998033	 = c8e8
+ = 4R3/4bp1p/4n1p1/1p1k4/5PP1/3KP3/7P/8 b - - 4 46
+7332237715717071195	 = d5d6
+ = 4R3/4bp1p/3kn1p1/1p6/5PP1/3KP3/7P/8 w - - 5 47
+-8676901125256051175	 = g4g5
+ = 4R3/4bp1p/3kn1p1/1p4P1/5P2/3KP3/7P/8 b - - 0 47
+806548625663603098	 = f7f5
+ = 4R3/4b2p/3kn1p1/1p3pP1/5P2/3KP3/7P/8 w - f6 0 48
+-5334763456919258877	 = e8b8
+ = 1R6/4b2p/3kn1p1/1p3pP1/5P2/3KP3/7P/8 b - - 1 48
+4839486916263765440	 = d6c6
+ = 1R6/4b2p/2k1n1p1/1p3pP1/5P2/3KP3/7P/8 w - - 2 49
+5854240538985677756	 = b8e8
+ = 4R3/4b2p/2k1n1p1/1p3pP1/5P2/3KP3/7P/8 b - - 3 49
+-6350036356207206529	 = c6d6
+ = 4R3/4b2p/3kn1p1/1p3pP1/5P2/3KP3/7P/8 w - - 4 50
+-5334763456919258877	 = e8b8
+ = 1R6/4b2p/3kn1p1/1p3pP1/5P2/3KP3/7P/8 b - - 5 50
+4839486916263765440	 = d6c6
+ = 1R6/4b2p/2k1n1p1/1p3pP1/5P2/3KP3/7P/8 w - - 6 51
+5854240538985677756	 = b8e8
+ = 4R3/4b2p/2k1n1p1/1p3pP1/5P2/3KP3/7P/8 b - - 7 51
+-6350036356207206529	 = c6d6
+ = 4R3/4b2p/3kn1p1/1p3pP1/5P2/3KP3/7P/8 w - - 8 52
+1898726323
+[INFO] Tests run: 37, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.078 s -- in com.github.bhlangonijr.chesslib.BoardTest
+[INFO] Running com.github.bhlangonijr.chesslib.move.MoveListQetTest
+[INFO] Tests run: 16, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0 s -- in com.github.bhlangonijr.chesslib.move.MoveListQetTest
+[INFO] Running com.github.bhlangonijr.chesslib.move.LucasMoveGeneratorTest
+[INFO] Tests run: 16, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.001 s -- in com.github.bhlangonijr.chesslib.move.LucasMoveGeneratorTest
+[INFO] Running com.github.bhlangonijr.chesslib.move.MoveGeneratorTest
+[INFO] Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0 s -- in com.github.bhlangonijr.chesslib.move.MoveGeneratorTest
+[INFO] Running com.github.bhlangonijr.chesslib.move.MoveListTest
+[INFO] Tests run: 12, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.002 s -- in com.github.bhlangonijr.chesslib.move.MoveListTest
+[INFO] Running com.github.bhlangonijr.chesslib.PolyglotKeyTest
+[INFO] Tests run: 11, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.001 s -- in com.github.bhlangonijr.chesslib.PolyglotKeyTest
+[INFO] Running com.github.bhlangonijr.chesslib.Chess960KxcCaptureTest
+Grieve vs Jeitz: all moves legal! FEN: 1qrnr1kb/pp2Np1p/5p2/1P6/P6Q/6P1/4PP1P/2RR2KB b - - 0 21
+After e4: rkqrbbnn/pppppppp/8/8/4P3/8/PPPP1PPP/RKQRBBNN b DAda e3 0 1
+After e5: rkqrbbnn/pppp1ppp/8/4p3/4P3/8/PPPP1PPP/RKQRBBNN w DAda e6 0 2
+After Ng3: rkqrbbnn/pppp1ppp/8/4p3/4P3/6N1/PPPP1PPP/RKQRBBN1 b DAda - 1 2
+After Ng6: rkqrbbn1/pppp1ppp/6n1/4p3/4P3/6N1/PPPP1PPP/RKQRBBN1 w DAda - 2 3
+After Nf3: rkqrbbn1/pppp1ppp/6n1/4p3/4P3/5NN1/PPPP1PPP/RKQRBB2 b DAda - 3 3
+After c5: rkqrbbn1/pp1p1ppp/6n1/2p1p3/4P3/5NN1/PPPP1PPP/RKQRBB2 w DAda c6 0 4
+After c3: rkqrbbn1/pp1p1ppp/6n1/2p1p3/4P3/2P2NN1/PP1P1PPP/RKQRBB2 b DAda - 0 4
+After Nf6: rkqrbb2/pp1p1ppp/5nn1/2p1p3/4P3/2P2NN1/PP1P1PPP/RKQRBB2 w DAda - 1 5
+After d4: rkqrbb2/pp1p1ppp/5nn1/2p1p3/3PP3/2P2NN1/PP3PPP/RKQRBB2 b DAda d3 0 5
+After cxd4: rkqrbb2/pp1p1ppp/5nn1/4p3/3pP3/2P2NN1/PP3PPP/RKQRBB2 w DAda - 0 6
+After cxd4: rkqrbb2/pp1p1ppp/5nn1/4p3/3PP3/5NN1/PP3PPP/RKQRBB2 b DAda - 0 6
+After Qxc1+: rk1rbb2/pp1p1ppp/5nn1/4p3/3PP3/5NN1/PP3PPP/RKqRBB2 w DAda - 0 7
+After Kxc1: rk1rbb2/pp1p1ppp/5nn1/4p3/3PP3/5NN1/PP3PPP/R1KRBB2 b da - 0 7
+After exd4: rk1rbb2/pp1p1ppp/5nn1/8/3pP3/5NN1/PP3PPP/R1KRBB2 w da - 0 8
+After Nxd4: rk1rbb2/pp1p1ppp/5nn1/8/3NP3/6N1/PP3PPP/R1KRBB2 b da - 0 8
+After d5: rk1rbb2/pp3ppp/5nn1/3p4/3NP3/6N1/PP3PPP/R1KRBB2 w da d6 0 9
+
+FEN before Nc2: rk1rbb2/pp3ppp/5nn1/3p4/3NP3/6N1/PP3PPP/R1KRBB2 w da d6 0 9
+Nc2 succeeded! FEN after: rk1rbb2/pp3ppp/5nn1/3p4/4P3/6N1/PPN2PPP/R1KRBB2 b da - 1 9
+After e4: rkqrbbnn/pppppppp/8/8/4P3/8/PPPP1PPP/RKQRBBNN b - e3 0 1
+After e5: rkqrbbnn/pppp1ppp/8/4p3/4P3/8/PPPP1PPP/RKQRBBNN w - e6 0 2
+After Ng3: rkqrbbnn/pppp1ppp/8/4p3/4P3/6N1/PPPP1PPP/RKQRBBN1 b - - 1 2
+After Ng6: rkqrbbn1/pppp1ppp/6n1/4p3/4P3/6N1/PPPP1PPP/RKQRBBN1 w - - 2 3
+After Nf3: rkqrbbn1/pppp1ppp/6n1/4p3/4P3/5NN1/PPPP1PPP/RKQRBB2 b - - 3 3
+After c5: rkqrbbn1/pp1p1ppp/6n1/2p1p3/4P3/5NN1/PPPP1PPP/RKQRBB2 w - c6 0 4
+After c3: rkqrbbn1/pp1p1ppp/6n1/2p1p3/4P3/2P2NN1/PP1P1PPP/RKQRBB2 b - - 0 4
+After Nf6: rkqrbb2/pp1p1ppp/5nn1/2p1p3/4P3/2P2NN1/PP1P1PPP/RKQRBB2 w - - 1 5
+After d4: rkqrbb2/pp1p1ppp/5nn1/2p1p3/3PP3/2P2NN1/PP3PPP/RKQRBB2 b - d3 0 5
+After cxd4: rkqrbb2/pp1p1ppp/5nn1/4p3/3pP3/2P2NN1/PP3PPP/RKQRBB2 w - - 0 6
+After cxd4: rkqrbb2/pp1p1ppp/5nn1/4p3/3PP3/5NN1/PP3PPP/RKQRBB2 b - - 0 6
+After Qxc1+: rk1rbb2/pp1p1ppp/5nn1/4p3/3PP3/5NN1/PP3PPP/RKqRBB2 w - - 0 7
+After Kxc1: rk1rbb2/pp1p1ppp/5nn1/4p3/3PP3/5NN1/PP3PPP/R1KRBB2 b - - 0 7
+After exd4: rk1rbb2/pp1p1ppp/5nn1/8/3pP3/5NN1/PP3PPP/R1KRBB2 w - - 0 8
+After Nxd4: rk1rbb2/pp1p1ppp/5nn1/8/3NP3/6N1/PP3PPP/R1KRBB2 b - - 0 8
+After d5: rk1rbb2/pp3ppp/5nn1/3p4/3NP3/6N1/PP3PPP/R1KRBB2 w - d6 0 9
+
+FEN before Nc2: rk1rbb2/pp3ppp/5nn1/3p4/3NP3/6N1/PP3PPP/R1KRBB2 w - d6 0 9
+Nc2 succeeded! FEN after: rk1rbb2/pp3ppp/5nn1/3p4/4P3/6N1/PPN2PPP/R1KRBB2 b - - 1 9
+[INFO] Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.001 s -- in com.github.bhlangonijr.chesslib.Chess960KxcCaptureTest
+[INFO] Running com.github.bhlangonijr.chesslib.unicode.UnicodePrinterTest
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0 s -- in com.github.bhlangonijr.chesslib.unicode.UnicodePrinterTest
+[INFO] Running com.github.bhlangonijr.chesslib.Chess960FenComparisonTest
+[INFO] Tests run: 6, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.002 s -- in com.github.bhlangonijr.chesslib.Chess960FenComparisonTest
+[INFO] Running com.github.bhlangonijr.chesslib.Chess960RookMoveTest
+Black OOO (queen-side castle): b8c8
+FEN before 43. Ra1: 2kn3q/1p6/pPp1p3/2Pp1p2/R2P1Pp1/1K1PQ1P1/1PB4r/8 w - - 2 43
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0 s -- in com.github.bhlangonijr.chesslib.Chess960RookMoveTest
+[INFO] Running com.github.bhlangonijr.chesslib.game.PedroTimeControlTest
+[INFO] Tests run: 23, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.006 s -- in com.github.bhlangonijr.chesslib.game.PedroTimeControlTest
+[INFO] Running com.github.bhlangonijr.chesslib.game.GameTest
+[INFO] Tests run: 22, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.005 s -- in com.github.bhlangonijr.chesslib.game.GameTest
+[INFO] Running com.github.bhlangonijr.chesslib.game.GameQualityTest
+[INFO] Tests run: 15, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.004 s -- in com.github.bhlangonijr.chesslib.game.GameQualityTest
+[INFO] Running com.github.bhlangonijr.chesslib.game.GameIntegrationTest
+[INFO] Tests run: 12, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.042 s -- in com.github.bhlangonijr.chesslib.game.GameIntegrationTest
+[INFO] Running com.github.bhlangonijr.chesslib.game.GameIsolatedTest
+[INFO] Tests run: 18, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.002 s -- in com.github.bhlangonijr.chesslib.game.GameIsolatedTest
+[INFO] Running com.github.bhlangonijr.chesslib.game.GameProcessingTest
+[INFO] Tests run: 22, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.002 s -- in com.github.bhlangonijr.chesslib.game.GameProcessingTest
+[INFO] Running com.github.bhlangonijr.chesslib.Chess960DoMoveBugTest
+[INFO] Tests run: 20, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.001 s -- in com.github.bhlangonijr.chesslib.Chess960DoMoveBugTest
+[INFO] Running com.github.bhlangonijr.chesslib.PieceTest
+[INFO] Tests run: 6, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0 s -- in com.github.bhlangonijr.chesslib.PieceTest
+[INFO] Running com.github.bhlangonijr.chesslib.PieceTypeTest
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0 s -- in com.github.bhlangonijr.chesslib.PieceTypeTest
+[INFO] Running com.github.bhlangonijr.chesslib.GameLoaderTest
+[INFO] Tests run: 7, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0 s -- in com.github.bhlangonijr.chesslib.GameLoaderTest
+[INFO] Running com.github.bhlangonijr.chesslib.bitboard.BitboardTest
+[INFO] Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0 s -- in com.github.bhlangonijr.chesslib.bitboard.BitboardTest
+[INFO] Running com.github.bhlangonijr.chesslib.PgnIteratorTest
+[INFO] Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.011 s -- in com.github.bhlangonijr.chesslib.PgnIteratorTest
+[INFO] Running com.github.bhlangonijr.chesslib.PgnHolderTest
+[INFO] Tests run: 29, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 3.211 s -- in com.github.bhlangonijr.chesslib.PgnHolderTest
+[INFO] Running com.github.bhlangonijr.chesslib.PedroPgnHolderQualityTest
+[INFO] Tests run: 8, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.004 s -- in com.github.bhlangonijr.chesslib.PedroPgnHolderQualityTest
+[INFO] Running com.github.bhlangonijr.chesslib.Chess960Test
+[INFO] Tests run: 27, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.004 s -- in com.github.bhlangonijr.chesslib.Chess960Test
+[INFO] Running com.github.bhlangonijr.chesslib.PerftTest
+b7b8q: 42706
+b7b8r: 35072
+b7b8b: 28044
+b7b8n: 10703
+a2a1: 13026
+a2b1: 17666
+a2b2: 25049
+a2a3: 18885
+a2b3: 26191
+Node count: 217342
+Time: 134
+a7a8q: 19066
+a7a8r: 17190
+a7a8b: 18675
+a7a8n: 6679
+a6a5: 14506
+a6b5: 16567
+Node count: 92683
+Time: 54
+a6a7: 837
+a8a7: 1380
+Node count: 2217
+Time: 1
+c7c8q: 0
+c7c8r: 52185
+c7c8b: 57162
+c7c8n: 44544
+b5a4: 74272
+b5b4: 108544
+b5c4: 133887
+b5a5: 18352
+b5c5: 56683
+b5c6: 21955
+Node count: 567584
+Time: 232
+f4e2: 544
+f4g2: 534
+f4d3: 677
+f4h3: 640
+f4d5: 665
+f4h5: 688
+f4e6: 839
+f4g6: 832
+f5b1: 524
+f5c2: 603
+f5d3: 199
+f5h3: 182
+f5e4: 318
+f5g4: 277
+f5a5: 782
+f5b5: 726
+f5c5: 515
+f5d5: 597
+f5e5: 562
+f5g5: 478
+f5h5: 558
+f5e6: 513
+f5f6: 763
+f5g6: 473
+f5d7: 812
+f5f7: 841
+f5h7: 838
+f5c8: 823
+f5f8: 809
+c6b5: 730
+c6c5: 687
+c6d5: 623
+c6b6: 784
+c6d6: 786
+c6b7: 785
+c6c7: 785
+c6d7: 735
+Node count: 23527
+Time: 10
+h6h5: 308855
+b7b6: 331753
+c7c5: 240760
+c7c6: 286368
+g7g5: 244926
+g7g6: 261420
+d5a2: 291533
+d5b3: 265480
+d5c4: 316179
+d5c6: 276024
+f6h4: 305276
+f6g5: 304916
+f6g6: 241213
+f6e7: 386224
+f6f7: 335622
+f6d8: 448488
+f6f8: 452793
+f5g4: 387273
+f5g5: 359243
+f5g6: 377168
+Node count: 6421514
+Time: 1375
+e2e3: 45326
+e2e4: 36889
+g2g3: 14747
+g2g4: 53895
+b4b1: 69665
+b4b2: 48498
+b4b3: 59719
+b4a4: 45591
+b4c4: 63781
+b4d4: 59574
+b4e4: 54192
+b4f4: 10776
+a5a4: 52943
+a5a6: 59028
+Node count: 674624
+Time: 121
+g2f1q: 33700
+g2f1r: 91129
+g2f1b: 33399
+g2f1n: 54682
+g2h1q: 141001
+g2h1r: 92321
+g2h1b: 109225
+g2h1n: 58424
+g2g1q: 196031
+g2g1r: 201350
+g2g1b: 72525
+g2g1n: 24145
+a8b6: 232333
+a8c7: 287482
+c8b6: 190892
+c8d6: 249997
+c8a7: 185316
+c8e7: 221064
+d7c6: 198410
+d7d6: 211186
+d7e6: 226311
+d7c7: 144121
+d7e7: 203075
+d7e8: 146984
+Node count: 3605103
+Time: 673
+a2a3: 181046
+a2a4: 217832
+b2b3: 215255
+b2b4: 216145
+c2c3: 222861
+c2c4: 240082
+d2d3: 328511
+d2d4: 361790
+e2e3: 402988
+e2e4: 405385
+f2f3: 178889
+f2f4: 198473
+g2g3: 217210
+g2g4: 214048
+h2h3: 181044
+h2h4: 218829
+b1a3: 198572
+b1c3: 234656
+g1f3: 233491
+g1h3: 198502
+Node count: 4865609
+Time: 756
+d7c8q: 44226
+d7c8r: 38077
+d7c8b: 65053
+d7c8n: 62009
+a2a3: 46833
+a2a4: 48882
+b2b3: 46497
+b2b4: 46696
+c2c3: 49406
+g2g3: 44509
+g2g4: 45506
+h2h3: 46762
+h2h4: 47811
+b1d2: 40560
+b1a3: 44378
+b1c3: 50303
+e2g1: 48844
+e2c3: 54792
+e2g3: 51892
+e2d4: 52109
+e2f4: 51127
+c1d2: 46881
+c1e3: 53637
+c1f4: 52350
+c1g5: 45601
+c1h6: 40913
+c4b3: 43453
+c4d3: 43565
+c4b5: 45559
+c4d5: 48002
+c4a6: 41884
+c4e6: 49872
+c4f7: 43289
+h1f1: 46101
+h1g1: 44668
+d1d2: 48843
+d1d3: 57153
+d1d4: 57744
+d1d5: 56899
+d1d6: 43766
+e1f1: 49775
+e1d2: 33423
+e1f2: 36783
+e1g1: 47054
+Node count: 2103487
+Time: 309
+b2b3: 83959
+b2b4: 85907
+g2g3: 89798
+h2h3: 93404
+h2h4: 87792
+a3a4: 89719
+d3d4: 93464
+c3b1: 74196
+c3d1: 72167
+c3a2: 81990
+c3a4: 83785
+c3b5: 86102
+c3d5: 84310
+f3e1: 77246
+f3d2: 87558
+f3d4: 98744
+f3h4: 89355
+f3e5: 111761
+c4a2: 83990
+c4b3: 84078
+c4b5: 84686
+c4d5: 82111
+c4a6: 87691
+c4e6: 88890
+c4f7: 8203
+g5c1: 81175
+g5d2: 89433
+g5e3: 91743
+g5f4: 99547
+g5h4: 83607
+g5f6: 79097
+g5h6: 89238
+a1b1: 83917
+a1c1: 81943
+a1d1: 79961
+a1e1: 76017
+a1a2: 80000
+f1b1: 83966
+f1c1: 85946
+f1d1: 87918
+f1e1: 87928
+e2d1: 82176
+e2e1: 84117
+e2d2: 89961
+e2e3: 90128
+g1h1: 95870
+Node count: 3894594
+Time: 527
+g2h3: 82759
+d5e6: 97464
+a2a3: 94405
+a2a4: 90978
+b2b3: 81066
+g2g3: 77468
+g2g4: 75677
+d5d6: 79551
+c3b1: 84773
+c3d1: 84782
+c3a4: 91447
+c3b5: 81498
+e5d3: 77431
+e5c4: 77752
+e5g4: 79912
+e5c6: 83885
+e5g6: 83866
+e5d7: 93913
+e5f7: 88799
+d2c1: 83037
+d2e3: 90274
+d2f4: 84869
+d2g5: 87951
+d2h6: 82323
+e2d1: 74963
+e2f1: 88728
+e2d3: 85119
+e2c4: 84835
+e2b5: 79739
+e2a6: 69334
+a1b1: 83348
+a1c1: 83263
+a1d1: 79695
+h1f1: 81563
+h1g1: 84876
+f3d3: 83727
+f3e3: 92505
+f3g3: 94461
+f3h3: 98524
+f3f4: 90488
+f3g4: 92037
+f3f5: 104992
+f3h5: 95034
+f3f6: 77838
+e1d1: 79989
+e1f1: 77887
+e1g1: 86975
+e1c1: 79803
+Node count: 4085603
+Time: 582
+d7c8q: 44226
+d7c8r: 38077
+d7c8b: 65053
+d7c8n: 62009
+a2a3: 46833
+a2a4: 48882
+b2b3: 46497
+b2b4: 46696
+c2c3: 49406
+g2g3: 44509
+g2g4: 45506
+h2h3: 46762
+h2h4: 47811
+b1d2: 40560
+b1a3: 44378
+b1c3: 50303
+e2g1: 48844
+e2c3: 54792
+e2g3: 51892
+e2d4: 52109
+e2f4: 51127
+c1d2: 46881
+c1e3: 53637
+c1f4: 52350
+c1g5: 45601
+c1h6: 40913
+c4b3: 43453
+c4d3: 43565
+c4b5: 45559
+c4d5: 48002
+c4a6: 41884
+c4e6: 49872
+c4f7: 43289
+h1f1: 46101
+h1g1: 44668
+d1d2: 48843
+d1d3: 57153
+d1d4: 57744
+d1d5: 56899
+d1d6: 43766
+e1f1: 49775
+e1d2: 33423
+e1f2: 36783
+e1g1: 47054
+Node count: 2103487
+Time: 285
+d2d4: 72051
+c4c5: 60769
+f3d4: 75736
+b4c5: 58167
+f1f2: 73972
+g1h1: 81638
+Node count: 422333
+Time: 59
+h2g1: 55333
+h2g3: 62626
+h2f4: 69053
+h2e5: 59135
+h2d6: 61097
+h2c7: 60199
+h2b8: 54752
+a1b1: 47958
+a1c1: 47557
+a1d1: 42247
+a1a2: 50325
+a1a3: 50836
+a1a4: 49150
+a1a5: 47033
+a1a6: 44730
+a1a7: 35744
+a1a8: 4427
+h1f1: 50602
+h1g1: 55938
+e1d1: 39985
+e1f1: 39070
+e1d2: 53401
+e1e2: 57805
+e1f2: 55433
+e1g1: 46811
+e1c1: 32959
+Node count: 1274206
+Time: 175
+a8a1: 1980
+a8a2: 40544
+a8a3: 41303
+a8a4: 47961
+a8a5: 50431
+a8a6: 49811
+a8a7: 55332
+a8b8: 54262
+a8c8: 54887
+a8d8: 49727
+h8h1: 1352
+h8h2: 39991
+h8h3: 38539
+h8h4: 47637
+h8h5: 48797
+h8h6: 49692
+h8h7: 55134
+h8f8: 46570
+h8g8: 52640
+f3d1: 3782
+f3f1: 3126
+f3h1: 3553
+f3e2: 1009
+f3f2: 2386
+f3g2: 50810
+f3a3: 43980
+f3b3: 61216
+f3c3: 7646
+f3d3: 46225
+f3e3: 2870
+f3g3: 6834
+f3h3: 45034
+f3e4: 6298
+f3f4: 47066
+f3g4: 55830
+f3d5: 52949
+f3f5: 62753
+f3h5: 43743
+f3c6: 58992
+f3f6: 54394
+f3b7: 68331
+f3f7: 62015
+f3f8: 45984
+e8f7: 57060
+Node count: 1720476
+Time: 249
+c4b2: 30626
+c4d2: 33151
+c4a3: 32124
+c4e3: 27112
+c4a5: 30993
+c4e5: 27378
+c4b6: 25466
+c4d6: 27429
+b3b1: 35096
+b3d1: 31676
+b3a2: 42340
+b3b2: 41247
+b3c2: 39534
+b3a3: 40996
+b3c3: 41432
+b3d3: 28068
+b3e3: 29254
+b3f3: 21754
+b3g3: 47132
+b3h3: 24663
+b3a4: 34477
+b3b4: 32808
+b3b5: 23059
+b3b6: 24326
+f1e1: 42228
+f1g1: 42353
+f1e2: 48873
+f1f2: 49517
+f1g2: 49546
+Node count: 1004658
+Time: 124
+[INFO] Tests run: 17, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 5.668 s -- in com.github.bhlangonijr.chesslib.PerftTest
+[INFO] 
+[INFO] Results:
+[INFO] 
+[INFO] Tests run: 341, Failures: 0, Errors: 0, Skipped: 0
+[INFO] 
+[INFO] 
+[INFO] --- jacoco:0.8.12:report (report) @ chesslib ---
+[INFO] Loading execution data file <REPOSITORIO>/chesslib/target/jacoco-movelist.exec
+[INFO] Analyzed bundle 'chesslib' with 1 classes
+[INFO] 
+[INFO] --- jar:3.5.0:jar (default-jar) @ chesslib ---
+[INFO] 
+[INFO] >>> source:3.2.1:jar (attach-sources) > generate-sources @ chesslib >>>
+[INFO] 
+[INFO] --- jacoco:0.8.12:prepare-agent (prepare-agent) @ chesslib ---
+[INFO] argLine set to "-javaagent:<HOME>/.m2/repository/org/jacoco/org.jacoco.agent/0.8.12/org.jacoco.agent-0.8.12-runtime.jar=destfile=<REPOSITORIO>/chesslib/target/jacoco-movelist.exec,append=false,includes=com/github/bhlangonijr/chesslib/move/MoveList,excludes=com/github/bhlangonijr/chesslib/move/MoveGeneratorException"
+[INFO] 
+[INFO] <<< source:3.2.1:jar (attach-sources) < generate-sources @ chesslib <<<
+[INFO] 
+[INFO] 
+[INFO] --- source:3.2.1:jar (attach-sources) @ chesslib ---
+[INFO] 
+[INFO] --- javadoc:3.2.0:jar (attach-javadocs) @ chesslib ---
+[INFO] Skipping javadoc generation
+[INFO] 
+[INFO] --- jacoco:0.8.12:check (check) @ chesslib ---
+[INFO] Loading execution data file <REPOSITORIO>/chesslib/target/jacoco-movelist.exec
+[INFO] Analyzed bundle 'chesslib' with 1 classes
+[INFO] All coverage checks have been met.
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  10.731 s
+[INFO] Finished at: 2026-11-22T19:08:40-03:00
+[INFO] ------------------------------------------------------------------------
