@@ -26,3 +26,8 @@ mvn -Dtest=LucasOwnerIntegrationTests test
 ```
 
 O teste usa uma porta aleatória e desativa somente o ciclo automático do Docker Compose, mantendo o banco H2 local da aplicação.
+
+## Resultado verificado
+
+Em 22/11/2026, os dois cenários foram executados com Maven e terminaram com
+`BUILD SUCCESS`: 2 testes aprovados, sem falhas, erros ou testes ignorados.

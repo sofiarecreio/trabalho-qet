@@ -502,6 +502,56 @@ Com base nesses resultados, o novo teste foi considerado válido porque verifica
 - Relatório JaCoCo gerado localmente: `chesslib/target/site/jacoco-movelist/index.html`
 - Relatório PIT gerado localmente: `chesslib/target/pit-reports-movelist/index.html`
 
+## Registro 011 — Testes unitários e cobertura do `MoveGenerator`
+
+| Informação | Registro |
+|---|---|
+| Data | 19/11/2026 |
+| Responsável | Lucas Ardelino |
+| Entrega | Entrega 2 |
+| Atividade | Ampliação dos testes unitários da classe `MoveGenerator` e configuração da cobertura estrutural |
+| Ferramentas | ChatGPT/Codex, Maven, JUnit e JaCoCo |
+| Artefatos relacionados | `LucasMoveGeneratorTest.java`, `MoveGenerator.java` e `movegenerator-cobertura.md` |
+| Prompt/instrução | Solicitei apoio para identificar cenários importantes da classe `MoveGenerator` e ampliar a cobertura dos métodos relacionados à geração de movimentos |
+| Resultado | Foram adicionados testes para peões, capturas, promoções, movimentos de peças, máscaras, movimentos pseudo-legais e roques |
+| Decisão | As sugestões foram revisadas e adaptadas ao funcionamento real da biblioteca. Foram mantidos os casos que apresentavam resultados esperados claros e verificáveis |
+| Validação | Lucas executou os testes com Maven e conferiu os relatórios do JaCoCo. A execução selecionada teve 20 testes aprovados e cobertura de branches acima de 80% |
+| Evidência no GitHub | [Commit `017a24d`](https://github.com/sofiarecreio/trabalho-qet/commit/017a24d), de 19/11/2026 |
+
+## Registro 012 — Integração do PetClinic e teste de mutação
+
+| Informação | Registro |
+|---|---|
+| Data | 19/11/2026 |
+| Responsável | Lucas Ardelino |
+| Entrega | Entrega 2 |
+| Atividade | Criação do teste de integração da busca de proprietário e configuração do teste de mutação do `MoveGenerator` |
+| Ferramentas | ChatGPT/Codex, Maven, JUnit, PIT e Spring Boot |
+| Artefatos relacionados | `LucasOwnerIntegrationTests.java`, `mutacao-movegenerator.md` e configuração do `pom.xml` |
+| Prompt/instrução | Solicitei apoio para definir um teste de integração utilizando as camadas reais do PetClinic e analisar quais mutações do `MoveGenerator` eram detectadas pelos testes |
+| Resultado | O teste de integração verificou a busca de proprietários e o acesso aos detalhes de Betty Davis. O PIT foi executado sobre o `MoveGenerator` para avaliar a força dos testes |
+| Decisão | Foi mantido o uso dos componentes reais da aplicação, sem substituir o fluxo por mocks. Na mutação, os resultados foram analisados sem remover mutantes apenas para aumentar o percentual |
+| Validação | Lucas executou os testes com Maven, conferiu as respostas da aplicação e analisou o relatório do PIT, incluindo mutantes mortos, sobreviventes e sem cobertura |
+| Evidência no GitHub | [Commit `df1b211`](https://github.com/sofiarecreio/trabalho-qet/commit/df1b211), de 19/11/2026 |
+
+## Registro 013 — Teste de sistema com Selenium
+
+| Informação | Registro |
+|---|---|
+| Data | 22/11/2026 |
+| Responsável | Lucas Ardelino |
+| Entrega | Entrega 2 |
+| Atividade | Execução do teste de sistema para buscar um proprietário pela interface web do PetClinic |
+| Ferramentas | ChatGPT/Codex, Selenium WebDriver, Chrome, JUnit e Maven |
+| Artefatos relacionados | `LucasOwnerSeleniumTests.java`, `selenium-petclinic.md` e a captura versionada do cenário |
+| Prompt/instrução | Solicitei apoio para organizar o roteiro do teste, revisar as verificações do código e registrar a evidência do cenário realizado no PetClinic |
+| Resultado | Lucas realizou o fluxo no sistema: acessou a busca de proprietários, informou o sobrenome `Davis`, enviou o formulário e conferiu a presença de Betty Davis e Harold Davis na tabela |
+| Decisão | A IA foi utilizada somente como apoio técnico na organização do roteiro e na revisão das asserções. A execução do cenário, a conferência do resultado e a seleção da evidência ficaram sob responsabilidade de Lucas |
+| Validação | O teste foi executado com Maven usando Chrome em modo headless. O resultado foi aprovado e a captura da tela foi conferida e copiada para a documentação versionada |
+| Evidência no GitHub | [Commit `77881c1`](https://github.com/sofiarecreio/trabalho-qet/commit/77881c1), de 22/11/2026 |
+
+---
+
 ## Registro 006 — Ampliação dos testes unitários e melhoria do escore de mutação de `GameLoader`
 
 | **Informação** | **Registro** |
@@ -748,7 +798,9 @@ A responsável revisou e colou a matriz ISO no documento Trabalho QeT. Na rodada
 - [Plano de Teste](https://docs.google.com/document/d/1JDJVJR6WbpOXpzfRQsbcVWZm8XzQYc8xMSGoEAKj0xo/edit)
 - [Rascunho da documentação no repositório](../entrega2/sofia/documentacao-final.md)
 
-## Registro — Ampliação dos testes de TimeControl
+---
+
+## Registro 014 — Ampliação dos testes de `TimeControl`
 
 | Informação | Registro |
 |---|---|

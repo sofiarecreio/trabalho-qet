@@ -71,6 +71,7 @@ O [Spring PetClinic](https://github.com/spring-projects/spring-petclinic) é uma
 - **Inspeção de Game:** [relatório, achados e resultados](docs/inspecao/game/relatorio.md), [PNG antes](docs/inspecao/game/sonar-antes.png) e [PNG depois](docs/inspecao/game/sonar-depois.png).
 - **Selenium de visitas:** [nove cenários, execução e capturas](docs/selenium/visitas/README.md).
 - **Artefatos de Lucas já disponíveis:** [cobertura](docs/entrega2/lucas/movegenerator-cobertura.md), [mutação](docs/entrega2/lucas/mutacao-movegenerator.md), [correções de MoveGenerator](docs/entrega2/lucas/qualidade-movegenerator.md), [integração PetClinic](docs/entrega2/lucas/integracao-petclinic.md) e [Selenium de busca](docs/entrega2/lucas/selenium-petclinic.md).
+- **Explicação da contribuição de Lucas:** [roteiro de apresentação](docs/entrega2/lucas/explicacao-contribuicao.md).
 - **Avaliação ISO/IEC 25010:** [matriz no documento Trabalho QeT](https://docs.google.com/document/d/16PhvQ19VGINYlqDE0NsTWH6VHgzwLYcO_FdjD46PtVU/edit), coordenada por Sofia com os dados medidos de todos os integrantes.
 - **Slides da apresentação:** [pasta indicada pela professora](https://drive.google.com/drive/folders/1LVjwh2mAI-q-r4dDPsyD1pxVFcnPD1Ff); slides ainda a publicar.
 
@@ -252,6 +253,17 @@ Atualização: 22/11/2026. A contribuição de Weslley está integrada à `main`
 
 Os 307 testes do Chesslib incluem os testes originais e dos demais integrantes. Os 18 do PetClinic correspondem à seleção indicada no comando, e não à suíte inteira da aplicação. O critério todas-arestas é medido pelo contador de branches do JaCoCo, como apresentado na aula de cobertura com EclEmma/JaCoCo.
 
+### Resultados de Lucas
+
+| Item | Resultado verificado | Evidência |
+| --- | --- | --- |
+| Testes unitários | 20 testes aprovados no recorte do `MoveGenerator` | [Cobertura](docs/entrega2/lucas/movegenerator-cobertura.md) |
+| Cobertura estrutural | 65/68 branches = 95,59% na execução focada; 67/68 = 98,53% na regressão consolidada | [Cobertura e consolidação](docs/entrega2/lucas/movegenerator-cobertura.md) |
+| Mutação | 64/78 mutantes mortos = 82,05% no cálculo estrito; 3 sobreviventes, 5 sem cobertura, 4 erros de memória e 2 timeouts | [Relatório PIT](docs/entrega2/lucas/mutacao-movegenerator.md) |
+| SonarQube | Quality Gate `OK`, sem bugs, vulnerabilidades ou code smells no recorte analisado | [Qualidade do MoveGenerator](docs/entrega2/lucas/qualidade-movegenerator.md) |
+| Integração PetClinic | 2 testes aprovados, usando Spring Boot, MVC, JPA, H2 e Thymeleaf reais | [Integração](docs/entrega2/lucas/integracao-petclinic.md) |
+| Selenium | 1 teste aprovado na busca por `Davis`, com evidência versionada | [Selenium](docs/entrega2/lucas/selenium-petclinic.md) |
+
 - [x] Ampliar e executar os testes de Game e a integração do Chesslib.
 - [x] Executar PIT de Game acima de 80%, mantendo todos os mutantes no denominador.
 - [x] Corrigir os apontamentos Sonar de Game e preservar capturas antes/depois.
@@ -259,7 +271,7 @@ Os 307 testes do Chesslib incluem os testes originais e dos demais integrantes. 
 - [x] Integrar o código e as evidências de Weslley à main.
 - [x] Comprovar o critério todas-arestas em Game: 166/179 branches (92,74%), acima da meta de 80%.
 - [x] Realizar a revisão individual dos testes, métricas e decisões.
-- [ ] Preparar a explicação da própria contribuição para a apresentação.
+- [x] Preparar a explicação da própria contribuição para a apresentação: [roteiro de Lucas](docs/entrega2/lucas/explicacao-contribuicao.md).
 
 ### Resultados de Pedro
 
@@ -297,7 +309,7 @@ Selenium de cadastro de proprietário de Sofia, execução local em 23/11/2026: 
 | --- | --- | --- |
 | Pedro | Consolidação atualizada e contribuição integrada | [Cinco classes revalidadas](docs/entrega2/consolidacao/README.md); PR #23 integrado à main; resultados e limites documentados |
 | Lucio | Nenhuma pendência individual | Testes, cobertura, mutação, inspeção da MoveList e Selenium concluídos e documentados |
-| Lucas | Consolidação das funcionalidades Selenium e confirmação dos resultados finais de sua classe | Artefatos de MoveGenerator, integração e busca de proprietário já disponíveis nos links acima |
+| Lucas | Consolidação das funcionalidades Selenium e confirmação dos resultados finais de sua classe | Artefatos de MoveGenerator, integração, busca de proprietário e evidências versionadas já disponíveis nos links acima; PR #27 |
 | Sofia | ISO/IEC 25010, Plano de Teste, índice de evidências e slides | ISO no [documento Trabalho QeT](https://docs.google.com/document/d/16PhvQ19VGINYlqDE0NsTWH6VHgzwLYcO_FdjD46PtVU/edit); Plano de Teste 2.0; índice neste README; slides pendentes |
 | Todos | Entregar seus próprios resultados, evidências e revisão individual | Esta atualização não declara concluídas as partes ainda sem confirmação |
 

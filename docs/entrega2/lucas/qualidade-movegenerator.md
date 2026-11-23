@@ -23,14 +23,26 @@ evita duplicação entre os dois lados, mantendo o comportamento coberto pelos t
 
 Foram executados os 20 testes do `MoveGenerator` — 16 testes do Lucas e 4 testes já
 existentes — e todos passaram. A verificação do JaCoCo também foi concluída com
-sucesso, mantendo a cobertura de branches acima do mínimo de 80% configurado para a
-classe.
+sucesso, registrando 95,6% de cobertura de branches no recorte analisado.
 
 ```bash
 cd chesslib
-mvn -Dtest=MoveGeneratorTest,LucasMoveGeneratorTest -Dmaven.javadoc.skip=true clean verify
+mvn -Dtest=MoveGeneratorTest,LucasMoveGeneratorTest -Dmaven.javadoc.skip=true test
 ```
 
-O servidor/analisador Sonar usado pela equipe não está configurado neste ambiente;
-por isso, a confirmação local foi feita pelos testes, pela cobertura e pela revisão
-do achado registrado no relatório compartilhado.
+Também foi executada uma análise no SonarQube Community Build 26.11.0.134175, usando
+o projeto `qet-lucas-movegenerator` e o perfil `Sonar way core`. A análise considerou
+o `MoveGenerator.java` e o respectivo teste do Lucas. O processamento terminou com
+sucesso e o resultado foi:
+
+- Quality Gate: `OK`;
+- bugs: `0`;
+- vulnerabilidades: `0`;
+- code smells: `0`;
+- security hotspots: `0`;
+- cobertura: `96,8%`;
+- cobertura de branches: `95,6%`;
+- duplicação: `0,0%`.
+
+O painel da análise ficou disponível em:
+`http://localhost:9000/dashboard?id=qet-lucas-movegenerator`.

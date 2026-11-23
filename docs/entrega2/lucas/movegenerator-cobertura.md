@@ -30,7 +30,7 @@ mvn -Dtest=MoveGeneratorTest,LucasMoveGeneratorTest -Dmaven.javadoc.skip=true cl
 
 O filtro executa os 16 testes do Lucas e os 4 testes já existentes da classe `MoveGeneratorTest`, totalizando 20 testes.
 
-## Resultado
+## Resultado da execução focada
 
 | Métrica do `MoveGenerator` | Resultado |
 |---|---:|
@@ -41,3 +41,10 @@ O filtro executa os 16 testes do Lucas e os 4 testes já existentes da classe `M
 Resultado da execução: **BUILD SUCCESS** e todos os 20 testes passaram.
 
 O relatório HTML detalhado é gerado automaticamente em `chesslib/target/site/jacoco/index.html` após a execução do comando. A pasta `target` é um artefato gerado pelo Maven e não precisa ser versionada.
+
+## Resultado usado na consolidação do grupo
+
+Na regressão completa do Chesslib, com 341 testes aprovados, o `MoveGenerator` ficou
+com **67 de 68 branches cobertos (98,53%)**. Esse é o número que deve ser usado na
+tabela geral da Entrega 2, enquanto os valores acima identificam a execução focada
+dos 20 testes diretamente relacionados à classe.
