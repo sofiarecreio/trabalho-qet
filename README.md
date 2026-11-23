@@ -64,7 +64,7 @@ O [Spring PetClinic](https://github.com/spring-projects/spring-petclinic) é uma
 - **Testes e integração de Game:** [relatório técnico de Weslley](docs/entrega2/weslley/game-testes-integracao.md).
 - **Inspeção de Game:** [relatório, achados e resultados](docs/inspecao/game/relatorio.md), [PNG antes](docs/inspecao/game/sonar-antes.png) e [PNG depois](docs/inspecao/game/sonar-depois.png).
 - **Selenium de visitas:** [nove cenários, execução e capturas](docs/selenium/visitas/README.md).
-- **Artefatos de Lucas já disponíveis:** [cobertura](docs/entrega2/lucas/movegenerator-cobertura.md), [mutação](docs/entrega2/lucas/mutacao-movegenerator.md), [correções de MoveGenerator](docs/entrega2/lucas/qualidade-movegenerator.md), [integração PetClinic](docs/entrega2/lucas/integracao-petclinic.md) e [Selenium de busca](docs/entrega2/lucas/selenium-petclinic.md).
+- **Artefatos de Lucas já disponíveis:** [cobertura](docs/entrega2/lucas/movegenerator-cobertura.md), [mutação](docs/entrega2/lucas/mutacao-movegenerator.md), [correções de MoveGenerator](docs/entrega2/lucas/qualidade-movegenerator.md), [integração PetClinic](docs/entrega2/lucas/integracao-petclinic.md), [Selenium de busca](docs/entrega2/lucas/selenium-petclinic.md) e [explicação da contribuição](docs/entrega2/lucas/explicacao-contribuicao.md).
 - **Avaliação ISO/IEC 25010:** consolidação pendente pela equipe; os dados medidos de Weslley estão no relatório técnico acima.
 - **Slides da apresentação:** link pendente de inclusão pela coordenação da documentação.
 
@@ -246,6 +246,17 @@ Atualização: 22/11/2026. A contribuição de Weslley está integrada à `main`
 
 Os 307 testes do Chesslib incluem os testes originais e dos demais integrantes. Os 18 do PetClinic correspondem à seleção indicada no comando, e não à suíte inteira da aplicação. O critério todas-arestas é medido pelo contador de branches do JaCoCo, como apresentado na aula de cobertura com EclEmma/JaCoCo.
 
+### Resultados de Lucas
+
+| Item | Resultado verificado | Evidência |
+| --- | --- | --- |
+| Testes unitários | 20 testes aprovados no recorte do `MoveGenerator` | [Cobertura](docs/entrega2/lucas/movegenerator-cobertura.md) |
+| Cobertura estrutural | 65/68 branches = 95,59% na execução focada; 67/68 = 98,53% na regressão consolidada | [Cobertura e consolidação](docs/entrega2/lucas/movegenerator-cobertura.md) |
+| Mutação | 64/78 mutantes mortos = 82,05% no cálculo estrito; 3 sobreviventes, 5 sem cobertura, 4 erros de memória e 2 timeouts | [Relatório PIT](docs/entrega2/lucas/mutacao-movegenerator.md) |
+| SonarQube | Quality Gate `OK`, sem bugs, vulnerabilidades ou code smells no recorte analisado | [Qualidade do MoveGenerator](docs/entrega2/lucas/qualidade-movegenerator.md) |
+| Integração PetClinic | 2 testes aprovados, usando Spring Boot, MVC, JPA, H2 e Thymeleaf reais | [Integração](docs/entrega2/lucas/integracao-petclinic.md) |
+| Selenium | 1 teste aprovado na busca por `Davis`, com evidência versionada | [Selenium](docs/entrega2/lucas/selenium-petclinic.md) |
+
 - [x] Ampliar e executar os testes de Game e a integração do Chesslib.
 - [x] Executar PIT de Game acima de 80%, mantendo todos os mutantes no denominador.
 - [x] Corrigir os apontamentos Sonar de Game e preservar capturas antes/depois.
@@ -253,7 +264,7 @@ Os 307 testes do Chesslib incluem os testes originais e dos demais integrantes. 
 - [x] Integrar o código e as evidências de Weslley à main.
 - [x] Comprovar o critério todas-arestas em Game: 166/179 branches (92,74%), acima da meta de 80%.
 - [x] Realizar a revisão individual dos testes, métricas e decisões.
-- [ ] Preparar a explicação da própria contribuição para a apresentação.
+- [x] Preparar a explicação da própria contribuição para a apresentação: [roteiro de Lucas](docs/entrega2/lucas/explicacao-contribuicao.md).
 
 ### Resultados de Pedro
 
@@ -275,7 +286,7 @@ A seleção do PetClinic não corresponde à suíte inteira. A seção de PgnHol
 | --- | --- | --- |
 | Pedro | Consolidar métricas e publicar sua contribuição | [Tabela preparada](docs/entrega2/consolidacao/README.md); resultados e limites documentados; integração pelo responsável do grupo |
 | Lucio | Relatório final de inspeção com os resultados das cinco classes | MoveList já descrita no documento compartilhado; Game preenchida; demais resultados finais a confirmar |
-| Lucas | Consolidação das funcionalidades Selenium e confirmação dos resultados finais de sua classe | Artefatos de MoveGenerator, integração e busca de proprietário já disponíveis nos links acima |
+| Lucas | Consolidação das funcionalidades Selenium e confirmação dos resultados finais de sua classe | Concluída nesta branch; resultados, evidências e roteiro disponíveis na [documentação de Lucas](docs/entrega2/lucas/explicacao-contribuicao.md) |
 | Sofia | ISO/IEC 25010, Plano de Teste, índice de evidências e slides | Consolidação e links finais pendentes |
 | Todos | Entregar seus próprios resultados, evidências e revisão individual | Esta atualização não declara concluídas as partes ainda sem confirmação |
 

@@ -47,4 +47,6 @@ No diretório `spring-petclinic`:
 mvn -Dtest=LucasOwnerSeleniumTests test
 ```
 
-O resultado esperado é `BUILD SUCCESS` com o teste aprovado.
+Na execução de 22/11/2026, o cenário terminou com `BUILD SUCCESS`: 1 teste
+aprovado, sem falhas, erros ou testes ignorados. A captura do resultado está
+versionada em [`docs/selenium/busca-proprietario/01-busca-davis-resultados.png`](../../selenium/busca-proprietario/01-busca-davis-resultados.png).
