@@ -390,7 +390,7 @@ Na etapa em que a refatoração foi validada, estavam disponíveis 12 testes de 
 - revisão manual dos comportamentos de roque, captura, promoção, ambiguidade, movimentos ilegais, xeque e xeque-mate;
 - comparação entre os resultados inicial e final do Sonar.
 
-Posteriormente, a suíte `MoveListQetTest` foi ampliada para 16 casos, totalizando 28 testes diretamente associados à `MoveList` quando considerada junto aos 12 casos de `MoveListTest`. Após a integração na `main`, a regressão completa do Chesslib executou 315 testes sem falhas, erros ou testes ignorados.
+Em uma validação posterior do valor exato do escore de mutação, a suíte `MoveListQetTest` foi ampliada para 17 casos, totalizando 29 testes diretamente associados à `MoveList`. Com o novo teste, a regressão completa passou a executar 316 testes sem falhas, erros ou testes ignorados.
 
 Com base nesses resultados, as refatorações foram consideradas válidas porque produziram uma redução mensurável da complexidade, preservaram o comportamento verificado pelos testes e não introduziram falhas conhecidas. O resultado da IA foi, portanto, utilizado como ponto de partida, mas foi revisado, aplicado gradualmente e aceito somente após validação técnica.
 
@@ -467,26 +467,31 @@ Na medição individual utilizada para gerar os relatórios da `MoveList`, 248 t
 - limite mínimo de 80% de branches atendido;
 - resultado `BUILD SUCCESS`.
 
-Em seguida, o PIT foi executado utilizando `MoveListTest` e `MoveListQetTest` como suítes-alvo. O relatório de mutação registrou:
+Em seguida, o PIT foi executado utilizando `MoveListTest` e `MoveListQetTest` como suítes-alvo. A primeira execução registrou 168 de 211 mutantes mortos. Embora o PIT apresentasse o valor arredondado de 80%, o cálculo exato correspondia a 79,62%, ainda abaixo do mínimo exigido.
 
-- 168 de 211 mutantes mortos, correspondendo a 80%;
+O relatório detalhado `mutations.xml` foi analisado para identificar os mutantes sobreviventes. Entre eles, foi identificado um mutante no método `toFan()`, que substituía o retorno correto por uma string vazia. A sugestão de criar um teste específico para esse comportamento foi aceita porque a documentação do próprio método define que uma lista não vazia deve produzir a notação FAN correspondente.
+
+Foi então adicionado o teste `testConversaoFanSemNumeracao`, que utiliza a sequência `e4 e5 Nf3` e verifica o retorno completo de `toFan()`. Após essa alteração, o relatório de mutação registrou:
+
+- 169 de 211 mutantes mortos, correspondendo exatamente a 80,09%;
 - cobertura de linhas de 316/388, correspondendo a 81%;
-- força dos testes de 168/185, correspondendo a 91%;
-- 26 mutantes sem cobertura e 17 sobreviventes;
+- força dos testes de 169/185, correspondendo a 91%;
+- 26 mutantes sem cobertura e 16 sobreviventes;
 - resultado `BUILD SUCCESS`.
 
-Após a integração da contribuição na `main`, a regressão completa foi executada novamente e apresentou 315 testes aprovados, sem falhas, erros ou testes ignorados. Os perfis `movelist-quality` e `game-quality` foram executados separadamente e terminaram com `BUILD SUCCESS`, confirmando que as duas configurações permaneceram funcionais após a resolução do conflito no `pom.xml`.
+Após a inclusão do novo teste, a regressão completa foi executada novamente e apresentou 316 testes aprovados, sem falhas, erros ou testes ignorados. O perfil `movelist-quality` também terminou com `BUILD SUCCESS`, confirmando que o limite de cobertura estrutural continuava atendido.
 
 A validação final foi composta pelas seguintes evidências:
 
-- execução bem-sucedida dos 248 testes da regressão do Chesslib;
+- execução bem-sucedida dos 29 testes diretamente relacionados à `MoveList`;
+- execução bem-sucedida dos 316 testes da regressão completa do Chesslib;
 - cobertura de branches superior ao mínimo exigido;
-- escore de mutação igual ao mínimo exigido;
-- relatórios HTML gerados separadamente para a `MoveList`;
-- correspondência entre os valores apresentados no terminal e nos relatórios;
+- escore exato de mutação de 80,09%, superior ao mínimo de 80%;
+- eliminação do mutante que substituía o retorno de `toFan()` por uma string vazia;
+- correspondência entre os valores apresentados no terminal e no relatório do PIT;
 - preservação da configuração existente para `MoveGenerator`.
 
-Com base nesses resultados, a configuração sugerida foi considerada válida porque permitiu reproduzir as análises de cobertura e mutação, atingiu os limites definidos, preservou o funcionamento dos testes existentes e manteve os resultados da `MoveList` separados das análises dos outros integrantes.
+Com base nesses resultados, o novo teste foi considerado válido porque verifica um comportamento previsto no contrato de `toFan()`, eliminou um mutante sobrevivente sem modificar o código de produção, elevou o escore para acima do limite exigido e não introduziu regressões nos demais testes.
 
 ### Evidências relacionadas
 

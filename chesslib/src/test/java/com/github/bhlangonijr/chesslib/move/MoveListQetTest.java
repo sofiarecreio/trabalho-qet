@@ -26,7 +26,7 @@ public class MoveListQetTest {
         assertEquals("e2e4", moveList.get(0).toString());
         assertEquals("e4 ", moveList.toSan());
     }
-    
+
     @Test
     public void testCapturaDePeao()
             throws MoveConversionException {
@@ -39,7 +39,7 @@ public class MoveListQetTest {
         assertEquals("e4d5", moveList.get(2).toString());
         assertEquals("e4 d5 exd5 ", moveList.toSan());
     }
-    
+
     @Test
     public void testCavalosEmMovimentoAmbiguo()
             throws MoveConversionException {
@@ -52,7 +52,7 @@ public class MoveListQetTest {
         assertEquals("b1d2", moveList.get(4).toString());
         assertEquals("Nbd2", moveList.toSanArray()[4]);
     }
-    
+
     @Test
     public void testPromocaoDePeao()
             throws MoveConversionException {
@@ -66,7 +66,7 @@ public class MoveListQetTest {
         assertEquals("e7e8q", moveList.get(0).toString());
         assertEquals("e8=Q+", moveList.toSanArray()[0]);
     }
-    
+
     @Test
     public void testRoquePequeno()
             throws MoveConversionException {
@@ -80,7 +80,7 @@ public class MoveListQetTest {
         assertEquals("e1g1", moveList.get(0).toString());
         assertEquals("O-O", moveList.toSanArray()[0]);
     }
-    
+
     @Test
     public void testRoqueGrande()
             throws MoveConversionException {
@@ -94,7 +94,7 @@ public class MoveListQetTest {
         assertEquals("e1c1", moveList.get(0).toString());
         assertEquals("O-O-O", moveList.toSanArray()[0]);
     }
-     
+
     @Test
     public void testCapturaEnPassant()
             throws MoveConversionException {
@@ -110,7 +110,7 @@ public class MoveListQetTest {
                 "rnbqkbnr/1pp1pppp/p2P4/8/8/8/PPPP1PPP/RNBQKBNR b KQkq - 0 3",
                 moveList.getFen());
     }
-    
+
     @Test(expected = MoveConversionException.class)
     public void testMovimentoIlegal() throws MoveConversionException {
 
@@ -118,7 +118,7 @@ public class MoveListQetTest {
 
         moveList.addSanMove("Qh5", true, true);
     }
-    
+
     @Test
     public void testConstrutorCopiaSemNotacoesCalculadas() {
 
@@ -129,7 +129,7 @@ public class MoveListQetTest {
         assertEquals(original.getStartFen(), copia.getStartFen());
         assertEquals(0, copia.size());
     }
-    
+
     @Test
     public void testConstrutorCopiaComNotacoesCalculadas()
             throws MoveConversionException {
@@ -154,7 +154,7 @@ public class MoveListQetTest {
                 original.toFanArray(),
                 copia.toFanArray());
     }
-    
+
     @Test
     public void testDesambiguacaoDeTorrePelaFileira()
             throws MoveConversionException {
@@ -168,7 +168,7 @@ public class MoveListQetTest {
         assertEquals("a1a2", moveList.get(0).toString());
         assertEquals("R1a2", moveList.toSanArray()[0]);
     }
-    
+
     @Test
     public void testRetornoDosMetodosAddEAddAll() {
 
@@ -196,7 +196,7 @@ public class MoveListQetTest {
 
         assertEquals(3, moveList.size());
     }
-    
+
     @Test
     public void testMetodosDeRemocaoELimpeza() {
 
@@ -225,7 +225,7 @@ public class MoveListQetTest {
 
         assertTrue(moveList.isEmpty());
     }
-    
+
     @Test
     public void testGetESetIndex() {
 
@@ -235,7 +235,7 @@ public class MoveListQetTest {
 
         assertEquals(7, moveList.getIndex());
     }
-    
+
     @Test
     public void testCriacaoDeListaParcialECompleta()
             throws MoveConversionException {
@@ -266,7 +266,7 @@ public class MoveListQetTest {
         assertEquals(0, parcial.size());
         assertEquals(0, completa.size());
     }
-    
+
     @Test(expected = MoveConversionException.class)
     public void testCriacaoDeListaComMovimentoIlegal()
             throws MoveConversionException {
@@ -279,6 +279,16 @@ public class MoveListQetTest {
 
         MoveList.createMoveListFrom(moveList, 1);
     }
-    
-    
+
+    @Test
+public void testConversaoFanSemNumeracao()
+        throws MoveConversionException {
+
+    MoveList moveList = new MoveList();
+    moveList.loadFromSan("e4 e5 Nf3");
+
+    assertEquals(
+            "\u2659e4 \u265Fe5 \u2658f3 ",
+            moveList.toFan());
+}
 }
