@@ -409,6 +409,7 @@
                             </targetClasses>
                             <targetTests combine.self="override">
                                 <param>com.github.bhlangonijr.chesslib.GameLoaderTest</param>
+                                <param>com.github.bhlangonijr.chesslib.pgn.GameLoaderIsolatedTest</param>
                             </targetTests>
                             <reportsDirectory>${project.build.directory}/pit-reports-gameloader</reportsDirectory>
                         </configuration>

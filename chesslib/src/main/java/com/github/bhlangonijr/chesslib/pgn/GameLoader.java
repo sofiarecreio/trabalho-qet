@@ -31,6 +31,7 @@ import org.apache.commons.lang3.StringUtils;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.UUID;
+import java.util.function.Function;
 
 import static com.github.bhlangonijr.chesslib.pgn.PgnProperty.UTF8_BOM;
 import static com.github.bhlangonijr.chesslib.pgn.PgnProperty.isProperty;
@@ -55,12 +56,24 @@ public class GameLoader {
      * @return the next game read from the iterator
      */
     public static Game loadNextGame(Iterator<String> iterator) {
+        return loadNextGame(iterator, round -> new Game(UUID.randomUUID().toString(), round));
+    }
+
+    /**
+     * Loads the next game creating it through the given factory. The public method uses a regular {@link Game};
+     * this package-private variant lets tests replace the game, isolating the loader from move parsing.
+     *
+     * @param iterator    the iterator over the lines of a PGN file
+     * @param gameFactory creates the game that receives the loaded data, given its round
+     * @return the next game read from the iterator
+     */
+    static Game loadNextGame(Iterator<String> iterator, Function<Round, Game> gameFactory) {
 
         if (!iterator.hasNext()) {
             return null;
         }
 
-        PgnTempContainer container = new PgnTempContainer();
+        PgnTempContainer container = new PgnTempContainer(gameFactory);
 
         while (iterator.hasNext()) {
             String line = removeBom(iterator.next().trim());
@@ -255,9 +268,9 @@ public class GameLoader {
         boolean initGame;
         boolean commentOpened;
 
-        PgnTempContainer() {
+        PgnTempContainer(Function<Round, Game> gameFactory) {
             Round round = new Round(new Event());
-            this.game = new Game(UUID.randomUUID().toString(), round);
+            this.game = gameFactory.apply(round);
             round.getGame().add(this.game);
             this.game.setWhitePlayer(newHumanPlayer());
             this.game.setBlackPlayer(newHumanPlayer());

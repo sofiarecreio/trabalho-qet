@@ -591,7 +591,7 @@ A validação final foi composta pelas seguintes evidências:
 - correspondência entre os resultados do terminal e os relatórios XML;
 - preservação do código de produção e da configuração de mutação.
 
-Com base nesses resultados, a ampliação foi considerada tecnicamente validada pelo agente porque detectou alterações antes não identificadas pelos testes, atingiu a meta de mutação e não introduziu falhas na regressão completa. A revisão individual da responsável permanece pendente. Os quatro mutantes restantes continuam registrados no relatório, sem exclusão ou classificação automática como equivalentes.
+Com base nesses resultados, a ampliação foi considerada tecnicamente validada pelo agente porque detectou alterações antes não identificadas pelos testes, atingiu a meta de mutação e não introduziu falhas na regressão completa. A responsável aceitou a alteração: fez o commit `9adb790`, integrou-o à main pelo PR #28 e fechou a Issue #26. Os quatro mutantes restantes continuam registrados no relatório, sem exclusão ou classificação automática como equivalentes.
 
 ### Evidências relacionadas
 
@@ -607,3 +607,143 @@ Com base nesses resultados, a ampliação foi considerada tecnicamente validada 
 - Relatório técnico e texto para a issue: [docs/entrega2/sofia/gameloader/README.md](../entrega2/sofia/gameloader/README.md)
 - Relatório JaCoCo gerado localmente: `chesslib/target/site/jacoco-gameloader/index.html`
 - Relatório PIT gerado localmente: `chesslib/target/pit-reports-gameloader/index.html`
+
+## Registro 007 — Testes Selenium do cadastro de proprietário
+
+| **Informação** | **Registro** |
+| --- | --- |
+| Data | 23/11/2026 |
+| Responsável | Sofia |
+| Entrega | Entrega 2 |
+| Atividade | Testes de sistema com Selenium para o CTM-02 — Cadastrar proprietário |
+| Ferramenta | Claude Code (Claude Opus 5.5), no aplicativo desktop |
+| Artefatos relacionados | `SofiaOwnerSeleniumTests.java`, `docs/selenium/cadastrar-proprietario/` |
+
+### Prompt/instrução utilizada
+
+> crie os testes selenium na branch sofia/entrega-2, mas deixe eu commitar
+
+### Resultado apresentado pela IA
+
+A IA leu os testes Selenium dos colegas, o `Owner`, o controlador e o template do formulário, e propôs oito casos por partições de equivalência e valores-limite: cadastro válido com busca posterior, nome com 30 caracteres (limite da coluna), telefone com 9 e 11 dígitos, com letra e com símbolos, formulário vazio e campos só com espaços. Cada caso confere tela, banco H2 e persistência após recarregar; os inválidos conferem a mensagem por campo e que nada foi gravado.
+
+### Decisão
+
+Aceita. A responsável fez o commit `081e5ca` e integrou pelo PR #28. Ficou registrado como limite que nome com 31 ou mais caracteres não foi avaliado e que a mensagem geral de erro do controlador não aparece no formulário.
+
+### Validação
+
+- Execução individual: 8 aprovados.
+- Execução conjunta com os Selenium do grupo e `OwnerControllerTests`: 43 aprovados.
+- Verificação de que as asserções reprovam: a mensagem esperada do telefone foi trocada temporariamente para "11-digit" e os quatro casos de telefone falharam; o texto original foi restaurado.
+- Capturas conferidas visualmente (cadastro válido e formulário vazio).
+
+### Evidências relacionadas
+
+- [Relatório e capturas](../selenium/cadastrar-proprietario/README.md)
+- [SofiaOwnerSeleniumTests.java](../../spring-petclinic/src/test/java/org/springframework/samples/petclinic/owner/SofiaOwnerSeleniumTests.java)
+
+## Registro 008 — Inspeção Sonar e correção de `GameLoader`
+
+| **Informação** | **Registro** |
+| --- | --- |
+| Data | 23/11/2026 |
+| Responsável | Sofia |
+| Entrega | Entrega 2 |
+| Atividade | Relatório de inspeção do código-fonte e correção dos apontamentos |
+| Ferramenta | Claude Code (Claude Opus 5.5); SonarQube Community Build 26.11.0.134175 em Docker |
+| Artefatos relacionados | `GameLoader.java`, `docs/inspecao/gameloader/`, seção 7 do relatório Sonar compartilhado |
+
+### Prompt/instrução utilizada
+
+> faça a inspeção com sonar do gameloader na branch sofiarecreio/sofia/entrega-2 no estilo [relatório Sonar compartilhado] e do repositorio tbm, pode escrever as coisas no docs na minha conta
+
+### Resultado apresentado pela IA
+
+A IA subiu o mesmo servidor usado nas inspeções de Game e PgnHolder, associou o perfil Sonar way comprehensive (608 regras) a projetos separados para antes e depois e encontrou 7 apontamentos: duas complexidades cognitivas acima de 15, construtor público implícito, `throws Exception`, `size() == 0` e dois TODO. Propôs extrair métodos auxiliares, construtor privado, retirar `throws Exception` (nenhuma exceção verificada é lançada) e implementar o que cada TODO pedia, em vez de apagar o comentário.
+
+### Decisão
+
+Aceita. A responsável fez o commit `a369d28`, integrado pelo PR #29. Os dois `catch (Exception)` não apontados foram mantidos para não mudar o comportamento com tags inválidas. A seção 7 do relatório Sonar compartilhado foi escrita no navegador logado na conta da responsável.
+
+### Validação
+
+- Sonar depois: 0 apontamentos, mesmo perfil e escopo.
+- Regressão completa: 349 aprovados; branches 60/68 (88,24%); mutação 71/75 (94,67%); os quatro mutantes restantes eram os mesmos da medição anterior.
+- E-mail de autoria que o Sonar obtém do git removido dos JSONs publicados.
+
+### Evidências relacionadas
+
+- [Relatório da inspeção](../inspecao/gameloader/README.md)
+- [Relatório Sonar compartilhado](https://docs.google.com/document/d/1LBd-p5gI73bchdHi-wWXTSUu7rfhmelV1IxTPfpdvk8/edit)
+
+## Registro 009 — Testes unitários isolados de `GameLoader`
+
+| **Informação** | **Registro** |
+| --- | --- |
+| Data | 23/11/2026 |
+| Responsável | Sofia |
+| Entrega | Entrega 2 |
+| Atividade | Melhorar os testes unitários isolando as dependências |
+| Ferramenta | Claude Code (Claude Opus 5.5) |
+| Artefatos relacionados | `GameLoaderIsolatedTest.java`, ponto de injeção em `GameLoader.java`, perfil `gameloader-quality` |
+
+### Prompt/instrução utilizada
+
+> [lista de pendências] … 5. Isolamento de dependências em GameLoader … faça tudo isso
+
+### Resultado apresentado pela IA
+
+A IA observou que GameLoaderTest só usava componentes reais e que GameLoader criava a partida internamente. Propôs uma sobrecarga visível só no pacote, que recebe a fábrica da partida, e dois stubs escritos à mão, no estilo do stub de Board de Weslley: `GameStub` (registra o texto entregue e devolve uma quantidade fixa de lances, sem Board, MoveList ou SAN) e `RecordingIterator` (conta linhas consumidas e falha numa linha escolhida). Foram propostos 12 casos.
+
+### Decisão
+
+Aplicada na branch, aguardando revisão e commit da responsável. A assinatura pública foi mantida. Na primeira execução, um caso falhou porque a linha de teste terminava em `*` e encerrava a partida antes do esperado; o caso foi reescrito com uma linha que contém os quatro marcadores.
+
+### Validação
+
+- 12 casos isolados aprovados; regressão completa com 361 testes aprovados.
+- Branches 63/68 (92,65%); mutação 76/77 (98,70%). O único sobrevivente (`round < 1` → `<= 1`) é equivalente e ficou no denominador.
+- Reanálise Sonar após o ponto de injeção: 0 apontamentos.
+
+### Evidências relacionadas
+
+- [Relatório do isolamento](../entrega2/sofia/gameloader/isolamento.md)
+- [GameLoaderIsolatedTest.java](../../chesslib/src/test/java/com/github/bhlangonijr/chesslib/pgn/GameLoaderIsolatedTest.java)
+
+## Registro 010 — Avaliação ISO/IEC 25010, Plano de Teste e índice de evidências
+
+| **Informação** | **Registro** |
+| --- | --- |
+| Data | 23/11/2026 |
+| Responsável | Sofia |
+| Entrega | Entrega 2 |
+| Atividade | Consolidação da documentação: avaliação ISO/IEC 25010, atualização do Plano de Teste e índice do README |
+| Ferramenta | Claude Code (Claude Opus 5.5) |
+| Artefatos relacionados | Documento Trabalho QeT, Plano de Teste, `README.md`, `docs/entrega2/sofia/documentacao-final.md` |
+
+### Prompt/instrução utilizada
+
+> nao quero q vc edite o docs, apenas q escreva aqui o que escreve pra eu ler, revisar e colocar la eu
+
+Depois: "me mande o plano de teste atualizado completo", "o que falta agora alem dos slides? cheque tudo …" e "faça tudo isso".
+
+### Resultado apresentado pela IA
+
+A IA reuniu os números dos relatórios de todos os integrantes e redigiu: a matriz ISO/IEC 25010:2011 com escalas próprias do grupo (percentual, tempo, binária e NE para o que não foi medido); o texto completo do Plano de Teste 2.0; e as atualizações do README. Também comparou os requisitos da professora com o repositório, os documentos e a pasta do Drive e listou as pendências.
+
+### Decisão
+
+A responsável revisou e colou a matriz ISO no documento Trabalho QeT. Na rodada final, a IA aplicou os ajustes pendentes (Portabilidade como NE, lista de pendências, GameLoader na inspeção, escopo com TimeControl) e o Plano de Teste completo pelo navegador logado na conta da responsável; o README foi alterado na branch, aguardando commit. A escala foi tratada como convenção do grupo, não como prescrição da ISO, e nenhuma característica sem medição recebeu nota.
+
+### Validação
+
+- Cada número da matriz foi conferido com o relatório ou XML de origem.
+- Os links das fontes foram conferidos na main.
+- A leitura do requisito da professora mostrou que a matriz precisava cobrir as oito características; Portabilidade foi incluída como NE.
+
+### Evidências relacionadas
+
+- [Documento Trabalho QeT](https://docs.google.com/document/d/16PhvQ19VGINYlqDE0NsTWH6VHgzwLYcO_FdjD46PtVU/edit)
+- [Plano de Teste](https://docs.google.com/document/d/1JDJVJR6WbpOXpzfRQsbcVWZm8XzQYc8xMSGoEAKj0xo/edit)
+- [Rascunho da documentação no repositório](../entrega2/sofia/documentacao-final.md)

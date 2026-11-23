@@ -1,0 +1,6 @@
+[INFO] Tests run: 361, Failures: 0, Errors: 0, Skipped: 0
+[INFO] All coverage checks have been met.
+[INFO] BUILD SUCCESS
+[INFO] Finished at: 2026-11-23T01:49:19-03:00
+[INFO] Tests run: 14, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0 s -- in com.github.bhlangonijr.chesslib.GameLoaderTest
+[INFO] Tests run: 12, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.005 s -- in com.github.bhlangonijr.chesslib.pgn.GameLoaderIsolatedTest
