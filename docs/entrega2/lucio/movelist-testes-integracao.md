@@ -14,7 +14,7 @@ Este relatório consolida os testes, as medições de cobertura estrutural e os 
 
 Na medição individual da `MoveList`, a regressão completa do Chesslib executou **248 testes**, sem falhas, erros ou testes ignorados. Essa execução completa foi utilizada para a medição de cobertura, pois outras suítes do projeto também exercitam caminhos da `MoveList`.
 
-Após a integração da contribuição à versão atual da `main`, a regressão completa foi executada novamente e apresentou **316 testes aprovados**, sem falhas, erros ou testes ignorados. Os perfis `movelist-quality` e `game-quality` também foram executados separadamente e terminaram com `BUILD SUCCESS`.
+Após a integração da contribuição à versão atual da `main`, a regressão completa foi executada novamente e apresentou **342 testes aprovados**, sem falhas, erros ou testes ignorados. Os perfis `movelist-quality` e `game-quality` também foram executados separadamente e terminaram com `BUILD SUCCESS`.
 
 ## Técnicas e casos funcionais
 
@@ -55,9 +55,9 @@ O PIT foi configurado para alterar somente a classe `MoveList` e utilizar `MoveL
 
 | Indicador | Resultado |
 | --- | ---: |
-| Cobertura de linhas das classes mutadas | 316/388 = **81%** |
-| Mutantes mortos | 168/211 = **80,09%** |
-| Força dos testes | 168/185 = **91%** |
+| Cobertura de linhas das classes mutadas | 342/388 = **81%** |
+| Mutantes mortos | 169/211 = **80,09%** |
+| Força dos testes | 169/185 = **91%** |
 | Mutantes sem cobertura | 26 |
 | Mutantes sobreviventes | 17 |
 | Limite configurado | **80% de mutação** |
@@ -99,4 +99,4 @@ A inspeção estática da `MoveList`, as correções realizadas e as evidências
 - [Build após as correções](../../inspecao/movelist/build_sucess.png)
 - [Registro de uso de IA](../../ai/AI-LOG.md)
 
-Os percentuais de cobertura e mutação apresentados neste documento correspondem à medição individual realizada com o perfil `movelist-quality` na branch `lucio/entrega2`. Após a integração na `main`, a regressão com 316 testes e as verificações dos perfis `movelist-quality` e `game-quality` foram aprovadas, confirmando que a integração não introduziu regressões conhecidas.
+Os percentuais de cobertura e mutação apresentados neste documento correspondem à medição individual realizada com o perfil `movelist-quality` na branch `lucio/entrega2`. Após a integração na `main`, a regressão com 342 testes e as verificações dos perfis `movelist-quality` e `game-quality` foram aprovadas, confirmando que a integração não introduziu regressões conhecidas.
