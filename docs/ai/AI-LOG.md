@@ -747,3 +747,18 @@ A responsável revisou e colou a matriz ISO no documento Trabalho QeT. Na rodada
 - [Documento Trabalho QeT](https://docs.google.com/document/d/16PhvQ19VGINYlqDE0NsTWH6VHgzwLYcO_FdjD46PtVU/edit)
 - [Plano de Teste](https://docs.google.com/document/d/1JDJVJR6WbpOXpzfRQsbcVWZm8XzQYc8xMSGoEAKj0xo/edit)
 - [Rascunho da documentação no repositório](../entrega2/sofia/documentacao-final.md)
+
+## Registro — Ampliação dos testes de TimeControl
+
+| Informação | Registro |
+|---|---|
+| Data | 22/11/2026 |
+| Responsável | Pedro Piaes Rodrigues |
+| Entrega | Entrega 2 |
+| Atividade | Ampliação dos testes unitários de TimeControl e avaliação de cobertura estrutural e mutação |
+| Ferramenta | ChatGPT, Maven, JUnit 4, JaCoCo e PIT |
+| Artefato relacionado | `PedroTimeControlTest.java` e perfil `timecontrol-quality` do `chesslib/pom.xml` |
+| Prompt/instrução | Solicitei apoio para ampliar os testes existentes de TimeControl, contemplando formatos válidos, incrementos, múltiplos estágios, valores-limite e entradas inválidas, além de ajuda na configuração e execução das medições de cobertura e mutação |
+| Resultado | Com apoio da ferramenta na definição e implementação dos cenários, a suíte passou de 5 para 23 testes. Também houve ajuda na configuração e execução do JaCoCo e do PIT, cujos relatórios permitiram verificar os resultados e identificar os caminhos e mutantes restantes |
+| Decisão | Foi preservado o código de produção de TimeControl. Foram utilizadas partições de equivalência e análise de valores-limite, além de um stub de MovePerTime para verificar a delegação com resultados controlados. Os mutantes sobreviventes e sem cobertura foram mantidos no cálculo |
+| Validação | Os 23 testes foram aprovados. O JaCoCo registrou 40/42 branches cobertos (95,24%). O PIT registrou 60/69 mutantes eliminados (86,96%), com 7 sobreviventes e 2 sem cobertura. As contagens foram conferidas nos relatórios XML |
