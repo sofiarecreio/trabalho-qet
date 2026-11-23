@@ -263,15 +263,15 @@ Os 307 testes do Chesslib incluem os testes originais e dos demais integrantes. 
 
 ### Resultados de Pedro
 
-Os resultados abaixo correspondem à validação da contribuição de Pedro; a integração na main deve ser confirmada pelo responsável pelo merge:
+A contribuição de Pedro foi integrada à main pelo [PR #23](https://github.com/sofiarecreio/trabalho-qet/pull/23). Os resultados originais estão preservados nos relatórios; a consolidação das cinco classes foi revalidada em 23/11/2026 sobre a main `3934419`, com 361 testes Chesslib aprovados:
 
 | Item | Resultado | Evidência |
 | --- | --- | --- |
 | TimeControl | 23 testes; 40/42 branches (95,24%); 60/69 mutantes mortos (86,96%) | [Relatório](docs/entrega2/pedro/timecontrol-testes.md) |
 | PgnHolder | 10 para 0 apontamentos no mesmo perfil Sonar; oito testes de regressão adicionais | [Inspeção](docs/inspecao/pgnholder/README.md) |
-| Regressão Chesslib | 341 aprovados | [Escopo e validação](docs/inspecao/pgnholder/README.md#compatibilidade-e-validação) |
+| Regressão Chesslib | 341 aprovados na entrega original; 361 na revalidação das cinco classes sobre `3934419` | [Escopo e validação](docs/inspecao/pgnholder/README.md#compatibilidade-e-validação) |
 | Edição de animal | Nove cenários Selenium aprovados; seleção conjunta de 42 testes aprovada | [Selenium](docs/selenium/alterar-animal/README.md) |
-| Consolidação | Cinco classes medidas; MoveList revalidada em 80,09% após o PR #24; GameLoader revalidada localmente em 93,65% na contribuição de Sofia abaixo | [Tabela e dados originais](docs/entrega2/consolidacao/README.md) |
+| Consolidação | Cinco classes revalidadas na mesma base; todas acima de 80% de branches e mutação estrita; ocorrências de execução de MoveGenerator documentadas | [Tabela e dados originais](docs/entrega2/consolidacao/README.md) |
 
 A seleção do PetClinic não corresponde à suíte inteira. A seção de PgnHolder no relatório Sonar compartilhado está atualizada. A seção 6 do [Plano de Teste](https://docs.google.com/document/d/1JDJVJR6WbpOXpzfRQsbcVWZm8XzQYc8xMSGoEAKj0xo/edit?tab=t.0) registra o escopo, a estratégia, os critérios e os resultados da contribuição de Pedro na Entrega 2. Os dados para a avaliação ISO estão [disponíveis nesta contribuição](docs/entrega2/pedro/dados-documentacao.md). As correções de PgnHolder estão registradas nas Issues [#21](https://github.com/sofiarecreio/trabalho-qet/issues/21) e [#22](https://github.com/sofiarecreio/trabalho-qet/issues/22).
 
@@ -295,7 +295,7 @@ Selenium de cadastro de proprietário de Sofia, execução local em 23/11/2026: 
 
 | Responsável | Próxima consolidação | Situação documentada |
 | --- | --- | --- |
-| Pedro | Consolidar métricas e publicar sua contribuição | [Tabela preparada](docs/entrega2/consolidacao/README.md); resultados e limites documentados; integração pelo responsável do grupo |
+| Pedro | Consolidação atualizada e contribuição integrada | [Cinco classes revalidadas](docs/entrega2/consolidacao/README.md); PR #23 integrado à main; resultados e limites documentados |
 | Lucio | Nenhuma pendência individual | Testes, cobertura, mutação, inspeção da MoveList e Selenium concluídos e documentados |
 | Lucas | Consolidação das funcionalidades Selenium e confirmação dos resultados finais de sua classe | Artefatos de MoveGenerator, integração e busca de proprietário já disponíveis nos links acima |
 | Sofia | ISO/IEC 25010, Plano de Teste, índice de evidências e slides | ISO no [documento Trabalho QeT](https://docs.google.com/document/d/16PhvQ19VGINYlqDE0NsTWH6VHgzwLYcO_FdjD46PtVU/edit); Plano de Teste 2.0; índice neste README; slides pendentes |

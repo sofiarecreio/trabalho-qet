@@ -1,26 +1,26 @@
 [INFO] Scanning for projects...
-[INFO] 
+[INFO]
 [INFO] --------------< com.github.bhlangonijr.chesslib:chesslib >--------------
 [INFO] Building chesslib 1.3.7
 [INFO]   from pom.xml
 [INFO] --------------------------------[ jar ]---------------------------------
-[INFO] 
+[INFO]
 [INFO] --- jacoco:0.8.12:prepare-agent (prepare-agent) @ chesslib ---
 [INFO] Skipping JaCoCo execution because property jacoco.skip is set.
 [INFO] argLine set to empty
-[INFO] 
+[INFO]
 [INFO] --- resources:3.4.0:resources (default-resources) @ chesslib ---
 [INFO] Copying 1 resource from src/main/resources to target/classes
-[INFO] 
+[INFO]
 [INFO] --- compiler:3.8.1:compile (default-compile) @ chesslib ---
 [INFO] Nothing to compile - all classes are up to date
-[INFO] 
+[INFO]
 [INFO] --- resources:3.4.0:testResources (default-testResources) @ chesslib ---
 [INFO] Copying 27 resources from src/test/resources to target/test-classes
-[INFO] 
+[INFO]
 [INFO] --- compiler:3.8.1:testCompile (default-testCompile) @ chesslib ---
 [INFO] Nothing to compile - all classes are up to date
-[INFO] 
+[INFO]
 [INFO] --- pitest:1.17.4:mutationCoverage (default-cli) @ chesslib ---
 [INFO] Root dir is : <REPOSITORIO>/chesslib
 [INFO] Found plugin : Default csv report plugin
@@ -68,58 +68,58 @@
 [INFO] Available mutators : EXPERIMENTAL_ARGUMENT_PROPAGATION,FALSE_RETURNS,TRUE_RETURNS,CONDITIONALS_BOUNDARY,CONSTRUCTOR_CALLS,EMPTY_RETURNS,INCREMENTS,INLINE_CONSTS,INVERT_NEGS,MATH,NEGATE_CONDITIONALS,NON_VOID_METHOD_CALLS,NULL_RETURNS,PRIMITIVE_RETURNS,REMOVE_CONDITIONALS_EQUAL_IF,REMOVE_CONDITIONALS_EQUAL_ELSE,REMOVE_CONDITIONALS_ORDER_IF,REMOVE_CONDITIONALS_ORDER_ELSE,VOID_METHOD_CALLS,EXPERIMENTAL_BIG_DECIMAL,EXPERIMENTAL_BIG_INTEGER,EXPERIMENTAL_MEMBER_VARIABLE,EXPERIMENTAL_NAKED_RECEIVER,REMOVE_INCREMENTS,EXPERIMENTAL_SWITCH
 [INFO] Adding org.pitest:pitest to SUT classpath
 [INFO] Mutating from <REPOSITORIO>/chesslib/target/classes
-[INFO] Replacing properties in argLine 
-19:09:19 PIT >> INFO : Verbose logging is disabled. If you encounter a problem, please enable it before reporting an issue.
-19:09:19 PIT >> INFO : Created 1 mutation test units in pre scan
-19:09:19 PIT >> INFO : Sending 2 test classes to minion
-19:09:19 PIT >> INFO : Sent tests to minion
-/-\|/-\|/-\|/-\|/-\|19:09:19 PIT >> INFO : Calculated coverage in 0 seconds.
-19:09:19 PIT >> INFO : Created 1 mutation test units
-19:09:29 PIT >> WARNING : Minion exited abnormally due to MEMORY_ERROR
-19:09:40 PIT >> WARNING : Minion exited abnormally due to TIMED_OUT
-19:09:50 PIT >> WARNING : Minion exited abnormally due to MEMORY_ERROR
-19:10:00 PIT >> WARNING : Minion exited abnormally due to MEMORY_ERROR
-19:10:11 PIT >> WARNING : Minion exited abnormally due to TIMED_OUT
-19:10:21 PIT >> WARNING : Minion exited abnormally due to MEMORY_ERROR
-/19:10:22 PIT >> INFO : Completed in 63 seconds
+[INFO] Replacing properties in argLine
+11:06:10 PIT >> INFO : Verbose logging is disabled. If you encounter a problem, please enable it before reporting an issue.
+11:06:10 PIT >> INFO : Created 1 mutation test units in pre scan
+11:06:10 PIT >> INFO : Sending 2 test classes to minion
+11:06:10 PIT >> INFO : Sent tests to minion
+/-\|/-\|/-\|/-\|/-\|11:06:10 PIT >> INFO : Calculated coverage in 0 seconds.
+11:06:10 PIT >> INFO : Created 1 mutation test units
+11:06:15 PIT >> WARNING : Minion exited abnormally due to MEMORY_ERROR
+11:06:21 PIT >> WARNING : Minion exited abnormally due to MEMORY_ERROR
+11:06:26 PIT >> WARNING : Minion exited abnormally due to MEMORY_ERROR
+11:06:32 PIT >> WARNING : Minion exited abnormally due to MEMORY_ERROR
+11:06:39 PIT >> WARNING : Minion exited abnormally due to MEMORY_ERROR
+11:06:45 PIT >> WARNING : Minion exited abnormally due to MEMORY_ERROR
+/11:06:46 PIT >> INFO : Completed in 35 seconds
 ================================================================================
 - Mutators
 ================================================================================
 > org.pitest.mutationtest.engine.gregor.mutators.returns.PrimitiveReturnsMutator
 >> Generated 1 Killed 1 (100%)
-> KILLED 1 SURVIVED 0 TIMED_OUT 0 NON_VIABLE 0 
-> MEMORY_ERROR 0 NOT_STARTED 0 STARTED 0 RUN_ERROR 0 
-> NO_COVERAGE 0 
+> KILLED 1 SURVIVED 0 TIMED_OUT 0 NON_VIABLE 0
+> MEMORY_ERROR 0 NOT_STARTED 0 STARTED 0 RUN_ERROR 0
+> NO_COVERAGE 0
 --------------------------------------------------------------------------------
 > org.pitest.mutationtest.engine.gregor.mutators.VoidMethodCallMutator
 >> Generated 23 Killed 23 (100%)
-> KILLED 23 SURVIVED 0 TIMED_OUT 0 NON_VIABLE 0 
-> MEMORY_ERROR 0 NOT_STARTED 0 STARTED 0 RUN_ERROR 0 
-> NO_COVERAGE 0 
+> KILLED 23 SURVIVED 0 TIMED_OUT 0 NON_VIABLE 0
+> MEMORY_ERROR 0 NOT_STARTED 0 STARTED 0 RUN_ERROR 0
+> NO_COVERAGE 0
 --------------------------------------------------------------------------------
 > org.pitest.mutationtest.engine.gregor.mutators.returns.BooleanTrueReturnValsMutator
 >> Generated 2 Killed 2 (100%)
-> KILLED 2 SURVIVED 0 TIMED_OUT 0 NON_VIABLE 0 
-> MEMORY_ERROR 0 NOT_STARTED 0 STARTED 0 RUN_ERROR 0 
-> NO_COVERAGE 0 
+> KILLED 2 SURVIVED 0 TIMED_OUT 0 NON_VIABLE 0
+> MEMORY_ERROR 0 NOT_STARTED 0 STARTED 0 RUN_ERROR 0
+> NO_COVERAGE 0
 --------------------------------------------------------------------------------
 > org.pitest.mutationtest.engine.gregor.mutators.MathMutator
 >> Generated 15 Killed 11 (73%)
-> KILLED 11 SURVIVED 0 TIMED_OUT 0 NON_VIABLE 0 
-> MEMORY_ERROR 0 NOT_STARTED 0 STARTED 0 RUN_ERROR 0 
-> NO_COVERAGE 4 
+> KILLED 11 SURVIVED 0 TIMED_OUT 0 NON_VIABLE 0
+> MEMORY_ERROR 0 NOT_STARTED 0 STARTED 0 RUN_ERROR 0
+> NO_COVERAGE 4
 --------------------------------------------------------------------------------
 > org.pitest.mutationtest.engine.gregor.mutators.returns.EmptyObjectReturnValsMutator
 >> Generated 3 Killed 3 (100%)
-> KILLED 3 SURVIVED 0 TIMED_OUT 0 NON_VIABLE 0 
-> MEMORY_ERROR 0 NOT_STARTED 0 STARTED 0 RUN_ERROR 0 
-> NO_COVERAGE 0 
+> KILLED 3 SURVIVED 0 TIMED_OUT 0 NON_VIABLE 0
+> MEMORY_ERROR 0 NOT_STARTED 0 STARTED 0 RUN_ERROR 0
+> NO_COVERAGE 0
 --------------------------------------------------------------------------------
 > org.pitest.mutationtest.engine.gregor.mutators.NegateConditionalsMutator
 >> Generated 34 Killed 30 (88%)
-> KILLED 24 SURVIVED 3 TIMED_OUT 2 NON_VIABLE 0 
-> MEMORY_ERROR 4 NOT_STARTED 0 STARTED 0 RUN_ERROR 0 
-> NO_COVERAGE 1 
+> KILLED 24 SURVIVED 3 TIMED_OUT 0 NON_VIABLE 0
+> MEMORY_ERROR 6 NOT_STARTED 0 STARTED 0 RUN_ERROR 0
+> NO_COVERAGE 1
 --------------------------------------------------------------------------------
 ================================================================================
 - Timings
@@ -128,9 +128,9 @@
 > scan classpath : < 1 second
 > coverage and dependency analysis : < 1 second
 > build mutation tests : < 1 second
-> run mutation analysis : 1 minutes and 2 seconds
+> run mutation analysis : 35 seconds
 --------------------------------------------------------------------------------
-> Total  : 1 minutes and 3 seconds
+> Total  : 35 seconds
 --------------------------------------------------------------------------------
 ================================================================================
 - Statistics
@@ -144,6 +144,6 @@ Enhanced functionality available at https://www.arcmutate.com/
 [INFO] ------------------------------------------------------------------------
 [INFO] BUILD SUCCESS
 [INFO] ------------------------------------------------------------------------
-[INFO] Total time:  01:04 min
-[INFO] Finished at: 2026-11-22T19:10:22-03:00
+[INFO] Total time:  36.539 s
+[INFO] Finished at: 2026-11-23T11:06:46-03:00
 [INFO] ------------------------------------------------------------------------

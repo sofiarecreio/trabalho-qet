@@ -63,3 +63,7 @@ O primeiro comando mede a suíte individual. O segundo executa a regressão comp
 Relatórios locais: `chesslib/target/site/jacoco-timecontrol/index.html` e `chesslib/target/pit-reports-timecontrol/index.html`. O perfil grava os relatórios em diretórios próprios e preserva os perfis dos demais integrantes.
 
 Evidências versionáveis desta medição: [JaCoCo XML](evidencias/timecontrol-jacoco.xml) e [PIT XML](evidencias/timecontrol-mutacoes.xml). O XML do PIT permite conferir cada estado de mutante, teste que o detectou e localização no código.
+
+## Revalidação final
+
+Em 23/11/2026, sobre a main `3934419`, a regressão completa executou 361 testes aprovados. A suíte individual permaneceu com 23 casos; a cobertura continuou em 40/42 branches (95,24%) e o PIT registrou 60/69 KILLED (86,96%), sete sobreviventes e dois sem cobertura, sem erros ou timeouts. Os XMLs individuais e a consolidação foram atualizados com essa execução. Os totais de 333 e 341 acima identificam as rodadas históricas da implementação.
